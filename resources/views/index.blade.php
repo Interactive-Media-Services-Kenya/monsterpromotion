@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ani-illu"> sudo a2ensite monster.ims.co.ke.conf
+                <div class="ani-illu">
 
                 </div>
             </div>
