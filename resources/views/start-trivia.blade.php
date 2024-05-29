@@ -72,14 +72,15 @@
             <span class="close">&times;</span>
             <form action="#">
                 <div class="subscribe">
-                    <input type="email" placeholder="Enter Fullname"><br />
+                    <input type="text" placeholder="Enter Fullname"><br />
 
                 </div>
                 <div class="subscribe" style="margin-top:20px">
-                    <input type="email" placeholder="Enter Phone No">
+                    <input type="text" placeholder="Enter Phone No">
                     <br />
 
-                    <button class="btn btn-primary" style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
+                    <button type="submit" class="btn btn-primary"
+                        style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
                         NOW</button>
                 </div>
             </form>
