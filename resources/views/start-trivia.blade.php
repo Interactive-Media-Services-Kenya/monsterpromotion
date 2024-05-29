@@ -110,11 +110,11 @@
             <span class="close">&times;</span>
             <form action="#">
                 <div class="subscribe">
-                    <input type="text" placeholder="Enter Fullname"><br />
+                    <input type="text" required id="username" name="username" placeholder="Enter Fullname"><br />
 
                 </div>
                 <div class="subscribe" style="margin-top:20px">
-                    <input type="text" placeholder="Enter Phone No">
+                    <input type="text" required placeholder="Enter Phone No">
                     <br />
 
                     <button type="button" class="btn btn-primary btn-play"
@@ -227,6 +227,11 @@
                 modal.style.display = 'none';
                 overlay.style.display = 'block'; // Show the overlay
                 startCountdown(); // Start the countdown when button is clicked
+                const usernameInput = document.getElementById('username');
+                const username = usernameInput.value.trim(); // Get the username from the input field
+                if (username) {
+                    localStorage.setItem('username', username);
+                }
             });
 
             closeBtn.addEventListener('click', function() {
@@ -237,24 +242,22 @@
 
             // Function to start the countdown
             function startCountdown() {
-                countdownElement.textContent = countdownValue; // Set initial countdown value
+                countdownElement.textContent = countdownValue;
                 const countdownInterval = setInterval(function() {
-                    countdownValue--; // Decrement countdown value
-                    countdownElement.textContent = countdownValue; // Update countdown display
-
+                    countdownValue--;
+                    countdownElement.textContent = countdownValue;
                     if (countdownValue <= 0) {
-                        clearInterval(countdownInterval); // Stop the countdown
-                        redirectToGame(); // Redirect to the game after countdown reaches 0
+                        clearInterval(countdownInterval);
+                        redirectToGame();
                     }
-                }, 1000); // Update countdown every second
+                }, 1000);
             }
 
             // Function to redirect to the game
             function redirectToGame() {
-                // Replace 'game_url' with the actual URL where the game is hosted
+
                 window.location.href = 'start-trivia';
             }
-
             window.addEventListener('click', function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
