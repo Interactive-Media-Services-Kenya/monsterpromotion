@@ -61,7 +61,7 @@
             height: 160px;
             width: 525px;
             /* border-radius: 75% 75% 70% 70%;
-                                                        position: relative; */
+                                                                                        position: relative; */
         }
 
         .balloon:before {
@@ -101,6 +101,13 @@
                 opacity: 0;
             }
         }
+
+        @media (max-width: 767px) {
+            #banner-section {
+                height: 70vh;
+
+            }
+        }
     </style>
     <section id="banner-section">
 
@@ -123,22 +130,6 @@
                                     </a> --}}
                                 </div>
                             </div>
-                            {{-- <div class="row justify-content-center">
-                                <div class="col-lg-12">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-6">
-                                            <div class="bottom-area text-center">
-                                                <img src="images/R0mMHlZhfUCF.png" alt="banner-vs">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-
-
-
-
                         </div>
                     </div>
                 </div>
