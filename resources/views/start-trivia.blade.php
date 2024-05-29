@@ -39,6 +39,14 @@
             /* Allows centering with margin: auto */
         }
 
+        @media (max-width: 998px) {
+            .modal-content {
+
+                margin-top: 50%;
+
+            }
+        }
+
         .close {
             color: #aaa;
             float: right;
