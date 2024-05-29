@@ -65,8 +65,23 @@ class QuizController extends Controller
         return redirect('admin/manage-questions')->with('success', 'Question created successfully.');
     }
     public function manageQuestions(){
-        return view('backend.quiz/index');
+        $questions=Question::where('status',1)->get();
+        return view('backend.quiz/index',['questions'=>$questions]);
     }
-    
+    public function disableQuestions(){
+             $id = decrypt($_GET['id']);
+
+             $question = Question::find($id);
+             if (!$question) {
+                return redirect()->back()->with('error','Question not found');
+             }
+     
+             try {
+                 $question->update(['status' => 0]);
+                 return redirect()->back()->with('success','Question deleted successfully');
+             } catch (\Exception $e) {
+                return redirect()->back()->with('error','An Error occured');
+             }
+    }
 
 }

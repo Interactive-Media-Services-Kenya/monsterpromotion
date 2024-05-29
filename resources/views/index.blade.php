@@ -24,8 +24,88 @@
             /* Make sure the content stays above the pseudo-element */
             /* Add any additional styles for the content here */
         }
+
+        body {
+            font-family: var(--body-font);
+            background-color: #171717;
+            font-size: 18px;
+            line-height: 25px;
+            padding: 0;
+            margin: 0;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+
+        #balloon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            height: 100%;
+
+            transition: opacity 500ms;
+        }
+
+        .banner-content {
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+        .balloon {
+            /* height: 125px;
+                                                                                                                        width: 105px;
+                                                                                                                        border-radius: 75% 75% 70% 70%; */
+            position: relative;
+        }
+
+        .balloon:before {
+            content: "";
+            height: 75px;
+            width: 1px;
+            padding: 1px;
+            background-color: #FDFD96;
+            display: block;
+            position: absolute;
+            top: 125px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .balloon:after {
+            content: "▲";
+            text-align: center;
+            display: block;
+            position: absolute;
+            color: inherit;
+            top: 120px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-300vh);
+                opacity: 0;
+            }
+        }
     </style>
     <section id="banner-section">
+
+        <div id="balloon-container">
+        </div>
         <div class="banner-content d-flex
         align-items-center">
             <div class="container">
@@ -33,15 +113,14 @@
                     <div class="col-lg-12">
                         <div class="main-content">
                             <div class="top-area justify-content-center text-center">
-                                <h3>Play Unlimited</h3>
-                                <h1>Tournaments</h1>
-                                <p>Compete in Free and Paid entry Tournaments. Transform your
-                                    games to real money eSports</p>
+                                <h1>ITS MONSTER TIME</h1>
+                                <h3>LETS PLAY A GAME, BE OUR NEXT CHAMPION</h3>
+                                <p>Just simple way,answer as many questions as you can within 60 seconds</p>
                                 <div class="btn-play d-flex justify-content-center align-items-center">
-                                    <a href="registration.html" class="cmn-btn">Get Started</a>
-                                    <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM" class="mfp-iframe popupvideo">
+                                    <a href="registration.html" class="cmn-btn">Ready? Play Now</a>
+                                    {{-- <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM" class="mfp-iframe popupvideo">
                                         <img src="images/hKSskvYIu5WE.png" alt="play">
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                             {{-- <div class="row justify-content-center">
@@ -73,14 +152,15 @@
 
     <!-- Available Game In start -->
     <section id="available-game-section">
+
         <div class="overlay pb-120">
             <div class="container wow fadeInUp">
                 <div class="main-container">
                     <div class="row justify-content-between">
                         <div class="col-lg-10">
                             <div class="section-header">
-                                <h2 class="title">Available Games</h2>
-                                <p>We are constantly adding new games</p>
+                                <h2 class="title">Our Top Games List</h2>
+                                <p>You can play any of our games below to win amazing gifts</p>
                             </div>
                         </div>
                     </div>
@@ -101,9 +181,9 @@
                             <a href="#"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
                         </div>
                     </div>
-                    <div class="btn-area text-center">
+                    {{-- <div class="btn-area text-center">
                         <a href="tournaments.html" class="cmn-btn">View All</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -185,56 +265,12 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
-                            <h2 class="title">Browse Tournaments</h2>
-                            <p>Find the perfect tournaments for you. Head to head matches
-                                where you pick the game, rules and prize.</p>
+                            <h2 class="title">LEADERS BOARD</h2>
+                            <p>Get to know our top Monster Champions.</p>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-40 mp-none">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="single-input">
-                            <span>Status</span>
-                            <select>
-                                <option>Status</option>
-                                <option value="1">Upcoming 1</option>
-                                <option value="2">Upcoming 2</option>
-                                <option value="3">Upcoming 3</option>
-                                <option value="5">Upcoming 5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="single-input">
-                            <span>Search</span>
-                            <input type="text" placeholder="Search">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="single-input">
-                            <span>Team Size</span>
-                            <select>
-                                <option>Select Team Size</option>
-                                <option value="1">Size 1</option>
-                                <option value="2">Size 2</option>
-                                <option value="3">Size 3</option>
-                                <option value="4">Size 4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="single-input">
-                            <span>Entry Fee</span>
-                            <select>
-                                <option>Select Entry Fee</option>
-                                <option value="1">50</option>
-                                <option value="2">60</option>
-                                <option value="3">70</option>
-                                <option value="4">80</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="single-item">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 d-flex align-items-center">
@@ -397,114 +433,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-item">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <img class="top-img" src="images/tlwPIjA9cnXw.png" alt="image">
-                        </div>
-                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                <h4>Begum Fortnite Tournament 23</h4>
-                                <div class="title-bottom d-flex">
-                                    <div class="time-area bg">
-                                        <img src="images/NCtbeIh0Ry44.png" alt="image">
-                                        <span>Starts in</span>
-                                        <span class="time">10d 2H 18M</span>
-                                    </div>
-                                    <div class="date-area bg">
-                                        <span class="date">Apr 21, 5:00 AM EDT</span>
-                                    </div>
-                                </div>
-                                <div class="single-box d-flex">
-                                    <div class="box-item">
-                                        <span class="head">ENTRY/PLAYER</span>
-                                        <span class="sub">10 Credits</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Team Size</span>
-                                        <span class="sub">2 VS 2</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Max Teams</span>
-                                        <span class="sub">64</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Enrolled</span>
-                                        <span class="sub">11</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">skill Level</span>
-                                        <span class="sub">All</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex align-items-center">
-                            <div class="prize-area text-center">
-                                <div class="contain-area">
-                                    <span class="prize"><img src="images/FIWhhUUYhL79.png" alt="image">prize</span>
-                                    <h4 class="dollar">$473</h4>
-                                    <a href="tournaments-single.html" class="cmn-btn">View Tournament</a>
-                                    <p>Top 3 Players Win a Cash Prize</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-item mp-none">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <img class="top-img" src="images/uzjYAaIJPOYz.png" alt="image">
-                        </div>
-                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                <h4>60 Player - Weekly - Micro</h4>
-                                <div class="title-bottom d-flex">
-                                    <div class="time-area bg">
-                                        <img src="images/NCtbeIh0Ry44.png" alt="image">
-                                        <span>Starts in</span>
-                                        <span class="time">10d 2H 18M</span>
-                                    </div>
-                                    <div class="date-area bg">
-                                        <span class="date">Apr 21, 5:00 AM EDT</span>
-                                    </div>
-                                </div>
-                                <div class="single-box d-flex">
-                                    <div class="box-item">
-                                        <span class="head">ENTRY/PLAYER</span>
-                                        <span class="sub">10 Credits</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Team Size</span>
-                                        <span class="sub">2 VS 2</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Max Teams</span>
-                                        <span class="sub">64</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Enrolled</span>
-                                        <span class="sub">11</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">skill Level</span>
-                                        <span class="sub">All</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex align-items-center">
-                            <div class="prize-area text-center">
-                                <div class="contain-area">
-                                    <span class="prize"><img src="images/FIWhhUUYhL79.png" alt="image">prize</span>
-                                    <h4 class="dollar">$778</h4>
-                                    <a href="tournaments-single.html" class="cmn-btn">View Tournament</a>
-                                    <p>Top 3 Players Win a Cash Prize</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </section>
@@ -643,210 +573,63 @@
     </section>
     <!-- Players of the Week In end -->
 
-    <!-- Features In start -->
-    <section id="features-section">
-        <div class="overlay pt-120">
-            <div class="container wow fadeInUp">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="section-header text-center">
-                            <h2 class="title">Begam Games Features</h2>
-                            <p>The biggest esports tournaments anytime, anywhere</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pm-none">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/tJEsFwTf3IPo.png" alt="image">
-                            </div>
-                            <h5>Premium Support</h5>
-                            <p>Our dedicated admins are there to answer in no time, avg response time is 5mins.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/6HKxuHMHqHQl.png" alt="image">
-                            </div>
-                            <h5>Instant Deposits</h5>
-                            <p>Make a deposit and receive your funds instantly to your account.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/PihofoiaOoEW.png" alt="image">
-                            </div>
-                            <h5>Climb the Leaderboards</h5>
-                            <p>Compete in monthly leaderboard challenges for real cash and prizes.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/GN3jISpbONzJ.png" alt="image">
-                            </div>
-                            <h5>Make 2x your $$</h5>
-                            <p>Our dedicated admins are there to answer in no time, avg response time is 5mins.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/50tVxRMV9cpK.png" alt="image">
-                            </div>
-                            <h5>Make up to 10X your $$</h5>
-                            <p>Make up to 10X your money on multiplayer tourneys. With paid and free entry.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/dw229D8o1KqT.png" alt="image">
-                            </div>
-                            <h5>Play at your Level</h5>
-                            <p>With ranked divisions we help you find the right level to compete.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Features In end -->
+    <script>
+        const balloonContainer = document.getElementById("balloon-container");
 
-    <!-- Call to Action In start -->
-    <section id="call-to-action">
-        <div class="overlay pt-120 pb-120">
-            <div class="container">
-                <div class="main-content">
-                    <div class="row d-sm-flex justify-content-sm-end">
-                        <div class="col-lg-4 col-md-1">
-                            <img class="left" src="images/87omSrHoKfUb.png" alt="image">
-                        </div>
-                        <div class="col-lg-4 col-md-5 col-sm-5 d-flex align-items-center">
-                            <div class="section-item">
-                                <h4>Invite Friends and Win Rewards.Join BEGAM Games today</h4>
-                            </div>
-                        </div>
-                        <div
-                            class="col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center justify-content-sm-end align-items-center">
-                            <div class="btn-area d-flex justify-content-center justify-content-sm-end align-items-center">
-                                <a href="registration.html" class="cmn-btn">Join Now</a>
-                            </div>
-                            <img src="images/neaYspSi4PR8.png" alt="image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Call to Action In end -->
+        function random(num) {
+            return Math.floor(Math.random() * num);
+        }
 
-    <!-- Testimonials In start -->
-    <section id="testimonials-section">
-        <div class="overlay pt-120 pb-120">
-            <div class="container wow fadeInUp">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="section-header text-center">
-                            <h2 class="title">Our Gamers Review</h2>
-                            <p>Thousands of Happy Gamers All Around the World</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mp-none">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <p>I play Tournament every day, it's a great way to relax and win cash too!</p>
-                            <div class="bottom-area d-flex justify-content-between">
-                                <div class="left-area d-flex">
-                                    <div class="img">
-                                        <div class="img-area">
-                                            <img src="images/0mNtIv1lsa0l.png" alt="image">
-                                        </div>
-                                    </div>
-                                    <div class="title-area">
-                                        <h6>Brice Tong</h6>
-                                        <span>Texas, USA</span>
-                                    </div>
-                                </div>
-                                <div class="amount">
-                                    <h6>$306</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <p>When I hang out with my friends, we play Tournament, its so much fun</p>
-                            <div class="bottom-area d-flex justify-content-between">
-                                <div class="left-area d-flex">
-                                    <div class="img">
-                                        <div class="img-area">
-                                            <img src="images/0mNtIv1lsa0l.png" alt="image">
-                                        </div>
-                                    </div>
-                                    <div class="title-area">
-                                        <h6>Alva Adair</h6>
-                                        <span>Frankfurt, Germany</span>
-                                    </div>
-                                </div>
-                                <div class="amount">
-                                    <h6>$496</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <p>I joined for the community but ended up winning cash, amazing.</p>
-                            <div class="bottom-area d-flex justify-content-between">
-                                <div class="left-area d-flex">
-                                    <div class="img">
-                                        <div class="img-area">
-                                            <img src="images/0mNtIv1lsa0l.png" alt="image">
-                                        </div>
-                                    </div>
-                                    <div class="title-area">
-                                        <h6>Ray Sutton</h6>
-                                        <span>Ontario, Canada</span>
-                                    </div>
-                                </div>
-                                <div class="amount">
-                                    <h6>$306</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonials In end -->
+        function getRandomStyles() {
+            var mt = random(200);
+            var ml = random(50);
+            var dur = random(5) + 5;
+            return `
+        margin: ${mt}px 0 0 ${ml}px;
+        width: 160px;
+        height: 525px;
+        animation: float ${dur}s ease-in infinite;
+    `;
+        }
 
-    <!-- Call Action In start -->
-    <section id="call-action" class="pb-120">
-        <div class="overlay">
-            <div class="container wow fadeInUp">
-                <div class="row d-flex justify-content-between align-items-center">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="left-area">
-                            <h2 class="title">Build Your Esports Profile</h2>
-                            <p>Showcase your achievements, match history and win rate while you build your reputation on
-                                Begam.</p>
-                            <a href="registration.html" class="cmn-btn-second">Sign Up Free</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-6">
-                        <div class="right-area">
-                            <img src="images/hlpOtZVOF0Yx.png" alt="image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+        function createBalloons(num) {
+            // Array of image URLs
+            var imageUrls = [
+                "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
+                "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
+                "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
+                "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
+                "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
+
+            ];
+
+            for (var i = num; i > 0; i--) {
+                var balloon = document.createElement("img");
+                balloon.className = "balloon";
+                // Select a random image URL from the array
+                var randomImageUrl = imageUrls[random(imageUrls.length)];
+                balloon.src = randomImageUrl;
+                balloon.style.cssText = getRandomStyles();
+                balloonContainer.append(balloon);
+            }
+        }
+
+
+        function removeBalloons() {
+            balloonContainer.style.opacity = 0;
+            setTimeout(() => {
+                balloonContainer.remove();
+            }, 500);
+        }
+
+        window.addEventListener("load", () => {
+            createBalloons(30);
+        });
+
+        window.addEventListener("click", () => {
+            removeBalloons();
+        });
+    </script>
     @include('footer');
 @endsection

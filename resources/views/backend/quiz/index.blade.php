@@ -6,44 +6,78 @@
     <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
-            <div class="row justify-content-center"> <!-- Add this line to center the form -->
-                <div class="col-md-12 grid-margin stretch-card"> <!-- Adjust the width of the form if needed -->
+            <div class="row ">
+                <div class="col-12 grid-margin">
                     <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Questions</h4>
-                            <p class="card-description"> Add Questions Here </p>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <div class="card-body">
+                            <h4 class="card-title">Manage Questions</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="form-check form-check-muted m-0">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" id="check-all">
+                                                    </label>
+                                                </div>
+                                            </th>
+                                            <th> Question</th>
+                                            <th> Time Allocated</th>
+                                            <th> Status</th>
+                                            <th> Correct Attempts</th>
+                                            <th> Failed Attempts</th>
+                                            <th> Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($questions as $question)
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </td>
+
+                                                <td> {{ $question->question }} </td>
+                                                <td> {{ $question->allocated_time }}s </td>
+                                                <td>
+                                                    <div class="badge badge-outline-success">Active</div>
+                                                </td>
+                                                <td> 0</td>
+                                                <td> 0</td>
+                                                <td>
+                                                    <a href="disable-question?id={{ encrypt($question->id) }}"
+                                                        class="badge badge-outline-danger"
+                                                        style="text-decoration:none">Delete</a>
+                                                    &nbsp;&nbsp;<a href="update-question?id={{ encrypt($question->id) }}"
+                                                        class="badge badge-outline-primary"
+                                                        style="text-decoration:none">Update</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    @include('backend/footer');
-@endsection
 
-<script>
-    function addRow() {
-        console.log("Add answer button clicked");
-        var choiceCount = $('.answer-group').length + 1; // Calculate the choice count
-        var answerField = '<div class="answer-group">' +
-            'Choice ' + choiceCount + '</br>' +
-            '<div class="row">' +
-            '<div class="col-10">' +
-            '<input type="text" class="form-control answer" placeholder="Answer">' +
-            '</div>' +
-            '<div class="col-2" style="float:right">' +
-            '<button style="visibility:hidden" type="button" class="btn btn-success btn-sm add-answer" onclick="addRow()">+</button>' +
-            '<button type="button" class="btn btn-danger btn-sm remove-answer" onclick="removeRow(this)">-</button>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        $('#answers').append(answerField);
-    }
-
-
-    function removeRow(btn) {
-        console.log("Remove answer button clicked");
-        $(btn).closest('.answer-group').remove();
-    };
-</script>
+        @include('backend/footer');
+    @endsection

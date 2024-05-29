@@ -1,11 +1,19 @@
 <!-- header-section start -->
-<header id="header-section">
+<style>
+    #header-section .header-area {
+        margin-left: 0;
+        margin-right: 0;
+        border-bottom: 1px solid #4543A9;
+        background: #171717;
+    }
+</style>
+<header id="header-section" style="background:#171717 !important">
     <div class="overlay">
         <div class="container">
             <div class="row d-flex header-area">
                 <div class="logo-section flex-grow-1 d-flex align-items-center">
-                    <a class="site-logo site-title" href="index.html"><img src="images/qVQxw6lCiGcf.png"
-                            alt="site-logo"></a>
+                    <a class="site-logo site-title" href="index.html"><img
+                            src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"></a>
                 </div>
                 <button class="navbar-toggler ml-auto collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -16,13 +24,13 @@
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav main-menu ml-auto">
                             <li><a href="index.html" class="active">Home</a></li>
-                            <li class="menu_has_children"><a href="#0">Tournaments</a>
+                            {{-- <li class="menu_has_children"><a href="#0">Tournaments</a>
                                 <ul class="sub-menu">
                                     <li><a href="tournaments.html">Tournaments</a></li>
                                     <li><a href="tournaments-single.html">Tournaments Single</a></li>
                                 </ul>
-                            </li>
-                            <li class="menu_has_children"><a href="#0">Pages</a>
+                            </li> --}}
+                            {{-- <li class="menu_has_children"><a href="#0">Pages</a>
                                 <ul class="sub-menu">
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="shop.html">Shop</a></li>
@@ -33,8 +41,11 @@
                                     <li><a href="features.html">Features</a></li>
                                     <li><a href="error.html">Error</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            </li> --}}
+                            <li><a href="contact.html">Trivia Quizes</a></li>
+                            <li><a href="contact.html">About</a></li>
+                            <li><a href="contact.html">How To Play</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -50,7 +61,7 @@
                             <option value="4">NL</option>
                         </select>
                     </div>
-                    <a href="login.html" class="login-btn">Login</a>
+                    {{-- <a href="login.html" class="login-btn">Login</a> --}}
                     <a href="registration.html" class="cmn-btn">Join Now!</a>
                 </div>
             </div>
