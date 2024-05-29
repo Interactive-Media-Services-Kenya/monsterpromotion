@@ -8,8 +8,75 @@
                 margin-bottom: 40px;
             }
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            /* Center horizontally */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto;
+            /* Center horizontally */
+            margin-top: 20%;
+            /* Adjust vertical position */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            /* Limit maximum width */
+            display: inline-block;
+            /* Allows centering with margin: auto */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            {{-- <div class="logo-section flex-grow-1 d-flex align-items-center" style="background:red">
+                <a class="site-logo site-title" href="/"><img
+                        src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"></a>
+            </div> --}}
+            <span class="close">&times;</span>
+            <form action="#">
+                <div class="subscribe">
+                    <input type="email" placeholder="Enter Fullname"><br />
+
+                </div>
+                <div class="subscribe" style="margin-top:20px">
+                    <input type="email" placeholder="Enter Phone No">
+                    <br />
+
+                    <button class="btn btn-primary" style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
+                        NOW</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
@@ -46,7 +113,7 @@
                                 <div class="contain-area">
                                     <span class="prize"><img src="https://www.monsterenergy.com/img/home/monster-logo.png"
                                             alt="image"></span>
-                                    <a href="" class="cmn-btn">READY? LETS START</a>
+                                    <button class="cmn-btn">READY? LETS START</button>
 
                                 </div>
                             </div>
@@ -61,70 +128,25 @@
     <!-- Browse Tournaments end -->
 
     <script>
-        const balloonContainer = document.getElementById("balloon-container");
+        // JavaScript
+        document.addEventListener("DOMContentLoaded", function() {
+            const readyButton = document.querySelector('.cmn-btn');
+            const modal = document.getElementById('myModal');
+            const closeBtn = modal.querySelector('.close');
 
-        function random(num) {
-            return Math.floor(Math.random() * num);
-        }
+            readyButton.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
 
-        function getRandomStyles() {
-            var mt = random(200);
-            var ml = random(50);
-            var dur = random(5) + 5;
-            var width = 160; // Default width
-            var height = 525; // Default height
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
 
-            // Adjust dimensions for smaller screens
-            if (window.innerWidth < 768) {
-                width = 70; // Adjust width for small screens
-                height = 225; // Adjust height for small screens
-            }
-
-            return `
-        margin: ${mt}px 0 0 ${ml}px;
-        width: ${width}px;
-        height: ${height}px;
-        animation: float ${dur}s ease-in infinite;
-    `;
-        }
-
-
-        function createBalloons(num) {
-            // Array of image URLs
-            var imageUrls = [
-                "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
-                "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
-                "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
-
-            ];
-
-            for (var i = num; i > 0; i--) {
-                var balloon = document.createElement("img");
-                balloon.className = "balloon";
-                // Select a random image URL from the array
-                var randomImageUrl = imageUrls[random(imageUrls.length)];
-                balloon.src = randomImageUrl;
-                balloon.style.cssText = getRandomStyles();
-                balloonContainer.append(balloon);
-            }
-        }
-
-
-        function removeBalloons() {
-            balloonContainer.style.opacity = 0;
-            setTimeout(() => {
-                balloonContainer.remove();
-            }, 500);
-        }
-
-        window.addEventListener("load", () => {
-            createBalloons(30);
-        });
-
-        window.addEventListener("click", () => {
-            removeBalloons();
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
     </script>
     @include('footer');

@@ -23,7 +23,7 @@
                 <nav class="navbar navbar-expand-lg p-0">
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav main-menu ml-auto">
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="/" class="active">Home</a></li>
                             {{-- <li class="menu_has_children"><a href="#0">Tournaments</a>
                                 <ul class="sub-menu">
                                     <li><a href="tournaments.html">Tournaments</a></li>
