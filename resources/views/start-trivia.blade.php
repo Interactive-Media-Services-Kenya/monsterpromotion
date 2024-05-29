@@ -9,6 +9,17 @@
             }
         }
 
+        /* Add this CSS */
+        body.overlay-shown {
+            overflow: hidden;
+            /* Prevent scrolling */
+        }
+
+        body.overlay-shown>*:not(#overlay) {
+            display: none;
+            /* Hide all content except the overlay */
+        }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -60,15 +71,38 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Overlay styles */
+        .overlaid {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            width: 100%;
+            height: 100%;
+            background: red;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* Countdown styles */
+        .countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+        }
     </style>
 
     <!-- Modal -->
+
     <div id="myModal" class="modal">
         <div class="modal-content">
-            {{-- <div class="logo-section flex-grow-1 d-flex align-items-center" style="background:red">
-                <a class="site-logo site-title" href="/"><img
-                        src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"></a>
-            </div> --}}
+
             <span class="close">&times;</span>
             <form action="#">
                 <div class="subscribe">
@@ -79,7 +113,7 @@
                     <input type="text" placeholder="Enter Phone No">
                     <br />
 
-                    <button type="submit" class="btn btn-primary"
+                    <button type="button" class="btn btn-primary btn-play"
                         style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
                         NOW</button>
                 </div>
@@ -89,6 +123,13 @@
 
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
+        <!-- Overlay with countdown timer -->
+        <div id="overlay" class="overlaid">
+            <div class="countdown">
+                <h2>Game starts in <span id="countdown">10</span> seconds</h2>
+            </div>
+        </div>
+
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
@@ -158,5 +199,56 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const readyButton = document.querySelector('.btn-play');
+            const modal = document.getElementById('myModal');
+            const closeBtn = modal.querySelector('.close');
+            const overlay = document.getElementById('overlay');
+            const countdownElement = document.getElementById('countdown');
+            let countdownValue = 10; // Initial countdown value
+
+            readyButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+                overlay.style.display = 'block'; // Show the overlay
+                startCountdown(); // Start the countdown when button is clicked
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                overlay.style.display = 'none'; // Hide the overlay
+                clearInterval(countdownInterval); // Stop the countdown if modal is closed
+            });
+
+            // Function to start the countdown
+            function startCountdown() {
+                countdownElement.textContent = countdownValue; // Set initial countdown value
+                const countdownInterval = setInterval(function() {
+                    countdownValue--; // Decrement countdown value
+                    countdownElement.textContent = countdownValue; // Update countdown display
+
+                    if (countdownValue <= 0) {
+                        clearInterval(countdownInterval); // Stop the countdown
+                        redirectToGame(); // Redirect to the game after countdown reaches 0
+                    }
+                }, 1000); // Update countdown every second
+            }
+
+            // Function to redirect to the game
+            function redirectToGame() {
+                // Replace 'game_url' with the actual URL where the game is hosted
+                window.location.href = 'trivia-play';
+            }
+
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    overlay.style.display = 'none'; // Hide the overlay
+                    clearInterval(countdownInterval); // Stop the countdown if modal is closed
+                }
+            });
+        });
+    </script>
+
     @include('footer');
 @endsection

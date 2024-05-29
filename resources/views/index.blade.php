@@ -61,7 +61,7 @@
             height: 160px;
             width: 525px;
             /* border-radius: 75% 75% 70% 70%;
-                                                                                                                                                    position: relative; */
+                                                                                                                                                                                            position: relative; */
         }
 
         .balloon:before {
@@ -584,15 +584,13 @@
             var mt = random(200);
             var ml = random(50);
             var dur = random(5) + 5;
-            var width = 160; // Default width
-            var height = 525; // Default height
-
+            var width = 100; // Default width
+            var height = 250; // Default height
             // Adjust dimensions for smaller screens
             if (window.innerWidth < 768) {
                 width = 70; // Adjust width for small screens
                 height = 225; // Adjust height for small screens
             }
-
             return `
         margin: ${mt}px 0 0 ${ml}px;
         width: ${width}px;
@@ -600,7 +598,6 @@
         animation: float ${dur}s ease-in infinite;
     `;
         }
-
 
         function createBalloons(num) {
             // Array of image URLs
