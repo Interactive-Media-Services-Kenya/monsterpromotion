@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row d-flex header-area">
                 <div class="logo-section flex-grow-1 d-flex align-items-center">
-                    <a class="site-logo site-title" href="index.html"><img
+                    <a class="site-logo site-title" href="/"><img
                             src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"></a>
                 </div>
                 <button class="navbar-toggler ml-auto collapsed" type="button" data-toggle="collapse"
@@ -51,7 +51,7 @@
                 </nav>
                 <div class="right-area header-action d-flex align-items-center">
                     <div class="search-icon">
-                        <a href="#"><img src="images/gYeZVMgEQGyP.png" alt="icon"></a>
+                        <a href="#"><img src="{{ asset('images/gYeZVMgEQGyP.png') }}" alt="icon"></a>
                     </div>
                     <div class="lang d-flex align-items-center">
                         <select>
@@ -62,7 +62,7 @@
                         </select>
                     </div>
                     {{-- <a href="login.html" class="login-btn">Login</a> --}}
-                    <a href="registration.html" class="cmn-btn">Join Now!</a>
+                    {{-- <a href="registration.html" class="cmn-btn">Join Now!</a> --}}
                 </div>
             </div>
         </div>

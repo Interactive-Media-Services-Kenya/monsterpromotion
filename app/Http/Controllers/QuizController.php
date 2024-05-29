@@ -68,6 +68,11 @@ class QuizController extends Controller
         $questions=Question::where('status',1)->get();
         return view('backend.quiz/index',['questions'=>$questions]);
     }
+    
+    public function playQuiz(){
+        // $questions=Question::where('status',1)->get();
+        return view('start-trivia');
+    }
     public function disableQuestions(){
              $id = decrypt($_GET['id']);
 

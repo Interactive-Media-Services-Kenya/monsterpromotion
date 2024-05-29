@@ -61,7 +61,7 @@
             height: 160px;
             width: 525px;
             /* border-radius: 75% 75% 70% 70%;
-                                                                                                position: relative; */
+                                                                                                                                                    position: relative; */
         }
 
         .balloon:before {
@@ -133,7 +133,7 @@
                                 <h3>LETS PLAY A GAME, BE OUR NEXT CHAMPION</h3>
                                 <p>Just simple way,answer as many questions as you can within 60 seconds</p>
                                 <div class="btn-play d-flex justify-content-center align-items-center">
-                                    <a href="registration.html" class="cmn-btn">Ready? Play Now</a>
+                                    <a href="#available-game-section" class="cmn-btn">Ready? Play Now</a>
                                     {{-- <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM" class="mfp-iframe popupvideo">
                                         <img src="images/hKSskvYIu5WE.png" alt="play">
                                     </a> --}}
@@ -166,19 +166,19 @@
                     </div>
                     <div class="available-game-carousel">
                         <div class="single-item">
-                            <a href="#"><img src="images/6oG1ggLQFyBC.png" alt="image"></a>
+                            <a href="{{ route('user/play-trivia') }}"><img src="images/6oG1ggLQFyBC.png" alt="image"></a>
                         </div>
                         <div class="single-item">
-                            <a href="#"><img src="images/Ri48fTxVZ3Pj.png" alt="image"></a>
+                            <a href="{{ route('user/play-trivia') }}"><img src="images/Ri48fTxVZ3Pj.png" alt="image"></a>
                         </div>
                         <div class="single-item">
-                            <a href="#"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
+                            <a href="{{ route('user/play-trivia') }}"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
                         </div>
                         <div class="single-item">
-                            <a href="#"><img src="images/9tY3c177ITYs.png" alt="image"></a>
+                            <a href="{{ route('user/play-trivia') }}"><img src="images/9tY3c177ITYs.png" alt="image"></a>
                         </div>
                         <div class="single-item">
-                            <a href="#"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
+                            <a href="{{ route('user/play-trivia') }}"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
                         </div>
                     </div>
                     {{-- <div class="btn-area text-center">
