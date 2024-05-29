@@ -99,6 +99,10 @@
     </style>
 
     <!-- Modal -->
+    <audio id="background-music" loop>
+        <source src="path_to_your_audio_file.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -206,8 +210,19 @@
             const closeBtn = modal.querySelector('.close');
             const overlay = document.getElementById('overlay');
             const countdownElement = document.getElementById('countdown');
-            let countdownValue = 10; // Initial countdown value
 
+            let countdownValue = 10; // Initial countdown value
+            function createBeepSound() {
+                const audioContext = new(window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                oscillator.type = 'sine'; // Set oscillator type to sine wave
+                oscillator.frequency.setValueAtTime(1000, audioContext.currentTime); // Set frequency (Hz)
+                oscillator.connect(audioContext.destination);
+                oscillator.start();
+                setTimeout(function() {
+                    oscillator.stop();
+                }, 100); // Stop the oscillator after 100 milliseconds
+            }
             readyButton.addEventListener('click', function() {
                 modal.style.display = 'none';
                 overlay.style.display = 'block'; // Show the overlay

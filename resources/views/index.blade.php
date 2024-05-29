@@ -61,7 +61,7 @@
             height: 160px;
             width: 525px;
             /* border-radius: 75% 75% 70% 70%;
-                                                                                                                                                                                            position: relative; */
+                                                                                                                                                                                                                                                                    position: relative; */
         }
 
         .balloon:before {
@@ -198,61 +198,51 @@
                     <div class="col-lg-6 text-center">
                         <div class="section-header">
                             <h2 class="title">How It Works</h2>
-                            <p>It's easier than you think. Follow 4 simple easy steps</p>
+                            <p>It's easier than you think. Just 3 simple easy steps</p>
                         </div>
                     </div>
                 </div>
                 <div class="row mp-top">
-                    <div class="col-lg-3 col-md-3 col-sm-6 d-flex justify-content-center">
+                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center">
                         <div class="single-item">
                             <div class="icon-area">
                                 <span>1</span>
                                 <img src="images/X9Rg4sp6JlL8.png" alt="image">
                             </div>
                             <div class="text-area">
-                                <h5>Signup</h5>
+                                <h5>Scan Code</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 d-flex justify-content-center obj-rel">
+                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center obj-rel">
                         <div class="single-item">
                             <div class="icon-area">
                                 <span>2</span>
                                 <img src="images/R1h81k9PrJYk.png" alt="image">
                             </div>
                             <div class="text-area">
-                                <h5>Deposit</h5>
+                                <h5>Start Trivia</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 d-flex justify-content-center obj-alt">
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center obj-rel">
                         <div class="single-item">
                             <div class="icon-area">
                                 <span>3</span>
-                                <img src="images/W2n6PFJ8Abd6.png" alt="image">
-                            </div>
-                            <div class="text-area">
-                                <h5>Compete</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 d-flex justify-content-center obj-rel">
-                        <div class="single-item">
-                            <div class="icon-area">
-                                <span>4</span>
                                 <img src="images/CLufmFhQfboo.png" alt="image">
                             </div>
                             <div class="text-area">
-                                <h5>Get Paid</h5>
+                                <h5>Win Prize</h5>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center">
+                {{-- <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
                         <a href="registration.html" class="cmn-btn">Join Now!</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -325,253 +315,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-item">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <img class="top-img" src="images/N2ziBCLyOHZj.png" alt="image">
-                        </div>
-                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                <h4>Head 2 Head - Weekly - Nano</h4>
-                                <div class="title-bottom d-flex">
-                                    <div class="time-area bg">
-                                        <img src="images/NCtbeIh0Ry44.png" alt="image">
-                                        <span>Starts in</span>
-                                        <span class="time">10d 2H 18M</span>
-                                    </div>
-                                    <div class="date-area bg">
-                                        <span class="date">Apr 21, 5:00 AM EDT</span>
-                                    </div>
-                                </div>
-                                <div class="single-box d-flex">
-                                    <div class="box-item">
-                                        <span class="head">ENTRY/PLAYER</span>
-                                        <span class="sub">10 Credits</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Team Size</span>
-                                        <span class="sub">2 VS 2</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Max Teams</span>
-                                        <span class="sub">64</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Enrolled</span>
-                                        <span class="sub">11</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">skill Level</span>
-                                        <span class="sub">All</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex align-items-center">
-                            <div class="prize-area text-center">
-                                <div class="contain-area">
-                                    <span class="prize"><img src="images/FIWhhUUYhL79.png" alt="image">prize</span>
-                                    <h4 class="dollar">$854</h4>
-                                    <a href="tournaments-single.html" class="cmn-btn">View Tournament</a>
-                                    <p>Top 3 Players Win a Cash Prize</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-item">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <img class="top-img" src="images/MNHpwdKvvcgf.png" alt="image">
-                        </div>
-                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                <h4>marathon aim premium</h4>
-                                <div class="title-bottom d-flex">
-                                    <div class="time-area bg">
-                                        <img src="images/NCtbeIh0Ry44.png" alt="image">
-                                        <span>Starts in</span>
-                                        <span class="time">10d 2H 18M</span>
-                                    </div>
-                                    <div class="date-area bg">
-                                        <span class="date">Apr 21, 5:00 AM EDT</span>
-                                    </div>
-                                </div>
-                                <div class="single-box d-flex">
-                                    <div class="box-item">
-                                        <span class="head">ENTRY/PLAYER</span>
-                                        <span class="sub">10 Credits</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Team Size</span>
-                                        <span class="sub">2 VS 2</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Max Teams</span>
-                                        <span class="sub">64</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Enrolled</span>
-                                        <span class="sub">11</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">skill Level</span>
-                                        <span class="sub">All</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex align-items-center">
-                            <div class="prize-area text-center">
-                                <div class="contain-area">
-                                    <span class="prize"><img src="images/FIWhhUUYhL79.png" alt="image">prize</span>
-                                    <h4 class="dollar">$105</h4>
-                                    <a href="tournaments-single.html" class="cmn-btn">View Tournament</a>
-                                    <p>Top 3 Players Win a Cash Prize</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
         </div>
     </section>
-    <!-- Browse Tournaments end -->
-
-    <!-- Counter In start -->
-    <section id="counter-section">
-        <div class="overlay pt-120 pb-120">
-            <div class="container">
-                <div class="row mp-none">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/FaX7Gxpa1zzQ.png" alt="image">
-                            </div>
-                            <h3><span class="counter">84</span>K</h3>
-                            <p>Matches Played</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/ymmVEw3fZVcI.png" alt="image">
-                            </div>
-                            <h3>$<span class="counter">96</span>m</h3>
-                            <p>Winnings Paid</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/P69luVhH7JX3.png" alt="image">
-                            </div>
-                            <h3><span class="counter">180</span></h3>
-                            <p>Active Ladders</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <img src="images/QNr7rTlgBzAB.png" alt="image">
-                            </div>
-                            <h3><span class="counter">168</span>b</h3>
-                            <p>XP Earned</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Counter In end -->
-
-    <!-- Players of the Week In start -->
-    <section id="players-week-section">
-        <div class="overlay pt-120 pb-120">
-            <div class="container wow fadeInUp">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7 mb-30">
-                        <div class="section-header text-center">
-                            <h2 class="title">Players of the Week</h2>
-                            <p>We take a look at the best player of the week awarded
-                                on Monday for the previous Monday to Sunday</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mp-none">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <div class="img-wrapper">
-                                    <img src="images/8bM6AasrjZOt.png" alt="image">
-                                </div>
-                            </div>
-                            <a href="profile.html">
-                                <h5>Barton Griggs</h5>
-                            </a>
-                            <p class="date">
-                                <span class="text-sm earn">1970 XP Earned</span>
-                                <span class="text-sm">04/05 - 04/12</span>
-                            </p>
-                            <p class="text-sm credit">
-                                <span class="text-sm"><img src="images/hbQWP654IrGK.png" alt="image"> +20
-                                    credits</span>
-                            </p>
-                            <a href="profile.html" class="cmn-btn">View Profile</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-item mid-area text-center">
-                            <div class="top-level">
-                                <img src="images/9H6wYb3UM1iX.png" alt="image">
-                            </div>
-                            <div class="img-area">
-                                <div class="img-wrapper">
-                                    <img src="images/YPfyijStJVJj.png" alt="image">
-                                </div>
-                            </div>
-                            <a href="profile.html">
-                                <h5>Mervin Trask</h5>
-                            </a>
-                            <p class="date">
-                                <span class="text-sm earn">1970 XP Earned</span>
-                                <span class="text-sm">04/05 - 04/12</span>
-                            </p>
-                            <p class="text-sm credit">
-                                <span class="text-sm"><img src="images/hbQWP654IrGK.png" alt="image"> +20
-                                    credits</span>
-                            </p>
-                            <a href="profile.html" class="cmn-btn">View Profile</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-item text-center">
-                            <div class="img-area">
-                                <div class="img-wrapper">
-                                    <img src="images/nq9UAnU1EIm4.png" alt="image">
-                                </div>
-                            </div>
-                            <a href="profile.html">
-                                <h5>Adria Poulin</h5>
-                            </a>
-                            <p class="date">
-                                <span class="text-sm earn">1970 XP Earned</span>
-                                <span class="text-sm">04/05 - 04/12</span>
-                            </p>
-                            <p class="text-sm credit">
-                                <span class="text-sm"><img src="images/hbQWP654IrGK.png" alt="image"> +20
-                                    credits</span>
-                            </p>
-                            <a href="profile.html" class="cmn-btn">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Players of the Week In end -->
 
     <script>
         const balloonContainer = document.getElementById("balloon-container");

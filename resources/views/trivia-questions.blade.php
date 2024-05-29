@@ -132,12 +132,21 @@
         <!-- Overlay with countdown timer -->
 
 
+
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
                             <h2 class="title">QUESTION : 1</h2>
+                            <audio id="beepAudio" controls style="display: none;">
+                                <source src="{{ asset('monster.wav') }}" type="audio/wav">
+                                <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+
+
+
                             {{-- <p>et to know our top Monster GChampions.</p> --}}
                         </div>
                     </div>
@@ -186,6 +195,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Function to start countdown timer and redirect if time elapses
             function startTimer(duration, redirectUrl) {
+
                 var timer = duration,
                     minutes, seconds;
                 setInterval(function() {
@@ -212,7 +222,13 @@
             startTimer(900, 'redirect-page-url'); // Replace 'redirect-page-url' with the URL to redirect
         });
     </script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Script is executing...");
+            var audio = document.getElementById('beepAudio');
+            audio.play();
+        });
+    </script>
 
     @include('footer');
 @endsection
