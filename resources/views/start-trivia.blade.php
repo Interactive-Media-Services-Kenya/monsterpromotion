@@ -189,6 +189,7 @@
             const closeBtn = modal.querySelector('.close');
 
             readyButton.addEventListener('click', function() {
+
                 modal.style.display = 'block';
             });
 

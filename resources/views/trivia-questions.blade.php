@@ -185,6 +185,12 @@
                 --font-size: 1rem;
             }
         }
+
+        #question2-container,
+        #question3-container {
+            display: none;
+            /* Hide additional questions initially */
+        }
     </style>
 
     <!-- Modal -->
@@ -238,30 +244,82 @@
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
                                 {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
-                                <div class="title-bottom">
+                                <div class="title-bottom " id="question1-container">
                                     <p>What year was Monster Energy Drink first introduced to the market?</p>
+                                    <br />
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1990" name="year" data-question="1" value="1990"
+                                            style="display: none;">
+                                        <label for="year_1990" class="radio-button">1990</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1994" name="year" data-question="1" value="1994"
+                                            style="display: none;">
+                                        <label for="year_1994" class="radio-button">1994</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_2020" data-question="1" name="year" value="2020"
+                                            style="display: none;">
+                                        <label for="year_2020" class="radio-button">2020</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_2023" data-question="1" name="year" value="2023"
+                                            style="display: none;">
+                                        <label for="year_2023" class="radio-button">2023</label>
+                                    </div>
                                 </div>
-                                <br />
-                                <div style="color:white">
-                                    <input type="radio" id="year_1990" name="year" value="1990"
-                                        style="display: none;">
-                                    <label for="year_1990" class="radio-button">1990</label>
+                                <div id="question2-container">
+                                    <!-- Your HTML for question 2 here, similar to question 1 -->
+                                    <p>Who is the Current Monster Brand Ambassador for Kenya?</p>
+                                    <br />
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1990" name="year" value="1990"
+                                            style="display: none;">
+                                        <label for="year_1990" data-question="2" class="radio-button">Person 1</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1994" name="year" value="1994"
+                                            style="display: none;">
+                                        <label for="year_1994" data-question="2" class="radio-button">Person 2</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_2020" name="year" value="2020"
+                                            style="display: none;">
+                                        <label for="year_2020" data-question="2" class="radio-button">Person 3</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_2023" data-question="2" name="year"
+                                            value="2023" style="display: none;">
+                                        <label for="year_2023" class="radio-button">Person 4</label>
+                                    </div>
                                 </div>
-                                <div style="color:white">
-                                    <input type="radio" id="year_1994" name="year" value="1994"
-                                        style="display: none;">
-                                    <label for="year_1994" class="radio-button">1994</label>
+
+                                <!-- Question 3 -->
+                                <div id="question3-container">
+                                    <p>This is the third question for monster trivia ?</p>
+                                    <br />
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1990" data-question="3" name="year"
+                                            value="1990" style="display: none;">
+                                        <label for="year_1990" class="radio-button">Answer 2</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_1994" data-question="3" name="year"
+                                            value="1994" style="display: none;">
+                                        <label for="year_1994" class="radio-button">Answer 4</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" data-question="3" id="year_2020" name="year"
+                                            value="2020" style="display: none;">
+                                        <label for="year_2020" class="radio-button">Answer 5</label>
+                                    </div>
+                                    <div style="color:white">
+                                        <input type="radio" id="year_2023" data-question="3" name="year"
+                                            value="2023" style="display: none;">
+                                        <label for="year_2023" class="radio-button">Answe 6</label>
+                                    </div>
                                 </div>
-                                <div style="color:white">
-                                    <input type="radio" id="year_2020" name="year" value="2020"
-                                        style="display: none;">
-                                    <label for="year_2020" class="radio-button">2020</label>
-                                </div>
-                                <div style="color:white">
-                                    <input type="radio" id="year_2023" name="year" value="2023"
-                                        style="display: none;">
-                                    <label for="year_2023" class="radio-button">2023</label>
-                                </div>
+
                             </div>
 
                         </div>
@@ -269,8 +327,8 @@
                             <div class="prize-area text-center">
                                 <div class="contain-area d-flex justify-content-center align-items-center">
                                     <!-- Added d-flex and justify-content-center align-items-center -->
-                                    <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100"
-                                        data-progress-color="crimson" data-bg-color="black">
+                                    <div class="circular-progress" data-inner-circle-color="lightgrey"
+                                        data-percentage="100" data-progress-color="crimson" data-bg-color="black">
                                         <div class="inner-circle"></div>
                                         <p class="percentage time-countdown">10</p>
                                     </div>
@@ -293,7 +351,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to start countdown timer and progress bar animation
+            startCountdownAndProgressBar(300, `redirect-s`);
+            // Function to handle switching between questions
+            function switchQuestion(questionNumber) {
+                document.getElementById(`question${questionNumber}-container`).style.display = 'block';
+                document.getElementById(`question${questionNumber - 1}-container`).style.display = 'none';
+                document.getElementById(`question${questionNumber + 1}-container`).style.display = 'none';
+
+                console.log(questionNumber);
+            }
+
             function startCountdownAndProgressBar(duration, redirectUrl) {
                 var timer = duration;
                 var progressBar = document.querySelectorAll(".circular-progress");
@@ -328,12 +395,27 @@
                     });
 
                     timer--;
-                }, 1000);
+                }, 300);
             }
 
-            // Start countdown timer and progress bar animation
-            startCountdownAndProgressBar(10, 'redirect-page-url');
+            // Function to show the next question
+            function showNextQuestion() {
+                var currentQuestion = this.getAttribute('data-question');
+                switchQuestion(parseInt(currentQuestion) + 1);
+                console.log(currentQuestion);
+            }
+
+            // Add event listener to the radio buttons for all questions
+            var radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(function(radioButton) {
+                radioButton.addEventListener('click', showNextQuestion);
+            });
+
+            // Start with the first question
+            switchQuestion(1);
         });
+    </script>
+
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
