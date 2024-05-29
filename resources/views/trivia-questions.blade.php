@@ -96,6 +96,12 @@
             color: white;
             font-size: 24px;
         }
+
+        #tournaments-section .single-item .title-bottom {
+            border-bottom: 1px solid #32286D;
+            margin-top: 10px;
+            padding-bottom: 15px;
+        }
     </style>
 
     <!-- Modal -->
@@ -124,18 +130,14 @@
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
         <!-- Overlay with countdown timer -->
-        <div id="overlay" class="overlaid">
-            <div class="countdown">
-                <h2>Trivia starts in <span id="countdown">10</span> seconds</h2>
-            </div>
-        </div>
+
 
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
-                            <h2 class="title">TRIVIA GAME QUIZ</h2>
+                            <h2 class="title">QUESTION : 1</h2>
                             {{-- <p>et to know our top Monster GChampions.</p> --}}
                         </div>
                     </div>
@@ -146,27 +148,30 @@
 
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
-                                <h4>HOW TO PLAY</h4>
+                                {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
                                 <div class="title-bottom">
 
-                                    <p>1. Each Question has a defined Time</p>
-                                    <p>2. You Should answer the question before the set time elapses.</p>
-                                    <p>3. Once counter resets to 0, the question is marked as failed attempt</p>
-                                    <p>4. Answer as many questions as possible within the allocated time.</p>
-                                    <p>5. Each correct attempt earns you a point.</p>
+                                    <p>What year was Monster Energy Drink first introduced to the market?</p>
+
                                 </div>
+                                <div style="color:white"><input type="radio" name="person" /> 1990</div>
+                                <div style="color:white"><input type="radio" name="person" /> 1994</div>
+                                <div style="color:white"><input type="radio" name="person" /> 2020</div>
+                                <div style="color:white"><input type="radio" name="person" /> 2023</div>
+
 
                             </div>
                         </div>
                         <div class="col-lg-3 d-flex align-items-center">
                             <div class="prize-area text-center">
                                 <div class="contain-area">
-                                    <span class="prize"><img src="https://www.monsterenergy.com/img/home/monster-logo.png"
-                                            alt="image"></span>
-                                    <button class="cmn-btn">READY? LETS START</button>
-
+                                    <span class="prize" style="color:white"> Time Remaining : <span class="time-countdown"
+                                            style="color:#56be78"></span></span>
+                                    <!-- Move the class here -->
+                                    <a href="" class="cmn-btn">NEXT QUESTION</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -178,77 +183,36 @@
     <!-- Browse Tournaments end -->
 
     <script>
-        // JavaScript
-        document.addEventListener("DOMContentLoaded", function() {
-            const readyButton = document.querySelector('.cmn-btn');
-            const modal = document.getElementById('myModal');
-            const closeBtn = modal.querySelector('.close');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to start countdown timer and redirect if time elapses
+            function startTimer(duration, redirectUrl) {
+                var timer = duration,
+                    minutes, seconds;
+                setInterval(function() {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
 
-            readyButton.addEventListener('click', function() {
-                modal.style.display = 'block';
-            });
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const readyButton = document.querySelector('.btn-play');
-            const modal = document.getElementById('myModal');
-            const closeBtn = modal.querySelector('.close');
-            const overlay = document.getElementById('overlay');
-            const countdownElement = document.getElementById('countdown');
-            let countdownValue = 10; // Initial countdown value
-
-            readyButton.addEventListener('click', function() {
-                modal.style.display = 'none';
-                overlay.style.display = 'block'; // Show the overlay
-                startCountdown(); // Start the countdown when button is clicked
-            });
-
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-                overlay.style.display = 'none'; // Hide the overlay
-                clearInterval(countdownInterval); // Stop the countdown if modal is closed
-            });
-
-            // Function to start the countdown
-            function startCountdown() {
-                countdownElement.textContent = countdownValue; // Set initial countdown value
-                const countdownInterval = setInterval(function() {
-                    countdownValue--; // Decrement countdown value
-                    countdownElement.textContent = countdownValue; // Update countdown display
-
-                    if (countdownValue <= 0) {
-                        clearInterval(countdownInterval); // Stop the countdown
-                        redirectToGame(); // Redirect to the game after countdown reaches 0
+                    // Display the countdown timer
+                    var countdownElement = document.querySelector('.time-countdown');
+                    if (countdownElement) {
+                        countdownElement.textContent = minutes + ":" + seconds;
                     }
-                }, 1000); // Update countdown every second
+
+                    if (--timer < 0) {
+                        // Redirect to another page if time elapses
+                        window.location.href = redirectUrl;
+                    }
+                }, 1000);
             }
 
-            // Function to redirect to the game
-            function redirectToGame() {
-                // Replace 'game_url' with the actual URL where the game is hosted
-                window.location.href = 'start-trivia';
-            }
-
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                    overlay.style.display = 'none'; // Hide the overlay
-                    clearInterval(countdownInterval); // Stop the countdown if modal is closed
-                }
-            });
+            // Start countdown timer on page load (15 minutes = 900 seconds)
+            startTimer(900, 'redirect-page-url'); // Replace 'redirect-page-url' with the URL to redirect
         });
     </script>
+
 
     @include('footer');
 @endsection
