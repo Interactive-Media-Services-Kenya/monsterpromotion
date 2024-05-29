@@ -61,7 +61,7 @@
             height: 160px;
             width: 525px;
             /* border-radius: 75% 75% 70% 70%;
-                                                                                        position: relative; */
+                                                                                                position: relative; */
         }
 
         .balloon:before {
@@ -106,6 +106,15 @@
             #banner-section {
                 height: 70vh;
 
+            }
+
+            @media (max-width: 767px) {
+
+                /* Center content vertically and horizontally */
+                .banner-content {
+                    padding: 20px;
+                    /* Add some padding for better spacing */
+                }
             }
         }
     </style>
