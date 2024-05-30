@@ -272,7 +272,7 @@
                     <button type="submit" id="saveit" class="btn btn-primary btn-play"
                         style="margin-top:20px;width:100%;background:#171717;border:none">SAVE SCORE</button>
                         <button type="submit" id="dontsave"  class="btn btn-primary btn-play"
-                        style="margin-top:20px;width:100%;background:red;border:none">DONT SAVE</button>
+                        style="margin-top:20px;width:100%;background:rgb(136, 64, 64);border:none">DONT SAVE</button>
                 </div>
             </form>
         </div>
@@ -385,7 +385,7 @@
                                 correctAnswers++;
                             }
                         });
-                        document.getElementById('scored').innerText = correctAnswers;
+                        document.getElementById('scored').innerText = correctAnswers + 'POINTS';
                         document.getElementById('total_score').value = totalQuestions;
                         document.getElementById('total_questions').value = correctAnswers;
                     }
@@ -502,7 +502,10 @@
     });
     document.getElementById('dontsave').addEventListener('click', function(event) {
         event.preventDefault();
+        
         localStorage.removeItem('question_answers');
+        
+        window.location.href = '/';
     });
 });
 

@@ -5,7 +5,11 @@
         #banner-section {
             position: relative;
         }
-
+        #tournaments-section .single-item .title-bottom {
+    border-bottom: none;
+    margin-top: 20px;
+    padding-bottom: 35px;
+}
         #banner-section::before {
             content: '';
             position: absolute;
@@ -117,6 +121,15 @@
                 }
             }
         }
+        #tournaments-section .single-item .prize-area {
+    border:none;
+    width: 100%;
+    /* height: 100%; */
+}
+.cmn-btn{
+    background:#b2d236;
+    color:white;
+}
     </style>
     <section id="banner-section">
 
@@ -181,9 +194,7 @@
                             <a href="{{ route('user/play-trivia') }}"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
                         </div>
                     </div>
-                    {{-- <div class="btn-area text-center">
-                        <a href="tournaments.html" class="cmn-btn">View All</a>
-                    </div> --}}
+                   
                 </div>
             </div>
         </div>
@@ -256,65 +267,47 @@
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
                             <h2 class="title">LEADERS BOARD</h2>
-                            <p>Get to know our top Monster Champions.</p>
+                            {{-- <p>Get to know our top Monster Champions.</p> --}}
                         </div>
                     </div>
                 </div>
 
-                <div class="single-item">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <img class="top-img" src="images/oHuUWtmDwB6J.png" alt="image">
-                        </div>
-                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                <h4>Mix It Mondays - Carry Only</h4>
+               
+                    @php
+                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','asc')->get();
+
+                    @endphp
+                    @foreach($leaders as $leader)
+                    <div class="single-item" >
+                    <div class="row" style="margin-top:-60px;margin-bottom:-60px" >
+                       
+                        <div class="col-lg-9 col-md-9 d-flex align-items-center">
+                            <div class="mid-area" >
+                          
                                 <div class="title-bottom d-flex">
-                                    <div class="time-area bg">
-                                        <img src="images/NCtbeIh0Ry44.png" alt="image">
-                                        <span>Starts in</span>
-                                        <span class="time">10d 2H 18M</span>
-                                    </div>
                                     <div class="date-area bg">
-                                        <span class="date">Apr 21, 5:00 AM EDT</span>
+                                        <span class="date">{{ $leader->name }}</span>
                                     </div>
+                                    <div class="time-area bg">
+                                      
+                                        <span>Score:</span>
+                                        <span class="time">{{ $leader->score }}</span>
+                                    </div>
+                                  
                                 </div>
-                                <div class="single-box d-flex">
-                                    <div class="box-item">
-                                        <span class="head">ENTRY/PLAYER</span>
-                                        <span class="sub">10 Credits</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Team Size</span>
-                                        <span class="sub">2 VS 2</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Max Teams</span>
-                                        <span class="sub">64</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">Enrolled</span>
-                                        <span class="sub">11</span>
-                                    </div>
-                                    <div class="box-item">
-                                        <span class="head">skill Level</span>
-                                        <span class="sub">All</span>
-                                    </div>
-                                </div>
+                              
                             </div>
                         </div>
                         <div class="col-lg-3 d-flex align-items-center">
                             <div class="prize-area text-center">
-                                <div class="contain-area">
-                                    <span class="prize"><img src="images/FIWhhUUYhL79.png" alt="image">prize</span>
-                                    <h4 class="dollar">$739</h4>
-                                    <a href="tournaments-single.html" class="cmn-btn">View Tournament</a>
-                                    <p>Top 3 Players Win a Cash Prize</p>
+                                <div class="contain-area" >
+                                      <p class="cmn-btn">RANK : {{ $loop->iteration }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div></div>
+                    @endforeach
+                
 
 
             </div>
