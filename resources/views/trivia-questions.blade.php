@@ -418,6 +418,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener to the form submission
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        
+        // Validate the input fields
+        var username = document.querySelector('input[name="username"]').value;
+        var phone = document.querySelector('input[name="phone"]').value;
+        
+        if (username.trim() === '' || phone.trim() === '') {
+            // If any input field is empty, display an alert message
+            alert('Please enter your full name and phone number.');
+        } else {
+            // If all input fields are filled, submit the form
+            this.submit();
+        }
+    });
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
             // Fetch the first question when the page loads
             fetchQuestion();
             // Add event listeners to radio buttons
