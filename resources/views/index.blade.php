@@ -294,7 +294,7 @@
                 </div>
 
                     @php
-                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','asc')->get();
+                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->get();
 
                     @endphp
                     @foreach($leaders as $leader)

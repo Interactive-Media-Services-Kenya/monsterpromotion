@@ -254,7 +254,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    background-color: black;
     text-align: center;
 }
 
@@ -503,8 +503,8 @@
                             }
                         });
                         document.getElementById('scored').innerText = correctAnswers;
-                        document.getElementById('total_score').value = totalQuestions;
-                        document.getElementById('total_questions').value = correctAnswers;
+                        document.getElementById('total_score').value =correctAnswers;
+                        document.getElementById('total_questions').value = totalQuestions;
                         // window.location.href = '/another-route';
                     }
 
@@ -567,13 +567,13 @@
 
     </script>
  <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add an event listener to play audio when the document is clicked
-    document.addEventListener('click', function() {
-        var audio = document.getElementById('beepAudio');
-        audio.play();
-    });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Add an event listener to play audio when the document is clicked
+//     document.addEventListener('click', function() {
+//         var audio = document.getElementById('beepAudio');
+//         audio.play();
+//     });
+// });
 
 </script>
 
