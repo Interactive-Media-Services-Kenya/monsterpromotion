@@ -38,7 +38,7 @@ class QuizController extends Controller
         $question->status = 1;
         $question->save();
 
-        return redirect('/')->with('success', 'Question created successfully.');
+        return redirect('/#tournaments-section')->with('success', 'Question created successfully.');
     }
     public function storeQuestion(Request $request)
     {

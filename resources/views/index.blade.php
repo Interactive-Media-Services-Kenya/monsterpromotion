@@ -281,8 +281,8 @@
     <!-- How Works end -->
 
     <!-- Browse Tournaments start -->
-    <section id="tournaments-section">
-        <div class="overlay pt-120 pb-120">
+    <section id="tournaments-section" >
+        <div class="overlay pt-120 pb-120" >
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">

@@ -564,10 +564,8 @@
     });
     document.getElementById('dontsave').addEventListener('click', function(event) {
         event.preventDefault();
-        
         localStorage.removeItem('question_answers');
-        
-        window.location.href = '/';
+        window.location.href = '/#available-game-section';
     });
 });
 
