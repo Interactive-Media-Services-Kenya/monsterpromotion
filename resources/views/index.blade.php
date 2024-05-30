@@ -114,7 +114,7 @@
 
         @media (max-width: 767px) {
             #banner-section {
-                height: 90vh;
+                height: 80vh;
 
             }
 
@@ -122,7 +122,7 @@
 
                 /* Center content vertically and horizontally */
                 #banner-section {
-                height: 90vh;
+                height: 80vh;
 
             }
             }
