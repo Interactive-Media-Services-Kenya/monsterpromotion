@@ -268,7 +268,10 @@
     </style>
 
     <!-- Modal -->
-    <div id="loader2"></div>
+    <div id="loader2">
+        <img
+        src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"> 
+    </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
