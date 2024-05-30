@@ -271,7 +271,7 @@
     transform: translate(-60%, -52%);
 }
     </style>
-
+<meta name="csrf-token" content="{{ csrf_token() }}"> 
     <!-- Modal -->
     <div id="loader2">
         <img
@@ -287,7 +287,7 @@
                             style="color:black">POINTS</span></b></p>
             <br />
             <p style="color:black">Enter details below to save your score</p><br />
-            <form action="{{ route('save-score') }}">
+            <form action="{{ route('save-score') }}" method="post">
                 @csrf
                 <div class="subscribe">
                     <input type="text" name="username" placeholder="Enter Fullname">
@@ -318,7 +318,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
-                            <h2 class="title">QUESTION</h2>
+                            <h2 class="title">QUESTION <span id="question-number"></span> / <span>{{ DB::table('questions')->count(); }}</span></h2>
+
                             <audio id="beepAudio" controls style="display: none;">
                                 <source src="{{ asset('monster.wav') }}" type="audio/wav">
                                 <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
@@ -429,18 +430,13 @@
         document.addEventListener('DOMContentLoaded', function() {
     // Add event listener to the form submission
     document.querySelector('form').addEventListener('submit', function(event) {
-        // Prevent the default form submission behavior
         event.preventDefault();
-        
-        // Validate the input fields
         var username = document.querySelector('input[name="username"]').value;
         var phone = document.querySelector('input[name="phone"]').value;
-        
+        localStorage.setItem('user_phone',phone);
         if (username.trim() === '' || phone.trim() === '') {
-            // If any input field is empty, display an alert message
             alert('Please enter your full name and phone number.');
         } else {
-            // If all input fields are filled, submit the form
             this.submit();
         }
     });
@@ -455,8 +451,6 @@
                     var selectedAnswer = event.target.value;
                     var selectedQuestionId = event.target.getAttribute('data-question');
                     // Show the loader
-               
-
                     fetchQuestion(selectedQuestionId, selectedAnswer); // Fetch the next question
                 }
             });
@@ -467,7 +461,6 @@
             document.getElementById('loader2').style.display = 'block';
             var xhr = new XMLHttpRequest();
             var url = '/user/select-question';
-
             if (questionId && selectedAnswer) {
                 // Save question ID and selected answer in localStorage
                 var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
@@ -480,29 +473,24 @@
                 localStorage.setItem('question_answers', JSON.stringify(questions));
                 url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
             }
-
             xhr.open('GET', url, true);
 
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 400) {
                     var questionData = JSON.parse(xhr.responseText);
                     if (questionData.question) {
-
                         updateQuestion(questionData);
                         // Hide the loader
                         document.getElementById('loader2').style.display = 'none';
 
                     } else {
                         document.getElementById('loader2').style.display = 'none';
-
                         modal.style.display = 'block';
                         body.classList.add('modal-open');
                         console.log(localStorage.getItem('question_answers'));
-
                         const data = JSON.parse(localStorage.getItem('question_answers'));
                         const totalQuestions = data.length;
                         let correctAnswers = 0;
-
                         data.forEach(item => {
                             if (item.selectedAnswer === item.correct_score) {
                                 correctAnswers++;
@@ -518,19 +506,18 @@
                     console.error('Request failed: ' + xhr.statusText);
                 }
             };
-
             xhr.onerror = function() {
                 console.error('Request failed');
             };
-
             xhr.send();
         }
         function disableRadioButtons() {
-    var radioButtons = document.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(function(radioButton) {
-        radioButton.disabled = true;
-    });
-}
+            var radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(function(radioButton) {
+                radioButton.disabled = true;
+            });
+            }
+            let questionCounter = 1;
         function updateQuestion(questionData) {
             var questionContainer = document.getElementById('question-container');
             questionContainer.innerHTML = '';
@@ -556,12 +543,53 @@
             </div>
         `;
             questionContainer.appendChild(questionElement);
+            document.getElementById('question-number').textContent = questionCounter;
+    questionCounter++; // Increment the counter for the next question
         }
-
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('saveit').addEventListener('click', function(event) {
-        localStorage.removeItem('question_answers');
+    document.getElementById('saveit').addEventListener('click', function(event) {
+        // Retrieve the item from localStorage
+        var questionAnswers = localStorage.getItem('question_answers');
+        var u_phone= localStorage.getItem('user_phone');
+        var dataToSend = {
+        questionAnswers: questionAnswers,
+        user_phone: u_phone // Add phone number to the payload
+    };
+        // Check if the item exists
+        if (questionAnswers) {
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            // Send the data to the backend
+           
+            fetch('save-quiz-answers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({dataToSend})
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Data sent successfully to the backend');
+                    localStorage.removeItem('question_answers');
+                } else {
+                    localStorage.removeItem('question_answers');
+                    console.error('Failed to send data to the backend');
+                }
+                
+            })
+            .catch(error => {
+                console.error('Error sending data to the backend:', error);
+            });
+        } else {
+            console.error('No data found in localStorage');
+        }
+        
+        // Remove the item from localStorage
+      
     });
+
+
     document.getElementById('dontsave').addEventListener('click', function(event) {
         event.preventDefault();
         localStorage.removeItem('question_answers');
@@ -570,16 +598,6 @@
 });
 
     </script>
- <script>
-// document.addEventListener('DOMContentLoaded', function() {
-//     // Add an event listener to play audio when the document is clicked
-//     document.addEventListener('click', function() {
-//         var audio = document.getElementById('beepAudio');
-//         audio.play();
-//     });
-// });
-
-</script>
 
     @include('footer');
 @endsection

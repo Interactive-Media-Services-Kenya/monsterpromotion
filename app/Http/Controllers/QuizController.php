@@ -8,7 +8,8 @@ use Illuminate\Support\Str;
 use App\Models\Question;
 use App\Models\Score;
 use App\Models\QuestionAnswer;
-
+use App\Models\QuizAnswer;
+use Illuminate\Support\Facades\Log;
 class QuizController extends Controller
 {
   
@@ -24,11 +25,26 @@ class QuizController extends Controller
         return view('backend.quiz/add');
     }
     
+    public function viewScore(Request $request)
+    {
+        $requestData = $request->all(); 
+        $dataToSend = json_decode($requestData['dataToSend'], true);
+        foreach ($dataToSend['questionAnswers'] as $questionAnswer) {
+            $quizAnswer = new QuizAnswer();
+            $quizAnswer->selected_answer = $questionAnswer['selectedAnswer'];
+            $quizAnswer->question_id = $questionAnswer['questionId'];
+            $quizAnswer->category = $questionAnswer['trivia_type']; 
+            $quizAnswer->correct_answer = $questionAnswer['correct_score'];
+            $quizAnswer->user_phone = $dataToSend['user_phone'];
+            $quizAnswer->save();
+        }
+        
+    log::info(collect($quizAnswer));
+    return response()->json(['message' => 'Data saved successfully'], 200);
+        return redirect('user/my-results')->with('success', 'Question created successfully.');
+    }
     public function saveScore(Request $request)
     {
-        // dd($request->all());
-        // $validatedData = $request->validate($rules);
-       
         $question = new Score();
         $question->name = $request->username;
         $question->score = $request->score;
@@ -37,8 +53,7 @@ class QuizController extends Controller
         $question->questions_attempted =$request->total_questions;
         $question->status = 1;
         $question->save();
-
-        return redirect('/#tournaments-section')->with('success', 'Question created successfully.');
+        return redirect('user/my-results')->with('success', 'Question created successfully.');
     }
     public function storeQuestion(Request $request)
     {
@@ -89,6 +104,9 @@ class QuizController extends Controller
     public function playQuiz(){
         // $questions=Question::where('status',1)->get();
         return view('start-trivia');
+    }
+    public function myScore(){
+        return view('user-results');
     }
     public function startQuiz(){
         // $questions=Question::where('status',1)->get();

@@ -194,7 +194,7 @@
                         <div class="col-lg-10">
                             <div class="section-header">
                                 <h2 class="title">Our Top Games List</h2>
-                                <p>Explore our yop games below</p>
+                                <p>Click any game to play</p>
                             </div>
                         </div>
                     </div>
@@ -294,10 +294,11 @@
                 </div>
 
                     @php
-                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->get();
+                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(4)->get();
 
                     @endphp
                     @foreach($leaders as $leader)
+                    @if($leader->score>=1)
                     <div class="single-item" >
                     <div class="row" style="margin-top:-30px;margin-bottom:-30px" >
                        
@@ -311,7 +312,7 @@
                                     <div class="time-area bg">
                                       
                                         <span>Score:</span>
-                                        <span class="time">{{ $leader->score }}</span>
+                                        <span class="time">{{ $leader->score }} / {{ $leader->questions_attempted }} </span>
                                     </div>
                                   
                                 </div>
@@ -326,10 +327,8 @@
                             </div>
                         </div>
                     </div></div>
+                    @endif
                     @endforeach
-                
-
-
             </div>
         </div>
     </section>
