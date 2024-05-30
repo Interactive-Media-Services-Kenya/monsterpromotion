@@ -412,7 +412,7 @@
         });
 
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
-            console.log('asa');
+            disableRadioButtons();
             var xhr = new XMLHttpRequest();
             var url = '/user/select-question';
 
@@ -468,7 +468,12 @@
 
             xhr.send();
         }
-
+        function disableRadioButtons() {
+    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(function(radioButton) {
+        radioButton.disabled = true;
+    });
+}
         function updateQuestion(questionData) {
             var questionContainer = document.getElementById('question-container');
             questionContainer.innerHTML = '';
