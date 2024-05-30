@@ -24,22 +24,21 @@ class QuizController extends Controller
     {
         return view('backend.quiz/add');
     }
-    
     public function viewScore(Request $request)
     {
         $requestData = $request->all(); 
+        // log::debug($requestData);
         $dataToSend = json_decode($requestData['dataToSend'], true);
-        foreach ($dataToSend['questionAnswers'] as $questionAnswer) {
+        foreach ($dataToSend as $questionAnswer) {
             $quizAnswer = new QuizAnswer();
             $quizAnswer->selected_answer = $questionAnswer['selectedAnswer'];
             $quizAnswer->question_id = $questionAnswer['questionId'];
             $quizAnswer->category = $questionAnswer['trivia_type']; 
             $quizAnswer->correct_answer = $questionAnswer['correct_score'];
-            $quizAnswer->user_phone = $dataToSend['user_phone'];
+            $quizAnswer->user_phone = $requestData['user_phone']; // Access 'user_phone' directly from $requestData
             $quizAnswer->save();
         }
-        
-    log::info(collect($quizAnswer));
+    log::info(collect($dataToSend));
     return response()->json(['message' => 'Data saved successfully'], 200);
         return redirect('user/my-results')->with('success', 'Question created successfully.');
     }
@@ -122,7 +121,6 @@ class QuizController extends Controller
         }else{
             $nextQuestion = Question::orderBy('id')->first();   
         }
-       
         return response()->json($nextQuestion);
     }
     public function disableQuestions(){

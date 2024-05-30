@@ -71,21 +71,6 @@
             cursor: pointer;
         }
 
-        /* Overlay styles */
-        .overlaid {
-            display: none;
-            position: fixed;
-            z-index: 200;
-            width: 100%;
-            height: 100%;
-            background: red;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            background-color: rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
         /* Countdown styles */
         .countdown {
             position: absolute;
@@ -111,7 +96,8 @@
             color: white;
             border: 1px solid #acd038;
             cursor: pointer;
-            text-align: center margin-right: 10px;
+            text-align: center;
+             margin-right: 10px;
         }
 
         .radio-button:hover {
@@ -270,9 +256,108 @@
     left: 52%;
     transform: translate(-60%, -52%);
 }
+@keyframes flyIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-container {
+    animation: flyIn 0.5s ease forwards;
+}
+
+.radio-button {
+    animation: flyIn 0.5s ease forwards;
+    animation-delay: 0.2s; /* Delay each radio button animation */
+}
+@keyframes blink {
+    0% { background-color: #ed902e; border-color: #ed902e; }
+    50% { background-color: transparent; border-color: transparent; }
+    100% { background-color: #ed902e; border-color: #ed902e; }
+}
+
+.blinking {
+    animation: blink 0.5s infinite; /* Adjusted duration to blink faster */
+}
+.user-selected {
+    background-color: blue;
+}
+#balloon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            height: 100%;
+        
+
+transition: opacity 500ms;
+        }
+
+        .banner-content {
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+        .balloon {
+            height: 160px;
+            width: 525px;
+            /* border-radius: 75% 75% 70% 70%;
+                                                                                                                                                                                                                                                                    position: relative; */
+        }
+
+        .balloon:before {
+            content: "";
+            height: 75px;
+            width: 1px;
+            padding: 1px;
+            background-color: #FDFD96;
+            display: block;
+            position: absolute;
+            top: 125px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+       
+        .balloon:after {
+            content: "▲";
+            text-align: center;
+            display: block;
+            position: absolute;
+            color: inherit;
+            top: 120px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-300vh);
+                opacity: 0;
+            }
+        }
+
     </style>
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
     <!-- Modal -->
+    <div id="balloon-container"  style="z-index: 0">
+    </div>
     <div id="loader2">
         <img
         src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"> 
@@ -283,7 +368,7 @@
         <div class="modal-content">
             <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
             {{-- <span class="close">&times;</span> --}}
-            <p style="color:#56be78"><b>CONGRATULATIONS YOU GOT <span style="color:black" id="scored"> <span
+            <p style="color:#56be78"><b>CONGRATULATIONS YOU GOT <span style="color:black" id="scored">  <span
                             style="color:black">POINTS</span></b></p>
             <br />
             <p style="color:black">Enter details below to save your score</p><br />
@@ -337,10 +422,7 @@
                             <div class="mid-area">
                                 {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
                                 <div class="title-bottom " id="question-container">
-
                                 </div>
-
-
                             </div>
 
                         </div>
@@ -415,7 +497,7 @@
                                 correctAnswers++;
                             }
                         });
-                        document.getElementById('scored').innerText = correctAnswers + 'POINTS';
+                        document.getElementById('scored').innerText = correctAnswers + ' POINTS';
                         document.getElementById('total_score').value = correctAnswers;
                         document.getElementById('total_questions').value = totalQuestions;
                     }
@@ -441,7 +523,6 @@
         }
     });
 });
-
         document.addEventListener('DOMContentLoaded', function() {
             // Fetch the first question when the page loads
             fetchQuestion();
@@ -455,97 +536,113 @@
                 }
             });
         });
+        function fetchQuestion1(questionId = null, selectedAnswer = null, correctAnswer = null) {
+    if (questionId && selectedAnswer) {
+        console.log('sas');
+        // Highlight correct answer elements
+        var correctElements = document.querySelectorAll('.correct-answer');
+        correctElements.forEach(function(element) {
+            element.classList.add("blinking");
+        });
+          if(selectedAnswer===correctAnswer){
+            // console.log('sasa')
+            createBalloons(30);   
+            
+          }
+
+
+        // Re-enable click events after 1 second
+        setTimeout(function() {
+           
+            fetchQuestion(questionId, selectedAnswer, correctAnswer);
+        }, 1000); 
+    }
+}
 
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
-            disableRadioButtons();
-            document.getElementById('loader2').style.display = 'block';
-            var xhr = new XMLHttpRequest();
-            var url = '/user/select-question';
-            if (questionId && selectedAnswer) {
-                // Save question ID and selected answer in localStorage
-                var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
-                questions.push({
-                    trivia_type: 'personality',
-                    questionId: questionId,
-                    selectedAnswer: selectedAnswer,
-                    correct_score: correctAnswer
-                });
-                localStorage.setItem('question_answers', JSON.stringify(questions));
-                url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
-            }
-            xhr.open('GET', url, true);
+    var xhr = new XMLHttpRequest();
+    var url = '/user/select-question';
+    if (questionId && selectedAnswer) {
+        var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
+        questions.push({
+            trivia_type: 'personality',
+            questionId: questionId,
+            selectedAnswer: selectedAnswer,
+            correct_score: correctAnswer
+        });
+        localStorage.setItem('question_answers', JSON.stringify(questions));
+        url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
+    }
+    xhr.open('GET', url, true);
 
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    var questionData = JSON.parse(xhr.responseText);
-                    if (questionData.question) {
-                        updateQuestion(questionData);
-                        // Hide the loader
-                        document.getElementById('loader2').style.display = 'none';
-
-                    } else {
-                        document.getElementById('loader2').style.display = 'none';
-                        modal.style.display = 'block';
-                        body.classList.add('modal-open');
-                        console.log(localStorage.getItem('question_answers'));
-                        const data = JSON.parse(localStorage.getItem('question_answers'));
-                        const totalQuestions = data.length;
-                        let correctAnswers = 0;
-                        data.forEach(item => {
-                            if (item.selectedAnswer === item.correct_score) {
-                                correctAnswers++;
-                            }
-                        });
-                        document.getElementById('scored').innerText = correctAnswers;
-                        document.getElementById('total_score').value =correctAnswers;
-                        document.getElementById('total_questions').value = totalQuestions;
-                        // window.location.href = '/another-route';
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            removeBalloons();
+            var questionData = JSON.parse(xhr.responseText);
+            if (questionData.question) {
+                updateQuestion(questionData);
+                document.getElementById('loader2').style.display = 'none';
+            } else {
+                document.getElementById('loader2').style.display = 'none';
+                modal.style.display = 'block';
+                body.classList.add('modal-open');
+                const data = JSON.parse(localStorage.getItem('question_answers'));
+                const totalQuestions = data.length;
+                let correctAnswers = 0;
+                data.forEach(item => {
+                    if (item.selectedAnswer === item.correct_score) {
+                        correctAnswers++;
                     }
-
-                } else {
-                    console.error('Request failed: ' + xhr.statusText);
-                }
-            };
-            xhr.onerror = function() {
-                console.error('Request failed');
-            };
-            xhr.send();
-        }
-        function disableRadioButtons() {
-            var radioButtons = document.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(function(radioButton) {
-                radioButton.disabled = true;
-            });
+                });
+                document.getElementById('scored').innerText = correctAnswers;
+                document.getElementById('total_score').value = correctAnswers;
+                document.getElementById('total_questions').value = totalQuestions;
             }
-            let questionCounter = 1;
-        function updateQuestion(questionData) {
-            var questionContainer = document.getElementById('question-container');
-            questionContainer.innerHTML = '';
-            var questionElement = document.createElement('div');
-            questionElement.innerHTML = `
-            <p>${questionData.question}</p>
-            <br />
-            <div style="color:white">
-                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_A}" data-question="${questionData.id}">
-                <label for="${questionData.id}_${questionData.choice_A}" onclick="fetchQuestion(${questionData.id}, 'A', '${questionData.correct_answer}')" class="radio-button">${questionData.choice_A}</label>
-            </div>
-            <div style="color:white">
-                <input type="radio"  style="display: none;" name="answer" value="${questionData.choice_B}" data-question="${questionData.id}">
-                <label for="${questionData.id}_${questionData.choice_B}" onclick="fetchQuestion(${questionData.id},'B','${questionData.correct_answer}')" class="radio-button">${questionData.choice_B}</label>
-            </div>
-            <div style="color:white">
-                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_C}" data-question="${questionData.id}">
-                <label for="${questionData.id}_${questionData.choice_C}" onclick="fetchQuestion(${questionData.id},'C','${questionData.correct_answer}')" class="radio-button">${questionData.choice_C}</label>
-            </div>
-            <div style="color:white">
-                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_D}" data-question="${questionData.id}">
-                <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion(${questionData.id},'D','${questionData.correct_answer}')"  class="radio-button">${questionData.choice_D}</label>
-            </div>
-        `;
-            questionContainer.appendChild(questionElement);
-            document.getElementById('question-number').textContent = questionCounter;
-    questionCounter++; // Increment the counter for the next question
+        } else {
+            console.error('Request failed: ' + xhr.statusText);
         }
+    };
+    xhr.onerror = function() {
+        console.error('Request failed');
+    };
+    xhr.send();
+}
+
+        function showCongratulationRibbons() {
+    
+    console.log("Congratulations! You selected the correct answer.");
+}
+
+            let questionCounter = 1;
+            function updateQuestion(questionData) {
+    var questionContainer = document.getElementById('question-container');
+    questionContainer.innerHTML = '';
+    var questionElement = document.createElement('div');
+    questionElement.innerHTML = `
+        <p>${questionData.question}</p>
+        <br />
+        <div style="color:white">
+            <input type="radio" style="display: none;" name="answer" value="${questionData.choice_A}" data-question="${questionData.id}">
+            <label for="${questionData.id}_${questionData.choice_A}" onclick="fetchQuestion1(${questionData.id}, 'A', '${questionData.correct_answer}')" class="radio-button ${questionData.correct_answer=='A' ? 'correct-answer' : 'incorrect'}">${questionData.choice_A}</label>
+        </div>
+        <div style="color:white">
+            <input type="radio" style="display: none;" name="answer" value="${questionData.choice_B}" data-question="${questionData.id}">
+            <label for="${questionData.id}_${questionData.choice_B}" onclick="fetchQuestion1(${questionData.id},'B','${questionData.correct_answer}')" class="radio-button ${questionData.choice_B == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_B}</label>
+        </div>
+        <div style="color:white">
+            <input type="radio" style="display: none;" name="answer" value="${questionData.choice_C}" data-question="${questionData.id}">
+            <label for="${questionData.id}_${questionData.choice_C}" onclick="fetchQuestion1(${questionData.id},'C','${questionData.correct_answer}')" class="radio-button ${questionData.choice_C == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_C}</label>
+        </div>
+        <div style="color:white">
+            <input type="radio" style="display: none;" name="answer" value="${questionData.choice_D}" data-question="${questionData.id}">
+            <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion1(${questionData.id},'D','${questionData.correct_answer}')" class="radio-button ${questionData.choice_D == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_D}</label>
+        </div>
+    `;
+    questionContainer.appendChild(questionElement);
+    document.getElementById('question-number').textContent = questionCounter;
+    questionCounter++; // Increment the counter for the next question
+}
+
         document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('saveit').addEventListener('click', function(event) {
         // Retrieve the item from localStorage
@@ -553,13 +650,12 @@
         var u_phone= localStorage.getItem('user_phone');
         var dataToSend = {
         questionAnswers: questionAnswers,
-        user_phone: u_phone // Add phone number to the payload
+         user_phone: u_phone // Add phone number to the payload
     };
         // Check if the item exists
         if (questionAnswers) {
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             // Send the data to the backend
-           
             fetch('save-quiz-answers', {
                 method: 'POST',
                 headers: {
@@ -598,6 +694,56 @@
 });
 
     </script>
+ <script>
+    const balloonContainer = document.getElementById("balloon-container");
 
+    function random(num) {
+        return Math.floor(Math.random() * num);
+    }
+
+    function getRandomStyles() {
+        var mt = random(200);
+        var ml = random(50);
+        var dur = random(5) + 5;
+        var width = 30;
+        var height = 50;
+        if (window.innerWidth < 768) {
+            width = 30; // Adjust width for small screens
+            height = 50; // Adjust height for small screens
+        }
+        return `
+    margin: ${mt}px 0 0 ${ml}px;
+    width: ${width}px;
+    height: ${height}px;
+    animation: float ${dur}s ease-in infinite;
+`;
+    }
+
+    function createBalloons(num) {
+        // Array of image URLs
+        var imageUrls = [
+            "https://cdn-icons-png.flaticon.com/512/8983/8983219.png",
+           
+        ];
+
+        for (var i = num; i > 0; i--) {
+            var balloon = document.createElement("img");
+            balloon.className = "balloon";
+            var randomImageUrl = imageUrls[random(imageUrls.length)];
+            balloon.src = randomImageUrl;
+            balloon.style.cssText = getRandomStyles();
+            balloonContainer.append(balloon);
+        }
+    }
+
+
+    function removeBalloons() {
+        balloonContainer.style.opacity = 0;
+        setTimeout(() => {
+            balloonContainer.remove();
+        }, 100);
+    }
+
+</script>
     @include('footer');
 @endsection
