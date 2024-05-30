@@ -114,7 +114,7 @@
 
         @media (max-width: 767px) {
             #banner-section {
-                height: 100vh;
+                height: 90vh;
 
             }
 
@@ -122,7 +122,7 @@
 
                 /* Center content vertically and horizontally */
                 #banner-section {
-                height: 100vh;
+                height: 90vh;
 
             }
             }
@@ -293,7 +293,6 @@
                     </div>
                 </div>
 
-               
                     @php
                      $leaders=DB::table('scores')->where('status',1)->orderBy('score','asc')->get();
 

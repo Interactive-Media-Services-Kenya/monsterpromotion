@@ -14,7 +14,9 @@
             overflow: hidden;
             /* Prevent scrolling */
         }
-
+  body{
+    background:#171717;
+  }
         body.overlay-shown>*:not(#overlay) {
             display: none;
             /* Hide all content except the overlay */
@@ -167,7 +169,7 @@
                                 <div class="contain-area">
                                     <span class="prize"><img src="https://www.monsterenergy.com/img/home/monster-logo.png"
                                             alt="image"></span>
-                                    <button class="cmn-btn btn-play">READY? LETS START</button>
+                                    <button class="cmn-btn btn-play" style="background: #b2d236;">READY? LETS START</button>
 
                                 </div>
                             </div>

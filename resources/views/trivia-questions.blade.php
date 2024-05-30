@@ -246,9 +246,29 @@
             text-decoration: none;
             cursor: pointer;
         }
+        #loader2 {
+    display: none; /* Initially hide the loader */
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    text-align: center;
+}
+
+#loader2 img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
     </style>
 
     <!-- Modal -->
+    <div id="loader2"></div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -400,12 +420,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Fetch the first question when the page loads
             fetchQuestion();
-
             // Add event listeners to radio buttons
             document.addEventListener('change', function(event) {
                 if (event.target.matches('input[type="radio"]')) {
                     var selectedAnswer = event.target.value;
                     var selectedQuestionId = event.target.getAttribute('data-question');
+                    // Show the loader
+               
+
                     fetchQuestion(selectedQuestionId, selectedAnswer); // Fetch the next question
                 }
             });
@@ -413,6 +435,7 @@
 
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
             disableRadioButtons();
+            document.getElementById('loader2').style.display = 'block';
             var xhr = new XMLHttpRequest();
             var url = '/user/select-question';
 
@@ -437,7 +460,12 @@
                     if (questionData.question) {
 
                         updateQuestion(questionData);
+                        // Hide the loader
+                        document.getElementById('loader2').style.display = 'none';
+
                     } else {
+                        document.getElementById('loader2').style.display = 'none';
+
                         modal.style.display = 'block';
                         body.classList.add('modal-open');
                         console.log(localStorage.getItem('question_answers'));
