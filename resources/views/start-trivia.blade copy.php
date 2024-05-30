@@ -117,7 +117,7 @@
                     <input type="text" required placeholder="Enter Phone No">
                     <br />
 
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn btn-primary btn-play"
                         style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
                         NOW</button>
                 </div>
@@ -167,7 +167,7 @@
                                 <div class="contain-area">
                                     <span class="prize"><img src="https://www.monsterenergy.com/img/home/monster-logo.png"
                                             alt="image"></span>
-                                    <button class="cmn-btn btn-play">READY? LETS START</button>
+                                    <button class="cmn-btn">READY? LETS START</button>
 
                                 </div>
                             </div>
@@ -184,7 +184,6 @@
     <script>
         // JavaScript
         document.addEventListener("DOMContentLoaded", function() {
-            localStorage.clear();
             const readyButton = document.querySelector('.cmn-btn');
             const modal = document.getElementById('myModal');
             const closeBtn = modal.querySelector('.close');

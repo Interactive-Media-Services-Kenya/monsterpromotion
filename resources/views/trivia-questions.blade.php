@@ -9,15 +9,14 @@
             }
         }
 
-        /* Add this CSS */
-        body.overlay-shown {
+        body.modal-open {
             overflow: hidden;
             /* Prevent scrolling */
         }
 
-        body.overlay-shown>*:not(#overlay) {
+        body.modal-open>*:not(.modal) {
             display: none;
-            /* Hide all content except the overlay */
+            /* Hide all content except the modal */
         }
 
         /* Modal styles */
@@ -186,10 +185,66 @@
             }
         }
 
+
+
         #question2-container,
         #question3-container {
             display: none;
             /* Hide additional questions initially */
+        }
+
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            /* Center horizontally */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto;
+            /* Center horizontally */
+            margin-top: 10%;
+            /* Adjust vertical position */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            /* max-width: 500px; */
+            /* height: 100%; */
+            /* Limit maximum width */
+            display: inline-block;
+            /* Allows centering with margin: auto */
+        }
+
+        @media (max-width: 998px) {
+            .modal-content {
+
+                margin-top: 50%;
+
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 
@@ -197,20 +252,27 @@
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-
-            <span class="close">&times;</span>
-            <form action="#">
+            <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
+            {{-- <span class="close">&times;</span> --}}
+            <p style="color:#56be78"><b>CONGRATULATIONS YOU GOT <span style="color:black" id="scored"> <span
+                            style="color:black">POINTS</span></b></p>
+            <br />
+            <p style="color:black">Enter details below to save your score</p><br />
+            <form action="{{ route('save-score') }}">
+                @csrf
                 <div class="subscribe">
-                    <input type="text" placeholder="Enter Fullname"><br />
-
+                    <input type="text" name="username" placeholder="Enter Fullname">
+                    <input type="hidden" id="total_score" name="score" value="" placeholder="Enter Fullname"><br/>
+                    <input type="hidden" id="total_questions" name="total_questions" value=""
+                        placeholder="Enter Fullname">
                 </div>
-                <div class="subscribe" style="margin-top:20px">
-                    <input type="text" placeholder="Enter Phone No">
+                <div class="subscribe" style="margin-top:10px">
+                    <input type="number" name="phone" placeholder="Enter Phone No">
                     <br />
-
-                    <button type="button" class="btn btn-primary btn-play"
-                        style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
-                        NOW</button>
+                    <button type="submit" id="saveit" class="btn btn-primary btn-play"
+                        style="margin-top:20px;width:100%;background:#171717;border:none">SAVE SCORE</button>
+                        <button type="submit" id="dontsave"  class="btn btn-primary btn-play"
+                        style="margin-top:20px;width:100%;background:red;border:none">DONT SAVE</button>
                 </div>
             </form>
         </div>
@@ -244,81 +306,10 @@
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
                                 {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
-                                <div class="title-bottom " id="question1-container">
-                                    <p>What year was Monster Energy Drink first introduced to the market?</p>
-                                    <br />
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1990" name="year" data-question="1" value="1990"
-                                            style="display: none;">
-                                        <label for="year_1990" class="radio-button">1990</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1994" name="year" data-question="1" value="1994"
-                                            style="display: none;">
-                                        <label for="year_1994" class="radio-button">1994</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_2020" data-question="1" name="year" value="2020"
-                                            style="display: none;">
-                                        <label for="year_2020" class="radio-button">2020</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_2023" data-question="1" name="year" value="2023"
-                                            style="display: none;">
-                                        <label for="year_2023" class="radio-button">2023</label>
-                                    </div>
-                                </div>
-                                <div id="question2-container">
-                                    <!-- Your HTML for question 2 here, similar to question 1 -->
-                                    <p>Who is the Current Monster Brand Ambassador for Kenya?</p>
-                                    <br />
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1990" name="year" value="1990"
-                                            style="display: none;">
-                                        <label for="year_1990" data-question="2" class="radio-button">Person 1</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1994" name="year" value="1994"
-                                            style="display: none;">
-                                        <label for="year_1994" data-question="2" class="radio-button">Person 2</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_2020" name="year" value="2020"
-                                            style="display: none;">
-                                        <label for="year_2020" data-question="2" class="radio-button">Person 3</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_2023" data-question="2" name="year"
-                                            value="2023" style="display: none;">
-                                        <label for="year_2023" class="radio-button">Person 4</label>
-                                    </div>
+                                <div class="title-bottom " id="question-container">
+
                                 </div>
 
-                                <!-- Question 3 -->
-                                <div id="question3-container">
-                                    <p>This is the third question for monster trivia ?</p>
-                                    <br />
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1990" data-question="3" name="year"
-                                            value="1990" style="display: none;">
-                                        <label for="year_1990" class="radio-button">Answer 2</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_1994" data-question="3" name="year"
-                                            value="1994" style="display: none;">
-                                        <label for="year_1994" class="radio-button">Answer 4</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" data-question="3" id="year_2020" name="year"
-                                            value="2020" style="display: none;">
-                                        <label for="year_2020" class="radio-button">Answer 5</label>
-                                    </div>
-                                    <div style="color:white">
-                                        <input type="radio" id="year_2023" data-question="3" name="year"
-                                            value="2023" style="display: none;">
-                                        <label for="year_2023" class="radio-button">Answe 6</label>
-                                    </div>
-                                </div>
 
                             </div>
 
@@ -327,10 +318,10 @@
                             <div class="prize-area text-center">
                                 <div class="contain-area d-flex justify-content-center align-items-center">
                                     <!-- Added d-flex and justify-content-center align-items-center -->
-                                    <div class="circular-progress" data-inner-circle-color="lightgrey"
-                                        data-percentage="100" data-progress-color="crimson" data-bg-color="black">
+                                    <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100"
+                                        data-progress-color="crimson" data-bg-color="black">
                                         <div class="inner-circle"></div>
-                                        <p class="percentage time-countdown">10</p>
+                                        <p class="percentage time-countdown">60</p>
                                     </div>
                                     <br />
                                     <!-- Move the class here -->
@@ -350,87 +341,171 @@
     <!-- Browse Tournaments end -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            startCountdownAndProgressBar(300, `redirect-s`);
-            // Function to handle switching between questions
-            function switchQuestion(questionNumber) {
-                document.getElementById(`question${questionNumber}-container`).style.display = 'block';
-                document.getElementById(`question${questionNumber - 1}-container`).style.display = 'none';
-                document.getElementById(`question${questionNumber + 1}-container`).style.display = 'none';
+        const modal = document.getElementById('myModal');
+        const body = document.body;
+        startCountdownAndProgressBar(60);
 
-                console.log(questionNumber);
+        function startCountdownAndProgressBar(duration) {
+            var timer = duration;
+            var progressBar = document.querySelectorAll(".circular-progress");
+
+            var interval = setInterval(function() {
+                // Update countdown timer
+                var countdownElement = document.querySelector('.time-countdown');
+                if (countdownElement) {
+                    countdownElement.textContent = timer;
+                }
+
+                // Update progress bar
+                progressBar.forEach(function(progressBar) {
+                    var innerCircle = progressBar.querySelector(".inner-circle");
+                    var progressColor = progressBar.getAttribute("data-progress-color");
+                    var endValue = Number(progressBar.getAttribute("data-percentage"));
+
+                    var startValue = duration - timer;
+                    var progressPercentage = (startValue / duration) * 100;
+
+                    innerCircle.style.color = progressColor;
+                    innerCircle.style.backgroundColor = progressBar.getAttribute(
+                        "data-inner-circle-color");
+                    progressBar.style.background =
+                        `conic-gradient(${progressColor} ${progressPercentage}%, ${progressBar.getAttribute("data-bg-color")} ${progressPercentage}% 100%)`;
+
+                    // If timer reaches 0, clear interval and redirect
+                    if (timer <= 0) {
+                        clearInterval(interval);
+                        modal.style.display = 'block';
+                        body.classList.add('modal-open');
+                        console.log(localStorage.getItem('question_answers'));
+                        var data = JSON.parse(localStorage.getItem('question_answers'));
+                        var totalQuestions = data.length;
+                        let correctAnswers = 0;
+                        data.forEach(item => {
+                            if (item.selectedAnswer === item.correct_score) {
+                                correctAnswers++;
+                            }
+                        });
+                        document.getElementById('scored').innerText = correctAnswers;
+                        document.getElementById('total_score').value = totalQuestions;
+                        document.getElementById('total_questions').value = correctAnswers;
+                    }
+                });
+
+                timer--;
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch the first question when the page loads
+            fetchQuestion();
+
+            // Add event listeners to radio buttons
+            document.addEventListener('change', function(event) {
+                if (event.target.matches('input[type="radio"]')) {
+                    var selectedAnswer = event.target.value;
+                    var selectedQuestionId = event.target.getAttribute('data-question');
+                    fetchQuestion(selectedQuestionId, selectedAnswer); // Fetch the next question
+                }
+            });
+        });
+
+        function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
+            console.log('asa');
+            var xhr = new XMLHttpRequest();
+            var url = '/user/select-question';
+
+            if (questionId && selectedAnswer) {
+                // Save question ID and selected answer in localStorage
+                var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
+                questions.push({
+                    trivia_type: 'personality',
+                    questionId: questionId,
+                    selectedAnswer: selectedAnswer,
+                    correct_score: correctAnswer
+                });
+                localStorage.setItem('question_answers', JSON.stringify(questions));
+                url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
             }
 
-            function startCountdownAndProgressBar(duration, redirectUrl) {
-                var timer = duration;
-                var progressBar = document.querySelectorAll(".circular-progress");
+            xhr.open('GET', url, true);
 
-                var interval = setInterval(function() {
-                    // Update countdown timer
-                    var countdownElement = document.querySelector('.time-countdown');
-                    if (countdownElement) {
-                        countdownElement.textContent = timer;
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    var questionData = JSON.parse(xhr.responseText);
+                    if (questionData.question) {
+
+                        updateQuestion(questionData);
+                    } else {
+                        modal.style.display = 'block';
+                        body.classList.add('modal-open');
+                        console.log(localStorage.getItem('question_answers'));
+
+                        const data = JSON.parse(localStorage.getItem('question_answers'));
+                        const totalQuestions = data.length;
+                        let correctAnswers = 0;
+
+                        data.forEach(item => {
+                            if (item.selectedAnswer === item.correct_score) {
+                                correctAnswers++;
+                            }
+                        });
+                        document.getElementById('scored').innerText = correctAnswers;
+                        document.getElementById('total_score').value = totalQuestions;
+                        document.getElementById('total_questions').value = correctAnswers;
+                        // window.location.href = '/another-route';
                     }
 
-                    // Update progress bar
-                    progressBar.forEach(function(progressBar) {
-                        var innerCircle = progressBar.querySelector(".inner-circle");
-                        var progressColor = progressBar.getAttribute("data-progress-color");
-                        var endValue = Number(progressBar.getAttribute("data-percentage"));
+                } else {
+                    console.error('Request failed: ' + xhr.statusText);
+                }
+            };
 
-                        var startValue = duration - timer;
-                        var progressPercentage = (startValue / duration) * 100;
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
 
-                        innerCircle.style.color = progressColor;
-                        innerCircle.style.backgroundColor = progressBar.getAttribute(
-                            "data-inner-circle-color");
-                        progressBar.style.background =
-                            `conic-gradient(${progressColor} ${progressPercentage}%, ${progressBar.getAttribute("data-bg-color")} ${progressPercentage}% 100%)`;
+            xhr.send();
+        }
 
-                        // If timer reaches 0, clear interval and redirect
-                        if (timer <= 0) {
-                            clearInterval(interval);
-                            window.location.href = redirectUrl;
-                        }
-                    });
+        function updateQuestion(questionData) {
+            var questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = '';
+            var questionElement = document.createElement('div');
+            questionElement.innerHTML = `
+            <p>${questionData.question}</p>
+            <br />
+            <div style="color:white">
+                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_A}" data-question="${questionData.id}">
+                <label for="${questionData.id}_${questionData.choice_A}" onclick="fetchQuestion(${questionData.id}, 'A', '${questionData.correct_answer}')" class="radio-button">${questionData.choice_A}</label>
+            </div>
+            <div style="color:white">
+                <input type="radio"  style="display: none;" name="answer" value="${questionData.choice_B}" data-question="${questionData.id}">
+                <label for="${questionData.id}_${questionData.choice_B}" onclick="fetchQuestion(${questionData.id},'B','${questionData.correct_answer}')" class="radio-button">${questionData.choice_B}</label>
+            </div>
+            <div style="color:white">
+                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_C}" data-question="${questionData.id}">
+                <label for="${questionData.id}_${questionData.choice_C}" onclick="fetchQuestion(${questionData.id},'C','${questionData.correct_answer}')" class="radio-button">${questionData.choice_C}</label>
+            </div>
+            <div style="color:white">
+                <input type="radio" style="display: none;"  name="answer" value="${questionData.choice_D}" data-question="${questionData.id}">
+                <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion(${questionData.id},'D','${questionData.correct_answer}')"  class="radio-button">${questionData.choice_D}</label>
+            </div>
+        `;
+            questionContainer.appendChild(questionElement);
+        }
 
-                    timer--;
-                }, 300);
-            }
-
-            // Function to show the next question
-            function showNextQuestion() {
-                var currentQuestion = this.getAttribute('data-question');
-                switchQuestion(parseInt(currentQuestion) + 1);
-                console.log(currentQuestion);
-            }
-
-            // Add event listener to the radio buttons for all questions
-            var radioButtons = document.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(function(radioButton) {
-                radioButton.addEventListener('click', showNextQuestion);
-            });
-
-            // Start with the first question
-            switchQuestion(1);
-        });
-    </script>
-
-    </script>
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("Script is executing...");
-            var audio = document.getElementById('beepAudio');
-            audio.play();
-        });
-    </script>
+            document.getElementById('saveit').addEventListener('click', function(event) {
+        localStorage.removeItem('question_answers');
+    });
+    document.getElementById('dontsave').addEventListener('click', function(event) {
+        event.preventDefault();
+        localStorage.removeItem('question_answers');
+    });
+});
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Script is executing...");
-            var audio = document.getElementById('beepAudio');
-            audio.play();
-        });
     </script>
 
     @include('footer');

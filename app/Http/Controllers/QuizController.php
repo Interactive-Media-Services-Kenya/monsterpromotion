@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Question;
+use App\Models\Score;
 use App\Models\QuestionAnswer;
 
 class QuizController extends Controller
@@ -22,7 +23,23 @@ class QuizController extends Controller
     {
         return view('backend.quiz/add');
     }
+    
+    public function saveScore(Request $request)
+    {
+        // dd($request->all());
+        // $validatedData = $request->validate($rules);
+       
+        $question = new Score();
+        $question->name = $request->username;
+        $question->score = $request->score;
+        $question->quiz_type='personality';
+        $question->phone=$request->phone;
+        $question->questions_attempted =$request->total_questions;
+        $question->status = 1;
+        $question->save();
 
+        return redirect('/')->with('success', 'Question created successfully.');
+    }
     public function storeQuestion(Request $request)
     {
         $rules = [
@@ -78,14 +95,24 @@ class QuizController extends Controller
         return view('trivia-questions');
     }
     
+    public function selectQuiz(){
+        if(isset($_GET['questionId'])){
+            $question= $_GET['questionId'];
+            $currentQuestion = Question::find($question); 
+            $nextQuestion = Question::where('id', '>', $currentQuestion->id)->first();
+           
+        }else{
+            $nextQuestion = Question::orderBy('id')->first();   
+        }
+       
+        return response()->json($nextQuestion);
+    }
     public function disableQuestions(){
              $id = decrypt($_GET['id']);
-
              $question = Question::find($id);
              if (!$question) {
                 return redirect()->back()->with('error','Question not found');
              }
-     
              try {
                  $question->update(['status' => 0]);
                  return redirect()->back()->with('success','Question deleted successfully');

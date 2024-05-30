@@ -42,7 +42,7 @@
                                     <li><a href="error.html">Error</a></li>
                                 </ul>
                             </li> --}}
-                            <li><a href="{{ route('user/play-trivia') }}">Trivia Quiz</a></li>
+                            <li><a href="{{ route('user/play-trivia') }}">Personality Quiz</a></li>
                             <li><a href="{{ route('user/play-trivia') }}">General Quiz</a></li>
                             {{-- <li><a href="contact.html">About</a></li> --}}
                             <li><a href="contact.html">How To Play</a></li>

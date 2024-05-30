@@ -13,3 +13,6 @@ Route::get('admin/manage-questions', [App\Http\Controllers\QuizController::class
 Route::get('admin/disable-question', [App\Http\Controllers\QuizController::class, 'disableQuestions'])->name('admin/disable-question');
 Route::get('user/play-trivia', [App\Http\Controllers\QuizController::class, 'playQuiz'])->name('user/play-trivia');
 Route::get('user/start-trivia', [App\Http\Controllers\QuizController::class, 'startQuiz'])->name('user/start-trivia');
+
+Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 'selectQuiz'])->name('user/select-question');
+Route::get('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');
