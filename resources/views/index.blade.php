@@ -81,7 +81,13 @@
             right: 0;
             margin: auto;
         }
-
+        #how-works-section .single-item .icon-area {
+    background: #4609C3;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 23px 25px;
+    position: relative;
+}
         .balloon:after {
             content: "▲";
             text-align: center;
@@ -108,18 +114,26 @@
 
         @media (max-width: 767px) {
             #banner-section {
-                height: 70vh;
+                height: 100vh;
 
             }
 
             @media (max-width: 767px) {
 
                 /* Center content vertically and horizontally */
-                .banner-content {
-                    padding: 20px;
-                    /* Add some padding for better spacing */
-                }
+                #banner-section {
+                height: 100vh;
+
             }
+            }
+            @media (max-width: 998px) {
+
+/* Center content vertically and horizontally */
+.banner-content {
+    padding: 20px;
+    /* Add some padding for better spacing */
+}
+}
         }
         #tournaments-section .single-item .prize-area {
     border:none;
@@ -129,6 +143,13 @@
 .cmn-btn{
     background:#b2d236;
     color:white;
+}
+#how-works-section .single-item .icon-area {
+    background: #b2d236 !important;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 23px 25px;
+    position: relative;
 }
     </style>
     <section id="banner-section">
@@ -173,7 +194,7 @@
                         <div class="col-lg-10">
                             <div class="section-header">
                                 <h2 class="title">Our Top Games List</h2>
-                                <p>You can play any of our games below to win amazing gifts</p>
+                                <p>Explore our yop games below</p>
                             </div>
                         </div>
                     </div>
@@ -279,7 +300,7 @@
                     @endphp
                     @foreach($leaders as $leader)
                     <div class="single-item" >
-                    <div class="row" style="margin-top:-60px;margin-bottom:-60px" >
+                    <div class="row" style="margin-top:-30px;margin-bottom:-30px" >
                        
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area" >
