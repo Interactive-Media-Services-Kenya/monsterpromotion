@@ -415,8 +415,8 @@
                             }
                         });
                         document.getElementById('scored').innerText = correctAnswers + 'POINTS';
-                        document.getElementById('total_score').value = totalQuestions;
-                        document.getElementById('total_questions').value = correctAnswers;
+                        document.getElementById('total_score').value = correctAnswers;
+                        document.getElementById('total_questions').value = totalQuestions;
                     }
                 });
 
