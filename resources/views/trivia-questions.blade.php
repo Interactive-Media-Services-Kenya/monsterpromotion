@@ -152,7 +152,7 @@
         .percentage {
             position: relative;
             font-size: var(--font-size);
-            color: rgb(0, 0, 0, 0.8);
+            color: #56be78;
         }
 
         @media screen and (max-width: 800px) {
@@ -311,8 +311,7 @@ transition: opacity 500ms;
         .balloon {
             height: 160px;
             width: 525px;
-            /* border-radius: 75% 75% 70% 70%;
-                                                                                                                                                                                                                                                                    position: relative; */
+                                                                                                                                                                                                                                                           position: relative; */
         }
 
         .balloon:before {
@@ -431,7 +430,7 @@ transition: opacity 500ms;
                                 <div class="contain-area d-flex justify-content-center align-items-center">
                                     <!-- Added d-flex and justify-content-center align-items-center -->
                                     <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100"
-                                        data-progress-color="crimson" data-bg-color="black">
+                                        data-progress-color="crimson" data-bg-color="#b2d236">
                                         <div class="inner-circle"></div>
                                         <p class="percentage time-countdown">60</p>
                                     </div>
@@ -681,7 +680,6 @@ transition: opacity 500ms;
             console.error('No data found in localStorage');
         }
         
-        // Remove the item from localStorage
       
     });
 
@@ -696,7 +694,6 @@ transition: opacity 500ms;
     </script>
  <script>
     const balloonContainer = document.getElementById("balloon-container");
-
     function random(num) {
         return Math.floor(Math.random() * num);
     }
