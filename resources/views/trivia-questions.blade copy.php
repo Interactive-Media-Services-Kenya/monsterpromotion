@@ -425,13 +425,6 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Script is executing...");
-            var audio = document.getElementById('beepAudio');
-            audio.play();
-        });
-    </script>
 
     @include('footer');
 @endsection

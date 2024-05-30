@@ -312,7 +312,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
-                            <h2 class="title">QUESTION : 1</h2>
+                            <h2 class="title">QUESTION</h2>
                             <audio id="beepAudio" controls style="display: none;">
                                 <source src="{{ asset('monster.wav') }}" type="audio/wav">
                                 <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
@@ -566,6 +566,16 @@
 });
 
     </script>
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add an event listener to play audio when the document is clicked
+    document.addEventListener('click', function() {
+        var audio = document.getElementById('beepAudio');
+        audio.play();
+    });
+});
+
+</script>
 
     @include('footer');
 @endsection
