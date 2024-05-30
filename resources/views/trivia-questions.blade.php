@@ -264,13 +264,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
+#loader2 #loadd {
+    position: absolute;
+    top: 60%;
+    left: 52%;
+    transform: translate(-60%, -52%);
+}
     </style>
 
     <!-- Modal -->
     <div id="loader2">
         <img
         src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"> 
+        <p   id="loadd" style="color:white">Loading Next Question....</p>
     </div>
 
     <div id="myModal" class="modal">
