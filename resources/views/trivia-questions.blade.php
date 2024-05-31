@@ -587,7 +587,7 @@ transition: opacity 500ms;
     }
 }
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
-            console.log('caleld');
+            console.log('caleld'+questionId);
     var xhr = new XMLHttpRequest();
     var url = '/user/select-question';
     if (questionId && selectedAnswer) {
