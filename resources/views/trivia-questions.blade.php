@@ -432,9 +432,6 @@ transition: opacity 500ms;
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
         <!-- Overlay with countdown timer -->
-
-
-
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
@@ -469,7 +466,7 @@ transition: opacity 500ms;
                                         <p class="percentage time-countdown">60</p>
                                     </div>
                                     <div class="spacer"></div> <!-- Add a spacer -->
-                                    <span class="inputt" >1 Points</span> <!-- Adjust padding-top as needed -->
+                                    <span class="inputt" id="points-earned">0</span> <!-- Adjust padding-top as needed -->
                                 </div>
                                 
                                
@@ -579,6 +576,9 @@ transition: opacity 500ms;
           if(selectedAnswer===correctAnswer){
             var successSound = new Audio('{{ asset('correct.mp3') }}');
              successSound.play();
+             var currentCount = parseInt(document.getElementById('points-earned').innerText);
+            document.getElementById('points-earned').innerText = currentCount + 1;
+         
           }else{
             var wrongSound = new Audio('{{ asset('wrong.mp3') }}');
              wrongSound.play();
@@ -620,7 +620,7 @@ transition: opacity 500ms;
                 const totalQuestions = data.length;
                 let correctAnswers = 0;
                 data.forEach(item => {
-                    if (item.selectedAnswer === item.correct_score) {
+                    if (item.selectedAnswer == item.correct_score) {
                         correctAnswers++;
                     }
                 });
