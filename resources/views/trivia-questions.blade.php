@@ -768,13 +768,13 @@ transition: opacity 500ms;
 
    
 
-function redirect() {
+    function redirect() {
     var question_last = localStorage.getItem('last_question');
     fetchQuestion(questionId = question_last, selectedAnswer = '', correctAnswer = '');   
 }
 
-
-    setTimeout(redirect, 10000);
+// Call redirect function every 10 seconds
+setInterval(redirect, 10000);
 
 </script>
     @include('footer');
