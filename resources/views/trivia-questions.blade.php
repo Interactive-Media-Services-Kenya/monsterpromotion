@@ -771,7 +771,7 @@ transition: opacity 500ms;
 
     function redirect() {
     var question_last = localStorage.getItem('last_question');
-    fetchQuestion(questionId = question_last, selectedAnswer = '', correctAnswer = '');   
+    fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');   
 }
 
 // Call redirect function every 10 seconds
