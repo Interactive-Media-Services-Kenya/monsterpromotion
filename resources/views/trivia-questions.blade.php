@@ -462,7 +462,7 @@ transition: opacity 500ms;
                                 <div class="contain-area d-flex justify-content-center align-items-center">
                                     <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100" data-progress-color="crimson" data-bg-color="#b2d236">
                                         <div class="inner-circle"></div>
-                                        <p class="percentage time-countdown">60</p>
+                                        <p class="percentage time-countdown">120</p>
                                     </div>
                                     <div class="spacer"></div> <!-- Add a spacer -->
                                     <span class="inputt" id="points-earned">0</span> <!-- Adjust padding-top as needed -->
@@ -484,7 +484,7 @@ transition: opacity 500ms;
     <script>
         const modal = document.getElementById('myModal');
         const body = document.body;
-        startCountdownAndProgressBar(60);
+        startCountdownAndProgressBar(120);
 
         function startCountdownAndProgressBar(duration) {
             var timer = duration;
@@ -642,7 +642,9 @@ transition: opacity 500ms;
 }
 
             let questionCounter = 1;
+     
             function updateQuestion(questionData) {
+                localStorage.setItem('last_question',questionData.id);
     var questionContainer = document.getElementById('question-container');
     questionContainer.innerHTML = '';
     var questionElement = document.createElement('div');
@@ -670,7 +672,6 @@ transition: opacity 500ms;
     document.getElementById('question-number').textContent = questionCounter;
     questionCounter++; // Increment the counter for the next question
 }
-
         document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('saveit').addEventListener('click', function(event) {
         // Retrieve the item from localStorage
@@ -764,6 +765,22 @@ transition: opacity 500ms;
             balloonContainer.remove();
         }, 100);
     }
+
+    function resetTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(redirect, inactivityTime);
+}
+
+function redirect() {
+    var question_last = localStorage.getItem('last_question');
+    fetchQuestion(questionId = question_last, selectedAnswer = '', correctAnswer = '');   
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(resetTimer, 10000); // Call resetTimer after 10 seconds
+});
+
+
 
 </script>
     @include('footer');
