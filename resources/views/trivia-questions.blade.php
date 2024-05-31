@@ -773,9 +773,9 @@ function redirect() {
     fetchQuestion(questionId = question_last, selectedAnswer = '', correctAnswer = '');   
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
     setTimeout(redirect, 10000);
-});
+
 </script>
     @include('footer');
 @endsection
