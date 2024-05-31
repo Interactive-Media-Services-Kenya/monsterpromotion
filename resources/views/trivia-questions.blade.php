@@ -585,7 +585,7 @@ transition: opacity 500ms;
           }
         setTimeout(function() {
             fetchQuestion(questionId, selectedAnswer, correctAnswer);
-        }, 2000); 
+        }, 1000); 
     }
 }
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
