@@ -587,7 +587,7 @@ transition: opacity 500ms;
     }
 }
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
-            console.log('caleld'+questionId);
+
     var xhr = new XMLHttpRequest();
     var url = '/user/select-question';
     if (questionId && selectedAnswer) {
@@ -601,7 +601,7 @@ transition: opacity 500ms;
         localStorage.setItem('question_answers', JSON.stringify(questions));
         url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
     }else{
-        url += `?questionId=${questionId}&selectedAnswer=0`;  
+    url += '?questionId=' + questionId+ '&selectedAnswer=0';
     }
     xhr.open('GET', url, true);
 
