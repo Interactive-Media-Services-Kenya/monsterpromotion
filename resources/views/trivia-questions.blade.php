@@ -607,6 +607,7 @@ transition: opacity 500ms;
             removeBalloons();
             var questionData = JSON.parse(xhr.responseText);
             if (questionData.question) {
+                localStorage.setItem('last_question',questionData.id);
                 updateQuestion(questionData);
                 document.getElementById('loader2').style.display = 'none';
 
