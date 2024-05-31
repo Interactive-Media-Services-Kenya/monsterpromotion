@@ -600,6 +600,8 @@ transition: opacity 500ms;
         });
         localStorage.setItem('question_answers', JSON.stringify(questions));
         url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
+    }else{
+        url += `?questionId=${questionId}&selectedAnswer=0`;  
     }
     xhr.open('GET', url, true);
 
