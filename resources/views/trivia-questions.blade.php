@@ -611,7 +611,7 @@ transition: opacity 500ms;
             if (questionData.question) {
                 updateQuestion(questionData);
                 document.getElementById('loader2').style.display = 'none';
-                playinitialSound();
+
             } else {
                 document.getElementById('loader2').style.display = 'none';
                 modal.style.display = 'block';
@@ -716,10 +716,7 @@ transition: opacity 500ms;
         window.location.href = '/#tournaments-section';
     });
 });
-function playinitialSound(){
-    var successSound = new Audio('{{ asset('correct.mp3') }}');
-             successSound.play();
-}
+
     </script>
  <script>
     const balloonContainer = document.getElementById("balloon-container");
