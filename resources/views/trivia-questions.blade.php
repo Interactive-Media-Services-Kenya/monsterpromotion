@@ -351,6 +351,44 @@ transition: opacity 500ms;
                 opacity: 0;
             }
         }
+        .inputt {
+            margin-right: 5px;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            color: white;
+            border:#FDFD96;
+            background: #acd038;
+            text-align: center;
+            line-height: 100px;
+            margin-right: 5px;
+
+            font-weight: bold;
+            font-size: 23px;
+        }
+        @media (max-width: 998px) {
+            .inputt {
+            margin-right: 5px;
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            color: white;
+            border:#acd038;
+   
+            background: #acd038;
+            text-align: center;
+            line-height: 120px;
+            margin-right: 5px;
+
+            font-weight: bold;
+            font-size: 23px;
+        }
+        }
+        .spacer {
+    width: 20px; 
+}
 
     </style>
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
@@ -416,29 +454,25 @@ transition: opacity 500ms;
 
                 <div class="single-item">
                     <div class="row">
-
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
                                 {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
                                 <div class="title-bottom " id="question-container">
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-lg-3 d-flex align-items-center">
                             <div class="prize-area text-center">
                                 <div class="contain-area d-flex justify-content-center align-items-center">
-                                    <!-- Added d-flex and justify-content-center align-items-center -->
-                                    <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100"
-                                        data-progress-color="crimson" data-bg-color="#b2d236">
+                                    <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100" data-progress-color="crimson" data-bg-color="#b2d236">
                                         <div class="inner-circle"></div>
                                         <p class="percentage time-countdown">60</p>
                                     </div>
-                                    <br />
-                                    <!-- Move the class here -->
-
+                                    <div class="spacer"></div> <!-- Add a spacer -->
+                                    <span class="inputt" >1 Points</span> <!-- Adjust padding-top as needed -->
                                 </div>
-                                <span style="padding-top:-200px !important">1 Points</span>
+                                
+                               
                             </div>
                         </div>
 
@@ -472,7 +506,6 @@ transition: opacity 500ms;
                     var innerCircle = progressBar.querySelector(".inner-circle");
                     var progressColor = progressBar.getAttribute("data-progress-color");
                     var endValue = Number(progressBar.getAttribute("data-percentage"));
-
                     var startValue = duration - timer;
                     var progressPercentage = (startValue / duration) * 100;
 
@@ -481,7 +514,6 @@ transition: opacity 500ms;
                         "data-inner-circle-color");
                     progressBar.style.background =
                         `conic-gradient(${progressColor} ${progressPercentage}%, ${progressBar.getAttribute("data-bg-color")} ${progressPercentage}% 100%)`;
-
                     // If timer reaches 0, clear interval and redirect
                     if (timer <= 0) {
                         clearInterval(interval);
@@ -509,19 +541,20 @@ transition: opacity 500ms;
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Add event listener to the form submission
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var username = document.querySelector('input[name="username"]').value;
-        var phone = document.querySelector('input[name="phone"]').value;
-        localStorage.setItem('user_phone',phone);
-        if (username.trim() === '' || phone.trim() === '') {
-            alert('Please enter your full name and phone number.');
-        } else {
-            this.submit();
-        }
-    });
-});
+          
+            // Add event listener to the form submission
+            document.querySelector('form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var username = document.querySelector('input[name="username"]').value;
+                var phone = document.querySelector('input[name="phone"]').value;
+                localStorage.setItem('user_phone',phone);
+                if (username.trim() === '' || phone.trim() === '') {
+                    alert('Please enter your full name and phone number.');
+                } else {
+                    this.submit();
+                }
+            });
+        });
         document.addEventListener('DOMContentLoaded', function() {
             // Fetch the first question when the page loads
             fetchQuestion();
@@ -544,20 +577,17 @@ transition: opacity 500ms;
             element.classList.add("blinking");
         });
           if(selectedAnswer===correctAnswer){
-            // console.log('sasa')
-            createBalloons(30);   
-            
+            var successSound = new Audio('{{ asset('correct.mp3') }}');
+             successSound.play();
+          }else{
+            var wrongSound = new Audio('{{ asset('wrong.mp3') }}');
+             wrongSound.play();
           }
-
-
-        // Re-enable click events after 1 second
         setTimeout(function() {
-           
             fetchQuestion(questionId, selectedAnswer, correctAnswer);
-        }, 1000); 
+        }, 2000); 
     }
 }
-
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
     var xhr = new XMLHttpRequest();
     var url = '/user/select-question';
@@ -581,6 +611,7 @@ transition: opacity 500ms;
             if (questionData.question) {
                 updateQuestion(questionData);
                 document.getElementById('loader2').style.display = 'none';
+                playinitialSound();
             } else {
                 document.getElementById('loader2').style.display = 'none';
                 modal.style.display = 'block';
@@ -671,7 +702,6 @@ transition: opacity 500ms;
                     localStorage.removeItem('question_answers');
                     console.error('Failed to send data to the backend');
                 }
-                
             })
             .catch(error => {
                 console.error('Error sending data to the backend:', error);
@@ -679,18 +709,17 @@ transition: opacity 500ms;
         } else {
             console.error('No data found in localStorage');
         }
-        
-      
     });
-
-
     document.getElementById('dontsave').addEventListener('click', function(event) {
         event.preventDefault();
         localStorage.removeItem('question_answers');
         window.location.href = '/#tournaments-section';
     });
 });
-
+function playinitialSound(){
+    var successSound = new Audio('{{ asset('correct.mp3') }}');
+             successSound.play();
+}
     </script>
  <script>
     const balloonContainer = document.getElementById("balloon-container");
