@@ -766,10 +766,7 @@ transition: opacity 500ms;
         }, 100);
     }
 
-    function resetTimer() {
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(redirect, inactivityTime);
-}
+   
 
 function redirect() {
     var question_last = localStorage.getItem('last_question');
@@ -777,11 +774,8 @@ function redirect() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(resetTimer, 10000); // Call resetTimer after 10 seconds
+    setTimeout(redirect, 10000);
 });
-
-
-
 </script>
     @include('footer');
 @endsection
