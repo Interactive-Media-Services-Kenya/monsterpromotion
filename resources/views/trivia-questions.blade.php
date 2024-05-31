@@ -444,7 +444,6 @@ transition: opacity 500ms;
                                 <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
-
                         </div>
                     </div>
                 </div>
@@ -538,7 +537,6 @@ transition: opacity 500ms;
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          
             // Add event listener to the form submission
             document.querySelector('form').addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -657,15 +655,15 @@ transition: opacity 500ms;
         </div>
         <div style="color:white">
             <input type="radio" style="display: none;" name="answer" value="${questionData.choice_B}" data-question="${questionData.id}">
-            <label for="${questionData.id}_${questionData.choice_B}" onclick="fetchQuestion1(${questionData.id},'B','${questionData.correct_answer}')" class="radio-button ${questionData.choice_B == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_B}</label>
+            <label for="${questionData.id}_${questionData.choice_B}" onclick="fetchQuestion1(${questionData.id},'B','${questionData.correct_answer}')" class="radio-button ${questionData.correct_answer=='B' ? 'correct-answer' : 'incorrect'}">${questionData.choice_B}</label>
         </div>
         <div style="color:white">
             <input type="radio" style="display: none;" name="answer" value="${questionData.choice_C}" data-question="${questionData.id}">
-            <label for="${questionData.id}_${questionData.choice_C}" onclick="fetchQuestion1(${questionData.id},'C','${questionData.correct_answer}')" class="radio-button ${questionData.choice_C == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_C}</label>
+            <label for="${questionData.id}_${questionData.choice_C}" onclick="fetchQuestion1(${questionData.id},'C','${questionData.correct_answer}')" class="radio-button ${questionData.correct_answer=='C' ? 'correct-answer' : 'incorrect'}">${questionData.choice_C}</label>
         </div>
         <div style="color:white">
             <input type="radio" style="display: none;" name="answer" value="${questionData.choice_D}" data-question="${questionData.id}">
-            <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion1(${questionData.id},'D','${questionData.correct_answer}')" class="radio-button ${questionData.choice_D == questionData.correct_answer ? 'correct-answer' : 'incorrect'}">${questionData.choice_D}</label>
+            <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion1(${questionData.id},'D','${questionData.correct_answer}')" class="radio-button ${questionData.correct_answer=='D' ? 'correct-answer' : 'incorrect'}">${questionData.choice_D}</label>
         </div>
     `;
     questionContainer.appendChild(questionElement);
