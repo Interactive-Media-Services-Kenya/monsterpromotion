@@ -772,11 +772,24 @@ transition: opacity 500ms;
             balloonContainer.remove();
         }, 100);
     }
-    function redirect() {
-    fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');  
-    console.log('coutner ni'+questionCounter);
+    var lastInteractionTime = Date.now(); // Initialize with the current timestamp
+var oneSecond = 1000; // 1 second in milliseconds
+
+function redirect() {
+    // Check if there has been user interaction in the last 1 second
+    if (Date.now() - lastInteractionTime > oneSecond) {
+        fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');  
+        console.log('counter ni' + questionCounter);
+    }
 }
+
+// Call redirect function every 10 seconds
 setInterval(redirect, 10000);
+
+// Event listener for user interaction (e.g., click)
+document.addEventListener('click', function() {
+    lastInteractionTime = Date.now(); // Update the last interaction time when there's a click
+});
 
 </script>
     @include('footer');
