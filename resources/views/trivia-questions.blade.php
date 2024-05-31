@@ -766,15 +766,10 @@ transition: opacity 500ms;
             balloonContainer.remove();
         }, 100);
     }
-
-   
-
     function redirect() {
-    var question_last = localStorage.getItem('last_question');
-    fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');   
+    fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');  
+    console.log('coutner ni'+questionCounter);
 }
-
-// Call redirect function every 10 seconds
 setInterval(redirect, 10000);
 
 </script>

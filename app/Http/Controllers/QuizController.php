@@ -116,12 +116,7 @@ class QuizController extends Controller
         if(isset($_GET['questionId'])){
             $question= $_GET['questionId'];
             $currentQuestion = Question::find($question); 
-            if($currentQuestion){
-                $nextQuestion = Question::where('id', '>', $currentQuestion->id)->first();
-            }else{
-                $nextQuestion = Question::where('id', '>', $question)->first();
-            }
-           
+            $nextQuestion = Question::where('id', '>', $currentQuestion->id)->first();
            
         }else{
             $nextQuestion = Question::orderBy('id')->first();   
