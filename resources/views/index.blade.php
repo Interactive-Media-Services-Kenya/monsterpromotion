@@ -338,7 +338,6 @@ function uploadFile(name){
   let data = new FormData(form);
   xhr.send(data);
 }
-
 function validateMobileNumber(number) {
     console.log(number);
     // Remove all non-digit characters
@@ -347,7 +346,7 @@ function validateMobileNumber(number) {
     const length = number.length;
     if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
         return true; // Starts with '07' or '01' and has 10 digits
-    } else if ((number.startsWith('7') || number.startsWith('1')) && length === 9) {
+    } else if ((number.startsWith('254') || number.startsWith('254')) && length ===12 ) {
         return true; // Starts with '7' or '1' and has 9 digits
     } else {
         return false; // Doesn't match the specified formats
