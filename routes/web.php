@@ -20,3 +20,4 @@ Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'sav
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
 Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
 Route::post('user/send-otp', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('send-otp');
+Route::post('user/upload-photo', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('upload-photo');

@@ -168,6 +168,10 @@
     .uploaded-area i.fa-check {
         font-size: 16px;
     }
+
+    .name {
+        color: #56be78;
+    }
 </style>
 </head>
 
@@ -185,7 +189,8 @@
         <br />
         <div class="conta">
             <div class="wrapper">
-                <form action="#">
+                <form action="#" method="POST">
+                    @csrf
                     <div style="display: flex;">
                         <input class="form-control" id="phone_no" placeholder="Enter Phone No" type="text" name="s"
                             style="border:1px solid #171717;;width: 70%; border-radius: 5px 0 0 5px;">
@@ -196,7 +201,7 @@
                     </div>
                     <br />
 
-                    <input class="form-control" onkeyup="verifyOTP()" id="verification_code"
+                    <input type="number" class="form-control" onkeyup="verifyOTP()" id="verificationid"
                         style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
                     <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
                         style="color:red;display:none"></span>
@@ -207,7 +212,7 @@
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
                     </div>
-
+                    <button id="submitbtn" style="width:100%;color:white;background:#171717;">SUBMIT</button>
                 </form>
                 <section class="progress-area"></section>
                 <section class="uploaded-area"></section>
@@ -219,11 +224,12 @@
 fileInput = document.querySelector(".file-input"),
 phoneInput = document.getElementById("phone_no").value,
   verifyButton = document.querySelector(".verify-button"),
-  verificationCodeInput = document.getElementById("verification_code"),
+  verificationCodeInput = document.getElementById("verificationid"),
 progressArea = document.querySelector(".progress-area"),
 uploadedArea = document.querySelector(".uploaded-area");
 fileInput.disabled = true;
 verificationCodeInput.disabled = true;
+document.getElementById("submitbtn").disabled=false;
 formput.addEventListener("click", () =>{
   fileInput.click();
 });
@@ -244,6 +250,7 @@ verifyButton.addEventListener("click", () => {
             },
             success: function (response) {
                 if (response.status === 'success') {
+               console.log(response.code);
                       var verification_otp=response.code;
                       localStorage.setItem('verification_otp',verification_otp);
                     toastr.success('OTP requested successfully!');
@@ -288,7 +295,7 @@ fileInput.onchange = ({target})=>{
 
 function uploadFile(name){
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "php/upload.php");
+//   xhr.open("POST", "user/upload-photo");
   xhr.upload.addEventListener("progress", ({loaded, total}) =>{
     let fileLoaded = Math.floor((loaded / total) * 100);
     let fileTotal = Math.floor(total / 1000);
@@ -324,8 +331,8 @@ function uploadFile(name){
       uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
     }
   });
-  let data = new FormData(form);
-  xhr.send(data);
+//   let data = new FormData(form);
+//   xhr.send(data);
 }
 
 function validateMobileNumber(number) {
@@ -382,22 +389,34 @@ startAnimation();
     }
 
     function verifyOTP() {
-        var verificationCodeInput = document.getElementById("verification_code").value;
-
+        var verificationCodeInput = document.getElementById("verificationid").value;
         if (verificationCodeInput != "") {
             document.getElementById("verifying_code").textContent = "Verifying code"; 
             document.getElementById("verifying_code").style.display = 'inline-block';
             document.getElementById("ellipsis").style.display = 'inline-block';
-            var otp_code= document.getElementById("verifying_code").value;
+            var otp_code= document.getElementById("verificationid").value;
             var otp_retrieved=localStorage.getItem('verification_otp');
-            console.log('code ni'+otp_retrieved);
-           startAnimation();
-           if(otp_retrieved==otp_code){
-            stopAnimation();
-            document.getElementById("verifying_code").textContent = "Verified Successful"; 
-           }
-        }
-    }  
+            ;
+          
+            startAnimation();
+            if(otp_code.length==6){
+                if(otp_retrieved==otp_code){
+                fileInput.disabled = false;
+            document.getElementById("verifying_code").textContent = "Verified Succesfully"; 
+            document.getElementById("verifying_code").style.color = '#56be78';
+            document.getElementById("ellipsis").style.display = 'none';
+           document.getElementById("phone_no").disabled=true;
+           document.getElementById("submitbtn").disabled=false;
+           
+            }else{
+                document.getElementById("verifying_code").textContent = "Wrong Verification Code";  
+                document.getElementById("ellipsis").style.display = 'none'; 
+              }
+            
+           
+           
+        
+    }}}
             </script>
         </div>
     </div>
