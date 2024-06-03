@@ -437,7 +437,7 @@ transition: opacity 500ms;
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
-                            <h2 class="title">QUESTION <span id="question-number"></span> / <span>{{ DB::table('questions')->count(); }}</span></h2>
+                            <h2 class="title">QUESTION <span id="question-number"></span> / <span>10</span></h2>
 
                             <audio id="beepAudio" controls style="display: none;">
                                 <source src="{{ asset('monster.wav') }}" type="audio/wav">
@@ -496,7 +496,6 @@ transition: opacity 500ms;
                 if (countdownElement) {
                     countdownElement.textContent = timer;
                 }
-
                 // Update progress bar
                 progressBar.forEach(function(progressBar) {
                     var innerCircle = progressBar.querySelector(".inner-circle");
@@ -651,7 +650,6 @@ function showCongratulationRibbons() {
      
             function updateQuestion(questionData) {
                 if(questionCounter==10){
-                    clearInterval(interval);
                         modal.style.display = 'block';
                         body.classList.add('modal-open');
                         console.log(localStorage.getItem('question_answers'));
@@ -702,7 +700,7 @@ function showCongratulationRibbons() {
         var u_phone= localStorage.getItem('user_phone');
         var dataToSend = {
         questionAnswers: questionAnswers,
-         user_phone: u_phone // Add phone number to the payload
+         user_phone: u_phone
     };
         // Check if the item exists
         if (questionAnswers) {
