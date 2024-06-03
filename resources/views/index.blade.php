@@ -213,11 +213,12 @@
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
                     </div>
+                    <section class="progress-area"></section>
+                <section class="uploaded-area"></section>
                     <button id="submitbtn" type="button" onclick="saveDetails()"
                         style="width:100%;color:white;background:#171717;">SUBMIT</button>
                 </form>
-                <section class="progress-area"></section>
-                <section class="uploaded-area"></section>
+               
             </div>
 
             <script>
@@ -340,22 +341,18 @@ function uploadFile(name){
 }
 function validateMobileNumber(number) {
     console.log(number);
-    // Remove all non-digit characters
     number = number.replace(/\D/g, '');
-    // Get the length of the number
     const length = number.length;
     if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
-        return true; // Starts with '07' or '01' and has 10 digits
+        return true; 
     } else if ((number.startsWith('254') || number.startsWith('254')) && length ===12 ) {
-        return true; // Starts with '7' or '1' and has 9 digits
+        return true;
     } else {
-        return false; // Doesn't match the specified formats
+        return false;
     } }
 
     var ellipsis = document.getElementById("ellipsis");
     var intervalId;
-    
-    // Function to start the animation
     function startAnimation() {
     var ellipsis = document.getElementById("ellipsis");
     var count = 1;
