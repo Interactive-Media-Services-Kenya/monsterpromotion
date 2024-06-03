@@ -2,11 +2,16 @@
 @section('content')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.css">
 
-<!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+
+
 <style>
     /* Import Google font - Poppins */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -180,8 +185,6 @@
         <br />
         <div class="conta">
             <div class="wrapper">
-                {{-- <header>File Uploader JavaScript</header> --}}
-
                 <form action="#">
                     <div style="display: flex;">
                         <input class="form-control" id="phone_no" placeholder="Enter Phone No" type="text" name="s"
@@ -193,9 +196,13 @@
                     </div>
                     <br />
 
-                    <input class="form-control" id="verification_code" style="border:1px solid #171717;" type=" text"
-                        placeholder="Enter Verification Code">
-                    <div class="upload-form">
+                    <input class="form-control" onkeyup="verifyOTP()" id="verification_code"
+                        style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
+                    <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
+                        style="color:red;display:none"></span>
+
+                    <br />
+                    <div class="upload-form" style="margin-top:-1px">
                         <input class="file-input" id="selfie" type="file" name="file" hidden>
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
@@ -237,9 +244,11 @@ verifyButton.addEventListener("click", () => {
             },
             success: function (response) {
                 if (response.status === 'success') {
-
+                      var verification_otp=response.code;
+                      localStorage.setItem('verification_otp',verification_otp);
                     toastr.success('OTP requested successfully!');
                     verificationCodeInput.disabled = false;
+                    
                 } else {
                     // toastr.error(response.message);
                     Swal.fire({
@@ -333,6 +342,62 @@ function validateMobileNumber(number) {
         return false; // Doesn't match the specified formats
     } }
 
+    var ellipsis = document.getElementById("ellipsis");
+    var intervalId;
+    
+    // Function to start the animation
+    function startAnimation() {
+    var ellipsis = document.getElementById("ellipsis");
+    var count = 1;
+    var maxCount = 1;
+    var increasing = true; 
+    
+    intervalId = setInterval(function() {
+        if (increasing) {
+            // Increase dot count
+            ellipsis.innerHTML += ".";
+            count++;
+            if (count > maxCount) {
+                increasing = false;
+            }
+        } else {
+            // Decrease dot count
+            ellipsis.innerHTML = ellipsis.innerHTML.slice(0, -1);
+            count--;
+            if (count === 1) {
+                increasing = true; // Start increasing dot count again
+            }
+        }
+    }, 200); // Adjust the interval duration as needed
+}
+
+// Start the animation
+startAnimation();
+
+
+    // Function to stop the animation
+    function stopAnimation() {
+        clearInterval(intervalId);
+        ellipsis.innerHTML = ""; // Remove ellipsis when animation stops
+    }
+
+    function verifyOTP() {
+        var verificationCodeInput = document.getElementById("verification_code").value;
+
+        if (verificationCodeInput != "") {
+            document.getElementById("verifying_code").textContent = "Verifying code"; 
+            document.getElementById("verifying_code").style.display = 'inline-block';
+            document.getElementById("ellipsis").style.display = 'inline-block';
+            var otp_code= document.getElementById("verifying_code").value;
+            var otp_retrieved=localStorage.getItem('verification_otp');
+            console.log('code ni'+otp_retrieved);
+           startAnimation();
+           if(otp_retrieved==otp_code){
+            stopAnimation();
+            document.getElementById("verifying_code").textContent = "Verified Successful"; 
+           }
+        }
+    }  
             </script>
         </div>
     </div>

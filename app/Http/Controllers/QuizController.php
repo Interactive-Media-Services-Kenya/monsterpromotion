@@ -135,5 +135,47 @@ class QuizController extends Controller
                 return redirect()->back()->with('error','An Error occured');
              }
     }
+    public function sendOTP(Request $request)
+    {
+        try {
+            $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
+            $mobile =$request["mobile"];
+            $otp = rand(100000, 999999);
+            $numberStr = (string) $mobile;
+            if ($numberStr[0] === '7' || $numberStr[0] === '1') {
+                $db_mobile='0'.$mobile;
+                $mobile ="254".$mobile;
+            }else{
+                $db_mobile=$mobile;
+                $mobile ="254".ltrim($mobile, '0');
+            }
+                $senderName = rawurlencode("IMS");
+                $bulkBalanceUser = "voucher";
+                $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
+                $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
+    
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_ENCODING, "");
+                curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                $response = curl_exec($ch);
+                $res = json_decode($response);
+                curl_close($ch);
+    
+                return response()->json(["status" => "success","code"=>$otp, "message" => "OTP requested successfully"]);
+       
+        } catch (\Exception $e) {
+            Log::debug($e);
+            return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
+        }
+    }
+    
 
 }
