@@ -462,7 +462,7 @@ transition: opacity 500ms;
                                 <div class="contain-area d-flex justify-content-center align-items-center">
                                     <div class="circular-progress" data-inner-circle-color="lightgrey" data-percentage="100" data-progress-color="crimson" data-bg-color="#b2d236">
                                         <div class="inner-circle"></div>
-                                        <p class="percentage time-countdown">120</p>
+                                        <p class="percentage time-countdown">60</p>
                                     </div>
                                     <div class="spacer"></div> <!-- Add a spacer -->
                                     <span class="inputt" id="points-earned">0</span> <!-- Adjust padding-top as needed -->
@@ -484,7 +484,7 @@ transition: opacity 500ms;
     <script>
         const modal = document.getElementById('myModal');
         const body = document.body;
-        startCountdownAndProgressBar(120);
+        startCountdownAndProgressBar(60);
 
         function startCountdownAndProgressBar(duration) {
             var timer = duration;
@@ -643,14 +643,30 @@ transition: opacity 500ms;
     xhr.send();
 }
 
-        function showCongratulationRibbons() {
-    
+function showCongratulationRibbons() {
     console.log("Congratulations! You selected the correct answer.");
 }
 
             let questionCounter = 1;
      
             function updateQuestion(questionData) {
+                if(questionCounter==10){
+                    clearInterval(interval);
+                        modal.style.display = 'block';
+                        body.classList.add('modal-open');
+                        console.log(localStorage.getItem('question_answers'));
+                        var data = JSON.parse(localStorage.getItem('question_answers'));
+                        var totalQuestions = data.length;
+                        let correctAnswers = 0;
+                        data.forEach(item => {
+                            if (item.selectedAnswer === item.correct_score) {
+                                correctAnswers++;
+                            }
+                        });
+                        document.getElementById('scored').innerText = correctAnswers + ' POINTS';
+                        document.getElementById('total_score').value = correctAnswers;
+                        document.getElementById('total_questions').value = totalQuestions;
+                }
                 localStorage.setItem('last_question',questionData.id);
     var questionContainer = document.getElementById('question-container');
     questionContainer.innerHTML = '';
@@ -729,7 +745,6 @@ transition: opacity 500ms;
     function random(num) {
         return Math.floor(Math.random() * num);
     }
-
     function getRandomStyles() {
         var mt = random(200);
         var ml = random(50);
@@ -747,14 +762,12 @@ transition: opacity 500ms;
     animation: float ${dur}s ease-in infinite;
 `;
     }
-
     function createBalloons(num) {
         // Array of image URLs
         var imageUrls = [
             "https://cdn-icons-png.flaticon.com/512/8983/8983219.png",
            
         ];
-
         for (var i = num; i > 0; i--) {
             var balloon = document.createElement("img");
             balloon.className = "balloon";
@@ -764,8 +777,6 @@ transition: opacity 500ms;
             balloonContainer.append(balloon);
         }
     }
-
-
     function removeBalloons() {
         balloonContainer.style.opacity = 0;
         setTimeout(() => {
@@ -774,18 +785,14 @@ transition: opacity 500ms;
     }
     var lastInteractionTime = Date.now(); // Initialize with the current timestamp
 var oneSecond = 1000; // 1 second in milliseconds
-
 function redirect() {
     // Check if there has been user interaction in the last 1 second
     if (Date.now() - lastInteractionTime > oneSecond) {
         fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');  
-        console.log('counter ni' + questionCounter);
     }
 }
-
 // Call redirect function every 10 seconds
 setInterval(redirect, 10000);
-
 // Event listener for user interaction (e.g., click)
 document.addEventListener('click', function() {
     lastInteractionTime = Date.now(); // Update the last interaction time when there's a click

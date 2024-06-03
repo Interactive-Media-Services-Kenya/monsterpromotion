@@ -354,12 +354,11 @@
             var mt = random(200);
             var ml = random(50);
             var dur = random(5) + 5;
-            var width = 100; // Default width
-            var height = 250; // Default height
-            // Adjust dimensions for smaller screens
+            var width = 100;
+            var height = 250; 
             if (window.innerWidth < 768) {
-                width = 70; // Adjust width for small screens
-                height = 225; // Adjust height for small screens
+                width = 70; 
+                height = 225; 
             }
             return `
         margin: ${mt}px 0 0 ${ml}px;

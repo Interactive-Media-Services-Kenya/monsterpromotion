@@ -40,7 +40,6 @@ class QuizController extends Controller
             $quizAnswer->user_phone = $requestData['user_phone']; // Access 'user_phone' directly from $requestData
             $quizAnswer->save();
         }
-    log::info(collect($dataToSend));
     return response()->json(['message' => 'Data saved successfully'], 200);
         return redirect('user/my-results')->with('success', 'Question created successfully.');
     }

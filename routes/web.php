@@ -21,6 +21,6 @@ Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 
 Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
 Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
-Route::post('user/send-otp', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('send-otp');
-Route::post('user/upload-photo', [App\Http\Controllers\QuizController::class, 'sesndOTP'])->name('upload-photo');
-Route::post('user/save-user-details', [App\Http\Controllers\QuizController::class, 'saveSelfie'])->name('save-user-details');
+// Route::post('user/send-otp', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('send-otp');
+// Route::post('user/upload-photo', [App\Http\Controllers\QuizController::class, 'sesndOTP'])->name('upload-photo');
+// Route::post('user/save-user-details', [App\Http\Controllers\QuizController::class, 'saveSelfie'])->name('save-user-details');
