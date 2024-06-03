@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    
     return view('index');
 });
 
@@ -18,3 +19,4 @@ Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 
 Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
 Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
+Route::post('user/send-otp', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('send-otp');

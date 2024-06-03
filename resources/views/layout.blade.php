@@ -17,10 +17,18 @@
     <link rel="stylesheet" href="{{ asset('css/anorvuxYH7Ak.css') }}">
     <link rel="stylesheet" href="{{ asset('css/6N8HPuuJtFDl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hDad7xUMRzky.css') }}">
+    <style>
+        #footer-section {
+            background-image: url(../images/C1rNiTA1ydGq.png);
+            background-repeat: no-repeat;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+    </style>
 </head>
 
 <body>
-    {{-- 
+    {{--
     <!-- start preloader -->
     <div class="preloader" id="preloader"></div>
     <!-- end preloader --> --}}

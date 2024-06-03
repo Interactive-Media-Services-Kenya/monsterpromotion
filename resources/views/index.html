@@ -1,0 +1,374 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Constants\Status;
+use App\Models\Cart;
+use App\Models\Product;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
+
+use Illuminate\Support\Facades\URL;
+class CartController extends Controller
+{
+    public function __construct()
+    {
+        $this->activeTemplate = activeTemplate();
+    }
+
+    public function addToCart(Request $request, $id)
+    {
+        $request->validate([
+            'mpesa_no'          => 'required|numeric',
+            'whatsapp_no' => 'required|numeric',
+        ]);
+
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404);
+        }
+
+        $user    = auth()->user();
+        $product = Product::available()->where('user_id', '!=', @$user->id)->findOrFail($id);
+        
+
+date_default_timezone_set('Africa/Nairobi');
+
+  # access token
+  $consumerKey = 'wDYuhJBH3LyRBzGrxXf6ppbFOJL4AdtY'; //Fill with your app Consumer Key
+  $consumerSecret = 'YpRgXC2ACJ84CON8'; // Fill with your app Secret
+
+  # define the variales
+  # provide the following details, this part is found on your test credentials on the developer account
+  $BusinessShortCode ='6228244'; 
+  $Passkey = 'bab388cf7eea4ef066da96820ed875496b83bac4bd6e31fa7304083c1e90cb8c';    
+  
+  $amount = 1; 
+  $phone=$request->mpesa_no;
+  
+  $PartyA = $phone; // This is your phone number, 
+  $AccountReference = strtoupper('dsds');;
+  $TransactionDesc = 'true';
+  $Amount =1;
+ 
+  # Get the timestamp, format YYYYmmddhms -> 20181004151020
+  $Timestamp = date('YmdHis');    
+  
+  # Get the base64 encoded string -> $password. The passkey is the M-PESA Public Key
+  $Password = base64_encode($BusinessShortCode.$Passkey.$Timestamp);
+
+  # header for access token
+  $headers = ['Content-Type:application/json; charset=utf8'];
+
+    # M-PESA endpoint urls
+  $access_token_url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+  $initiate_url ='https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+
+  # callback url
+  $CallBackURL = 'https://www.kawangware.asilitech.co.ke/confirm-payment?id='.$id;  
+
+  $curl = curl_init($access_token_url);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  curl_setopt($curl, CURLOPT_USERPWD, $consumerKey.':'.$consumerSecret);
+  $result = curl_exec($curl);
+  $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+  $result = json_decode($result);
+  $access_token = $result->access_token;  
+  curl_close($curl);
+
+  # header for stk push
+  $stkheader = ['Content-Type:application/json','Authorization:Bearer '.$access_token];
+
+  # initiating the transaction
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $initiate_url);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, $stkheader); //setting custom header
+$BusinessShortCode ='6228244'; 
+  $curl_post_data = array(
+    //Fill in the request parameters with valid values
+    'BusinessShortCode' => $BusinessShortCode,
+    'Password' => $Password,
+    'Timestamp' => $Timestamp,
+    'TransactionType' => 'CustomerBuyGoodsOnline',
+    'Amount' => $Amount,
+    'PartyA' => $PartyA,
+    'PartyB' => 8288328,
+    'PhoneNumber' => $PartyA,
+    'CallBackURL' => $CallBackURL,
+    'AccountReference' => $AccountReference,
+    'TransactionDesc' => $TransactionDesc
+  );
+
+  $data_string = json_encode($curl_post_data);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_POST, true);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+  $curl_response = curl_exec($curl);
+
+    // 	// store feedback start
+    	$resp_data = json_decode($curl_response);
+        $MerchantRequestID = $resp_data->MerchantRequestID;
+        $CheckoutRequestID = $resp_data->CheckoutRequestID;
+        $ResponseCode = $resp_data->ResponseCode;
+ $resp_data = json_decode($curl_response);
+log::debug(collect($resp_data));
+
+// $product = Product::findOrFail($pid);
+    $file = $product->file;
+
+    if ($product->server == 0) {
+        $fullPath = getImage(getFilePath('productFile') . '/' . $file);
+    } else {
+        $fullPath = Storage::disk('custom-ftp')->path($file);
+    }
+ $filename = str_replace(' ', '_', strtolower($product->name)) . '.' . pathinfo($file, PATHINFO_EXTENSION);
+    $accessToken = 'EAAQdgxipEwwBOw7y691gaYl02Bcet7uSSzNd0EGX4P8oUryc1qKTZCJxZAUJLkKCjp9ahNb7bSobYMNvCnap4XsEUTJOLa9rXWLinkhOkiCM3b331bIkrj0UeJqepkIaBP5WQpCPM6deprPuxQhKNlxbHp6fKsXZCGCN8svJ1XRdZBsv1GsQOMAYnoRJqAP0eqpFyk2ugeveGimB';
+$fromPhoneNumberId = '353491004505493';
+$recipientPhoneNumber = 254705030613;
+$messageContent = 'asa';
+ $documentUrl = $fullPath;
+//  log::info($documentUrl);
+$endpoint = 'https://graph.facebook.com/v19.0/' . $fromPhoneNumberId . '/messages';
+$headers = [
+    'Authorization: Bearer ' . $accessToken,
+    'Content-Type: application/json',
+];
+
+$data = json_encode([
+    "messaging_product" => "whatsapp",
+    "recipient_type" => "individual",
+    "to" => $recipientPhoneNumber,
+   "type" => "document",
+    "document" => [
+        "link" => $documentUrl,
+ 	"caption"=> "Thank you for purchasing ".$product->name." ,welcome back again",
+      "filename"=> $product->name,
+      
+    ]
+]);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $endpoint);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+echo $response;
+log::info($response);
+curl_close($ch);
+    // $data = [
+    //     "msisdn" => $request->mpesa_no,
+    //     "amount" => 1,
+    //     "callback" => "https://www.kawangware.asilitech.co.ke/confirm-payment"
+    // ];
+
+    // curl_setopt_array($curl, [
+    //     CURLOPT_URL => 'https://payscel.com/api/v1/initiate',
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => "",
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 30,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => "POST",
+    //     CURLOPT_POSTFIELDS => json_encode($data),
+    //     CURLOPT_HTTPHEADER => [
+    //         "Content-Type: application/json",
+    //         "User-Agent: insomnia/2023.5.8",
+    //         "apikey: 5fa482f27351",
+    //         "linkid: #PYSCL6a"
+    //     ],
+    // ]);
+
+    // $response = curl_exec($curl);
+    // $err = curl_error($curl);
+
+    // curl_close($curl);
+        $orderNumber = @$user->id;
+        if (!$orderNumber) {
+            $orderNumber = session()->get('order_number');
+            if (!$orderNumber) {
+                $orderNumber = getTrx(8);
+                session()->put('order_number', $orderNumber);
+            }
+        }
+        $productPrice = ($product->regular_price);
+        $totalPrice   = $productPrice;
+        $general      = gs();
+        $supportFee   = 0;
+        if ($product->support == Status::YES && $request->extended_support) {
+            $supportTime = Carbon::now()->addMonths($general->extended)->format('Y-m-d');
+            $data        = $this->supportDiscount($product, $request->license);
+            $totalPrice  = $data[0];
+            $supportFee  = $data[1];
+        } elseif ($product->support == Status::YES) {
+            $supportTime = Carbon::now()->addMonths($general->regular)->format('Y-m-d');
+        } else {
+            $supportTime = null;
+        }
+
+        // $cartExists = Cart::where('order_number', $orderNumber)->where('product_id', $product->id)->first();
+        // if ($cartExists) {
+        //     $cartExists->delete();
+        // }
+        $cart                = new Cart();
+        $cart->order_number  = $orderNumber;
+        $cart->code          = getTrx();
+        $cart->author_id     = $product->user_id;
+        $cart->product_id    = $product->id;
+        $cart->license       = $MerchantRequestID;
+        $cart->support      = $MerchantRequestID;
+        $cart->support_time  =1;
+        $cart->support_fee   = 1;
+        $cart->product_price = $productPrice;
+        $cart->total_price   = $totalPrice;
+        $cart->save();
+        $notify[] = ['success', 'Product checked out successfully,confirm purchase by entering mpesa pin'];
+        return back()->withNotify($notify);
+    }
+
+ protected function confirmPayment(Request $request)
+    {
+        $pid=$_GET['id'];
+         Log::info('sasa');
+         $callbackData = json_decode($request->getContent());
+         Log::info('reached here');
+  $callbackJSONData = file_get_contents('php://input');
+  $logFile = "stkPushCallbackResponse.json";
+  $log = fopen($logFile, "a");
+  fwrite($log, $callbackJSONData);
+  fclose($log);
+  $callbackData= json_decode($callbackJSONData);
+    $MerchantRequestID=$callbackData->Body->stkCallback->MerchantRequestID;
+    $CheckoutRequestID=$callbackData->Body->stkCallback->CheckoutRequestID;
+    $ResultCode = $callbackData->Body->stkCallback->ResultCode;
+    $ResultDesc= $callbackData->Body->stkCallback->ResultDesc;
+    $Amount    = $callbackData->Body->stkCallback->CallbackMetadata->Item[0]->Value;
+    $MpesaReceiptNumber = $callbackData->Body->stkCallback->CallbackMetadata->Item[1]->Value;
+   $PhoneNumber   = $callbackData->Body->stkCallback->CallbackMetadata->Item[4]->Value;
+$product = Product::findOrFail($pid);
+    $file = $product->file;
+
+    if ($product->server == 0) {
+        $fullPath = getImage(getFilePath('productFile') . '/' . $file);
+    } else {
+        $fullPath = Storage::disk('custom-ftp')->path($file);
+    }
+    $filename = str_replace(' ', '_', strtolower($product->name)) . '.' . pathinfo($file, PATHINFO_EXTENSION);
+    $accessToken = 'EAAQdgxipEwwBOw7y691gaYl02Bcet7uSSzNd0EGX4P8oUryc1qKTZCJxZAUJLkKCjp9ahNb7bSobYMNvCnap4XsEUTJOLa9rXWLinkhOkiCM3b331bIkrj0UeJqepkIaBP5WQpCPM6deprPuxQhKNlxbHp6fKsXZCGCN8svJ1XRdZBsv1GsQOMAYnoRJqAP0eqpFyk2ugeveGimB';
+$fromPhoneNumberId = '353491004505493';
+$recipientPhoneNumber = $PhoneNumber;
+$messageContent = 'asa';
+ $documentUrl = $fullPath;
+//  log::info($documentUrl);
+$endpoint = 'https://graph.facebook.com/v19.0/' . $fromPhoneNumberId . '/messages';
+$headers = [
+    'Authorization: Bearer ' . $accessToken,
+    'Content-Type: application/json',
+];
+
+$data = json_encode([
+    "messaging_product" => "whatsapp",
+    "recipient_type" => "individual",
+    "to" => $recipientPhoneNumber,
+   "type" => "document",
+    "document" => [
+        "link" => $documentUrl,
+ 	"caption"=> "Thank you for purchasing ".$product->name." ,welcome back again",
+      "filename"=> $product->name,
+      
+    ]
+]);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $endpoint);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+echo $response;
+curl_close($ch);
+
+$random_hash = md5(date('r', time()));
+
+$to = 'georgemuemah@gmail.com';
+$subject = 'Subject of the Email';
+$message = 'Body of the Email';
+
+$headers = "From: georgemuemah@gmail.com\r\n";
+$headers .= "Reply-To: georgemuemah@gmail.com\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: multipart/mixed; boundary=\"PHP-mixed-".$random_hash."\"\r\n";
+
+$attachment = chunk_split(base64_encode(file_get_contents($documentUrl)));
+$filename = basename($documentUrl);
+
+// Add attachment to the email
+$body = "--PHP-mixed-$random_hash\r\n";
+$body .= "Content-Type: application/octet-stream; name=\"$filename\"\r\n";
+$body .= "Content-Disposition: attachment; filename=\"$filename\"\r\n";
+$body .= "Content-Transfer-Encoding: base64\r\n";
+$body .= "\r\n";
+$body .= $attachment;
+$body .= "\r\n";
+
+// Add the message body
+$body .= "--PHP-mixed-$random_hash\r\n";
+$body .= "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n";
+$body .= "Content-Transfer-Encoding: 7bit\r\n";
+$body .= "\r\n";
+$body .= $message;
+$body .= "\r\n";
+
+// // Send the email
+ $mail_sent = mail($to, $subject, $body, $headers);
+
+if (!$mail_sent) {
+    log::info(error_get_last()['message']);
+   
+} else {
+    log::info('good');
+
+}
+
+    }
+    protected function supportDiscount($product, $license)
+    {
+        $price                = ($license == Status::REGULAR_LICENSE) ? $product->regular_price : $product->extended_price;
+        $tempCharge           = ($price * $product->support_charge) / 100;
+        $totalSupportDiscount = $product->support_discount ? (($tempCharge * $product->support_discount) / 100) : 0;
+        $supportFee           = $tempCharge - $totalSupportDiscount;
+        $totalPrice           = $price + $supportFee;
+        $price                = [$totalPrice, $supportFee];
+
+        return $price;
+    }
+
+    public function myCart()
+    {
+        $pageTitle    = 'My Cart';
+        $user         = auth()->user();
+        $order_number = $user ? $user->id : session()->get('order_number');
+        $orders       = Cart::active()->where('order_number', $order_number)->with(['product.user', 'author'])->get();
+        return view($this->activeTemplate . 'cart', compact('pageTitle', 'orders'));
+    }
+
+    public function removeCart($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404);
+        }
+        $order = Cart::findOrFail($id);
+        $order->delete();
+        $notify[] = ['success', 'Product successfully removed from cart'];
+        return back()->withNotify($notify);
+    }
+}

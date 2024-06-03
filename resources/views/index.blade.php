@@ -1,401 +1,341 @@
-<!-- banner-section start -->
 @extends('layout')
 @section('content')
-    <style>
-        #banner-section {
-            position: relative;
-        }
-        #tournaments-section .single-item .title-bottom {
-    border-bottom: none;
-    margin-top: 20px;
-    padding-bottom: 35px;
-}
-        #banner-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('{{ asset('images/banner.jpg') }}');
-            opacity: 0.5;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
 
-        .banner-content {
-            position: relative;
-            /* Make sure the content stays above the pseudo-element */
-            /* Add any additional styles for the content here */
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
 
-        body {
-            font-family: var(--body-font);
-            background-color: #171717;
-            font-size: 18px;
-            line-height: 25px;
-            padding: 0;
-            margin: 0;
-            font-weight: 400;
-            overflow-x: hidden;
-        }
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<style>
+    /* Import Google font - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: #171717;
+    }
+
+    .conta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* min-height: 100vh; */
+        background: #171717;
+    }
+
+    .contad {
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+        /* min-height: 100vh; */
+        background: #171717;
+    }
+
+    ::selection {
+        color: #fff;
+        background: #171717;
+    }
+
+    .wrapper {
+        width: 430px;
+        background: #fff;
+        border-radius: 5px;
+        padding: 30px;
+        box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .wrapper header {
+        color: #171717;
+        font-size: 27px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .wrapper .upload-form {
+        height: 167px;
+        display: flex;
+        cursor: pointer;
+        margin: 30px 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 5px;
+        border: 2px dashed #171717;
+        ;
+    }
+
+    form :where(i, p) {
+        color: #171717;
+    }
+
+    form i {
+        font-size: 50px;
+    }
+
+    form p {
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+    section .row {
+        margin-bottom: 10px;
+        background: #E9F0FF;
+        list-style: none;
+        padding: 15px 20px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    section .row i {
+        color: #171717;
+        font-size: 30px;
+    }
+
+    section .details span {
+        font-size: 14px;
+    }
+
+    .progress-area .row .content {
+        width: 100%;
+        margin-left: 15px;
+    }
+
+    .progress-area .details {
+        display: flex;
+        align-items: center;
+        margin-bottom: 7px;
+        justify-content: space-between;
+    }
+
+    .progress-area .content .progress-bar {
+        height: 6px;
+        width: 100%;
+        margin-bottom: 4px;
+        background: #fff;
+        border-radius: 30px;
+    }
+
+    .content .progress-bar .progress {
+        height: 100%;
+        width: 0%;
+        background: #171717;
+        border-radius: inherit;
+    }
+
+    .uploaded-area {
+        max-height: 232px;
+        overflow-y: scroll;
+    }
+
+    .uploaded-area.onprogress {
+        max-height: 150px;
+    }
+
+    .uploaded-area::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    .uploaded-area .row .content {
+        display: flex;
+        align-items: center;
+    }
+
+    .uploaded-area .row .details {
+        display: flex;
+        margin-left: 15px;
+        flex-direction: column;
+    }
+
+    .uploaded-area .row .details .size {
+        color: #404040;
+        font-size: 11px;
+    }
+
+    .uploaded-area i.fa-check {
+        font-size: 16px;
+    }
+</style>
+</head>
+
+<body>
 
 
-        #balloon-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            overflow: hidden;
-            height: 100%;
+    <div class="contad" style="margin-bottom:200px">
+        <br /> <br /> <br /> <br />
+        <h3 style="text-align:center;color:white;">SHARE, PLAY AND WIN</h3>
+        <p style="text-align:center;color:white;">Take a picture with a monster energy drink pack<br /> upload
+            it,unlock some easy
+            games,
+            play and stand a chance to
+            win amazing gifts. </p>
+        <br />
+        <div class="conta">
+            <div class="wrapper">
+                {{-- <header>File Uploader JavaScript</header> --}}
 
-            transition: opacity 500ms;
-        }
+                <form action="#">
+                    <div style="display: flex;">
+                        <input class="form-control" id="phone_no" placeholder="Enter Phone No" type="text" name="s"
+                            style="border:1px solid #171717;;width: 70%; border-radius: 5px 0 0 5px;">
+                        <button type="button" class="verify-button"
+                            style="border:1px solid #171717;background:#171717;color:white;width: 30%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
+                            Phone</button>
 
-        .banner-content {
-            position: relative;
-
-            z-index: 1;
-
-        }
-
-        .balloon {
-            height: 160px;
-            width: 525px;
-            /* border-radius: 75% 75% 70% 70%;
-                                                                                                                                                                                                                                                                    position: relative; */
-        }
-
-        .balloon:before {
-            content: "";
-            height: 75px;
-            width: 1px;
-            padding: 1px;
-            background-color: #FDFD96;
-            display: block;
-            position: absolute;
-            top: 125px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-        #how-works-section .single-item .icon-area {
-    background: #4609C3;
-    border-radius: 10px;
-    display: inline-block;
-    padding: 23px 25px;
-    position: relative;
-}
-        .balloon:after {
-            content: "▲";
-            text-align: center;
-            display: block;
-            position: absolute;
-            color: inherit;
-            top: 120px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        @keyframes float {
-            from {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateY(-300vh);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 767px) {
-            #banner-section {
-                height: 70vh;
-
-            }
-
-            @media (max-width: 767px) {
-
-                /* Center content vertically and horizontally */
-                #banner-section {
-                height: 70vh;
-
-            }
-            }
-            @media (max-width: 998px) {
-
-/* Center content vertically and horizontally */
-.banner-content {
-    padding: 20px;
-    /* Add some padding for better spacing */
-}
-}
-        }
-        #tournaments-section .single-item .prize-area {
-    border:none;
-    width: 100%;
-    /* height: 100%; */
-}
-.cmn-btn{
-    background:#b2d236;
-    color:white;
-}
-#how-works-section .single-item .icon-area {
-    background: #b2d236 !important;
-    border-radius: 10px;
-    display: inline-block;
-    padding: 23px 25px;
-    position: relative;
-}
-    </style>
-    <section id="banner-section">
-
-        <div id="balloon-container">
-        </div>
-        <div class="banner-content d-flex
-        align-items-center">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="main-content">
-                            <div class="top-area justify-content-center text-center">
-                                <h1>ITS MONSTER TIME</h1>
-                                <h3>LETS PLAY A GAME, BE OUR NEXT CHAMPION</h3>
-                                <p>Just simple way,answer as many questions as you can within 60 seconds</p>
-                                <div class="btn-play d-flex justify-content-center align-items-center">
-                                    <a href="#available-game-section" class="cmn-btn">Ready? Play Now</a>
-                                    {{-- <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM" class="mfp-iframe popupvideo">
-                                        <img src="images/hKSskvYIu5WE.png" alt="play">
-                                    </a> --}}
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                <div class="ani-illu">
+                    <br />
 
-                </div>
+                    <input class="form-control" id="verification_code" style="border:1px solid #171717;" type=" text"
+                        placeholder="Enter Verification Code">
+                    <div class="upload-form">
+                        <input class="file-input" id="selfie" type="file" name="file" hidden>
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Browse File to Upload</p>
+                    </div>
+
+                </form>
+                <section class="progress-area"></section>
+                <section class="uploaded-area"></section>
             </div>
-        </div>
-    </section>
-    <!-- banner-section end -->
 
-    <!-- Available Game In start -->
-    <section id="available-game-section">
+            <script>
+                const formput = document.querySelector(".upload-form");
+                const form = document.querySelector("form"),
+fileInput = document.querySelector(".file-input"),
+phoneInput = document.getElementById("phone_no").value,
+  verifyButton = document.querySelector(".verify-button"),
+  verificationCodeInput = document.getElementById("verification_code"),
+progressArea = document.querySelector(".progress-area"),
+uploadedArea = document.querySelector(".uploaded-area");
+fileInput.disabled = true;
+verificationCodeInput.disabled = true;
+formput.addEventListener("click", () =>{
+  fileInput.click();
+});
+verifyButton.addEventListener("click", () => {
+   var phone = document.getElementById("phone_no").value;
+  //initiate sending OTP
 
-        <div class="overlay pb-120">
-            <div class="container wow fadeInUp">
-                <div class="main-container">
-                    <div class="row justify-content-between">
-                        <div class="col-lg-10">
-                            <div class="section-header">
-                                <h2 class="title">Our Top Games List</h2>
-                                <p>Click any game to play</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="available-game-carousel">
-                        <div class="single-item">
-                            <a href="{{ route('user/play-trivia') }}"><img src="images/6oG1ggLQFyBC.png" alt="image"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="{{ route('user/play-trivia') }}"><img src="images/Ri48fTxVZ3Pj.png" alt="image"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="{{ route('user/play-trivia') }}"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="{{ route('user/play-trivia') }}"><img src="images/9tY3c177ITYs.png" alt="image"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="{{ route('user/play-trivia') }}"><img src="images/9Z2wX0RylL4S.png" alt="image"></a>
-                        </div>
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Available Game In end -->
+    if (validateMobileNumber(phone)) {
+        // console.log(phone)
+        // document.getElementById('otp-field').style.display = 'block';
+        // document.getElementById('login').disabled = true;
+        $.ajax({
+            url: '/user/send-otp',
+            method: 'POST',
+            data: {
+                mobile: phone,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                if (response.status === 'success') {
 
-    <!-- How Works start -->
-    <section id="how-works-section" class="border-area">
-        <div class="overlay pt-120 pb-120">
-            <div class="container wow fadeInUp">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <div class="section-header">
-                            <h2 class="title">How It Works</h2>
-                            <p>It's easier than you think. Just 3 simple easy steps</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mp-top">
-                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center">
-                        <div class="single-item">
-                            <div class="icon-area">
-                                <span>1</span>
-                                <img src="images/X9Rg4sp6JlL8.png" alt="image">
-                            </div>
-                            <div class="text-area">
-                                <h5>Scan Code</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center obj-rel">
-                        <div class="single-item">
-                            <div class="icon-area">
-                                <span>2</span>
-                                <img src="images/R1h81k9PrJYk.png" alt="image">
-                            </div>
-                            <div class="text-area">
-                                <h5>Start Trivia</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center obj-rel">
-                        <div class="single-item">
-                            <div class="icon-area">
-                                <span>3</span>
-                                <img src="images/CLufmFhQfboo.png" alt="image">
-                            </div>
-                            <div class="text-area">
-                                <h5>Win Prize</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <a href="registration.html" class="cmn-btn">Join Now!</a>
-                    </div>
-                </div> --}}
-            </div>
-        </div>
-    </section>
-    <!-- How Works end -->
-
-    <!-- Browse Tournaments start -->
-    <section id="tournaments-section" >
-        <div class="overlay pt-120 pb-120" >
-            <div class="container wow fadeInUp">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <div class="section-header">
-                            <h2 class="title">LEADERS BOARD</h2>
-                            {{-- <p>Get to know our top Monster Champions.</p> --}}
-                        </div>
-                    </div>
-                </div>
-
-                    @php
-                     $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(4)->get();
-
-                    @endphp
-                    @foreach($leaders as $leader)
-                    @if($leader->score>=1)
-                    <div class="single-item" >
-                    <div class="row" style="margin-top:-30px;margin-bottom:-30px" >
-                       
-                        <div class="col-lg-9 col-md-9 d-flex align-items-center">
-                            <div class="mid-area" >
-                          
-                                <div class="title-bottom d-flex">
-                                    <div class="date-area bg">
-                                        <span class="date">{{ $leader->name }}</span>
-                                    </div>
-                                    <div class="time-area bg">
-                                      
-                                        <span>Score:</span>
-                                        <span class="time">{{ $leader->score }} / {{ $leader->questions_attempted }} </span>
-                                    </div>
-                                  
-                                </div>
-                              
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex align-items-center">
-                            <div class="prize-area text-center">
-                                <div class="contain-area" >
-                                      <p class="cmn-btn">RANK : {{ $loop->iteration }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div></div>
-                    @endif
-                    @endforeach
-            </div>
-        </div>
-    </section>
-
-    <script>
-        const balloonContainer = document.getElementById("balloon-container");
-
-        function random(num) {
-            return Math.floor(Math.random() * num);
-        }
-
-        function getRandomStyles() {
-            var mt = random(200);
-            var ml = random(50);
-            var dur = random(5) + 5;
-            var width = 100; // Default width
-            var height = 250; // Default height
-            // Adjust dimensions for smaller screens
-            if (window.innerWidth < 768) {
-                width = 70; // Adjust width for small screens
-                height = 225; // Adjust height for small screens
+                    toastr.success('OTP requested successfully!');
+                    verificationCodeInput.disabled = false;
+                } else {
+                    // toastr.error(response.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'User not found. Please register.'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/register';
+                        }
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                toastr.error('Error: Unable to request OTP.');
             }
-            return `
-        margin: ${mt}px 0 0 ${ml}px;
-        width: ${width}px;
-        height: ${height}px;
-        animation: float ${dur}s ease-in infinite;
-    `;
-        }
-
-        function createBalloons(num) {
-            // Array of image URLs
-            var imageUrls = [
-                "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
-                "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
-                "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
-
-            ];
-
-            for (var i = num; i > 0; i--) {
-                var balloon = document.createElement("img");
-                balloon.className = "balloon";
-                // Select a random image URL from the array
-                var randomImageUrl = imageUrls[random(imageUrls.length)];
-                balloon.src = randomImageUrl;
-                balloon.style.cssText = getRandomStyles();
-                balloonContainer.append(balloon);
-            }
-        }
-
-
-        function removeBalloons() {
-            balloonContainer.style.opacity = 0;
-            setTimeout(() => {
-                balloonContainer.remove();
-            }, 500);
-        }
-
-        window.addEventListener("load", () => {
-            createBalloons(30);
         });
-
-        window.addEventListener("click", () => {
-            removeBalloons();
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please Enter a valid mobile No'
         });
-    </script>
+    }
+});
+fileInput.onchange = ({target})=>{
+  let file = target.files[0];
+  if(file){
+    let fileName = file.name;
+    if(fileName.length >= 12){
+      let splitName = fileName.split('.');
+      fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
+    }
+    uploadFile(fileName);
+  }
+}
+
+function uploadFile(name){
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "php/upload.php");
+  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
+    let fileLoaded = Math.floor((loaded / total) * 100);
+    let fileTotal = Math.floor(total / 1000);
+    let fileSize;
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
+    let progressHTML = `<li class="row">
+                          <i class="fas fa-file-alt"></i>
+                          <div class="content">
+                            <div class="details">
+                              <span class="name">${name} • Uploading</span>
+                              <span class="percent">${fileLoaded}%</span>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress" style="width: ${fileLoaded}%"></div>
+                            </div>
+                          </div>
+                        </li>`;
+    uploadedArea.classList.add("onprogress");
+    progressArea.innerHTML = progressHTML;
+    if(loaded == total){
+      progressArea.innerHTML = "";
+      let uploadedHTML = `<li class="row">
+                            <div class="content upload">
+                              <i class="fas fa-file-alt"></i>
+                              <div class="details">
+                                <span class="name">${name} • Uploaded</span>
+                                <span class="size">${fileSize}</span>
+                              </div>
+                            </div>
+                            <i class="fas fa-check"></i>
+                          </li>`;
+      uploadedArea.classList.remove("onprogress");
+      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+    }
+  });
+  let data = new FormData(form);
+  xhr.send(data);
+}
+
+function validateMobileNumber(number) {
+    console.log(number);
+    // Remove all non-digit characters
+    number = number.replace(/\D/g, '');
+    // Get the length of the number
+    const length = number.length;
+    if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
+        return true; // Starts with '07' or '01' and has 10 digits
+    } else if ((number.startsWith('7') || number.startsWith('1')) && length === 9) {
+        return true; // Starts with '7' or '1' and has 9 digits
+    } else {
+        return false; // Doesn't match the specified formats
+    } }
+
+            </script>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @include('footer');
-@endsection
+    @endsection

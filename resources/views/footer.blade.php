@@ -1,4 +1,4 @@
-< <!-- footer-section start -->
+
     <footer id="footer-section">
 
         <div class="footer-mid pt-120">
