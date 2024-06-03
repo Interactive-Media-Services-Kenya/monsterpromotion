@@ -176,6 +176,8 @@ class QuizController extends Controller
             return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
         }
     }
-    
-
+    public function saveSelfie(Request $request){
+        Log::debug($request->all()); 
+        
+    }
 }

@@ -192,8 +192,9 @@
                 <form action="#" method="POST">
                     @csrf
                     <div style="display: flex;">
-                        <input class="form-control" id="phone_no" placeholder="Enter Phone No" type="text" name="s"
-                            style="border:1px solid #171717;;width: 70%; border-radius: 5px 0 0 5px;">
+                        <input class="form-control" name="phone" id="phone_no" placeholder="Enter Phone No" type="text"
+                            style="border:1px solid #171717;width: 70%; border-radius: 5px 0 0 5px;">
+
                         <button type="button" class="verify-button"
                             style="border:1px solid #171717;background:#171717;color:white;width: 30%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
                             Phone</button>
@@ -201,7 +202,7 @@
                     </div>
                     <br />
 
-                    <input type="number" class="form-control" onkeyup="verifyOTP()" id="verificationid"
+                    <input type="number" name="otp" class="form-control" onkeyup="verifyOTP()" id="verificationid"
                         style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
                     <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
                         style="color:red;display:none"></span>
@@ -212,7 +213,8 @@
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
                     </div>
-                    <button id="submitbtn" style="width:100%;color:white;background:#171717;">SUBMIT</button>
+                    <button id="submitbtn" type="button" onclick="saveDetails()"
+                        style="width:100%;color:white;background:#171717;">SUBMIT</button>
                 </form>
                 <section class="progress-area"></section>
                 <section class="uploaded-area"></section>
@@ -221,16 +223,18 @@
             <script>
                 const formput = document.querySelector(".upload-form");
                 const form = document.querySelector("form"),
-fileInput = document.querySelector(".file-input"),
-phoneInput = document.getElementById("phone_no").value,
+fileInput = document.querySelector(".file-input");
+phoneInput = document.getElementById("phone_no").value;
+
   verifyButton = document.querySelector(".verify-button"),
   verificationCodeInput = document.getElementById("verificationid"),
 progressArea = document.querySelector(".progress-area"),
 uploadedArea = document.querySelector(".uploaded-area");
 fileInput.disabled = true;
 verificationCodeInput.disabled = true;
-document.getElementById("submitbtn").disabled=false;
+document.getElementById("submitbtn").disabled=true;
 formput.addEventListener("click", () =>{
+
   fileInput.click();
 });
 verifyButton.addEventListener("click", () => {
@@ -295,7 +299,7 @@ fileInput.onchange = ({target})=>{
 
 function uploadFile(name){
   let xhr = new XMLHttpRequest();
-//   xhr.open("POST", "user/upload-photo");
+  xhr.open("POST", "user/uspload-photo");
   xhr.upload.addEventListener("progress", ({loaded, total}) =>{
     let fileLoaded = Math.floor((loaded / total) * 100);
     let fileTotal = Math.floor(total / 1000);
@@ -331,8 +335,8 @@ function uploadFile(name){
       uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
     }
   });
-//   let data = new FormData(form);
-//   xhr.send(data);
+  let data = new FormData(form);
+  xhr.send(data);
 }
 
 function validateMobileNumber(number) {
@@ -405,7 +409,8 @@ startAnimation();
             document.getElementById("verifying_code").textContent = "Verified Succesfully"; 
             document.getElementById("verifying_code").style.color = '#56be78';
             document.getElementById("ellipsis").style.display = 'none';
-           document.getElementById("phone_no").disabled=true;
+        //    document.getElementById("phone_no").disabled=true;
+         
            document.getElementById("submitbtn").disabled=false;
            
             }else{
@@ -417,6 +422,38 @@ startAnimation();
            
         
     }}}
+
+    function saveDetails() {
+    let data = new FormData(form);
+    console.log(data);
+
+    $.ajax({
+        url: 'user/save-user-details',
+        method: 'POST',
+        data: data, // Send FormData directly
+        processData: false, // Prevent jQuery from automatically processing the data
+        contentType: false, // Prevent jQuery from automatically setting the content type
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set CSRF token in headers
+        },
+        success: function(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Details submitted, you will be redirected shortly.'
+            });
+
+            // Adding a 5-second delay
+            setTimeout(function() {
+                window.location.href = 'user/play-games';
+            }, 5000); // 5000 milliseconds = 5 seconds
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+        }
+    });
+}
+
             </script>
         </div>
     </div>
