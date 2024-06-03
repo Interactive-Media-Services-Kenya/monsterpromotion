@@ -208,7 +208,7 @@
                         style="color:red;display:none"></span>
 
                     <br />
-                    <div class="upload-form" style="margin-top:-1px">
+                    <div class="upload-form" style="margin-top:-1px;" >
                         <input class="file-input" id="selfie" type="file" name="file" hidden>
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
@@ -240,12 +240,8 @@ formput.addEventListener("click", () =>{
 });
 verifyButton.addEventListener("click", () => {
    var phone = document.getElementById("phone_no").value;
-  //initiate sending OTP
 
     if (validateMobileNumber(phone)) {
-        // console.log(phone)
-        // document.getElementById('otp-field').style.display = 'block';
-        // document.getElementById('login').disabled = true;
         $.ajax({
             url: '/user/send-otp',
             method: 'POST',
@@ -254,8 +250,14 @@ verifyButton.addEventListener("click", () => {
                 _token: '{{ csrf_token() }}'
             },
             success: function (response) {
+                console.log(response);
                 if (response.status === 'success') {
                console.log(response.code);
+               console.log(response);
+               if(response.exist=='yes'){
+                console.log(response);
+                document.querySelector(".upload-form").style.display = 'none';
+               }
                       var verification_otp=response.code;
                       localStorage.setItem('verification_otp',verification_otp);
                     toastr.success('OTP requested successfully!');
@@ -266,10 +268,10 @@ verifyButton.addEventListener("click", () => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'User not found. Please register.'
+                        text: 'OTP Not Send.'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = '/register';
+                            window.location.href = '/';
                         }
                     });
                 }
@@ -397,7 +399,6 @@ startAnimation();
             var otp_code= document.getElementById("verificationid").value;
             var otp_retrieved=localStorage.getItem('verification_otp');
             ;
-          
             startAnimation();
             if(otp_code.length==6){
                 if(otp_retrieved==otp_code){
@@ -405,7 +406,6 @@ startAnimation();
             document.getElementById("verifying_code").textContent = "Verified Succesfully"; 
             document.getElementById("verifying_code").style.color = '#56be78';
             document.getElementById("ellipsis").style.display = 'none';
-        //    document.getElementById("phone_no").disabled=true;
          
            document.getElementById("submitbtn").disabled=false;
            
@@ -413,26 +413,47 @@ startAnimation();
                 document.getElementById("verifying_code").textContent = "Wrong Verification Code";  
                 document.getElementById("ellipsis").style.display = 'none'; 
               }
-            
-           
-           
-        
     }}}
 
     function saveDetails() {
+        let file = fileInput.files[0];
+    let phone = document.getElementById("phone_no").value.trim();
+    if (document.querySelector(".upload-form").style.display === 'none') {
+   
+        document.getElementById("submitbtn").disabled=false;
+    }else{
+        if (!file) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please select a file to upload.'
+        });
+      
+    }
+    }
+    
+
+    if (!phone) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please enter a phone number.'
+        });
+        return;
+    }
     let data = new FormData(form);
     console.log(data);
-
     $.ajax({
         url: 'user/save-user-details',
         method: 'POST',
-        data: data, // Send FormData directly
-        processData: false, // Prevent jQuery from automatically processing the data
-        contentType: false, // Prevent jQuery from automatically setting the content type
+        data: data,
+        processData: false,
+        contentType: false, 
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set CSRF token in headers
         },
         success: function(response) {
+       
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
@@ -442,10 +463,17 @@ startAnimation();
             // Adding a 5-second delay
             setTimeout(function() {
                 window.location.href = 'user/play-games';
-            }, 5000); // 5000 milliseconds = 5 seconds
+            }, 2000); // 5000 milliseconds = 5 seconds
         },
         error: function(xhr, status, error) {
-            // Handle error response
+            if(response.status=='failed_phone'){
+                Swal.fire({
+                icon: 'error',
+                title: 'error',
+                text: 'Phone Cannot be empty.'
+            });
+         
+            }
         }
     });
 }

@@ -9,7 +9,9 @@ use App\Models\Question;
 use App\Models\Score;
 use App\Models\QuestionAnswer;
 use App\Models\QuizAnswer;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 class QuizController extends Controller
 {
   
@@ -137,22 +139,28 @@ class QuizController extends Controller
     }
     public function sendOTP(Request $request)
     {
+       
         try {
             $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
             $mobile =$request["mobile"];
             $otp = rand(100000, 999999);
-            $numberStr = (string) $mobile;
-            if ($numberStr[0] === '7' || $numberStr[0] === '1') {
-                $db_mobile='0'.$mobile;
-                $mobile ="254".$mobile;
-            }else{
-                $db_mobile=$mobile;
-                $mobile ="254".ltrim($mobile, '0');
+            $numberStr = $mobile;
+            if ($numberStr[0] == '0') {
+                $mobile2 = "254" . ltrim($mobile, '0');
+            } else {
+                $mobile2 = $mobile;
             }
+            Log::info($mobile2);
+            $user = User::where('phone', $mobile2)->first();
+                if($user){
+                    $exist='yes';
+                }else{
+                    $exist='no';
+                }
                 $senderName = rawurlencode("IMS");
                 $bulkBalanceUser = "voucher";
                 $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
-                $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
+                $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile2&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
     
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -168,16 +176,41 @@ class QuizController extends Controller
                 $response = curl_exec($ch);
                 $res = json_decode($response);
                 curl_close($ch);
-    
-                return response()->json(["status" => "success","code"=>$otp, "message" => "OTP requested successfully"]);
-       
+                return response()->json(["status" => "success","exist"=>$exist,"code"=>$otp, "message" => "OTP requested successfully"]);
         } catch (\Exception $e) {
             Log::debug($e);
             return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
         }
     }
-    public function saveSelfie(Request $request){
-        Log::debug($request->all()); 
-        
+    
+    public function saveSelfie(Request $request)
+    {
+        $mobile =$request->input('phone');
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            $mobile2 = "254" . ltrim($mobile, '0');
+        } else {
+            $mobile2 = $mobile;
+        }
+        $user=User::where('phone',$mobile2)->first();
+        if(!$mobile){
+            return response()->json(["status" => "failed_phone"]);
+        }else{
+                if($user){
+                    return response()->json(["status" => "success"]);
+                }else{
+                    $file = $request->file('file');
+                    $directory = 'public/user-uploads';
+                    if (!Storage::exists($directory)) {
+                        Storage::makeDirectory($directory);
+                    }
+                    $filePath = $file->store($directory);
+                    $user = new User;
+                    $user->phone =$mobile;
+                    $user->photo = $filePath;
+                    $user->save();
+                }
+        return response()->json(["status" => "success"]);
+     } 
     }
 }
