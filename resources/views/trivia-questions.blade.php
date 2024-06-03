@@ -649,7 +649,7 @@ function showCongratulationRibbons() {
             let questionCounter = 1;
      
             function updateQuestion(questionData) {
-                if(questionCounter==10){
+                if(questionCounter==11){
                         modal.style.display = 'block';
                         body.classList.add('modal-open');
                         console.log(localStorage.getItem('question_answers'));
