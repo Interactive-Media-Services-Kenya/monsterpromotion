@@ -266,7 +266,7 @@
   </thead>
   <tbody>
   @php
-            $leaders=DB::table('scores')->where('status',1)->orderByDesc('score')->get();
+            $leaders=DB::table('scores')->where('status',1)->orderByDesc('score')->limit(10)->get();
       
             @endphp
             @foreach($leaders as $leader)
