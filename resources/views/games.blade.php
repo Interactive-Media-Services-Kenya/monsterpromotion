@@ -292,14 +292,12 @@
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
                         <h2 class="title">LEADERS BOARD</h2>
-                        {{-- <p>Get to know our top Monster Champions.</p> --}}
                     </div>
                 </div>
             </div>
 
             @php
             $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(4)->get();
-
             @endphp
             @foreach($leaders as $leader)
             @if($leader->score>=1)

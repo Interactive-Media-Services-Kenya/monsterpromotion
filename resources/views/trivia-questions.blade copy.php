@@ -781,6 +781,20 @@ function showCongratulationRibbons() {
             balloonContainer.remove();
         }, 100);
     }
+    var lastInteractionTime = Date.now(); // Initialize with the current timestamp
+var oneSecond = 1000; // 1 second in milliseconds
+function redirect() {
+    // Check if there has been user interaction in the last 1 second
+    if (Date.now() - lastInteractionTime > oneSecond) {
+        fetchQuestion(questionId = questionCounter, selectedAnswer = '', correctAnswer = '');  
+    }
+}
+// Call redirect function every 10 seconds
+setInterval(redirect, 10000);
+// Event listener for user interaction (e.g., click)
+document.addEventListener('click', function() {
+    lastInteractionTime = Date.now(); // Update the last interaction time when there's a click
+});
 
 </script>
     @include('footer');
