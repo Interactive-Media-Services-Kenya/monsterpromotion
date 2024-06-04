@@ -57,7 +57,7 @@ class QuizController extends Controller
             $quizAnswer->correct_answer = 1;
             $quizAnswer->user_phone = $mobile2; 
             $quizAnswer->save();
-            return redirect('user/play-games')->with('success', 'Question created successfully.');
+            return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
     }
     public function saveScore(Request $request)
@@ -81,7 +81,7 @@ class QuizController extends Controller
         }
         session()->forget('random_questions');
 
-        return redirect('user/play-games')->with('success', 'Question created successfully.');
+        return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
     public function storeQuestion(Request $request)
     {

@@ -14,12 +14,10 @@
         /* Add this CSS */
         body.overlay-shown {
             overflow: hidden;
-            /* Prevent scrolling */
         }
 
         body.overlay-shown>*:not(#overlay) {
             display: none;
-            /* Hide all content except the overlay */
         }
 
         /* Modal styles */
@@ -34,22 +32,21 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
             text-align: center;
-            /* Center horizontally */
         }
+        .highlighted {
+    background-color: #56be78; 
+    color:black !important;
+}
 
         .modal-content {
             background-color: #fefefe;
             margin: 0 auto;
-            /* Center horizontally */
             margin-top: 20%;
-            /* Adjust vertical position */
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
-            /* Limit maximum width */
             display: inline-block;
-            /* Allows centering with margin: auto */
         }
 
         @media (max-width: 998px) {
@@ -270,18 +267,32 @@
 
         searchInput.addEventListener('input', function() {
             const searchText = searchInput.value.trim().toLowerCase();
+            const matchedRows = [];
+
+            // Separate matched and unmatched rows
             rows.forEach(row => {
-                const name = row.querySelector('.name').textContent.trim().toLowerCase();
-                const score = row.querySelector('.score').textContent.trim().toLowerCase();
-                if (name.includes(searchText) || score.includes(searchText)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
+                const nameElement = row.querySelector('.name');
+                const scoreElement = row.querySelector('.score');
+                if (nameElement && scoreElement) { // Check if elements exist
+                    const name = nameElement.textContent.trim().toLowerCase();
+                    const score = scoreElement.textContent.trim().toLowerCase();
+                    if (name.includes(searchText) || score.includes(searchText)) {
+                        row.classList.add('highlighted'); // Add highlighted class
+                        matchedRows.push(row);
+                    } else {
+                        row.classList.remove('highlighted'); // Remove highlighted class
+                    }
                 }
             });
+
+            // Reorder rows in table
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = ''; // Clear existing rows
+            matchedRows.forEach(row => tbody.appendChild(row));
         });
     });
 </script>
+
 
  
 

@@ -766,7 +766,7 @@ function showCongratulationRibbons() {
     document.getElementById('dontsave').addEventListener('click', function(event) {
         event.preventDefault();
         localStorage.removeItem('question_answers');
-        window.location.href = '/#tournaments-section';
+        window.location.href = '/leaders-board';
     });
 });
 
