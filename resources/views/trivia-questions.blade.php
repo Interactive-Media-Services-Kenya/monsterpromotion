@@ -550,7 +550,9 @@ window.location.href="/";
             document.querySelector('form').addEventListener('submit', function(event) {
                 event.preventDefault();
                 var username = document.querySelector('input[name="username"]').value;
+                var user_phone_no=localStorage.getItem('user_mobile_no');
                 var phone = user_phone_no;
+               
                 localStorage.setItem('user_phone',phone);
                 if (username.trim() === '') {
                     alert('Please enter your full name.');
