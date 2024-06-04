@@ -389,6 +389,16 @@ transition: opacity 500ms;
         .spacer {
     width: 20px; 
 }
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 999; 
+    pointer-events: auto;
+}
 
     </style>
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
@@ -444,7 +454,7 @@ window.location.href="/";
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
         <!-- Overlay with countdown timer -->
-        <div class="overlay pt-120 pb-120">
+        <div class=" pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
@@ -580,17 +590,21 @@ window.location.href="/";
         });
         function fetchQuestion1(questionId = null, selectedAnswer = null, correctAnswer = null) {
     if (questionId && selectedAnswer) {
-        console.log('sas');
+        // console.log('sas');
         // Highlight correct answer elements
         var correctElements = document.querySelectorAll('.correct-answer');
         correctElements.forEach(function(element) {
             element.classList.add("blinking");
         });
+
+var overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
           if(selectedAnswer===correctAnswer){
             var successSound = new Audio('{{ asset('correct.mp3') }}');
              successSound.play();
              var currentCount = parseInt(document.getElementById('points-earned').innerText);
-            document.getElementById('points-earned').innerText = currentCount + 1;
+              document.getElementById('points-earned').innerText = currentCount + 1;
          
           }else{
             var wrongSound = new Audio('{{ asset('wrong.mp3') }}');
@@ -598,6 +612,7 @@ window.location.href="/";
           }
         setTimeout(function() {
             fetchQuestion(questionId, selectedAnswer, correctAnswer);
+            overlay.remove();
         }, 1000); 
     }
 }
