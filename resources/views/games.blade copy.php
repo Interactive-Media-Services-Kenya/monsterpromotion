@@ -267,10 +267,9 @@
   <tbody>
   @php
             $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(10)->get();
-      
             @endphp
             @foreach($leaders as $leader)
-         
+            @if($leader->score>=1)
     <tr>
       <th scope="row" class="scores">{{ $loop->iteration }}</th>
       <td class="scores">{{ $leader->name }}</td>
@@ -280,6 +279,7 @@
      <tr style="border-bottom: 1px solid #ccc;">
             <td colspan="3"></td>
         </tr>
+    @endif
             @endforeach
     
   </tbody>
