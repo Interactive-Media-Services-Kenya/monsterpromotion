@@ -297,7 +297,7 @@
             </div>
 
             @php
-            $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(4)->get();
+            $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(10)->get();
             @endphp
             @foreach($leaders as $leader)
             @if($leader->score>=1)
