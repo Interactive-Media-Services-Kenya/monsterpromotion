@@ -144,7 +144,12 @@ class QuizController extends Controller
             $mobile2 = $mobile;
         }
         $questions_done=QuizAnswer::where('user_phone',$mobile2)->first();
+      if($questions_done){
         $question_done = json_decode($questions_done->question_id, true) ?: [];
+      }else{
+        $question_done =[];
+      }
+       
         // dd($question_done);
         // Check if questions are already stored in the session
         if (!isset($_SESSION['random_questions'])) {
