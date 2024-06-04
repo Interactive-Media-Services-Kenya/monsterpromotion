@@ -314,7 +314,7 @@
                                 <div class="time-area bg">
 
                                     <span>Score:</span>
-                                    <span class="time">{{ $leader->score }} / {{ $leader->questions_attempted }} </span>
+                                    <span class="time">{{ $leader->score }}  </span>
                                 </div>
 
                             </div>
