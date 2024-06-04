@@ -66,15 +66,26 @@ if($user!="") {
     }
     public function saveScore(Request $request)
     {
-        // $randomQuestions = session('random_questions');
-        $question = new Score();
-        $question->name = $request->username;
-        $question->score = $request->score;
-        $question->quiz_type='personality';
-        $question->phone=$request->phone;
-        $question->questions_attempted =$request->total_questions;
-        $question->status = 1;
-        $question->save();
+$mobile = $request->phone;
+$mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
+$user = Score::where('phone', $mobile2)->first();
+
+if (!$user) {
+    $question = new Score();
+    $question->name = $request->username;
+    $question->score = $request->score;
+    $question->quiz_type = 'personality';
+    $question->phone = $mobile2;
+    $question->questions_attempted = $request->total_questions;
+    $question->status = 1;
+    $question->save();
+} else {
+    $user->score += $request->score;
+    $user->save();
+}
+
+
+       
         session()->forget('random_questions');
 
         return redirect('user/play-games')->with('success', 'Question created successfully.');
