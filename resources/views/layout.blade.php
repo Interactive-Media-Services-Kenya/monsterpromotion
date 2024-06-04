@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Monster Promotions</title>
 
-    <link rel="shortcut icon" href="images/iYHo1rUQ7gCg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/1oLxepliGc2T.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Wk1556kCcZhf.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Wk1556kCcZhf.css') }}">

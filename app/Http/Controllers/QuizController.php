@@ -66,6 +66,7 @@ if($user!="") {
     }
     public function saveScore(Request $request)
     {
+        // $randomQuestions = session('random_questions');
         $question = new Score();
         $question->name = $request->username;
         $question->score = $request->score;
@@ -74,6 +75,8 @@ if($user!="") {
         $question->questions_attempted =$request->total_questions;
         $question->status = 1;
         $question->save();
+        session()->forget('random_questions');
+
         return redirect('user/play-games')->with('success', 'Question created successfully.');
     }
     public function storeQuestion(Request $request)
@@ -134,16 +137,27 @@ if($user!="") {
         return view('trivia-questions');
     }
     
-    public function selectQuiz(){
-        if(isset($_GET['questionId'])){
-            $question= $_GET['questionId'];
-            $currentQuestion = Question::find($question); 
-            $nextQuestion = Question::where('id', '>', $currentQuestion->id)->first();
-        }else{
-            $nextQuestion = Question::orderBy('id')->first();   
+    public function selectQuiz() {
+        // Check if questions are already stored in the session
+        if (!isset($_SESSION['random_questions'])) {
+            $randomQuestions = Question::inRandomOrder()->limit(10)->get();
+            $_SESSION['random_questions'] = $randomQuestions->toArray();
+            return response()->json($randomQuestions->first());
+        } else {
+            $randomQuestions = $_SESSION['random_questions'];
+            if (isset($_GET['questionId'])) {
+                $questionId = $_GET['questionId'];
+                $currentIndex = array_search($questionId, array_column($randomQuestions, 'id'));
+                $nextQuestionIndex = $currentIndex + 1;
+                if ($nextQuestionIndex < count($randomQuestions)) {
+                    $nextQuestion = $randomQuestions[$nextQuestionIndex];
+                    return response()->json($nextQuestion);
+                }
+            }
+            return response()->json(['message' => 'Quiz completed']);
         }
-        return response()->json($nextQuestion);
     }
+    
     public function disableQuestions(){
              $id = decrypt($_GET['id']);
              $question = Question::find($id);

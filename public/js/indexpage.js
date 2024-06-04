@@ -29,6 +29,7 @@ _token: '{{ csrf_token() }}'
 },
 success: function (response) {
 if (response.status === 'success') {
+  localStorage.setItem('mobile_number',phone);
 if(response.exist=='yes'){
 document.querySelector(".upload-form").style.display = 'none';
 }

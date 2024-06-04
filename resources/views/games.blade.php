@@ -266,7 +266,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center obj-rel">
                     <div class="single-item">
                         <div class="icon-area">
@@ -279,11 +278,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <a href="registration.html" class="cmn-btn">Join Now!</a>
-                </div>
-            </div> --}}
+
         </div>
     </div>
 </section>
@@ -406,5 +401,12 @@
             removeBalloons();
         });
 </script>
+<!-- <script>
+      var uid=localStorage.getItem('mobile_number');
+    if(!uid){
+        window.location.href='/';
+    }
+</script> -->
+
 @include('footer');
 @endsection

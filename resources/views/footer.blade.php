@@ -7,12 +7,12 @@
                     <div
                         class="col-lg-8 col-md-8 d-flex justify-content-md-between justify-content-center align-items-center cus-grid">
                         <div class="logo-section">
-                            <a class="site-logo site-title" href="index.html"><img
+                            <a class="site-logo site-title" href="/"><img
                                     src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"></a>
                         </div>
                         <ul class="menu-side d-flex align-items-center">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="" class="active">Home</a></li>
+                            <li><a href="">About Us</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="col-lg-12 col-md-6">
                             <div class="left-area text-center">
                                 <p>Copyright © 2021. All Rights Reserved By
-                                    <a href="#">BEGAM</a>
+                                    <a href="#">IMS</a>
                                 </p>
                             </div>
                         </div>

@@ -24,7 +24,8 @@
     }
 
     body {
-        background: #171717;
+        /* background: #171717; */
+        background-image:url('{{asset('images/img22.jpg')}}');
     }
 
     .conta {
@@ -32,7 +33,7 @@
         align-items: center;
         justify-content: center;
         /* min-height: 100vh; */
-        background: #171717;
+        /* background: #171717; */
     }
 
     .contad {
@@ -40,7 +41,8 @@
         align-items: center;
         justify-content: center;
         /* min-height: 100vh; */
-        background: #171717;
+        /* background: #171717; */
+        background-image:url('{{asset('images/img22.jpg')}}');
     }
 
     ::selection {
