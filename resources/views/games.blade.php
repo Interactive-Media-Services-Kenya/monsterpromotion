@@ -136,6 +136,9 @@
                 padding: 20px;
                 /* Add some padding for better spacing */
             }
+            .header-title{
+              font-size:15px;  
+            }
         }
     }
 
@@ -240,18 +243,23 @@
 <section id="tournaments-section">
     <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp">
-        <div class="row">
-    <div class="col-6">
+        <div class="row align-items-center justify-content-between mx-3">
+    <div class="col d-flex">
         <div class="section-header">
-            <span class="title" style="text-align: left;"><u>TOP PLAYERS</u></span>
+            <span class="title header-title" style="text-align: left;"><u>TOP PLAYERS</u></span>
         </div>
     </div>
-    <div class="col-6 d-flex justify-content-end">
-        <div class="section-header">
-            <a href="{{ route('leaders-board')}}" style="text-align: right;" class="cmn-btn btn-play">VIEW ALL</a>
+    <div class="col d-flex justify-content-end">
+        <div class="section-header text-md-right">
+            <a href="{{ route('leaders-board')}}" class="cmn-btn btn-play">VIEW ALL</a>
         </div>
     </div>
 </div>
+
+
+
+
+
 
             <div class="single-item">
                 <div class="row" >
