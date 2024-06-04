@@ -29,6 +29,7 @@ _token: '{{ csrf_token() }}'
 },
 success: function (response) {
 if (response.status === 'success') {
+  cconsole.log(response);
 if(response.exist=='yes'){
 document.querySelector(".upload-form").style.display = 'none';
 }
@@ -36,7 +37,6 @@ document.querySelector(".upload-form").style.display = 'none';
       localStorage.setItem('verification_otp',verification_otp);
     toastr.success('OTP requested successfully!');
     verificationCodeInput.disabled = false;
-    
 } else {
     // toastr.error(response.message);
     Swal.fire({
