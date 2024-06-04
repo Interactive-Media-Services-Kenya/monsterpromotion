@@ -151,12 +151,9 @@ class QuizController extends Controller
       }
        
         // dd($question_done);
-        // Check if questions are already stored in the session
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::inRandomOrder()->whereNotIn('id',$question_done)->limit(10)->get();
-         if(!$randomQuestions){
-            return response()->json('no-questions');
-         }
+            $randomQuestions = Question::whereNotIn('id', $question_done)->get()->shuffle()->take(10);
+            // log::debug(collect($randomQuestions));
             $_SESSION['random_questions'] = $randomQuestions->toArray();
             return response()->json($randomQuestions->first());
         } else {
