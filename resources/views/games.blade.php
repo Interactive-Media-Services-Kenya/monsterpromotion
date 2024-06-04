@@ -5,7 +5,9 @@
     #banner-section {
         position: relative;
     }
-
+   .scores{
+    color:white;
+   }
     #tournaments-section .single-item .title-bottom {
         border-bottom: none;
         margin-top: 20px;
@@ -232,6 +234,63 @@
 <!-- Available Game In end -->
 
 <!-- How Works start -->
+
+<!-- How Works end -->
+
+<!-- Browse Tournaments start -->
+<section id="tournaments-section">
+    <div class="overlay pt-120 pb-120">
+        <div class="container wow fadeInUp">
+        <div class="row">
+    <div class="col-6">
+        <div class="section-header">
+            <span class="title" style="text-align: left;"><u>TOP PLAYERS</u></span>
+        </div>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        <div class="section-header">
+            <span style="text-align: right;" class="cmn-btn btn-play">VIEW ALL</span>
+        </div>
+    </div>
+</div>
+
+            <div class="single-item">
+                <div class="row" >
+            <table class="table table-striped">
+  <thead style="background:black">
+    <tr>
+      <th scope="col" class="scores">Player Rank</th>
+      <th scope="col" class="scores">Username</th>
+      <th scope="col" class="scores">Total Score</th>
+    </tr>
+  </thead>
+  <tbody>
+  @php
+            $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(10)->get();
+            @endphp
+            @foreach($leaders as $leader)
+            @if($leader->score>=1)
+    <tr>
+      <th scope="row" class="scores">{{ $loop->iteration }}</th>
+      <td class="scores">{{ $leader->name }}</td>
+      <td class="scores">{{ $leader->score }}</td>
+     
+    </tr>
+     <tr style="border-bottom: 1px solid #ccc;">
+            <td colspan="3"></td>
+        </tr>
+    @endif
+            @endforeach
+    
+  </tbody>
+</table> </div>
+            </div>
+           
+            
+           
+        </div>
+    </div>
+</section>
 <section id="how-works-section" class="border-area">
     <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp">
@@ -282,57 +341,6 @@
         </div>
     </div>
 </section>
-<!-- How Works end -->
-
-<!-- Browse Tournaments start -->
-<section id="tournaments-section">
-    <div class="overlay pt-120 pb-120">
-        <div class="container wow fadeInUp">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <div class="section-header">
-                        <h2 class="title">LEADERS BOARD</h2>
-                    </div>
-                </div>
-            </div>
-
-            @php
-            $leaders=DB::table('scores')->where('status',1)->orderBy('score','desc')->limit(10)->get();
-            @endphp
-            @foreach($leaders as $leader)
-            @if($leader->score>=1)
-            <div class="single-item">
-                <div class="row" style="margin-top:-30px;margin-bottom:-30px">
-                    <div class="col-lg-9 col-md-9 d-flex align-items-center">
-                        <div class="mid-area">
-                            <div class="title-bottom d-flex">
-                                <div class="date-area bg">
-                                    <span  class="date masked-phone">{{ $leader->phone }}</span>
-                                </div>
-                                <div class="time-area bg">
-                                    <span>Score:</span>
-                                    <span class="time">{{ $leader->score }}  </span>
-                                </div>
-                               
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 d-flex align-items-center">
-                        <div class="prize-area text-center">
-                            <div class="contain-area">
-                                <p class="cmn-btn">RANK : {{ $loop->iteration }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            @endforeach
-        </div>
-    </div>
-</section>
-
 <script>
     const balloonContainer = document.getElementById("balloon-container");
 
