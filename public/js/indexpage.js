@@ -29,7 +29,7 @@ _token: '{{ csrf_token() }}'
 },
 success: function (response) {
 if (response.status === 'success') {
-  cconsole.log(response);
+  console.log(response);
 if(response.exist=='yes'){
 document.querySelector(".upload-form").style.display = 'none';
 }
