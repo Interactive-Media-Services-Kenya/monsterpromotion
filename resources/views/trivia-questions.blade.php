@@ -392,6 +392,16 @@ transition: opacity 500ms;
 
     </style>
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
+<script>
+// console.log('sds'+localStorage.getItem('user_mobile_no'))
+if(!localStorage.getItem('user_mobile_no')){
+
+window.location.href="/";
+}else{
+    const user_phone_no=localStorage.getItem('user_mobile_no');
+    console.log(user_phone_no);
+}
+</script>
     <!-- Modal -->
     <div id="balloon-container"  style="z-index: 0">
     </div>
@@ -418,7 +428,7 @@ transition: opacity 500ms;
                         placeholder="Enter Fullname">
                 </div>
                 <div class="subscribe" style="margin-top:10px">
-                    <input type="number" name="phone" placeholder="Enter Phone No">
+                    <!-- <input type="number" name="phone" placeholder="Enter Phone No"> -->
                     <br />
                     <button type="submit" id="saveit" class="btn btn-primary btn-play"
                         style="margin-top:20px;width:100%;background:#171717;border:none">SAVE SCORE</button>
@@ -540,10 +550,10 @@ transition: opacity 500ms;
             document.querySelector('form').addEventListener('submit', function(event) {
                 event.preventDefault();
                 var username = document.querySelector('input[name="username"]').value;
-                var phone = document.querySelector('input[name="phone"]').value;
+                var phone = user_phone_no;
                 localStorage.setItem('user_phone',phone);
-                if (username.trim() === '' || phone.trim() === '') {
-                    alert('Please enter your full name and phone number.');
+                if (username.trim() === '') {
+                    alert('Please enter your full name.');
                 } else {
                     this.submit();
                 }
@@ -586,9 +596,10 @@ transition: opacity 500ms;
     }
 }
         function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
-
+            var user_phone_no=localStorage.getItem('user_mobile_no');
     var xhr = new XMLHttpRequest();
-    var url = '/user/select-question';
+    var url = '/user/select-question?user_code='+user_phone_no;
+    
     if (questionId && selectedAnswer) {
         var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
         questions.push({
@@ -597,14 +608,16 @@ transition: opacity 500ms;
             selectedAnswer: selectedAnswer,
             correct_score: correctAnswer
         });
+       
         localStorage.setItem('question_answers', JSON.stringify(questions));
-        url += `?questionId=${questionId}&selectedAnswer=${selectedAnswer}`;
+        url +=`&questionId=${questionId}&selectedAnswer=0&user_code=${user_phone_no}`;
     }else{
         if(questionId){
-            url += '?questionId=' + questionId+ '&selectedAnswer=0';
+            url +=`&questionId=${questionId}&selectedAnswer=0&user_code=${user_phone_no}`;
         }
-  
+
     }
+    console.log(url);
     xhr.open('GET', url, true);
 
     xhr.onload = function() {
@@ -615,7 +628,6 @@ transition: opacity 500ms;
                 localStorage.setItem('last_question',questionData.id);
                 updateQuestion(questionData);
                 document.getElementById('loader2').style.display = 'none';
-
             } else {
                 document.getElementById('loader2').style.display = 'none';
                 modal.style.display = 'block';
@@ -697,7 +709,7 @@ function showCongratulationRibbons() {
     document.getElementById('saveit').addEventListener('click', function(event) {
         // Retrieve the item from localStorage
         var questionAnswers = localStorage.getItem('question_answers');
-        var u_phone= localStorage.getItem('user_phone');
+        var u_phone= user_phone_no;
         var dataToSend = {
         questionAnswers: questionAnswers,
          user_phone: u_phone
@@ -781,7 +793,6 @@ function showCongratulationRibbons() {
             balloonContainer.remove();
         }, 100);
     }
-
 </script>
     @include('footer');
 @endsection

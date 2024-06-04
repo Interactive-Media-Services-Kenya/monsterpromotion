@@ -122,7 +122,6 @@
         margin-bottom: 7px;
         justify-content: space-between;
     }
-
     .progress-area .content .progress-bar {
         height: 6px;
         width: 100%;

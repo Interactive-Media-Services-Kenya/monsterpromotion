@@ -36,7 +36,6 @@
             text-align: center;
             /* Center horizontally */
         }
-
         .modal-content {
             background-color: #fefefe;
             margin: 0 auto;
@@ -99,7 +98,16 @@
             font-size: 30px;
         }
     </style>
+<script>
+// console.log('sds'+localStorage.getItem('user_mobile_no'))
+if(!localStorage.getItem('user_mobile_no')){
 
+window.location.href="/";
+}else{
+    const user_phone_no=localStorage.getItem('user_mobile_no');
+    console.log(user_phone_no);
+}
+</script>
     <!-- Modal -->
     <audio id="background-music" loop>
         <source src="path_to_your_audio_file.mp3" type="audio/mp3">
@@ -186,7 +194,11 @@
     <script>
         // JavaScript
         document.addEventListener("DOMContentLoaded", function() {
-            localStorage.clear();
+            // localStorage.clear();
+            var userResults=localStorage.getItem('question_answers')
+            if(userResults){
+                localStorage.clear('question_answers');
+            }
             const readyButton = document.querySelector('.cmn-btn');
             const modal = document.getElementById('myModal');
             const closeBtn = modal.querySelector('.close');
@@ -259,7 +271,6 @@
 
             // Function to redirect to the game
             function redirectToGame() {
-
                 window.location.href = 'start-trivia';
             }
             window.addEventListener('click', function(event) {
@@ -270,6 +281,7 @@
                 }
             });
         });
+   
     </script>
 
     @include('footer');

@@ -58,7 +58,7 @@ class QuizController extends Controller
             $quizAnswer->user_phone = $mobile2; 
             $quizAnswer->save();
             return redirect('user/play-games')->with('success', 'Question created successfully.');
-}
+    }
     }
     public function saveScore(Request $request)
     {
@@ -135,9 +135,18 @@ if (!$user) {
     }
     
     public function selectQuiz() {
+        $mobile =$_GET['user_code'];
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            $mobile2 = "254" . ltrim($mobile, '0');
+        } else {
+            $mobile2 = $mobile;
+        }
+        $questions_done=QuizAnswer::where('user_phone',$mobile2)->first();
+        $questions_done = $questions_done ?: [];
         // Check if questions are already stored in the session
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::inRandomOrder()->limit(10)->get();
+            $randomQuestions = Question::inRandomOrder()->whereNotIn('id',$questions_done)->limit(10)->get();
             $_SESSION['random_questions'] = $randomQuestions->toArray();
             return response()->json($randomQuestions->first());
         } else {
@@ -181,7 +190,7 @@ if (!$user) {
             } else {
                 $mobile2 = $mobile;
             }
-            Log::info($mobile2);
+    
             $user = User::where('phone',$mobile2)->first();
                 if($user){
                     $exist='yes';

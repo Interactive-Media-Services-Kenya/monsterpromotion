@@ -413,6 +413,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return maskedPart + visibleDigits;
         }
     });
+
+    // localStorage.setItem('user_mobile_no',phone);
+    console.log(localStorage.getItem('user_mobile_no'));
 </script>
 
 @include('footer');

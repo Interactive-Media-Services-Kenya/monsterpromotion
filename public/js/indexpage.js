@@ -28,13 +28,16 @@ mobile: phone,
 _token: '{{ csrf_token() }}'
 },
 success: function (response) {
+  // console.log(response);
 if (response.status === 'success') {
+  localStorage.setItem('user_mobile_no',phone);
   console.log(response);
 if(response.exist=='yes'){
 document.querySelector(".upload-form").style.display = 'none';
 }
       var verification_otp=response.code;
       localStorage.setItem('verification_otp',verification_otp);
+    
     toastr.success('OTP requested successfully!');
     verificationCodeInput.disabled = false;
 } else {
