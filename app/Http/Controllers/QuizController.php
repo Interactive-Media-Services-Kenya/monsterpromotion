@@ -62,7 +62,7 @@ class QuizController extends Controller
     }
     public function saveScore(Request $request)
     {
-$mobile = $request->phone;
+        $mobile = (string) $request->phone;
 $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
 $user = Score::where('phone', $mobile2)->first();
 if (!$user) {
