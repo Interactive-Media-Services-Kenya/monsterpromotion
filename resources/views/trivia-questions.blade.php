@@ -426,9 +426,11 @@ window.location.href="/";
                     <input type="hidden" id="total_score" name="score" value="" placeholder="Enter Fullname"><br/>
                     <input type="hidden" id="total_questions" name="total_questions" value=""
                         placeholder="Enter Fullname">
+                        <input type="hidden" id="userr_phone" name="phone" value=""
+                        placeholder="Enter Fullname">
                 </div>
                 <div class="subscribe" style="margin-top:10px">
-                    <!-- <input type="number" name="phone" placeholder="Enter Phone No"> -->
+                    
                     <br />
                     <button type="submit" id="saveit" class="btn btn-primary btn-play"
                         style="margin-top:20px;width:100%;background:#171717;border:none">SAVE SCORE</button>
@@ -546,6 +548,8 @@ window.location.href="/";
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var user_phone_no = localStorage.getItem('user_mobile_no');
+    document.getElementById('userr_phone').value = user_phone_no;
             // Add event listener to the form submission
             document.querySelector('form').addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -711,10 +715,10 @@ function showCongratulationRibbons() {
     document.getElementById('saveit').addEventListener('click', function(event) {
         // Retrieve the item from localStorage
         var questionAnswers = localStorage.getItem('question_answers');
-        var u_phone= localStorage.getItem('user_phone_no');
+        var u_phone= localStorage.getItem('user_mobile_no');
         var dataToSend = {
         questionAnswers: questionAnswers,
-         user_phone: u_phone
+         user_phone: localStorage.getItem('user_mobile_no')
     };
         // Check if the item exists
         if (questionAnswers) {

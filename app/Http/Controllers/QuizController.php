@@ -49,7 +49,7 @@ class QuizController extends Controller
             $user->save();
         } else {
             $questionIdsJson = json_encode($questionIds);
-            log::debug($questionIdsJson);
+            // log::debug($questionIdsJson);
             $quizAnswer = new QuizAnswer();
             $quizAnswer->selected_answer = 1;
             $quizAnswer->question_id =$questionIdsJson;
@@ -62,22 +62,23 @@ class QuizController extends Controller
     }
     public function saveScore(Request $request)
     {
+      
         $mobile = (string) $request->phone;
-$mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
-$user = Score::where('phone', $mobile2)->first();
-if (!$user) {
-    $question = new Score();
-    $question->name = $request->username;
-    $question->score = $request->score;
-    $question->quiz_type = 'personality';
-    $question->phone = $mobile2;
-    $question->questions_attempted = $request->total_questions;
-    $question->status = 1;
-    $question->save();
-} else {
-    $user->score += $request->score;
-    $user->save();
-}
+        $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
+        $user = Score::where('phone', $mobile2)->first();
+        if (!$user) {
+            $question = new Score();
+            $question->name = $request->username;
+            $question->score = $request->score;
+            $question->quiz_type = 'personality';
+            $question->phone = $mobile2;
+            $question->questions_attempted = $request->total_questions;
+            $question->status = 1;
+            $question->save();
+        } else {
+            $user->score += $request->score;
+            $user->save();
+        }
         session()->forget('random_questions');
 
         return redirect('user/play-games')->with('success', 'Question created successfully.');
@@ -143,14 +144,22 @@ if (!$user) {
             $mobile2 = $mobile;
         }
         $questions_done=QuizAnswer::where('user_phone',$mobile2)->first();
-        $questions_done = $questions_done ?: [];
+        $question_done = json_decode($questions_done->question_id, true) ?: [];
+        // dd($question_done);
         // Check if questions are already stored in the session
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::inRandomOrder()->whereNotIn('id',$questions_done)->limit(10)->get();
+            $randomQuestions = Question::inRandomOrder()->whereNotIn('id',$question_done)->limit(10)->get();
+         if(!$randomQuestions){
+            return response()->json('no-questions');
+         }
             $_SESSION['random_questions'] = $randomQuestions->toArray();
             return response()->json($randomQuestions->first());
         } else {
             $randomQuestions = $_SESSION['random_questions'];
+            if(!$randomQuestions){
+                return response()->json('no-questions');
+             }
+           
             if (isset($_GET['questionId'])) {
                 $questionId = $_GET['questionId'];
                 $currentIndex = array_search($questionId, array_column($randomQuestions, 'id'));
@@ -160,6 +169,7 @@ if (!$user) {
                     return response()->json($nextQuestion);
                 }
             }
+
             return response()->json(['message' => 'Quiz completed']);
         }
     }
