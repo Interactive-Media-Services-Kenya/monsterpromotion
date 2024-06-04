@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Storage;
 class QuizController extends Controller
 {
   
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('backend.dashboard');
@@ -28,30 +25,29 @@ class QuizController extends Controller
     }
     public function viewScore(Request $request)
     {
-      
         $requestData = $request->all(); 
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
 
         $questionIds = array();
 
-foreach ($questionAnswers as $answer) {
-    $questionIds[] = $answer['questionId'];
-}
-$mobile =$phone;
-$numberStr = $mobile;
-if ($numberStr[0] == '0') {
-    $mobile2 = "254" . ltrim($mobile, '0');
-} else {
-    $mobile2 = $mobile;
-}
-$user=QuizAnswer::where('user_phone',$mobile2)->first();
-if($user!="") {
-    $existingQuestionIds = json_decode($user->question_id, true);
-    $updatedQuestionIds = array_values(array_unique(array_merge($existingQuestionIds, $questionIds)));
-    $user->question_id = json_encode($updatedQuestionIds);
-    $user->save();
-} else {
+        foreach ($questionAnswers as $answer) {
+            $questionIds[] = $answer['questionId'];
+        }
+        $mobile =$phone;
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            $mobile2 = "254" . ltrim($mobile, '0');
+        } else {
+            $mobile2 = $mobile;
+        }
+        $user=QuizAnswer::where('user_phone',$mobile2)->first();
+        if($user!="") {
+            $existingQuestionIds = json_decode($user->question_id, true);
+            $updatedQuestionIds = array_values(array_unique(array_merge($existingQuestionIds, $questionIds)));
+            $user->question_id = json_encode($updatedQuestionIds);
+            $user->save();
+        } else {
             $questionIdsJson = json_encode($questionIds);
             log::debug($questionIdsJson);
             $quizAnswer = new QuizAnswer();
@@ -69,7 +65,6 @@ if($user!="") {
 $mobile = $request->phone;
 $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
 $user = Score::where('phone', $mobile2)->first();
-
 if (!$user) {
     $question = new Score();
     $question->name = $request->username;
@@ -83,9 +78,6 @@ if (!$user) {
     $user->score += $request->score;
     $user->save();
 }
-
-
-       
         session()->forget('random_questions');
 
         return redirect('user/play-games')->with('success', 'Question created successfully.');
@@ -101,11 +93,7 @@ if (!$user) {
             'C' => 'required|string',
             'D' => 'required|string',
         ];
-        // dd($request->all());
-        // Validate the request data
-       
         $validatedData = $request->validate($rules);
-       
         $question = new Question();
         $question->question = $validatedData['question'];
         $question->category_id = 0;
@@ -113,8 +101,6 @@ if (!$user) {
         $question->status = 1;
         $question->correct_answer = $validatedData['correct_answer'];
         $question->save();
-
-     
         if($question->save()){
             $answers = [];
             foreach (['A', 'B', 'C', 'D'] as $option) {
@@ -196,7 +182,7 @@ if (!$user) {
                 $mobile2 = $mobile;
             }
             Log::info($mobile2);
-            $user = User::where('phone', $mobile2)->first();
+            $user = User::where('phone',$mobile2)->first();
                 if($user){
                     $exist='yes';
                 }else{
