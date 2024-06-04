@@ -149,19 +149,15 @@ class QuizController extends Controller
       }else{
         $question_done =[];
       }
-       
         // dd($question_done);
         if (!isset($_SESSION['random_questions'])) {
             $randomQuestions = Question::whereNotIn('id', $question_done)->get()->shuffle()->take(10);
             // log::debug(collect($randomQuestions));
             $_SESSION['random_questions'] = $randomQuestions->toArray();
+            //  log::debug(collect($_SESSION['random_questions']));
             return response()->json($randomQuestions->first());
         } else {
             $randomQuestions = $_SESSION['random_questions'];
-            if(!$randomQuestions){
-                return response()->json('no-questions');
-             }
-           
             if (isset($_GET['questionId'])) {
                 $questionId = $_GET['questionId'];
                 $currentIndex = array_search($questionId, array_column($randomQuestions, 'id'));
