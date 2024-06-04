@@ -96,7 +96,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 24px;
+            font-size: 30px;
         }
     </style>
 
@@ -132,7 +132,7 @@
         <!-- Overlay with countdown timer -->
         <div id="overlay" class="overlaid">
             <div class="countdown">
-                <h2>Trivia starts in <span id="countdown" style="font-size:18px">10</span> seconds</h2>
+                <h2>Trivia starts in <span id="countdown" style="font-size:20px !important">10</span> seconds</h2>
             </div>
         </div>
 
