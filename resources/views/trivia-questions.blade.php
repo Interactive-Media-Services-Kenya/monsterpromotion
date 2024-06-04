@@ -709,7 +709,7 @@ function showCongratulationRibbons() {
     document.getElementById('saveit').addEventListener('click', function(event) {
         // Retrieve the item from localStorage
         var questionAnswers = localStorage.getItem('question_answers');
-        var u_phone= user_phone_no;
+        var u_phone= localStorage.getItem('user_phone_no');
         var dataToSend = {
         questionAnswers: questionAnswers,
          user_phone: u_phone
