@@ -237,7 +237,7 @@ if (!$user) {
                     }
                     $filePath = $file->store($directory);
                     $user = new User;
-                    $user->phone =$mobile;
+                    $user->phone =$mobile2;
                     $user->photo = $filePath;
                     $user->save();
                 }
