@@ -35,7 +35,7 @@
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-lg-12 col-md-6">
                             <div class="left-area text-center">
-                                <p>Copyright © 2021. All Rights Reserved By
+                                <p>Copyright © 2024. All Rights Reserved By
                                     <a href="#">IMS</a>
                                 </p>
                             </div>

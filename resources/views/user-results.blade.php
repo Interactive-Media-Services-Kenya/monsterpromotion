@@ -8,7 +8,9 @@
                 margin-bottom: 40px;
             }
         }
-
+        .scores{
+    color:white;
+   }
         /* Add this CSS */
         body.overlay-shown {
             overflow: hidden;
@@ -197,26 +199,7 @@
 
     <!-- Modal -->
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-
-            <span class="close">&times;</span>
-            <form action="#">
-                <div class="subscribe">
-                    <input type="text" placeholder="Enter Fullname"><br />
-
-                </div>
-                <div class="subscribe" style="margin-top:20px">
-                    <input type="text" placeholder="Enter Phone No">
-                    <br />
-
-                    <button type="button" class="btn btn-primary btn-play"
-                        style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
-                        NOW</button>
-                </div>
-            </form>
-        </div>
-    </div>
+   
 
     <!-- Browse Tournaments start -->
     <section id="tournaments-section">
@@ -224,44 +207,81 @@
 
 
 
+
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8 text-center">
+                    <div class="col-lg-12 text-center">
                         <div class="section-header">
-                            <h2 class="title">TRIVIA RESULTS</h2>
-                            <audio id="beepAudio" controls style="display: none;">
-                                <source src="{{ asset('monster.wav') }}" type="audio/wav">
-                                <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
+                            <h2 class="title">LEADERS BOARD</h2>
+                            <div class="row justify-content-end">
+    <div class="col-lg-4 col-sm-12 col-md-12">
+        <div class="form-group" >
+            <input type="text" style="float:left" class="form-control" id="searchInput" placeholder="Enter Your Username">
+        </div>
+    </div>
+</div>
 
                         </div>
                     </div>
                 </div>
-
                 <div class="single-item">
-                    <div class="row">
+                <div class="row" >
+            <table class="table table-striped">
+  <thead style="background:black">
+    <tr>
+      <th scope="col" class="scores">Player Rank</th>
+      <th scope="col" class="scores">Username</th>
+      <th scope="col" class="scores">Total Score</th>
+    </tr>
+  </thead>
+  <tbody>
+  @php
+            $leaders=DB::table('scores')->where('status',"1")->orderBy('score','desc')->get();
+                                 
+            @endphp
+            @foreach($leaders as $leader)
+         
+            <tr>
+    <th scope="row" class="scores">{{ $loop->iteration }}</th>
+    <td class="scores name">{{ $leader->name }}</td>
+    <td class="scores score">{{ $leader->score }}</td>
+</tr>
 
-                        <div class="col-lg-9 col-md-9 d-flex align-items-center">
-                            <div class="mid-area">
-                                {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
-                                <div class="title-bottom " id="question1-container">
-                                    <p>results will display Here</p>
-                                </div>
-                            
-                            </div>
-
-                        </div>
-                       
-                    </div>
-                </div>
+     <tr style="border-bottom: 1px solid #ccc;">
+            <td colspan="3"></td>
+        </tr>
+            @endforeach
+    
+  </tbody>
+</table> </div>
+            </div>
+               
 
 
             </div>
         </div>
     </section>
     <!-- Browse Tournaments end -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const rows = document.querySelectorAll('tbody tr');
+
+        searchInput.addEventListener('input', function() {
+            const searchText = searchInput.value.trim().toLowerCase();
+            rows.forEach(row => {
+                const name = row.querySelector('.name').textContent.trim().toLowerCase();
+                const score = row.querySelector('.score').textContent.trim().toLowerCase();
+                if (name.includes(searchText) || score.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
 
  
 

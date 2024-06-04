@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
-    protected $guared = [];
+    protected $guarded = [];
 }

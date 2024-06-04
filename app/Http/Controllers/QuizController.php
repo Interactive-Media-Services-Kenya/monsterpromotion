@@ -127,7 +127,7 @@ class QuizController extends Controller
         // $questions=Question::where('status',1)->get();
         return view('start-trivia');
     }
-    public function myScore(){
+    public function leadersBoard(){
         return view('user-results');
     }
     public function startQuiz(){

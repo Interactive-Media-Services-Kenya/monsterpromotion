@@ -189,7 +189,6 @@
     </div>
 </section>
 <!-- banner-section end -->
-
 <!-- Available Game In start -->
 <section id="available-game-section">
 
@@ -249,7 +248,7 @@
     </div>
     <div class="col-6 d-flex justify-content-end">
         <div class="section-header">
-            <span style="text-align: right;" class="cmn-btn btn-play">VIEW ALL</span>
+            <a href="{{ route('leaders-board')}}" style="text-align: right;" class="cmn-btn btn-play">VIEW ALL</a>
         </div>
     </div>
 </div>
@@ -266,8 +265,8 @@
   </thead>
   <tbody>
   @php
-            $leaders=DB::table('scores')->where('status',1)->orderByDesc('score')->limit(10)->get();
-      
+            $leaders=DB::table('scores')->where('status',"1")->orderBy('score','desc')->limit(10)->get();
+                                 
             @endphp
             @foreach($leaders as $leader)
          

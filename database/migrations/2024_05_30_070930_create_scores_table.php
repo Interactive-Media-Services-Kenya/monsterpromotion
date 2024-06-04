@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
-             $table->string('score')->default(1);
+             $table->bigInteger('score')->default(1);
              $table->string('quiz_type')->default(1);
             $table->string('status')->default(1);
             $table->string('questions_attempted')->nullable();
