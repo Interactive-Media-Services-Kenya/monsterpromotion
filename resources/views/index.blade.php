@@ -200,7 +200,6 @@
                         <button type="button" class="verify-button"
                             style="border:1px solid #171717;background:#171717;color:white;width: 30%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
                             Phone</button>
-
                     </div>
                     <br />
 
@@ -220,9 +219,7 @@
                     <button id="submitbtn" type="button" onclick="saveDetails()"
                         style="width:100%;color:white;background:#171717;">SUBMIT</button>
                 </form>
-        
             </div>
-
         </div>
     </div>
     <script src="{{ asset('js/indexpage.js')}}"></script>

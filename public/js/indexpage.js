@@ -237,7 +237,7 @@ text: 'Details submitted, you will be redirected shortly.'
 // Adding a 5-second delay
 setTimeout(function() {
 window.location.href = 'user/play-games';
-}, 2000); // 5000 milliseconds = 5 seconds
+}, 1000);
 },
 error: function(xhr, status, error) {
 if(response.status=='failed_phone'){

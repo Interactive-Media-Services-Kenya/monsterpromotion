@@ -303,20 +303,17 @@
             @if($leader->score>=1)
             <div class="single-item">
                 <div class="row" style="margin-top:-30px;margin-bottom:-30px">
-
                     <div class="col-lg-9 col-md-9 d-flex align-items-center">
                         <div class="mid-area">
-
                             <div class="title-bottom d-flex">
                                 <div class="date-area bg">
-                                    <span class="date">{{ $leader->name }}</span>
+                                    <span  class="date masked-phone">{{ $leader->phone }}</span>
                                 </div>
                                 <div class="time-area bg">
-
                                     <span>Score:</span>
                                     <span class="time">{{ $leader->score }}  </span>
                                 </div>
-
+                               
                             </div>
 
                         </div>
@@ -399,12 +396,24 @@
             removeBalloons();
         });
 </script>
-<!-- <script>
-      var uid=localStorage.getItem('mobile_number');
-    if(!uid){
-        window.location.href='/';
-    }
-</script> -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        var phoneElements = document.querySelectorAll('.masked-phone');
+
+        phoneElements.forEach(function(element) {
+            var phone = element.textContent.trim(); 
+            var maskedPhone = maskPhoneNumber(phone);
+            element.textContent = maskedPhone; 
+        });
+
+        function maskPhoneNumber(phone) {
+            var visibleDigits = phone.substring(phone.length - 4);
+            var maskedPart = '*'.repeat(phone.length - 4);
+            return maskedPart + visibleDigits;
+        }
+    });
+</script>
 
 @include('footer');
 @endsection
