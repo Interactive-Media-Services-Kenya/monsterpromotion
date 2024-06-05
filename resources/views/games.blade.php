@@ -6,6 +6,7 @@
         position: relative;
     }
    .scores{
+   
     color:white;
    }
     #tournaments-section .single-item .title-bottom {
@@ -57,18 +58,14 @@
 
     .banner-content {
         position: relative;
-
         z-index: 1;
 
     }
-
     .balloon {
         height: 160px;
         width: 525px;
-        /* border-radius: 75% 75% 70% 70%;
-                                                                                                                                                                                                                                                                    position: relative; */
+                                                                                                                                                                                                                                                                         position: relative; */
     }
-
     .balloon:before {
         content: "";
         height: 75px;
@@ -82,7 +79,6 @@
         right: 0;
         margin: auto;
     }
-
     #how-works-section .single-item .icon-area {
         background: #4609C3;
         border-radius: 10px;
@@ -98,17 +94,14 @@
         position: absolute;
         color: inherit;
         top: 120px;
-        left: 0;
         right: 0;
         margin: auto;
     }
-
     @keyframes float {
         from {
             transform: translateY(100vh);
             opacity: 1;
         }
-
         to {
             transform: translateY(-300vh);
             opacity: 0;
@@ -188,11 +181,11 @@
 </section>
 <!-- banner-section end -->
 <!-- Available Game In start -->
-<section id="available-game-section">
-
+<section id="available-game-section" style="background:#171717 !important">
+<br/>
     <div class="overlay pb-120">
-        <div class="container wow fadeInUp">
-            <div class="main-container">
+        <div class="container wow fadeInUp" >
+            <div class="main-container" style="background:black">
                 <div class="row justify-content-between">
                     <div class="col-lg-10">
                         <div class="section-header">
@@ -201,29 +194,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="available-game-carousel">
+                <div class="available-game-carousel" >
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia') }}"><img src="{{ asset('images/6oG1ggLQFyBC.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/6oG1ggLQFyBC.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia') }}"><img src="{{ asset('images/Ri48fTxVZ3Pj.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/Ri48fTxVZ3Pj.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia') }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia') }}"><img src="{{ asset('images/9tY3c177ITYs.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/9tY3c177ITYs.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia') }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
                                 alt="image"></a>
                     </div>
                 </div>
-
+                <br/><br/>
             </div>
         </div>
     </div>
@@ -235,9 +228,9 @@
 <!-- How Works end -->
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section">
-    <div class="overlay pt-120 pb-120">
-        <div class="container wow fadeInUp">
+<section id="tournaments-section" style="background:#171717 !important">
+    <div class="overlay pt-120 pb-120" >
+        <div class="container wow fadeInUp" style="margin-top:-200px;background:#171717 !important">
         <div class="row align-items-center justify-content-between mx-3">
     <div class="col d-flex">
         <div class="section-header">
@@ -256,10 +249,10 @@
 
 
 
-            <div class="single-item">
+            <div class="single-item" style="background:black">
                 <div class="row" >
-            <table class="table table-striped">
-  <thead style="background:black">
+            <table class="table table-striped" >
+  <thead style=" background:#171717;">
     <tr>
       <th scope="col" class="scores">Player Rank</th>
       <th scope="col" class="scores">Username</th>

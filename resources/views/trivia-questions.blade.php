@@ -420,7 +420,6 @@ window.location.href="/";
         src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo"> 
         <p   id="loadd" style="color:white">Loading Next Question....</p>
     </div>
-
     <div id="myModal" class="modal">
         <div class="modal-content">
             <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
@@ -452,7 +451,7 @@ window.location.href="/";
     </div>
 
     <!-- Browse Tournaments start -->
-    <section id="tournaments-section">
+    <section id="tournaments-section" style="background:#171717">
         <!-- Overlay with countdown timer -->
         <div class=" pt-120 pb-120">
             <div class="container wow fadeInUp">
@@ -470,11 +469,11 @@ window.location.href="/";
                     </div>
                 </div>
 
-                <div class="single-item">
+                <div class="single-item" style="background:black">
                     <div class="row">
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
-                                {{-- <h4>ATTEMPT THE TRIVIA</h4> --}}
+                            
                                 <div class="title-bottom " id="question-container">
                                 </div>
                             </div>

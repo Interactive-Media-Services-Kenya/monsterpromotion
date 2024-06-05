@@ -136,7 +136,7 @@ window.location.href="/";
     </div>
 
     <!-- Browse Tournaments start -->
-    <section id="tournaments-section">
+    <section id="tournaments-section" style="background:#171717">
         <!-- Overlay with countdown timer -->
         <div id="overlay" class="overlaid">
             <div class="countdown">
@@ -155,7 +155,7 @@ window.location.href="/";
                     </div>
                 </div>
 
-                <div class="single-item">
+                <div class="single-item" style="background:black">
                     <div class="row">
 
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
