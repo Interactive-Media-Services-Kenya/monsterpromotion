@@ -274,7 +274,7 @@
 
         // Function to redirect to the game
         function redirectToGame() {
-            window.location.href = '/start-trivia';
+            window.location.href = '/user/start-trivia';
         }
         window.addEventListener('click', function (event) {
             if (event.target === modal) {
