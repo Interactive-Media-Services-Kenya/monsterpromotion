@@ -188,24 +188,25 @@ class QuizController extends Controller
     public function sendOTP(Request $request)
     {
        
+        $mobile =$request["mobile"];
+        $otp = rand(100000, 999999);
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            $mobile2 = "254" . ltrim($mobile, '0');
+        } else {
+            $mobile2 = $mobile;
+        }
+            $user = User::where('phone',$mobile2)->first();
+            if($user->status==1){
+                $exist='approved';
+            }else if($user->status==2){
+                $exist='rejected';
+            }else if($user->status==0){
+                $exist='pending';
+            }
         try {
             $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
-            $mobile =$request["mobile"];
-            $otp = rand(100000, 999999);
-            $numberStr = $mobile;
-            if ($numberStr[0] == '0') {
-                $mobile2 = "254" . ltrim($mobile, '0');
-            } else {
-                $mobile2 = $mobile;
-            }
-                 $user = User::where('phone',$mobile2)->first();
-                if($user->status==1){
-                    $exist='approved';
-                }else if($user->status==2){
-                    $exist='rejected';
-                }else if($user->status==0){
-                    $exist='pending';
-                }
+          
                 $senderName = rawurlencode("IMS");
                 $bulkBalanceUser = "voucher";
                 $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");

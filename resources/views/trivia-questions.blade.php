@@ -403,9 +403,7 @@ transition: opacity 500ms;
     </style>
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
 <script>
-// console.log('sds'+localStorage.getItem('user_mobile_no'))
 if(!localStorage.getItem('user_mobile_no')){
-
 window.location.href="/";
 }else{
     const user_phone_no=localStorage.getItem('user_mobile_no');
