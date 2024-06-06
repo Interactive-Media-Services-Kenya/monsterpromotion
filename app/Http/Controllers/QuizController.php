@@ -143,6 +143,7 @@ class QuizController extends Controller
     public function selectQuiz()
     {
         $mobile = $_GET['user_code'];
+        $category = $_GET['category_id'];
         $numberStr = $mobile;
         if ($numberStr[0] == '0') {
             $mobile2 = "254" . ltrim($mobile, '0');
@@ -157,7 +158,7 @@ class QuizController extends Controller
         }
         // dd($question_done);
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::whereNotIn('id', $question_done)->get()->shuffle()->take(10);
+            $randomQuestions = Question::whereNotIn('id', $question_done)->where('category_id', $category)->get()->shuffle()->take(10);
             // log::debug(collect($randomQuestions));
             $_SESSION['random_questions'] = $randomQuestions->toArray();
             //  log::debug(collect($_SESSION['random_questions']));

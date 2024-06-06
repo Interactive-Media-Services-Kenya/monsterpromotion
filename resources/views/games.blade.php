@@ -213,11 +213,11 @@
                                 src="{{ asset('images/general.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => 3]) }}"><img
                                 src="{{ asset('images/music.png') }}" alt="image"></a>
                     </div>
 

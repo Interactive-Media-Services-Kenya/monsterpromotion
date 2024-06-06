@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    
+
     return view('index');
 });
 Route::get('/user/play-games', function () {
@@ -18,14 +18,10 @@ Route::get('admin/manage-pending-orders', [App\Http\Controllers\UserController::
 Route::get('admin/update-user', [App\Http\Controllers\UserController::class, 'updateUser'])->name('update-user');
 
 Route::get('user/play-trivia/{id}', [App\Http\Controllers\QuizController::class, 'playQuiz'])->name('user/play-trivia');
-Route::get('user/start-trivia', [App\Http\Controllers\QuizController::class, 'startQuiz'])->name('user/start-trivia');
+Route::get('user/start-trivia/{id}', [App\Http\Controllers\QuizController::class, 'startQuiz'])->name('user/start-trivia');
 
 Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 'selectQuiz'])->name('user/select-question');
 Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
 Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
-// Route::post('user/send-otp', [App\Http\Controllers\QuizController::class, 'sendOTP'])->name('send-otp');
-// Route::post('user/upload-photo', [App\Http\Controllers\QuizController::class, 'sesndOTP'])->name('upload-photo');
-// Route::post('user/save-user-details', [App\Http\Controllers\QuizController::class, 'saveSelfie'])->name('save-user-details');
-
 Route::get('user/leaders-board', [App\Http\Controllers\QuizController::class, 'leadersBoard'])->name('leaders-board');

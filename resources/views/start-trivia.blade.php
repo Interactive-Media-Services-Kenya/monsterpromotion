@@ -274,7 +274,12 @@
 
         // Function to redirect to the game
         function redirectToGame() {
-            window.location.href = '/user/start-trivia';
+            // Get the current URL
+            var currentUrl = window.location.href;
+            var urlParts = currentUrl.split("/");
+            var categoryId = urlParts[urlParts.length - 1]
+
+            window.location.href = '/user/start-trivia/' + categoryId;
         }
         window.addEventListener('click', function (event) {
             if (event.target === modal) {

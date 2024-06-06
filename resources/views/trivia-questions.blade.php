@@ -517,6 +517,10 @@
 <!-- Browse Tournaments end -->
 
 <script>
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split("/");
+    var categoryId = urlParts[urlParts.length - 1]
+
     const modal = document.getElementById('myModal');
     const body = document.body;
     startCountdownAndProgressBar(60);
@@ -628,10 +632,11 @@
             }, 1000);
         }
     }
+
     function fetchQuestion(questionId = null, selectedAnswer = null, correctAnswer = null) {
         var user_phone_no = localStorage.getItem('user_mobile_no');
         var xhr = new XMLHttpRequest();
-        var url = '/user/select-question?user_code=' + user_phone_no;
+        var url = '/user/select-question?user_code=' + user_phone_no + '&category_id=' + categoryId;
 
         if (questionId && selectedAnswer) {
             var questions = JSON.parse(localStorage.getItem('question_answers')) || [];
