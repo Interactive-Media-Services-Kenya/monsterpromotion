@@ -233,7 +233,7 @@ headers: {
 'X-CSRF-TOKEN': '{{ csrf_token() }}' 
 },
 success: function(response) {
-if(response=='approved'){
+if(response.status=='approved'){
   Swal.fire({
     icon: 'success',
     title: 'Success',

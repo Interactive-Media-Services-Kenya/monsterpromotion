@@ -246,7 +246,7 @@ class QuizController extends Controller
             return response()->json(["status" => "failed_phone"]);
         }else{
                 if($user){
-                    if($user->status=1){
+                    if($user->status==1){
                         return response()->json(["status" => "approved"]);
                     }else{
                         return response()->json(["status" => "pending"]);  
@@ -265,7 +265,7 @@ class QuizController extends Controller
                     $user->photo = $filePath;
                     $user->save();
                 }
-        return response()->json(["status" => "success"]);
+       
      } 
     }
 }
