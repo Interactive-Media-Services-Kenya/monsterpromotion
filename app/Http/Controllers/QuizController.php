@@ -140,6 +140,12 @@ class QuizController extends Controller
         return view('trivia-questions');
     }
 
+
+    public function musicQuiz()
+    {
+        // $questions=Question::where('status',1)->get();
+        return view('music-game');
+    }
     public function selectQuiz()
     {
         $mobile = $_GET['user_code'];

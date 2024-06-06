@@ -19,6 +19,7 @@ Route::get('admin/update-user', [App\Http\Controllers\UserController::class, 'up
 
 Route::get('user/play-trivia/{id}', [App\Http\Controllers\QuizController::class, 'playQuiz'])->name('user/play-trivia');
 Route::get('user/start-trivia/{id}', [App\Http\Controllers\QuizController::class, 'startQuiz'])->name('user/start-trivia');
+Route::get('user/music-game', [App\Http\Controllers\QuizController::class, 'musicQuiz'])->name('user/music-game');
 
 Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 'selectQuiz'])->name('user/select-question');
 Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');

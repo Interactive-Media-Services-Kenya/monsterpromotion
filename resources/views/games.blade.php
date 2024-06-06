@@ -217,8 +217,8 @@
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 3]) }}"><img
-                                src="{{ asset('images/music.png') }}" alt="image"></a>
+                        <a href="{{ route('user/music-game') }}"><img src="{{ asset('images/music.png') }}"
+                                alt="image"></a>
                     </div>
 
 
