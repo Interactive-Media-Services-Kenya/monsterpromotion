@@ -468,12 +468,10 @@ window.location.href="/";
                         </div>
                     </div>
                 </div>
-
                 <div class="single-item" style="background:black">
                     <div class="row">
                         <div class="col-lg-9 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
-                            
                                 <div class="title-bottom " id="question-container">
                                 </div>
                             </div>
@@ -488,15 +486,10 @@ window.location.href="/";
                                     <div class="spacer"></div> <!-- Add a spacer -->
                                     <span class="inputt" id="points-earned">0</span> <!-- Adjust padding-top as needed -->
                                 </div>
-                                
-                               
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -524,7 +517,6 @@ window.location.href="/";
                     var endValue = Number(progressBar.getAttribute("data-percentage"));
                     var startValue = duration - timer;
                     var progressPercentage = (startValue / duration) * 100;
-
                     innerCircle.style.color = progressColor;
                     innerCircle.style.backgroundColor = progressBar.getAttribute(
                         "data-inner-circle-color");

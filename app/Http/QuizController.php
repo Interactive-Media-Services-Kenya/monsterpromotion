@@ -203,7 +203,7 @@ class QuizController extends Controller
                     $exist='approved';
                 }else if($user->status==2){
                     $exist='rejected';
-                }else if($user->status==0){
+                }else{
                     $exist='pending';
                 }
                 $senderName = rawurlencode("IMS");

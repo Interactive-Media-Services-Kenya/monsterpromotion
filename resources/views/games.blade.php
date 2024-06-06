@@ -148,6 +148,9 @@
         padding: 23px 25px;
         position: relative;
     }
+    #available-game-section .main-container .single-item {
+    padding: 0 15px;
+}
 </style>
 <section id="banner-section">
     <div id="balloon-container">
@@ -187,8 +190,8 @@
         <div class="container wow fadeInUp" >
             <div class="main-container" style="background:black">
                 <div class="row justify-content-between">
-                    <div class="col-lg-10">
-                        <div class="section-header">
+                    <div class="col-lg-12">
+                        <div class="section-header" style="text-align:center">
                             <h2 class="title">Our Top Games List</h2>
                             <p>Click any game to play</p>
                         </div>
@@ -196,25 +199,19 @@
                 </div>
                 <div class="available-game-carousel" >
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/6oG1ggLQFyBC.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img   src="{{ asset('images/general.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/Ri48fTxVZ3Pj.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/personality.png') }}"
                                 alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
+                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img src="{{ asset('images/music.png') }}"
                                 alt="image"></a>
                     </div>
-                    <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/9tY3c177ITYs.png') }}"
-                                alt="image"></a>
-                    </div>
-                    <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/9Z2wX0RylL4S.png') }}"
-                                alt="image"></a>
-                    </div>
+                
+                   
                 </div>
                 <br/><br/>
             </div>
@@ -416,10 +413,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return maskedPart + visibleDigits;
         }
     });
-
-    // localStorage.setItem('user_mobile_no',phone);
     console.log(localStorage.getItem('user_mobile_no'));
 </script>
-
+<script>
+// console.log('sds'+localStorage.getItem('user_mobile_no'))
+if(!localStorage.getItem('user_mobile_no')){
+window.location.href="/";
+}else{
+    const user_phone_no=localStorage.getItem('user_mobile_no');
+    console.log(user_phone_no);
+}
+</script>
 @include('footer');
 @endsection

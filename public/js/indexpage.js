@@ -28,16 +28,19 @@ mobile: phone,
 _token: '{{ csrf_token() }}'
 },
 success: function (response) {
-  // console.log(response);
-if (response.status === 'success') {
-  localStorage.setItem('user_mobile_no',phone);
   console.log(response);
-if(response.exist=='yes'){
+if (response.status === 'success') {
+if(response.exist=='approved'){
+  localStorage.setItem('user_mobile_no',phone);
 document.querySelector(".upload-form").style.display = 'none';
+}else if(response.exist=='rejected'){
+  document.querySelector(".response-message").innerText='Your previous upload was rejected,Kindly upload again';
+}else{
+  document.querySelector(".upload-form").style.display = 'none';
+  document.querySelector(".response-message").innerText='Your previous upload is still pending,Please try again later.';
 }
       var verification_otp=response.code;
       localStorage.setItem('verification_otp',verification_otp);
-    
     toastr.success('OTP requested successfully!');
     verificationCodeInput.disabled = false;
 } else {
@@ -230,17 +233,34 @@ headers: {
 'X-CSRF-TOKEN': '{{ csrf_token() }}' 
 },
 success: function(response) {
+if(response=='approved'){
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: 'Details submitted, you will be redirected shortly.'
+    });
+    setTimeout(function() {
+      window.location.href = 'user/play-games';
+      }, 1000);
+      localStorage.setItem('user_mobile_no',phone);
+}else{
+  Swal.fire({
+    icon: 'info',
+    title: 'Pending Approval',
+    text: 'Your uploaded selfie is pending approval. We shall get back to you shortly.',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    // cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Reload the page
+      location.reload();
+    }
+  });
+  
 
-Swal.fire({
-icon: 'success',
-title: 'Success',
-text: 'Details submitted, you will be redirected shortly.'
-});
+}
 
-// Adding a 5-second delay
-setTimeout(function() {
-window.location.href = 'user/play-games';
-}, 1000);
 },
 error: function(xhr, status, error) {
 if(response.status=='failed_phone'){

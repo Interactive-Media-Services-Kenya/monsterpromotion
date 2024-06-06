@@ -77,11 +77,30 @@
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin/manage-questions') }}">Manage
                                     Questions</a></li>
-
                         </ul>
                     </div>
                 </li>
-
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false"
+                        aria-controls="users">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-laptop"></i>
+                        </span>
+                        <span class="menu-title">Users</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="users">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('manage.pending.users') }}">Pending Requests</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('add.quiz') }}">Manage Users</a>
+                            </li>
+                            <!-- <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin/manage-questions') }}">Manage
+                                    Users</a></li> -->
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </nav>
         <!-- partial -->

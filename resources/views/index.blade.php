@@ -195,18 +195,16 @@
                     <div style="display: flex;">
                         <input class="form-control" name="phone" id="phone_no" placeholder="Enter Phone No" type="text"
                             style="border:1px solid #171717;width: 70%; border-radius: 5px 0 0 5px;">
-
                         <button type="button" class="verify-button"
                             style="border:1px solid #171717;background:#171717;color:white;width: 30%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
                             Phone</button>
                     </div>
                     <br />
-
                     <input type="number" name="otp" class="form-control" onkeyup="verifyOTP()" id="verificationid"
                         style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
                     <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
                         style="color:red;display:none"></span>
-
+                        <span  class="response-message" style="color:dodgerblue"></span>
                     <br />
                     <div class="upload-form" style="margin-top:-1px;" >
                         <input class="file-input" id="selfie" type="file" name="file" hidden>

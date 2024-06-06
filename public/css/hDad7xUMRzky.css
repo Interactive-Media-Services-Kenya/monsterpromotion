@@ -1136,7 +1136,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 #available-game-section .available-game-carousel {
-    margin: 0 -15px;
+    margin: 0 -100px;
     margin-bottom: -7px;
 }
 

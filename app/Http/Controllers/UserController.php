@@ -12,12 +12,13 @@ use App\Models\QuizAnswer;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-class QuizController extends Controller
+class UserController extends Controller
 {
   
-    public function index()
+    public function pendingRequests()
     {
-        return view('backend.dashboard');
+        $users=User::where("status",0)->orWhere("status",2)->orderBy("id","desc")->get();
+        return view('backend.users.pending',['users'=>$users]);
     }
     public function add()
     {
@@ -172,15 +173,16 @@ class QuizController extends Controller
         }
     }
     
-    public function disableQuestions(){
-             $id = decrypt($_GET['id']);
-             $question = Question::find($id);
-             if (!$question) {
-                return redirect()->back()->with('error','Question not found');
+    public function updateUser(){
+             $id = ($_GET['id']);
+             $status=$_GET['s'];
+             $user = User::find($id);
+             if (!$user) {
+                return redirect()->back()->with('error','User not found');
              }
              try {
-                 $question->update(['status' => 0]);
-                 return redirect()->back()->with('success','Question deleted successfully');
+                $user->update(['status' =>$status ]);
+                 return redirect()->back()->with('success','Record Updated');
              } catch (\Exception $e) {
                 return redirect()->back()->with('error','An Error occured');
              }
@@ -198,13 +200,11 @@ class QuizController extends Controller
             } else {
                 $mobile2 = $mobile;
             }
-                 $user = User::where('phone',$mobile2)->first();
-                if($user->status==1){
-                    $exist='approved';
-                }else if($user->status==2){
-                    $exist='rejected';
-                }else if($user->status==0){
-                    $exist='pending';
+            $user = User::where('phone',$mobile2)->where('status',1)->first();
+                if($user){
+                    $exist='yes';
+                }else{
+                    $exist='no';
                 }
                 $senderName = rawurlencode("IMS");
                 $bulkBalanceUser = "voucher";
