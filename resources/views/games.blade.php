@@ -5,10 +5,12 @@
     #banner-section {
         position: relative;
     }
-   .scores{
-   
-    color:white;
-   }
+
+    .scores {
+
+        color: white;
+    }
+
     #tournaments-section .single-item .title-bottom {
         border-bottom: none;
         margin-top: 20px;
@@ -61,11 +63,14 @@
         z-index: 1;
 
     }
+
     .balloon {
         height: 160px;
         width: 525px;
-                                                                                                                                                                                                                                                                         position: relative; */
+        position: relative;
+        */
     }
+
     .balloon:before {
         content: "";
         height: 75px;
@@ -79,6 +84,7 @@
         right: 0;
         margin: auto;
     }
+
     #how-works-section .single-item .icon-area {
         background: #4609C3;
         border-radius: 10px;
@@ -97,11 +103,13 @@
         right: 0;
         margin: auto;
     }
+
     @keyframes float {
         from {
             transform: translateY(100vh);
             opacity: 1;
         }
+
         to {
             transform: translateY(-300vh);
             opacity: 0;
@@ -124,8 +132,9 @@
             .banner-content {
                 padding: 20px;
             }
-            .header-title{
-              font-size:18px;  
+
+            .header-title {
+                font-size: 18px;
             }
         }
     }
@@ -148,9 +157,10 @@
         padding: 23px 25px;
         position: relative;
     }
+
     #available-game-section .main-container .single-item {
-    padding: 0 15px;
-}
+        padding: 0 15px;
+    }
 </style>
 <section id="banner-section">
     <div id="balloon-container">
@@ -185,9 +195,9 @@
 <!-- banner-section end -->
 <!-- Available Game In start -->
 <section id="available-game-section" style="background:#171717 !important">
-<br/>
+    <br />
     <div class="overlay pb-120">
-        <div class="container wow fadeInUp" >
+        <div class="container wow fadeInUp">
             <div class="main-container" style="background:black">
                 <div class="row justify-content-between">
                     <div class="col-lg-12">
@@ -197,23 +207,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="available-game-carousel" >
+                <div class="available-game-carousel">
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img   src="{{ asset('images/general.png') }}"
-                                alt="image"></a>
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img
+                                src="{{ asset('images/general.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img src="{{ asset('images/personality.png') }}"
-                                alt="image"></a>
+                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img
+                                src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item">
-                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img src="{{ asset('images/music.png') }}"
-                                alt="image"></a>
+                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img
+                                src="{{ asset('images/music.png') }}" alt="image"></a>
                     </div>
-                
-                   
+
+
                 </div>
-                <br/><br/>
+                <br /><br />
             </div>
         </div>
     </div>
@@ -226,20 +236,20 @@
 
 <!-- Browse Tournaments start -->
 <section id="tournaments-section" style="background:#171717 !important">
-    <div class="overlay pt-120 pb-120" >
+    <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp" style="margin-top:-200px;background:#171717 !important">
-        <div class="row align-items-center justify-content-between mx-3">
-    <div class="col d-flex">
-        <div class="section-header">
-            <span class="title header-title" style="text-align: left;"><u>TOP PLAYERS</u></span>
-        </div>
-    </div>
-    <div class="col d-flex justify-content-end">
-        <div class="section-header text-md-right">
-            <a href="{{ route('leaders-board')}}" class="cmn-btn btn-play">VIEW ALL</a>
-        </div>
-    </div>
-</div>
+            <div class="row align-items-center justify-content-between mx-3">
+                <div class="col d-flex">
+                    <div class="section-header">
+                        <span class="title header-title" style="text-align: left;"><u>TOP PLAYERS</u></span>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <div class="section-header text-md-right">
+                        <a href="{{ route('leaders-board')}}" class="cmn-btn btn-play">VIEW ALL</a>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -247,39 +257,39 @@
 
 
             <div class="single-item" style="background:black">
-                <div class="row" >
-            <table class="table table-striped" >
-  <thead style=" background:#171717;">
-    <tr>
-      <th scope="col" class="scores">Player Rank</th>
-      <th scope="col" class="scores">Username</th>
-      <th scope="col" class="scores">Total Score</th>
-    </tr>
-  </thead>
-  <tbody>
-  @php
-            $leaders=DB::table('scores')->where('status',"1")->orderBy('score','desc')->limit(10)->get();
-                                 
-            @endphp
-            @foreach($leaders as $leader)
-         
-    <tr>
-      <th scope="row" class="scores">{{ $loop->iteration }}</th>
-      <td class="scores">{{ $leader->name }}</td>
-      <td class="scores">{{ $leader->score }}</td>
-     
-    </tr>
-     <tr style="border-bottom: 1px solid #ccc;">
-            <td colspan="3"></td>
-        </tr>
-            @endforeach
-    
-  </tbody>
-</table> </div>
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead style=" background:#171717;">
+                            <tr>
+                                <th scope="col" class="scores">Player Rank</th>
+                                <th scope="col" class="scores">Username</th>
+                                <th scope="col" class="scores">Total Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
+
+                            @endphp
+                            @foreach($leaders as $leader)
+                                <tr>
+                                    <th scope="row" class="scores">{{ $loop->iteration }}</th>
+                                    <td class="scores">{{ $leader->name }}</td>
+                                    <td class="scores">{{ $leader->score }}</td>
+
+                                </tr>
+                                <tr style="border-bottom: 1px solid #ccc;">
+                                    <td colspan="3"></td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-           
-            
-           
+
+
+
         </div>
     </div>
 </section>
@@ -336,75 +346,75 @@
 <script>
     const balloonContainer = document.getElementById("balloon-container");
 
-        function random(num) {
-            return Math.floor(Math.random() * num);
-        }
+    function random(num) {
+        return Math.floor(Math.random() * num);
+    }
 
-        function getRandomStyles() {
-            var mt = random(200);
-            var ml = random(50);
-            var dur = random(5) + 5;
-            var width = 100;
-            var height = 250; 
-            if (window.innerWidth < 768) {
-                width = 70; 
-                height = 225; 
-            }
-            return `
+    function getRandomStyles() {
+        var mt = random(200);
+        var ml = random(50);
+        var dur = random(5) + 5;
+        var width = 100;
+        var height = 250;
+        if (window.innerWidth < 768) {
+            width = 70;
+            height = 225;
+        }
+        return `
         margin: ${mt}px 0 0 ${ml}px;
         width: ${width}px;
         height: ${height}px;
         animation: float ${dur}s ease-in infinite;
     `;
+    }
+
+    function createBalloons(num) {
+        // Array of image URLs
+        var imageUrls = [
+            "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
+            "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
+            "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
+            "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
+            "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
+
+        ];
+
+        for (var i = num; i > 0; i--) {
+            var balloon = document.createElement("img");
+            balloon.className = "balloon";
+            // Select a random image URL from the array
+            var randomImageUrl = imageUrls[random(imageUrls.length)];
+            balloon.src = randomImageUrl;
+            balloon.style.cssText = getRandomStyles();
+            balloonContainer.append(balloon);
         }
-
-        function createBalloons(num) {
-            // Array of image URLs
-            var imageUrls = [
-                "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
-                "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
-                "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
-                "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
-
-            ];
-
-            for (var i = num; i > 0; i--) {
-                var balloon = document.createElement("img");
-                balloon.className = "balloon";
-                // Select a random image URL from the array
-                var randomImageUrl = imageUrls[random(imageUrls.length)];
-                balloon.src = randomImageUrl;
-                balloon.style.cssText = getRandomStyles();
-                balloonContainer.append(balloon);
-            }
-        }
+    }
 
 
-        function removeBalloons() {
-            balloonContainer.style.opacity = 0;
-            setTimeout(() => {
-                balloonContainer.remove();
-            }, 500);
-        }
+    function removeBalloons() {
+        balloonContainer.style.opacity = 0;
+        setTimeout(() => {
+            balloonContainer.remove();
+        }, 500);
+    }
 
-        window.addEventListener("load", () => {
-            createBalloons(30);
-        });
+    window.addEventListener("load", () => {
+        createBalloons(30);
+    });
 
-        window.addEventListener("click", () => {
-            removeBalloons();
-        });
+    window.addEventListener("click", () => {
+        removeBalloons();
+    });
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var phoneElements = document.querySelectorAll('.masked-phone');
 
-        phoneElements.forEach(function(element) {
-            var phone = element.textContent.trim(); 
+        phoneElements.forEach(function (element) {
+            var phone = element.textContent.trim();
             var maskedPhone = maskPhoneNumber(phone);
-            element.textContent = maskedPhone; 
+            element.textContent = maskedPhone;
         });
 
         function maskPhoneNumber(phone) {
@@ -416,13 +426,13 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(localStorage.getItem('user_mobile_no'));
 </script>
 <script>
-// console.log('sds'+localStorage.getItem('user_mobile_no'))
-if(!localStorage.getItem('user_mobile_no')){
-window.location.href="/";
-}else{
-    const user_phone_no=localStorage.getItem('user_mobile_no');
-    console.log(user_phone_no);
-}
+    // console.log('sds'+localStorage.getItem('user_mobile_no'))
+    if (!localStorage.getItem('user_mobile_no')) {
+        window.location.href = "/";
+    } else {
+        const user_phone_no = localStorage.getItem('user_mobile_no');
+        console.log(user_phone_no);
+    }
 </script>
 @include('footer');
 @endsection

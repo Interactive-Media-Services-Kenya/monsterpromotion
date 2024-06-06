@@ -39,6 +39,8 @@ verifyButton.addEventListener("click", () => {
             document.querySelector(".upload-form").style.display = 'none';
             document.querySelector(".response-message").innerText = 'Your previous upload is still pending,Please try again later.';
           }
+          var verification_otp = response.code;
+          localStorage.setItem('verification_otp', verification_otp);
           toastr.success('OTP requested successfully!');
           verificationCodeInput.disabled = false;
         } else {
