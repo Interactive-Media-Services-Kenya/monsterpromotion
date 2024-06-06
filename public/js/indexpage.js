@@ -35,12 +35,10 @@ verifyButton.addEventListener("click", () => {
             document.querySelector(".upload-form").style.display = 'none';
           } else if (response.exist == 'rejected') {
             document.querySelector(".response-message").innerText = 'Your previous upload was rejected,Kindly upload again';
-          } else {
+          } else if (response.exist == 'pending') {
             document.querySelector(".upload-form").style.display = 'none';
             document.querySelector(".response-message").innerText = 'Your previous upload is still pending,Please try again later.';
           }
-          var verification_otp = response.code;
-          localStorage.setItem('verification_otp', verification_otp);
           toastr.success('OTP requested successfully!');
           verificationCodeInput.disabled = false;
         } else {
@@ -186,9 +184,7 @@ function verifyOTP() {
         document.getElementById("verifying_code").textContent = "Verified Succesfully";
         document.getElementById("verifying_code").style.color = '#56be78';
         document.getElementById("ellipsis").style.display = 'none';
-
         document.getElementById("submitbtn").disabled = false;
-
       } else {
         document.getElementById("verifying_code").textContent = "Wrong Verification Code";
         document.getElementById("ellipsis").style.display = 'none';
@@ -253,17 +249,13 @@ function saveDetails() {
           text: 'Your uploaded selfie is pending approval. We shall get back to you shortly.',
           showCancelButton: true,
           confirmButtonText: 'OK',
-          // cancelButtonText: 'Cancel'
         }).then((result) => {
           if (result.isConfirmed) {
             // Reload the page
             location.reload();
           }
         });
-
-
       }
-
     },
     error: function (xhr, status, error) {
       if (response.status == 'failed_phone') {

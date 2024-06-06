@@ -203,7 +203,7 @@ class QuizController extends Controller
         } else {
             $mobile2 = $mobile;
         }
-        $exist = 'pending';
+        $exist = 'new';
         $user = User::where('phone', $mobile2)->first();
         if ($user) {
             if ($user->status == 1) {
