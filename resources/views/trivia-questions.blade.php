@@ -604,6 +604,7 @@
             }
         });
     });
+    var overlay = document.createElement('div');
     function fetchQuestion1(questionId = null, selectedAnswer = null, correctAnswer = null) {
         if (questionId && selectedAnswer) {
             // console.log('sas');
@@ -613,7 +614,7 @@
                 element.classList.add("blinking");
             });
 
-            var overlay = document.createElement('div');
+
             overlay.classList.add('overlay');
             document.body.appendChild(overlay);
             if (selectedAnswer === correctAnswer) {
