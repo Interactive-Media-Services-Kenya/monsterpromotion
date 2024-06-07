@@ -170,7 +170,7 @@
 <body>
 
 
-    <div class="contad" style="margin-bottom:200px">
+    <div class="contad" style="margin-top:20px !important;">
         <br /> <br /> <br /> <br />
         <h3 style="text-align:center;color:white;">SHARE, PLAY AND WIN</h3>
         <p style="text-align:center;color:white;">Take a picture with a monster energy drink pack<br /> upload

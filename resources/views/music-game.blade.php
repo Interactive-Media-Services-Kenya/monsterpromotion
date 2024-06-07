@@ -754,7 +754,7 @@
     `;
         questionContainer.appendChild(questionElement);
         document.getElementById('question-number').textContent = questionCounter;
-        questionCounter++; // Increment the counter for the next question
+        questionCounter++;
         overlay.remove();
     }
     document.addEventListener('DOMContentLoaded', function () {

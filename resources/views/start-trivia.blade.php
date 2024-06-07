@@ -139,7 +139,7 @@
 </div>
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section" style="background:#171717">
+<section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
     <!-- Overlay with countdown timer -->
     <div id="overlay" class="overlaid">
         <div class="countdown">
@@ -207,7 +207,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         if (categoryId == 1) {
             document.getElementById('header-text').innerText = 'GENERAL QUIZ';
-        } else if (categoryId == 1) {
+        } else if (categoryId == 2) {
             document.getElementById('header-text').innerText = 'PERSONALITY';
         }
         // localStorage.clear();
