@@ -85,6 +85,10 @@
         margin: auto;
     }
 
+    #available-game-section .main-container .single-item {
+        padding: 0 15px;
+    }
+
     #how-works-section .single-item .icon-area {
         background: #4609C3;
         border-radius: 10px;
@@ -136,6 +140,10 @@
             .header-title {
                 font-size: 18px;
             }
+
+            #available-game-section .main-container .single-item {
+                padding: 0 95px !important;
+            }
         }
     }
 
@@ -156,10 +164,6 @@
         display: inline-block;
         padding: 23px 25px;
         position: relative;
-    }
-
-    #available-game-section .main-container .single-item {
-        padding: 0 15px;
     }
 </style>
 <section id="banner-section">
@@ -208,19 +212,18 @@
                     </div>
                 </div>
                 <div class="available-game-carousel">
-                    <div class="single-item">
+                    <div class="single-item  available">
                         <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img
                                 src="{{ asset('images/general.png') }}" alt="image"></a>
                     </div>
-                    <div class="single-item">
+                    <div class="single-item available">
                         <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
-                    <div class="single-item">
+                    <div class="single-item available">
                         <a href="{{ route('user/music-game') }}"><img src="{{ asset('images/music.png') }}"
                                 alt="image"></a>
                     </div>
-
 
                 </div>
                 <br /><br />
