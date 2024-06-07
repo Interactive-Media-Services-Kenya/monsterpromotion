@@ -409,6 +409,11 @@
             font-weight: bold;
             font-size: 23px;
         }
+
+        #question-number,
+        .title {
+            font-size: 20px !important;
+        }
     }
 
     .spacer {
@@ -480,7 +485,6 @@
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
                         <h2 class="title">QUESTION <span id="question-number"></span> / <span>10</span></h2>
-
                         <audio id="beepAudio" controls style="display: none;">
                             <source src="{{ asset('monster.wav') }}" type="audio/wav">
                             <source src="{{ asset('monster.wav') }}" type="audio/mpeg">

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/anorvuxYH7Ak.css') }}">
     <link rel="stylesheet" href="{{ asset('css/6N8HPuuJtFDl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hDad7xUMRzky.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/fav.png') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -202,7 +202,7 @@
 
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section">
+<section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
     <!-- Overlay with countdown timer -->
 
 
@@ -241,18 +241,18 @@
                                 $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->get();
 
                             @endphp
-           @foreach($leaders as $leader)
+                            @foreach($leaders as $leader)
 
-            <tr>
-                <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                <td class="scores name">{{ $leader->name }}</td>
-                <td class="scores score">{{ $leader->score }}</td>
-            </tr>
+                                <tr>
+                                    <th scope="row" class="scores">{{ $loop->iteration }}</th>
+                                    <td class="scores name">{{ $leader->name }}</td>
+                                    <td class="scores score">{{ $leader->score }}</td>
+                                </tr>
 
-            <tr style="border-bottom: 1px solid #ccc;">
-                <td colspan="3"></td>
-            </tr>
-        @endforeach
+                                <tr style="border-bottom: 1px solid #ccc;">
+                                    <td colspan="3"></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
