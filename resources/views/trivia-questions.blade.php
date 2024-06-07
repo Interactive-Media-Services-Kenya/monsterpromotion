@@ -629,7 +629,7 @@
             }
             setTimeout(function () {
                 fetchQuestion(questionId, selectedAnswer, correctAnswer);
-                overlay.remove();
+
             }, 1000);
         }
     }
@@ -758,7 +758,8 @@
     `;
         questionContainer.appendChild(questionElement);
         document.getElementById('question-number').textContent = questionCounter;
-        questionCounter++; // Increment the counter for the next question
+        questionCounter++;
+        overlay.remove();
     }
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('saveit').addEventListener('click', function (event) {
