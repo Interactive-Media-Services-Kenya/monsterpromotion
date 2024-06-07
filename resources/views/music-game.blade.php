@@ -735,11 +735,11 @@
         var questionElement = document.createElement('div');
         questionElement.innerHTML = `
         <p>
-    <audio controls>
-        <source src="{{ asset('music/Hepi.MP3') }}" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-</p>
+        <audio controls>
+            <source src="music/${questionData.music_title}" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </p> 
         <p>${questionData.question}</p>
         <br />
         <div style="color:white">
