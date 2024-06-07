@@ -616,7 +616,6 @@
             var overlay = document.createElement('div');
             overlay.classList.add('overlay');
             document.body.appendChild(overlay);
-            console.log('hapa');
             if (selectedAnswer === correctAnswer) {
                 var successSound = new Audio('{{ asset('correct.mp3') }}');
                 successSound.play();
