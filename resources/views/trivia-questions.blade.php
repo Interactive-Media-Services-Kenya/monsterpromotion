@@ -662,6 +662,22 @@
             if (xhr.status >= 200 && xhr.status < 400) {
                 removeBalloons();
                 var questionData = JSON.parse(xhr.responseText);
+                if (questionData == 'caught-up') {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Caught Up!!',
+                        text: 'No More Quizes Under This Category, Try Another One.',
+                        showCancelButton: true,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/user/play-games";
+                        } else {
+                            window.location.href = "/user/play-games";
+                        }
+                    });
+                    return;
+                }
                 if (questionData.question) {
                     localStorage.setItem('last_question', questionData.id);
                     updateQuestion(questionData);
@@ -832,5 +848,5 @@
         }, 100);
     }
 </script>
-@include('footer');
+@include('footer')
 @endsection

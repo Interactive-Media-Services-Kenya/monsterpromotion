@@ -165,10 +165,12 @@ class QuizController extends Controller
         // dd($question_done);
         if (!isset($_SESSION['random_questions'])) {
             $randomQuestions = Question::whereNotIn('id', $question_done)->where('category_id', $category)->get()->shuffle()->take(10);
-            // log::debug(collect($randomQuestions));
             $_SESSION['random_questions'] = $randomQuestions->toArray();
-            //  log::debug(collect($_SESSION['random_questions']));
-            return response()->json($randomQuestions->first());
+            if (count($randomQuestions) > 0) {
+                return response()->json($randomQuestions->first());
+            } else {
+                return response()->json('caught-up');
+            }
         } else {
             $randomQuestions = $_SESSION['random_questions'];
             if (isset($_GET['questionId'])) {
@@ -178,10 +180,14 @@ class QuizController extends Controller
                 if ($nextQuestionIndex < count($randomQuestions)) {
                     $nextQuestion = $randomQuestions[$nextQuestionIndex];
                     return response()->json($nextQuestion);
+                    if (count($randomQuestions) > 0) {
+                        return response()->json($randomQuestions->first());
+                    } else {
+                        return response()->json('caught-up');
+                    }
                 }
             }
-
-            return response()->json(['message' => 'Quiz completed']);
+            // return response()->json(['message' => 'Quiz completed']);
         }
     }
 
@@ -268,7 +274,6 @@ class QuizController extends Controller
             } else {
                 return response()->json(["status" => "pending"]);
             }
-
         } else {
             $file = $request->file('file');
             $directory = 'public/user-uploads';
@@ -278,10 +283,10 @@ class QuizController extends Controller
             $filePath = $file->store($directory);
             $user = new User;
             $user->phone = $mobile2;
-            $user->status = 0;
+            $user->status = 1;
             $user->photo = $filePath;
             $user->save();
-            return response()->json(["status" => "pending"]);
+            return response()->json(["status" => "approved"]);
         }
 
     }

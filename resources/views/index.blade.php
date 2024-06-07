@@ -1,16 +1,6 @@
 @extends('layout')
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.css">
-
-<!-- SweetAlert2 JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
-
 
 <style>
     /* Import Google font - Poppins */
@@ -25,7 +15,7 @@
 
     body {
         /* background: #171717; */
-        background-image:url('{{asset('images/img22.jpg')}}');
+        background-image: url('{{asset('images/img22.jpg')}}');
     }
 
     .conta {
@@ -42,7 +32,7 @@
         justify-content: center;
         /* min-height: 100vh; */
         /* background: #171717; */
-        background-image:url('{{asset('images/img22.jpg')}}');
+        background-image: url('{{asset('images/img22.jpg')}}');
     }
 
     ::selection {
@@ -122,6 +112,7 @@
         margin-bottom: 7px;
         justify-content: space-between;
     }
+
     .progress-area .content .progress-bar {
         height: 6px;
         width: 100%;
@@ -204,15 +195,15 @@
                         style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
                     <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
                         style="color:red;display:none"></span>
-                        <span  class="response-message" style="color:dodgerblue"></span>
+                    <span class="response-message" style="color:dodgerblue"></span>
                     <br />
-                    <div class="upload-form" style="margin-top:-1px;" >
+                    <div class="upload-form" style="margin-top:-1px;">
                         <input class="file-input" id="selfie" type="file" name="file" hidden>
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Browse File to Upload</p>
                     </div>
                     <section class="progress-area"></section>
-                <section class="uploaded-area"></section>
+                    <section class="uploaded-area"></section>
                     <button id="submitbtn" type="button" onclick="saveDetails()"
                         style="width:100%;color:white;background:#171717;">SUBMIT</button>
                 </form>
@@ -220,6 +211,6 @@
         </div>
     </div>
     <script src="{{ asset('js/indexpage.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @include('footer');
     @endsection

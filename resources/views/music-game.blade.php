@@ -478,7 +478,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
-                        <h2 class="title">QUESTION <span id="question-number"></span> / <span>10</span></h2>
+                        <h2 class="title">QUESTION <span id="question-number"></span></h2>
 
                         <audio id="beepAudio" controls style="display: none;">
                             <source src="{{ asset('monster.wav') }}" type="audio/wav">
@@ -493,7 +493,6 @@
                     <div class="col-lg-9 col-md-9 d-flex align-items-center">
                         <div class="mid-area">
                             <div class="title-bottom " id="question-container">
-
                             </div>
                         </div>
                     </div>
@@ -660,7 +659,24 @@
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 400) {
                 removeBalloons();
+
                 var questionData = JSON.parse(xhr.responseText);
+                if (questionData == 'caught-up') {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Caught Up!!',
+                        text: 'No More Quizes Under This Category, Try Another One.',
+                        showCancelButton: true,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/user/play-games";
+                        } else {
+                            window.location.href = "/user/play-games";
+                        }
+                    });
+                    return;
+                }
                 if (questionData.question) {
                     localStorage.setItem('last_question', questionData.id);
                     updateQuestion(questionData);
@@ -690,7 +706,6 @@
         };
         xhr.send();
     }
-
     function showCongratulationRibbons() {
         console.log("Congratulations! You selected the correct answer.");
     }
@@ -829,5 +844,5 @@
         }, 100);
     }
 </script>
-@include('footer');
+@include('footer')
 @endsection

@@ -434,5 +434,5 @@
         console.log(user_phone_no);
     }
 </script>
-@include('footer');
+@include('footer')
 @endsection

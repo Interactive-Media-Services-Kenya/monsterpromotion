@@ -146,19 +146,18 @@
             <h2>Trivia starts in <span id="countdown" style="font-size:25px !important">10</span> seconds</h2>
         </div>
     </div>
-
     <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
-                        <h2 class="title">TRIVIA GAME QUIZ</h2>
+                        <h2 class="title"><span id="header-text" style="color:#B2D236"></span> GAME</h2>
                         {{-- <p>et to know our top Monster GChampions.</p> --}}
                     </div>
                 </div>
             </div>
 
-            <div class="single-item" style="background:black">
+            <div class=" single-item" style="background:black">
                 <div class="row">
 
                     <div class="col-lg-9 col-md-9 d-flex align-items-center">
@@ -168,8 +167,10 @@
 
                                 <p>1. Each Question has a defined Time</p>
                                 <p>2. You Should answer the question before the set time elapses.</p>
-                                <p>3. Once counter resets to 0, the question is marked as failed attempt</p>
-                                <p>4. Answer as many questions as possible within the allocated time.</p>
+                                <p>3. Once counter resets to 0, the question is marked as failed attempt
+                                </p>
+                                <p>4. Answer as many questions as possible within the allocated time.
+                                </p>
                                 <p>5. Each correct attempt earns you a point.</p>
                             </div>
 
@@ -180,7 +181,8 @@
                             <div class="contain-area">
                                 <span class="prize"><img src="https://www.monsterenergy.com/img/home/monster-logo.png"
                                         alt="image"></span>
-                                <button class="cmn-btn btn-play" style="background: #b2d236;">READY? LETS START</button>
+                                <button class="cmn-btn btn-play" style="background: #b2d236;">READY?
+                                    LETS START</button>
 
                             </div>
                         </div>
@@ -195,8 +197,19 @@
 <!-- Browse Tournaments end -->
 
 <script>
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split("/");
+    var categoryId = urlParts[urlParts.length - 1]
+
+
+
     // JavaScript
     document.addEventListener("DOMContentLoaded", function () {
+        if (categoryId == 1) {
+            document.getElementById('header-text').innerText = 'GENERAL QUIZ';
+        } else if (categoryId == 1) {
+            document.getElementById('header-text').innerText = 'PERSONALITY';
+        }
         // localStorage.clear();
         var userResults = localStorage.getItem('question_answers')
         if (userResults) {
@@ -275,9 +288,6 @@
         // Function to redirect to the game
         function redirectToGame() {
             // Get the current URL
-            var currentUrl = window.location.href;
-            var urlParts = currentUrl.split("/");
-            var categoryId = urlParts[urlParts.length - 1]
 
             window.location.href = '/user/start-trivia/' + categoryId;
         }
@@ -292,5 +302,5 @@
 
 </script>
 
-@include('footer');
+@include('footer')
 @endsection
