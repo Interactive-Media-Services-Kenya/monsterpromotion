@@ -736,7 +736,7 @@
         questionElement.innerHTML = `
         <p>
         <audio controls>
-            <source src="music/${questionData.music_title}" type="audio/mp3">
+            <source src="/music/${questionData.music_title}" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
     </p> 
