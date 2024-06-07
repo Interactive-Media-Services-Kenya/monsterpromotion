@@ -421,7 +421,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: transparent;
+        background-color: green;
         z-index: 999;
         pointer-events: auto;
     }
@@ -616,7 +616,6 @@
             var overlay = document.createElement('div');
             overlay.classList.add('overlay');
             document.body.appendChild(overlay);
-            // console.log('hapa');
             if (selectedAnswer === correctAnswer) {
                 var successSound = new Audio('{{ asset('correct.mp3') }}');
                 successSound.play();
@@ -629,7 +628,7 @@
             }
             setTimeout(function () {
                 fetchQuestion(questionId, selectedAnswer, correctAnswer);
-                overlay.remove();
+                // overlay.remove();
             }, 1000);
         }
     }
