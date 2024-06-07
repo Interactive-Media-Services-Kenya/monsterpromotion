@@ -421,7 +421,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: green;
+        background-color: transparent;
         z-index: 999;
         pointer-events: auto;
     }
@@ -757,9 +757,10 @@
         </div>
     `;
         questionContainer.appendChild(questionElement);
-        overlay.remove();
+
         document.getElementById('question-number').textContent = questionCounter;
         questionCounter++; // Increment the counter for the next question
+        overlay.remove();
     }
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('saveit').addEventListener('click', function (event) {
