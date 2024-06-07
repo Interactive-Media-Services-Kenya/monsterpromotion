@@ -471,7 +471,7 @@
 </div>
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
+<section id="tournaments-section" style="background:#171717;margin-top:36px !important;">
     <!-- Overlay with countdown timer -->
     <div class=" pt-120 pb-120">
         <div class="container wow fadeInUp">
