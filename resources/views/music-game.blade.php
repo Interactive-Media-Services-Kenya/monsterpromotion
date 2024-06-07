@@ -736,7 +736,7 @@
         questionElement.innerHTML = `
         <p>
     <audio controls>
-        <source src="{{ asset('music/Hepi.M4A') }}" type="audio/mp3">
+        <source src="{{ asset('music/Hepi.MP3') }}" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 </p>
