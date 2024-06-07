@@ -604,9 +604,6 @@
             }
         });
     });
-    var overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    document.body.appendChild(overlay);
     function fetchQuestion1(questionId = null, selectedAnswer = null, correctAnswer = null) {
         if (questionId && selectedAnswer) {
             // console.log('sas');
@@ -616,6 +613,10 @@
                 element.classList.add("blinking");
             });
 
+            var overlay = document.createElement('div');
+            overlay.classList.add('overlay');
+            document.body.appendChild(overlay);
+            // console.log('hapa');
             if (selectedAnswer === correctAnswer) {
                 var successSound = new Audio('{{ asset('correct.mp3') }}');
                 successSound.play();
@@ -628,7 +629,7 @@
             }
             setTimeout(function () {
                 fetchQuestion(questionId, selectedAnswer, correctAnswer);
-
+                overlay.remove();
             }, 1000);
         }
     }
@@ -755,7 +756,6 @@
             <label for="${questionData.id}_${questionData.choice_D}" onclick="fetchQuestion1(${questionData.id},'D','${questionData.correct_answer}')" class="radio-button ${questionData.correct_answer == 'D' ? 'correct-answer' : 'incorrect'}">${questionData.choice_D}</label>
         </div>
     `;
-        overlay.remove();
         questionContainer.appendChild(questionElement);
         document.getElementById('question-number').textContent = questionCounter;
         questionCounter++; // Increment the counter for the next question
