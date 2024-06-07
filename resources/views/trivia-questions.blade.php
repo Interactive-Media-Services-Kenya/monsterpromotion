@@ -432,6 +432,7 @@
         window.location.href = "/";
     } else {
         const user_phone_no = localStorage.getItem('user_mobile_no');
+        localStorage.setItem('user_mobile_no', user_phone_no);
         console.log(user_phone_no);
     }
 </script>
@@ -471,7 +472,7 @@
 </div>
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section" style="background:#171717;margin-top:36px !important;">
+<section id="tournaments-section" style="background:#171717;margin-top:50px !important;">
     <!-- Overlay with countdown timer -->
     <div class=" pt-120 pb-120">
         <div class="container wow fadeInUp">

@@ -7,6 +7,11 @@
             margin-top: 40px !important;
             margin-bottom: 40px;
         }
+
+        #header-text,
+        .title {
+            font-size: 20px !important;
+        }
     }
 
     /* Add this CSS */
@@ -102,12 +107,11 @@
     }
 </style>
 <script>
-    // console.log('sds'+localStorage.getItem('user_mobile_no'))
     if (!localStorage.getItem('user_mobile_no')) {
-
         window.location.href = "/";
     } else {
         const user_phone_no = localStorage.getItem('user_mobile_no');
+        localStorage.setItem('user_mobile_no', user_phone_no);
         console.log(user_phone_no);
     }
 </script>

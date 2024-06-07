@@ -185,9 +185,9 @@
                     @csrf
                     <div style="display: flex;">
                         <input class="form-control" name="phone" id="phone_no" placeholder="Enter Phone No" type="text"
-                            style="border:1px solid #171717;width: 70%; border-radius: 5px 0 0 5px;">
+                            style="border:1px solid #171717;width: 50%; border-radius: 5px 0 0 5px;">
                         <button type="button" class="verify-button"
-                            style="border:1px solid #171717;background:#171717;color:white;width: 30%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
+                            style="border:1px solid #171717;background:#171717;color:white;width: 50%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
                             Phone</button>
                     </div>
                     <br />

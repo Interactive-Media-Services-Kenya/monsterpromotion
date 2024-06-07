@@ -181,10 +181,7 @@
                             <p>Just simple way,answer as many questions as you can within 60 seconds</p>
                             <div class="btn-play d-flex justify-content-center align-items-center">
                                 <a href="#available-game-section" class="cmn-btn">Ready? Play Now</a>
-                                {{-- <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM"
-                                    class="mfp-iframe popupvideo">
-                                    <img src="images/hKSskvYIu5WE.png" alt="play">
-                                </a> --}}
+
                             </div>
                         </div>
                     </div>
@@ -434,6 +431,7 @@
         window.location.href = "/";
     } else {
         const user_phone_no = localStorage.getItem('user_mobile_no');
+        localStorage.setItem('user_mobile_no', user_phone_no);
         console.log(user_phone_no);
     }
 </script>

@@ -471,7 +471,7 @@
 </div>
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section" style="background:#171717">
+<section id="tournaments-section" style="background:#171717;margin-top:50px">
     <!-- Overlay with countdown timer -->
     <div class=" pt-120 pb-120">
         <div class="container wow fadeInUp">
@@ -479,7 +479,6 @@
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
                         <h2 class="title">QUESTION <span id="question-number"></span></h2>
-
                         <audio id="beepAudio" controls style="display: none;">
                             <source src="{{ asset('monster.wav') }}" type="audio/wav">
                             <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
