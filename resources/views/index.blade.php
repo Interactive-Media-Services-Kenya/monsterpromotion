@@ -179,8 +179,8 @@
             play and stand a chance to
             win amazing gifts. </p>
         <br />
-        <div class="conta">
-            <div class="wrapper">
+        <div class="conta" style="padding-bottom:30px">
+            <div class=" wrapper">
                 <form action="#" method="POST">
                     @csrf
                     <div style="display: flex;">
@@ -191,7 +191,7 @@
                             Phone</button>
                     </div>
                     <br />
-                    <input type="number" name="otp" class="form-control" onkeyup="verifyOTP()" id="verificationid"
+                    <input type="number" name="otp" class="form-control" oninput="verifyOTP()" id="verificationid"
                         style="border:1px solid #171717;" type=" text" placeholder="Enter Verification Code">
                     <span style="color:red;display:none" id="verifying_code"></span><span id="ellipsis"
                         style="color:red;display:none"></span>
@@ -212,5 +212,5 @@
     </div>
     <script src="{{ asset('js/indexpage.js')}}"></script>
 
-    @include('footer');
+    @include('footer')
     @endsection
