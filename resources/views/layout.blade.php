@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.css">
-
     <!-- SweetAlert2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
@@ -37,8 +36,6 @@
 </head>
 
 <body>
-
-
     <a href="#" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
     @include('header')
     @yield('content')

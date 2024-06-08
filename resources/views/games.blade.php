@@ -1,170 +1,9 @@
 <!-- banner-section start -->
 @extends('layout')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/gamespage.css')}}">
 <style>
-    #banner-section {
-        position: relative;
-    }
 
-    .scores {
-
-        color: white;
-    }
-
-    #tournaments-section .single-item .title-bottom {
-        border-bottom: none;
-        margin-top: 20px;
-        padding-bottom: 35px;
-    }
-
-    #banner-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('{{ asset('images/banner.jpg') }}');
-        opacity: 0.5;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .banner-content {
-        position: relative;
-    }
-
-    body {
-        font-family: var(--body-font);
-        background-color: #171717;
-        font-size: 18px;
-        line-height: 25px;
-        padding: 0;
-        margin: 0;
-        font-weight: 400;
-        overflow-x: hidden;
-    }
-
-    #balloon-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        overflow: hidden;
-        height: 100%;
-
-        transition: opacity 500ms;
-    }
-
-    .banner-content {
-        position: relative;
-        z-index: 1;
-
-    }
-
-    .balloon {
-        height: 160px;
-        width: 525px;
-        position: relative;
-        */
-    }
-
-    .balloon:before {
-        content: "";
-        height: 75px;
-        width: 1px;
-        padding: 1px;
-        background-color: #FDFD96;
-        display: block;
-        position: absolute;
-        top: 125px;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-
-    #available-game-section .main-container .single-item {
-        padding: 0 15px;
-    }
-
-    #how-works-section .single-item .icon-area {
-        background: #4609C3;
-        border-radius: 10px;
-        display: inline-block;
-        padding: 23px 25px;
-        position: relative;
-    }
-
-    .balloon:after {
-        content: "▲";
-        text-align: center;
-        display: block;
-        position: absolute;
-        color: inherit;
-        top: 120px;
-        right: 0;
-        margin: auto;
-    }
-
-    @keyframes float {
-        from {
-            transform: translateY(100vh);
-            opacity: 1;
-        }
-
-        to {
-            transform: translateY(-300vh);
-            opacity: 0;
-        }
-    }
-
-    @media (max-width: 767px) {
-        #banner-section {
-            height: 70vh;
-
-        }
-
-        @media (max-width: 767px) {
-            #banner-section {
-                height: 70vh;
-            }
-        }
-
-        @media (max-width: 998px) {
-            .banner-content {
-                padding: 20px;
-            }
-
-            .header-title {
-                font-size: 18px;
-            }
-
-            #available-game-section .main-container .single-item {
-                padding: 0 95px !important;
-            }
-        }
-    }
-
-    #tournaments-section .single-item .prize-area {
-        border: none;
-        width: 100%;
-        /* height: 100%; */
-    }
-
-    .cmn-btn {
-        background: #b2d236;
-        color: white;
-    }
-
-    #how-works-section .single-item .icon-area {
-        background: #b2d236 !important;
-        border-radius: 10px;
-        display: inline-block;
-        padding: 23px 25px;
-        position: relative;
-    }
 </style>
 <section id="banner-section">
     <div id="balloon-container">
@@ -181,7 +20,6 @@
                             <p>Just simple way,answer as many questions as you can within 60 seconds</p>
                             <div class="btn-play d-flex justify-content-center align-items-center">
                                 <a href="#available-game-section" class="cmn-btn">Ready? Play Now</a>
-
                             </div>
                         </div>
                     </div>
@@ -210,11 +48,11 @@
                 </div>
                 <div class="available-game-carousel">
                     <div class="single-item  available">
-                        <a href="{{ route('user/play-trivia', ['id' => 1]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}"><img
                                 src="{{ asset('images/general.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item available">
-                        <a href="{{ route('user/play-trivia', ['id' => 2]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => encrypt(2)]) }}"><img
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item available">
@@ -228,6 +66,7 @@
         </div>
     </div>
 </section>
+
 <!-- Available Game In end -->
 
 <!-- How Works start -->
@@ -250,11 +89,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
 
             <div class="single-item" style="background:black">
                 <div class="row">
@@ -344,96 +178,7 @@
     </div>
 </section>
 <script>
-    const balloonContainer = document.getElementById("balloon-container");
 
-    function random(num) {
-        return Math.floor(Math.random() * num);
-    }
-
-    function getRandomStyles() {
-        var mt = random(200);
-        var ml = random(50);
-        var dur = random(5) + 5;
-        var width = 100;
-        var height = 250;
-        if (window.innerWidth < 768) {
-            width = 70;
-            height = 225;
-        }
-        return `
-        margin: ${mt}px 0 0 ${ml}px;
-        width: ${width}px;
-        height: ${height}px;
-        animation: float ${dur}s ease-in infinite;
-    `;
-    }
-
-    function createBalloons(num) {
-        // Array of image URLs
-        var imageUrls = [
-            "https://web-assests.monsterenergy.com/mnst/1a43af6d-be01-4540-b315-8f5cf15d7c3a.webp",
-            "https://web-assests.monsterenergy.com/mnst/80f5851f-b4e7-4991-a477-0a1866c5b8ed.webp",
-            "https://web-assests.monsterenergy.com/mnst/bdd04209-6311-4121-976c-f18c93b1bbdf.webp",
-            "https://web-assests.monsterenergy.com/mnst/870180a1-a4ad-4e16-8036-8da586c19cdf.webp",
-            "https://web-assests.monsterenergy.com/mnst/28ee69eb-aee6-4f44-b301-706aa35e16a1.webp"
-
-        ];
-
-        for (var i = num; i > 0; i--) {
-            var balloon = document.createElement("img");
-            balloon.className = "balloon";
-            // Select a random image URL from the array
-            var randomImageUrl = imageUrls[random(imageUrls.length)];
-            balloon.src = randomImageUrl;
-            balloon.style.cssText = getRandomStyles();
-            balloonContainer.append(balloon);
-        }
-    }
-
-
-    function removeBalloons() {
-        balloonContainer.style.opacity = 0;
-        setTimeout(() => {
-            balloonContainer.remove();
-        }, 500);
-    }
-
-    window.addEventListener("load", () => {
-        createBalloons(30);
-    });
-
-    window.addEventListener("click", () => {
-        removeBalloons();
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var phoneElements = document.querySelectorAll('.masked-phone');
-
-        phoneElements.forEach(function (element) {
-            var phone = element.textContent.trim();
-            var maskedPhone = maskPhoneNumber(phone);
-            element.textContent = maskedPhone;
-        });
-
-        function maskPhoneNumber(phone) {
-            var visibleDigits = phone.substring(phone.length - 4);
-            var maskedPart = '*'.repeat(phone.length - 4);
-            return maskedPart + visibleDigits;
-        }
-    });
-    console.log(localStorage.getItem('user_mobile_no'));
-</script>
-<script>
-    // console.log('sds'+localStorage.getItem('user_mobile_no'))
-    if (!localStorage.getItem('user_mobile_no')) {
-        window.location.href = "/";
-    } else {
-        const user_phone_no = localStorage.getItem('user_mobile_no');
-        localStorage.setItem('user_mobile_no', user_phone_no);
-        console.log(user_phone_no);
-    }
 </script>
 @include('footer')
 @endsection

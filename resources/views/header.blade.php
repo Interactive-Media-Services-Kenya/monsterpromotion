@@ -24,9 +24,9 @@
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav main-menu ml-auto">
                             <li><a href="/user/play-games" class="active">Home</a></li>
-
-                            <li><a href="{{ route('user/play-trivia', ['id' => 1]) }}">General Quiz</a></li>
-                            <li><a href="{{ route('user/play-trivia', ['id' => 2]) }}">Personality Quiz</a></li>
+                            <li><a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}">General Quiz</a></li>
+                            <li><a href="{{ route('user/play-trivia', ['id' => encrypt(2)]) }}">Personality Quiz</a>
+                            </li>
                             <li><a href="{{ route('user/music-game') }}">Music Game</a></li>
                             <li><a href="{{ route('leaders-board')}}">Leaders Board</a></li>
                             <li><a href="">Contact Us</a></li>

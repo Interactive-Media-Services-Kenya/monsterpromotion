@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\singleScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Question;
@@ -80,8 +81,11 @@ class QuizController extends Controller
             $user->score += $request->score;
             $user->save();
         }
+        $single = new SingleScore();
+        $single->total_score = $request->score;
+        $single->user_phone = $mobile2;
+        $single->save();
         session()->forget('random_questions');
-
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
     public function storeQuestion(Request $request)
@@ -149,7 +153,7 @@ class QuizController extends Controller
     public function selectQuiz()
     {
         $mobile = $_GET['user_code'];
-        $category = $_GET['category_id'];
+        $category = decrypt($_GET['category_id']);
         $numberStr = $mobile;
         if ($numberStr[0] == '0') {
             $mobile2 = "254" . ltrim($mobile, '0');
@@ -162,9 +166,14 @@ class QuizController extends Controller
         } else {
             $question_done = [];
         }
-        // dd($question_done);
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::whereNotIn('id', $question_done)->where('category_id', $category)->get()->shuffle()->take(10);
+            $randomQuestions = Question::select('id', 'question', 'choice_A', 'choice_B', 'choice_C', 'choice_D')
+                ->whereNotIn('id', $question_done)
+                ->where('category_id', $category)
+                ->get()
+                ->shuffle()
+                ->take(10);
+
             $_SESSION['random_questions'] = $randomQuestions->toArray();
             if (count($randomQuestions) > 0) {
                 return response()->json($randomQuestions->first());
@@ -290,4 +299,29 @@ class QuizController extends Controller
         }
 
     }
+    public function getCategoryName(Request $request)
+    {
+        $category_id = decrypt($request->categoryID);
+        if ($category_id == 2) {
+            return response()->json(["category_name" => "PERSONALITY QUIZ"]);
+        } else if ($category_id == 1) {
+            return response()->json(["category_name" => "GENERAL QUIZ"]);
+        } else {
+            return response()->json(["error" => "No category Found"]);
+        }
+    }
+    public function getQuestionResult(Request $request)
+    {
+
+        $question = $request->questionID;
+        $userChoice = $request->userChoice;
+        $choices = Question::where("id", $question)->first();
+
+        if ($choices->correct_answer == $userChoice) {
+            return response()->json(["status" => true, "choice" => $choices->correct_answer]);
+        } else {
+            return response()->json(["status" => false, "choice" => $choices->correct_answer]);
+        }
+    }
+
 }

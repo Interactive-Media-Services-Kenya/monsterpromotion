@@ -4,7 +4,6 @@ const formput = document.querySelector(".upload-form");
 const form = document.querySelector("form"),
   fileInput = document.querySelector(".file-input");
 phoneInput = document.getElementById("phone_no").value;
-
 verifyButton = document.querySelector(".verify-button"),
   verificationCodeInput = document.getElementById("verificationid"),
   progressArea = document.querySelector(".progress-area"),
@@ -13,12 +12,10 @@ fileInput.disabled = true;
 verificationCodeInput.disabled = true;
 document.getElementById("submitbtn").disabled = true;
 formput.addEventListener("click", () => {
-
   fileInput.click();
 });
 verifyButton.addEventListener("click", () => {
   var phone = document.getElementById("phone_no").value;
-
   if (validateMobileNumber(phone)) {
     $.ajax({
       url: '/api/user/send-otp',
@@ -28,7 +25,6 @@ verifyButton.addEventListener("click", () => {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        console.log(response);
         if (response.status === 'success') {
           if (response.exist == 'approved') {
             localStorage.setItem('user_mobile_no', phone);
@@ -121,7 +117,6 @@ function uploadFile(name) {
   xhr.send(data);
 }
 function validateMobileNumber(number) {
-  console.log(number);
   number = number.replace(/\D/g, '');
   const length = number.length;
   if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
@@ -143,31 +138,26 @@ function startAnimation() {
 
   intervalId = setInterval(function () {
     if (increasing) {
-      // Increase dot count
       ellipsis.innerHTML += ".";
       count++;
       if (count > maxCount) {
         increasing = false;
       }
     } else {
-      // Decrease dot count
       ellipsis.innerHTML = ellipsis.innerHTML.slice(0, -1);
       count--;
       if (count === 1) {
-        increasing = true; // Start increasing dot count again
+        increasing = true;
       }
     }
-  }, 200); // Adjust the interval duration as needed
+  }, 200);
 }
 
-// Start the animation
 startAnimation();
 
-
-// Function to stop the animation
 function stopAnimation() {
   clearInterval(intervalId);
-  ellipsis.innerHTML = ""; // Remove ellipsis when animation stops
+  ellipsis.innerHTML = "";
 }
 
 function verifyOTP() {
@@ -199,7 +189,6 @@ function saveDetails() {
   let file = fileInput.files[0];
   let phone = document.getElementById("phone_no").value.trim();
   if (document.querySelector(".upload-form").style.display === 'none') {
-
     document.getElementById("submitbtn").disabled = false;
   } else {
     if (!file) {
@@ -211,8 +200,6 @@ function saveDetails() {
 
     }
   }
-
-
   if (!phone) {
     Swal.fire({
       icon: 'error',
@@ -222,7 +209,6 @@ function saveDetails() {
     return;
   }
   let data = new FormData(form);
-  console.log(data);
   $.ajax({
     url: 'api/user/save-user-details',
     method: 'POST',
@@ -233,7 +219,6 @@ function saveDetails() {
       'X-CSRF-TOKEN': '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response.status);
       if (response.status == 'approved') {
         Swal.fire({
           icon: 'success',

@@ -1,146 +1,13 @@
 <!-- banner-section start -->
 @extends('layout')
 @section('content')
-<style>
-    @media (max-width: 998px) {
-        .section-header {
-            margin-top: 40px !important;
-            margin-bottom: 40px;
-        }
+<link rel="stylesheet" href="{{ asset('css/starttrivia.css')}}">
 
-        #header-text,
-        .title {
-            font-size: 20px !important;
-        }
-    }
-
-    /* Add this CSS */
-    body.overlay-shown {
-        overflow: hidden;
-        /* Prevent scrolling */
-    }
-
-    body {
-        background: #171717;
-    }
-
-    body.overlay-shown>*:not(#overlay) {
-        display: none;
-        /* Hide all content except the overlay */
-    }
-
-    /* Modal styles */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-        /* Center horizontally */
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 0 auto;
-        /* Center horizontally */
-        margin-top: 20%;
-        /* Adjust vertical position */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
-        /* Limit maximum width */
-        display: inline-block;
-        /* Allows centering with margin: auto */
-    }
-
-    @media (max-width: 998px) {
-        .modal-content {
-
-            margin-top: 50%;
-
-        }
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    /* Overlay styles */
-    .overlaid {
-        display: none;
-        position: fixed;
-        z-index: 200;
-        width: 100%;
-        height: 100%;
-        background: red;
-        top: 0;
-        left: 0;
-        z-index: 100;
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: center;
-    }
-
-    /* Countdown styles */
-    .countdown {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 30px;
-    }
-</style>
-<script>
-    if (!localStorage.getItem('user_mobile_no')) {
-        window.location.href = "/";
-    } else {
-        const user_phone_no = localStorage.getItem('user_mobile_no');
-        localStorage.setItem('user_mobile_no', user_phone_no);
-        console.log(user_phone_no);
-    }
-</script>
 <!-- Modal -->
 <audio id="background-music" loop>
     <source src="path_to_your_audio_file.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-
-        <span class="close">&times;</span>
-        <form action="#">
-            <div class="subscribe">
-                <input type="text" required id="username" name="username" placeholder="Enter Fullname"><br />
-
-            </div>
-            <div class="subscribe" style="margin-top:20px">
-                <input type="text" required placeholder="Enter Phone No">
-                <br />
-
-                <button type="button" class="btn btn-primary"
-                    style="margin-top:20px;width:100%;background:#171717;border:none">PLAY
-                    NOW</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- Browse Tournaments start -->
 <section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
@@ -155,8 +22,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
-                        <h2 class="title"><span id="header-text" style="color:#B2D236"></span> GAME</h2>
-                        {{-- <p>et to know our top Monster GChampions.</p> --}}
+                        <h2 class="title"><span id="header-text" style="color:#B2D236"></span></h2>
                     </div>
                 </div>
             </div>
@@ -187,7 +53,6 @@
                                         alt="image"></span>
                                 <button class="cmn-btn btn-play" style="background: #b2d236;">READY?
                                     LETS START</button>
-
                             </div>
                         </div>
                     </div>
@@ -200,111 +65,6 @@
 </section>
 <!-- Browse Tournaments end -->
 
-<script>
-    var currentUrl = window.location.href;
-    var urlParts = currentUrl.split("/");
-    var categoryId = urlParts[urlParts.length - 1]
-
-
-
-    // JavaScript
-    document.addEventListener("DOMContentLoaded", function () {
-        if (categoryId == 1) {
-            document.getElementById('header-text').innerText = 'GENERAL QUIZ';
-        } else if (categoryId == 2) {
-            document.getElementById('header-text').innerText = 'PERSONALITY';
-        }
-        // localStorage.clear();
-        var userResults = localStorage.getItem('question_answers')
-        if (userResults) {
-            localStorage.clear('question_answers');
-        }
-        const readyButton = document.querySelector('.cmn-btn');
-        const modal = document.getElementById('myModal');
-        const closeBtn = modal.querySelector('.close');
-
-        readyButton.addEventListener('click', function () {
-
-            modal.style.display = 'block';
-        });
-
-        closeBtn.addEventListener('click', function () {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const readyButton = document.querySelector('.btn-play');
-        const modal = document.getElementById('myModal');
-        const closeBtn = modal.querySelector('.close');
-        const overlay = document.getElementById('overlay');
-        const countdownElement = document.getElementById('countdown');
-
-        let countdownValue = 10; // Initial countdown value
-        function createBeepSound() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            oscillator.type = 'sine'; // Set oscillator type to sine wave
-            oscillator.frequency.setValueAtTime(1000, audioContext.currentTime); // Set frequency (Hz)
-            oscillator.connect(audioContext.destination);
-            oscillator.start();
-            setTimeout(function () {
-                oscillator.stop();
-            }, 100); // Stop the oscillator after 100 milliseconds
-        }
-        readyButton.addEventListener('click', function () {
-            modal.style.display = 'none';
-            overlay.style.display = 'block'; // Show the overlay
-            startCountdown(); // Start the countdown when button is clicked
-            const usernameInput = document.getElementById('username');
-            const username = usernameInput.value.trim(); // Get the username from the input field
-            if (username) {
-                localStorage.setItem('username', username);
-            }
-        });
-
-        closeBtn.addEventListener('click', function () {
-            modal.style.display = 'none';
-            overlay.style.display = 'none'; // Hide the overlay
-            clearInterval(countdownInterval); // Stop the countdown if modal is closed
-        });
-
-        // Function to start the countdown
-        function startCountdown() {
-            countdownElement.textContent = countdownValue;
-            const countdownInterval = setInterval(function () {
-                countdownValue--;
-                countdownElement.textContent = countdownValue;
-                if (countdownValue <= 0) {
-                    clearInterval(countdownInterval);
-                    redirectToGame();
-                }
-            }, 1000);
-        }
-
-        // Function to redirect to the game
-        function redirectToGame() {
-            // Get the current URL
-
-            window.location.href = '/user/start-trivia/' + categoryId;
-        }
-        window.addEventListener('click', function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                overlay.style.display = 'none'; // Hide the overlay
-                clearInterval(countdownInterval); // Stop the countdown if modal is closed
-            }
-        });
-    });
-
-</script>
-
+<script src="{{ asset('js/starttrivia.js')}}"></script>
 @include('footer')
 @endsection
