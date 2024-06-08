@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
 var overlay = document.createElement('div');
 function fetchQuestion1(questionId = null, selectedAnswer = null) {
 
-  console.log('tuko');
   if (questionId && selectedAnswer) {
 
     overlay.classList.add('overlay');
@@ -104,8 +103,6 @@ function fetchQuestion1(questionId = null, selectedAnswer = null) {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        console.log(response)
-        console.log(questionId)
         if (response.status === true) {
           var successSound = new Audio('/correct.mp3');
           successSound.play();
@@ -150,7 +147,6 @@ function fetchQuestion(questionId = null, selectedAnswer = null) {
   xhr.onload = function () {
     if (xhr.status >= 200 && xhr.status < 400) {
       var questionData = JSON.parse(xhr.responseText);
-      console.log(questionData);
       if (questionData == 'caught-up') {
         Swal.fire({
           icon: 'info',
