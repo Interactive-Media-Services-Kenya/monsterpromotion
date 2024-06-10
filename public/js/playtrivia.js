@@ -56,7 +56,6 @@ function startCountdownAndProgressBar(duration) {
 document.addEventListener('DOMContentLoaded', function () {
   var user_phone_no = localStorage.getItem('user_mobile_no');
   document.getElementById('userr_phone').value = user_phone_no;
-  // Add event listener to the form submission
   document.querySelector('form').addEventListener('submit', function (event) {
     event.preventDefault();
     var username = document.querySelector('input[name="username"]').value;
@@ -71,15 +70,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 document.addEventListener('DOMContentLoaded', function () {
-  // Fetch the first question when the page loads
   fetchQuestion();
-  // Add event listeners to radio buttons
   document.addEventListener('change', function (event) {
     if (event.target.matches('input[type="radio"]')) {
       var selectedAnswer = event.target.value;
       var selectedQuestionId = event.target.getAttribute('data-question');
-      // Show the loader
-      fetchQuestion(selectedQuestionId, selectedAnswer); // Fetch the next question
+      fetchQuestion(selectedQuestionId, selectedAnswer);
     }
   });
 });
@@ -97,6 +93,14 @@ function fetchQuestion1(questionId = null, selectedAnswer = null) {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
+        var correctElements = document.querySelectorAll('.correct-answer');
+        correctElements.forEach(function (element) {
+          element.classList.add("blinking");
+        });
+        var correctLabel = document.querySelector(`label[for="${questionId}_${response.choice}"]`);
+        if (correctLabel) {
+          correctLabel.classList.add("correct-answer", "blinking");
+        }
         if (response.status === true) {
           var successSound = new Audio('/correct.mp3');
           successSound.play();

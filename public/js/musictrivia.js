@@ -95,6 +95,14 @@ function fetchQuestion1(questionId = null, selectedAnswer = null) {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
+        var correctElements = document.querySelectorAll('.correct-answer');
+        correctElements.forEach(function (element) {
+          element.classList.add("blinking");
+        });
+        var correctLabel = document.querySelector(`label[for="${questionId}_${response.choice}"]`);
+        if (correctLabel) {
+          correctLabel.classList.add("correct-answer", "blinking");
+        }
         if (response.status === true) {
           var successSound = new Audio('/correct.mp3');
           successSound.play();
