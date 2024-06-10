@@ -167,7 +167,7 @@ class QuizController extends Controller
             $question_done = [];
         }
         if (!isset($_SESSION['random_questions'])) {
-            $randomQuestions = Question::select('id', 'question', 'choice_A', 'choice_B', 'choice_C', 'choice_D')
+            $randomQuestions = Question::select('id', 'question', 'music_title', 'choice_A', 'choice_B', 'choice_C', 'choice_D')
                 ->whereNotIn('id', $question_done)
                 ->where('category_id', $category)
                 ->get()
