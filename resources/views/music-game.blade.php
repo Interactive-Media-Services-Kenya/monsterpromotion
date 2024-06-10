@@ -92,6 +92,6 @@ $categoryId = encrypt(3);  ?>
 </script>
 <script>
 </script>
-<script src="{{ asset('js/playtrivia.js')}}"></script>
+<script src="{{ asset('js/musictrivia.js')}}"></script>
 @include('footer')
 @endsection
