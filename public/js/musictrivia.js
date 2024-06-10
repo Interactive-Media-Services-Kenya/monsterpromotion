@@ -4,9 +4,7 @@ if (!localStorage.getItem('user_mobile_no')) {
   const user_phone_no = localStorage.getItem('user_mobile_no');
   localStorage.setItem('user_mobile_no', user_phone_no);
 }
-var currentUrl = window.location.href;
-var urlParts = currentUrl.split("/");
-var categoryId = urlParts[urlParts.length - 1]
+
 const modal = document.getElementById('myModal');
 const body = document.body;
 startCountdownAndProgressBar(60);
@@ -197,6 +195,12 @@ function updateQuestion(questionData) {
   questionContainer.innerHTML = '';
   var questionElement = document.createElement('div');
   questionElement.innerHTML = `
+  <p>
+  <audio controls>
+      <source src="/music/${questionData.music_title}" type="audio/mp3">
+      Your browser does not support the audio element.
+  </audio>
+</p> 
     <p>${questionData.question}</p>
     <br />
     <div style="color:white">
@@ -206,16 +210,7 @@ function updateQuestion(questionData) {
     <div style="color:white">
       <input type="radio" style="display: none;" name="answer" value="${questionData.choice_B}" data-question="${questionData.id}">
         <label for="${questionData.id}_B" onclick="fetchQuestion1(${questionData.id},'B')" class="radio-button ">${questionData.choice_B}</label>
-    </div>
-    <div style="color:white">
-      <input type="radio" style="display: none;" name="answer" value="${questionData.choice_C}" data-question="${questionData.id}">
-        <label for="${questionData.id}_C" onclick="fetchQuestion1(${questionData.id},'C')" class="radio-button">${questionData.choice_C}</label>
-    </div>
-    <div style="color:white">
-      <input type="radio" style="display: none;" name="answer" value="${questionData.choice_D}" data-question="${questionData.id}">
-        <label for="${questionData.id}_D" onclick="fetchQuestion1(${questionData.id},'D')" class="radio-button ">${questionData.choice_D}</label>
-    </div>
-    `;
+    </div> `;
   questionContainer.appendChild(questionElement);
 
   document.getElementById('question-number').textContent = questionCounter;
@@ -224,7 +219,6 @@ function updateQuestion(questionData) {
 }
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('saveit').addEventListener('click', function (event) {
-    // Retrieve the item from localStorage
     var questionAnswers = localStorage.getItem('question_answers');
     var dataToSend = {
       questionAnswers: questionAnswers,

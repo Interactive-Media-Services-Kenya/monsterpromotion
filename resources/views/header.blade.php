@@ -27,7 +27,7 @@
                             <li><a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}">General Quiz</a></li>
                             <li><a href="{{ route('user/play-trivia', ['id' => encrypt(2)]) }}">Personality Quiz</a>
                             </li>
-                            <li><a href="{{ route('user/music-game') }}">Music Game</a></li>
+                            <li><a href="{{ route('user/music-game', ['id' => encrypt(3)]) }}">Music Game</a></li>
                             <li><a href="{{ route('leaders-board')}}">Leaders Board</a></li>
                             <li><a href="">Contact Us</a></li>
                         </ul>

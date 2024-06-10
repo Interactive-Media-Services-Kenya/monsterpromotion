@@ -121,6 +121,7 @@ body {
         height: 70vh;
 
     }
+}
 
     @media (max-width: 767px) {
         #banner-section {
@@ -141,7 +142,7 @@ body {
             padding: 0 95px !important;
         }
     }
-}
+
 
 #tournaments-section .single-item .prize-area {
     border: none;
@@ -153,7 +154,6 @@ body {
     background: #b2d236;
     color: white;
 }
-
 #how-works-section .single-item .icon-area {
     background: #b2d236 !important;
     border-radius: 10px;
@@ -161,3 +161,4 @@ body {
     padding: 23px 25px;
     position: relative;
 }
+

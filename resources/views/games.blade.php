@@ -56,8 +56,8 @@
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item available">
-                        <a href="{{ route('user/music-game') }}"><img src="{{ asset('images/music.png') }}"
-                                alt="image"></a>
+                        <a href="{{ route('user/music-game', ['id' => encrypt(3)]) }}"><img
+                                src="{{ asset('images/music.png') }}" alt="image"></a>
                     </div>
 
                 </div>
