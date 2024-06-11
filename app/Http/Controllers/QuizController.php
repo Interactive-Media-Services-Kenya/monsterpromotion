@@ -81,10 +81,10 @@ class QuizController extends Controller
             $user->score += $request->score;
             $user->save();
         }
-        $single = new SingleScore();
-        $single->total_score = $request->score;
-        $single->user_phone = $mobile2;
-        $single->save();
+        // $single = new SingleScore();
+        // $single->total_score = $request->score;
+        // $single->user_phone = $mobile2;
+        // $single->save();
         session()->forget('random_questions');
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
