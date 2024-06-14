@@ -7,7 +7,7 @@
 
     <div class="contad" style="margin-top:20px !important;">
         <br /> <br /> <br /> <br />
-        <h4 style="text-align:center;color:white;">BE OUR NEXT CHAMPION</h>
+        <h4 style="text-align:center;color:#B2D236; ">BE OUR NEXT CHAMPION</h>
             <br />
             <p style="text-align:center;color:white;">Win Tickets to an exclusive monster energy party.<br /> Share a
                 selfie
