@@ -64,6 +64,7 @@ class QuizController extends Controller
     }
     public function saveScore(Request $request)
     {
+        // dd($request->all());
 
         $mobile = (string) $request->phone;
         $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
@@ -81,10 +82,10 @@ class QuizController extends Controller
             $user->score += $request->score;
             $user->save();
         }
-        // $single = new SingleScore();
-        // $single->total_score = $request->score;
-        // $single->user_phone = $mobile2;
-        // $single->save();
+        $single = new SingleScore();
+        $single->total_score = $request->score;
+        $single->user_phone = $mobile2;
+        $single->save();
         session()->forget('random_questions');
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
@@ -230,13 +231,17 @@ class QuizController extends Controller
         if ($user) {
             if ($user->status == 1) {
                 $exist = 'approved';
+                $username = $user->name;
             } else if ($user->status == 2) {
                 $exist = 'rejected';
+                $username = $user->name;
             } else {
                 $exist = 'pending';
+                $username = $user->name;
             }
+        } else {
+            $username = 'none';
         }
-
         try {
             $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
 
@@ -259,7 +264,7 @@ class QuizController extends Controller
             $response = curl_exec($ch);
             $res = json_decode($response);
             curl_close($ch);
-            return response()->json(["status" => "success", "exist" => $exist, "code" => $otp, "message" => "OTP requested successfully"]);
+            return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
         } catch (\Exception $e) {
             Log::debug($e);
             return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
@@ -292,6 +297,7 @@ class QuizController extends Controller
             $filePath = $file->store($directory);
             $user = new User;
             $user->phone = $mobile2;
+            $user->name = $request->input('username');
             $user->status = 1;
             $user->photo = $filePath;
             $user->save();

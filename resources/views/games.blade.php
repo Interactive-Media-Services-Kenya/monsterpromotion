@@ -177,8 +177,6 @@
         </div>
     </div>
 </section>
-<script>
 
-</script>
 @include('footer')
 @endsection

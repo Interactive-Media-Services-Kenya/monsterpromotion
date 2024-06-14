@@ -107,6 +107,7 @@ function fetchQuestion1(questionId = null, selectedAnswer = null) {
           var currentCount = parseInt(document.getElementById('points-earned').innerText);
           document.getElementById('points-earned').innerText = currentCount + 1;
           document.getElementById('scored').innerText = currentCount + 1;
+          document.getElementById('total_score').value = currentCount + 1;
         } else {
           var wrongSound = new Audio('/wrong.mp3');
           wrongSound.play();
@@ -193,7 +194,6 @@ function updateQuestion(questionData) {
     var totalQuestions = data.length;
     var scored = document.getElementById('scored').innerText;
     document.getElementById('total_score').value = scored;
-
     document.getElementById('total_questions').value = totalQuestions;
   }
   localStorage.setItem('last_question', questionData.id);
@@ -261,11 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('No data found in localStorage');
     }
   });
-  document.getElementById('dontsave').addEventListener('click', function (event) {
-    event.preventDefault();
-    localStorage.removeItem('question_answers');
-    window.location.href = '/leaders-board';
-  });
+
 });
 
 

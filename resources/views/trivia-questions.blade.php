@@ -15,24 +15,25 @@
     <div class="modal-content">
         <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
         {{-- <span class="close">&times;</span> --}}
-        <p style="color:#56be78"><b>CONGRATULATIONS YOU GOT <span style="color:black" id="scored"> <span
-                        style="color:black">POINTS</span></b></p>
+        <p style="color:#56be78"><b>CONGRATULATIONS <span id="playerName" style="color:black"></span> </b></p>
         <br />
-        <p style="color:black">Enter details below to save your score</p><br />
+        <p style="color:#56be78"><b>YOU GOT </b><span style="color:black" id="scored"> <span
+                    style="color:black">POINTS</span>
+        </p>
+
         <form action="{{ route('save-score') }}" method="post">
             @csrf
-            <div class="subscribe">
-                <input type="text" name="username" placeholder="Enter Fullname">
-                <input type="hidden" id="total_score" name="score" value=""><br />
-                <input type="hidden" id="total_questions" name="total_questions" value="">
-                <input type="hidden" id="userr_phone" name="phone" value="">
-            </div>
+
+            <input type="hidden" name="username" id="username" placeholder="Enter Fullname">
+            <input type="hidden" id="total_score" name="score" value=""><br />
+            <input type="hidden" id="total_questions" name="total_questions" value="">
+            <input type="hidden" id="userr_phone" name="phone" value="">
+
             <div class="subscribe" style="margin-top:10px">
-                <br />
+
                 <button type="submit" id="saveit" class="btn btn-primary btn-play"
-                    style="margin-top:20px;width:100%;background:#171717;border:none">SAVE SCORE</button>
-                <button type="submit" id="dontsave" class="btn btn-primary btn-play"
-                    style="margin-top:20px;width:100%;background:rgb(136, 64, 64);border:none">DONT SAVE</button>
+                    style="margin-top:20px;width:100%;background:#171717;border:none">VIEW RANKING</button>
+
             </div>
         </form>
     </div>
@@ -79,6 +80,12 @@
 </section>
 <!-- Browse Tournaments end -->
 <script src="{{ asset('js/playtrivia.js')}}"></script>
+<script>
 
+    var usernameInput = document.getElementById("username");
+    usernameInput.value = localStorage.getItem('username');
+    document.getElementById("playerName").textContent = localStorage.getItem('username');
+
+</script>
 @include('footer')
 @endsection

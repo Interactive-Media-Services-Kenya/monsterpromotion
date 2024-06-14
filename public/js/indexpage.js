@@ -1,9 +1,13 @@
 
+if (localStorage.getItem('user_mobile_no')) {
+  window.location.href = 'user/play-games';
+}
 
 const formput = document.querySelector(".upload-form");
 const form = document.querySelector("form"),
   fileInput = document.querySelector(".file-input");
 phoneInput = document.getElementById("phone_no").value;
+nameInput = document.getElementById("username").value;
 verifyButton = document.querySelector(".verify-button"),
   verificationCodeInput = document.getElementById("verificationid"),
   progressArea = document.querySelector(".progress-area"),
@@ -28,10 +32,21 @@ verifyButton.addEventListener("click", () => {
         if (response.status === 'success') {
           if (response.exist == 'approved') {
             localStorage.setItem('user_mobile_no', phone);
+            localStorage.setItem('username', nameInput);
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
             document.querySelector(".upload-form").style.display = 'none';
           } else if (response.exist == 'rejected') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
             document.querySelector(".response-message").innerText = 'Your previous upload was rejected,Kindly upload again';
           } else if (response.exist == 'pending') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+
             document.querySelector(".upload-form").style.display = 'none';
             document.querySelector(".response-message").innerText = 'Your previous upload is still pending,Please try again later.';
           }
@@ -150,7 +165,7 @@ function startAnimation() {
         increasing = true;
       }
     }
-  }, 200);
+  }, 800);
 }
 
 startAnimation();
@@ -188,6 +203,7 @@ function verifyOTP() {
 function saveDetails() {
   let file = fileInput.files[0];
   let phone = document.getElementById("phone_no").value.trim();
+  let username = document.getElementById("username").value;
   if (document.querySelector(".upload-form").style.display === 'none') {
     document.getElementById("submitbtn").disabled = false;
   } else {
@@ -229,6 +245,7 @@ function saveDetails() {
           window.location.href = 'user/play-games';
         }, 1000);
         localStorage.setItem('user_mobile_no', phone);
+        localStorage.setItem('username', username);
       } else {
         Swal.fire({
           icon: 'info',
