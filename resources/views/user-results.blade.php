@@ -195,25 +195,64 @@
         display: none;
         /* Hide additional questions initially */
     }
+
+    .form {
+
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    fieldset {
+        border: 2px solid #B2D236;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+    }
+
+    legend {
+        background-color: #B2D236;
+        color: white;
+        WIDTH: 20%;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 998px) {
+        legend {
+            width: 80%;
+        }
+    }
+
+    .cardi {
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 10px;
+        /* Rounded corners */
+    }
+
+    .cardi:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        /* Increase shadow on hover */
+    }
 </style>
 
 <!-- Modal -->
 
 
-
-<!-- Browse Tournaments start -->
 <section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
-    <!-- Overlay with countdown timer -->
-
-
-
-
     <div class="overlay pt-120 pb-120">
-        <div class="container wow fadeInUp">
+        <br /><br /><br />
+        <br /><br /><br /><br /><br />
+        <div class="container wow fadeInUp" style="margin-top:-200px;background:#171717 !important">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-12 text-center">
                     <div class="section-header">
-                        <h2 class="title">LEADERS BOARD</h2>
+                        <!-- <h2 class="title">LEADERS BOARD</h2> -->
                         <div class="row justify-content-end">
                             <div class="col-lg-4 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -226,39 +265,39 @@
                     </div>
                 </div>
             </div>
-            <div class="single-item">
-                <div class="row">
-                    <table class="table table-striped">
-                        <thead style="background:black">
-                            <tr>
-                                <th scope="col" class="scores">Player Rank</th>
-                                <th scope="col" class="scores">Username</th>
-                                <th scope="col" class="scores">Total Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->get();
+            <div class="single-item form" style="background:black; color: white;">
 
-                            @endphp
-                            @foreach($leaders as $leader)
+                <fieldset>
+                    <legend>LEADERSBOARD</legend>
 
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead style="background:#B2D236;">
                                 <tr>
-                                    <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                                    <td class="scores name">{{ $leader->name }}</td>
-                                    <td class="scores score">{{ $leader->score }}</td>
+                                    <th scope="col" class="scores">Rank</th>
+                                    <th scope="col" class="scores">Player</th>
+                                    <th scope="col" class="scores">Score</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
+                                @endphp
+                                @foreach($leaders as $leader)
+                                    <tr style="background:rgb(38,37,35)" class="cardi">
+                                        <th scope="row" class="scores">{{ $loop->iteration }}</th>
+                                        <td class="scores name">{{ $leader->name }}</td>
+                                        <td class="scores score">{{ $leader->score }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                                <tr style="border-bottom: 1px solid #ccc;">
-                                    <td colspan="3"></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
-
 
         </div>
     </div>

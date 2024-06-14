@@ -33,6 +33,19 @@
             width: 80%;
         }
     }
+
+    .cardi {
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 10px;
+        /* Rounded corners */
+    }
+
+    .cardi:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        /* Increase shadow on hover */
+    }
 </style>
 <section id="banner-section">
     <div id="balloon-container">
@@ -106,8 +119,6 @@
 <section id="tournaments-section">
     <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp" style="margin-top:-200px;background:#171717 !important">
-
-
             <div class="single-item form" style="background:black; color: white;">
 
                 <fieldset>
@@ -127,12 +138,12 @@
                                     $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
                                 @endphp
                                 @foreach($leaders as $leader)
-                                    <tr>
+                                    <tr style="background:rgb(38,37,35)" class="cardi">
                                         <th scope="row" class="scores">{{ $loop->iteration }}</th>
                                         <td class="scores">{{ $leader->name }}</td>
                                         <td class="scores">{{ $leader->score }}</td>
                                     </tr>
-                                    <tr style="border-bottom: 1px solid #ccc;">
+                                    <tr>
                                         <td colspan="3"></td>
                                     </tr>
                                 @endforeach
@@ -140,12 +151,7 @@
                         </table>
                     </div>
 
-
-
             </div>
-
-
-
 
         </div>
     </div>
