@@ -62,7 +62,7 @@
 </section>
 <!-- banner-section end -->
 <!-- Available Game In start -->
-<section id="available-game-section" style="background:#171717 !important">
+<section id="available-game-section">
     <br />
     <div class="overlay pb-120">
         <div class="container wow fadeInUp">
@@ -103,7 +103,7 @@
 <!-- How Works end -->
 
 <!-- Browse Tournaments start -->
-<section id="tournaments-section" style="background:#171717 !important">
+<section id="tournaments-section">
     <div class="overlay pt-120 pb-120">
         <div class="container wow fadeInUp" style="margin-top:-200px;background:#171717 !important">
 

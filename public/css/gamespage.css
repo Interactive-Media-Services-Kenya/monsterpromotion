@@ -1,6 +1,9 @@
 #banner-section {
     position: relative;
 }
+#available-game-section,#tournaments-section {
+    background-image: url('../images/img22.jpg');
+}
 
 .scores {
 
