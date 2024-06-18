@@ -164,7 +164,22 @@
                                                                     <td class="scores"> <img style="border-radius:50%;width:50px;height:50px"
                                                                             src="{{ asset(str_replace('public', 'storage', $img)) }}" alt="image">
                                                                         &nbsp;&nbsp; {{ $leader->name }}</td>
-                                                                    <td class="scores" style="text-align:center">{{ $leader->score }}</td>
+                                                                    <!-- <td class="scores" style="text-align:center">{{ $leader->score }}</td> -->
+                                                                    <td class="scores" style="text-align:center">
+    @php
+        $stars = ceil($leader->score / 5); // Calculate number of stars needed
+    @endphp
+    
+    @for ($i = 0; $i < 5; $i++)
+        @if ($i < $stars)
+            <span style="color: gold;">★</span> <!-- Gold star -->
+        @else
+            <span style="color: lightgray;">★</span> <!-- Grayed-out star -->
+        @endif
+    @endfor
+    ({{ $leader->score }} points )
+</td>
+
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="3"></td>
