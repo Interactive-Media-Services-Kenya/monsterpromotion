@@ -46,6 +46,11 @@
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         /* Increase shadow on hover */
     }
+
+    .trophy-icon {
+        color: gold;
+        /* Change color as needed */
+    }
 </style>
 <section id="banner-section">
     <div id="balloon-container">
@@ -128,23 +133,35 @@
                         <table class="table table-striped">
                             <thead style="background:#B2D236;">
                                 <tr>
-                                    <th scope="col" class="scores">Rank</th>
-                                    <th scope="col" class="scores">Player</th>
-                                    <th scope="col" class="scores">Score</th>
+                                    <th scope="col" class="scores">RANK</th>
+                                    <th scope="col" class="scores">PLAYER</th>
+                                    <th scope="col" class="scores">POINTS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                     $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
-
                                 @endphp
                                 @foreach($leaders as $leader)
                                                                 @php
                                                                     $img = DB::table('users')->where('phone', $leader->phone)->value('photo');
                                                                 @endphp
                                                                 <tr style="background:rgb(38,37,35)" class="cardi">
-                                                                    <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                                                                    <td class="scores"> <img style="border-radius:50%;width:40px;height:40px"
+
+
+
+                                                                    <th scope="row" class="scores">
+                                                                        <div style="position: relative; text-align: center;">
+                                                                            <img style="border-radius: 50%; width: 60px; height: 50px;"
+                                                                                src="{{ asset('images/trophy.png') }}" alt="image">
+                                                                            <div
+                                                                                style="position: absolute; top: 45%; left: 50%;font-size:16px; transform: translate(-50%, -50%); font-weight: bold;">
+                                                                                {{ $loop->iteration }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+
+                                                                    <td class="scores"> <img style="border-radius:50%;width:50px;height:50px"
                                                                             src="{{ asset(str_replace('public', 'storage', $img)) }}" alt="image">
                                                                         &nbsp;&nbsp; {{ $leader->name }}</td>
                                                                     <td class="scores">{{ $leader->score }}</td>
