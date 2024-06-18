@@ -136,19 +136,22 @@
                             <tbody>
                                 @php
                                     $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
+
                                 @endphp
                                 @foreach($leaders as $leader)
-                                    <tr style="background:rgb(38,37,35)" class="cardi">
-                                        <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                                        <td class="scores"> <img style="border-radius:50%;width:45px"
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5-3YjBcXTqKUlOAeUUtuOLKgQSma2wGG1g&s"
-                                                alt="image">
-                                            &nbsp;&nbsp; {{ $leader->name }}</td>
-                                        <td class="scores">{{ $leader->score }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                    </tr>
+                                                                @php
+                                                                    $img = DB::table('users')->where('phone', $leader->phone)->value('photo');
+                                                                @endphp
+                                                                <tr style="background:rgb(38,37,35)" class="cardi">
+                                                                    <th scope="row" class="scores">{{ $loop->iteration }}</th>
+                                                                    <td class="scores"> <img style="border-radius:50%;width:40px;height:40px"
+                                                                            src="{{ asset(str_replace('public', 'storage', $img)) }}" alt="image">
+                                                                        &nbsp;&nbsp; {{ $leader->name }}</td>
+                                                                    <td class="scores">{{ $leader->score }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3"></td>
+                                                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
