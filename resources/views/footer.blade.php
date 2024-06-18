@@ -11,8 +11,9 @@
                     </div>
                     <ul class="menu-side d-flex align-items-center">
                         <li><a href="/user/play-games" class="active">Home</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Contact</a></li>
+                        <!-- <li><a href="">About Us</a></li> -->
+                        <li><a href="{{ route('terms-conditions')}}">About</a></li>
+                        <li><a href="{{ route('terms-conditions')}}">Terms</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">

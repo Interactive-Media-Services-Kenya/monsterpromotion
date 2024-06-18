@@ -21,6 +21,7 @@ class QuizController extends Controller
     {
         return view('backend.dashboard');
     }
+
     public function add()
     {
         return view('backend.quiz/add');
@@ -328,6 +329,10 @@ class QuizController extends Controller
         } else {
             return response()->json(["status" => false, "choice" => $choices->correct_answer]);
         }
+    }
+    public function terms()
+    {
+        return view('terms-conditions');
     }
 
 }

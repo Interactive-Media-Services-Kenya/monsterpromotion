@@ -90,15 +90,15 @@
                 </div>
                 <div class="available-game-carousel">
                     <div class="single-item  available">
-                        <a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}"><img style="height:300px"
                                 src="{{ asset('images/general.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item available">
-                        <a href="{{ route('user/play-trivia', ['id' => encrypt(2)]) }}"><img
+                        <a href="{{ route('user/play-trivia', ['id' => encrypt(2)]) }}"><img style="height:300px"
                                 src="{{ asset('images/personality.png') }}" alt="image"></a>
                     </div>
                     <div class="single-item available">
-                        <a href="{{ route('user/music-game', ['id' => encrypt(3)]) }}"><img
+                        <a href="{{ route('user/music-game', ['id' => encrypt(3)]) }}"><img style="height:300px"
                                 src="{{ asset('images/music.png') }}" alt="image"></a>
                     </div>
 
@@ -140,7 +140,10 @@
                                 @foreach($leaders as $leader)
                                     <tr style="background:rgb(38,37,35)" class="cardi">
                                         <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                                        <td class="scores">{{ $leader->name }}</td>
+                                        <td class="scores"> <img style="border-radius:50%;width:45px"
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5-3YjBcXTqKUlOAeUUtuOLKgQSma2wGG1g&s"
+                                                alt="image">
+                                            &nbsp;&nbsp; {{ $leader->name }}</td>
                                         <td class="scores">{{ $leader->score }}</td>
                                     </tr>
                                     <tr>

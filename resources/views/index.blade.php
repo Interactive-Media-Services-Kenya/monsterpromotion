@@ -4,7 +4,6 @@
 </head>
 
 <body>
-
     <div class="contad" style="margin-top:20px !important;">
         <br /> <br /> <br /> <br />
         <h4 style="text-align:center;color:#B2D236; ">BE OUR NEXT CHAMPION</h>
@@ -12,7 +11,7 @@
             <p style="text-align:center;color:white;">Win Tickets to an exclusive monster energy party.<br /> Share a
                 selfie
                 with
-                a monster enery can,<br /> unlock some exciting games,play and stand a chance to be our next champion.
+                a monster energy can,<br /> unlock some exciting games,play and stand a chance to be our next champion.
             </p>
             <br />
             <div class="conta" style="padding-bottom:30px">
@@ -26,7 +25,6 @@
                                 style="border:1px solid #171717;background:#171717;color:white;width: 50%; font-size: 15px; border-radius: 0 5px 5px 0;">Verify
                                 Phone</button>
                         </div>
-
                         <div style="display: flex;">
                             <input type="number" name="otp" class="form-control" oninput="verifyOTP()"
                                 id="verificationid" style="margin-top:10px;border:1px solid #171717;width:49%"

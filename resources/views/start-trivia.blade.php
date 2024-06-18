@@ -14,7 +14,7 @@
     <!-- Overlay with countdown timer -->
     <div id="overlay" class="overlaid">
         <div class="countdown">
-            <h2>Trivia starts in <span id="countdown" style="font-size:25px !important">10</span> seconds</h2>
+            <h2>Trivia starts in <span id="countdown" style="font-size:35px !important">10</span> seconds</h2>
         </div>
     </div>
     <div class="overlay pt-120 pb-120">

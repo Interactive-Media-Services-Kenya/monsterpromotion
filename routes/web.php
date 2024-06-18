@@ -26,3 +26,5 @@ Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'sav
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
 Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
 Route::get('user/leaders-board', [App\Http\Controllers\QuizController::class, 'leadersBoard'])->name('leaders-board');
+
+Route::get('user/terms-conditions', [App\Http\Controllers\QuizController::class, 'terms'])->name('terms-conditions');
