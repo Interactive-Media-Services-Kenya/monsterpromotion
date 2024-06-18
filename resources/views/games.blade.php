@@ -133,9 +133,9 @@
                         <table class="table table-striped">
                             <thead style="background:#B2D236;">
                                 <tr>
-                                    <th scope="col" class="scores">RANK</th>
+                                    <th scope="col" class="scores" style="text-align:center">RANK</th>
                                     <th scope="col" class="scores">PLAYER</th>
-                                    <th scope="col" class="scores">POINTS</th>
+                                    <th scope="col" class="scores" style="text-align:center">POINTS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,7 +164,7 @@
                                                                     <td class="scores"> <img style="border-radius:50%;width:50px;height:50px"
                                                                             src="{{ asset(str_replace('public', 'storage', $img)) }}" alt="image">
                                                                         &nbsp;&nbsp; {{ $leader->name }}</td>
-                                                                    <td class="scores">{{ $leader->score }}</td>
+                                                                    <td class="scores" style="text-align:center">{{ $leader->score }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="3"></td>
