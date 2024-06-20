@@ -228,7 +228,32 @@
                             <div class="">
 
                                 <p>1. Terms and conditions will show here</p>
+                                <h1>TERMS AND CONDITIONS FOR "MONSTER WIN A TICKET TO AN EXCLUSIVE PARTY’ PROMOTION"</h1>
 
+                                <p>The following terms and conditions (“Terms and Conditions”) apply to the "MONSTER WIN A TICKET TO AN EXCLUSIVE PARTY’ PROMOTION” (“the Promotion") and by participating in the same you are deemed to have read, understood, and accepted the same.</p>
+
+                                <h2>Organization, Duration, Eligibility and Entry</h2>
+
+                                <ol>
+                                    <li>The Promotion is organized by Coca Cola Beverages Kenya (“Sponsor”) and Participation will be Restricted to NAIROBI COUNTY ONLY.</li>
+                                    <li>All employees, contractors, and immediate family (spouse, parents, siblings, children, and household members) the Organizers. Interactive Media Services (IMS) and Betting Control and Licensing Board including their respective parent companies, subsidiaries, affiliates, agents and any other supplier or third party involved in the development, facilitation or execution of this Promotion and their immediate families and dependants shall not be eligible to participate in this Promotion.</li>
+                                    <li>By participation in the Promotion, the entrant fully and unconditionally agrees to and accepts these Terms and Conditions and the decisions of the Organizers which are final and binding in all matters related to the Promotion.</li>
+                                    <li>The Promotion will run from 15th June 2024 up to 30th July 2024 and the Redemption to done 31st July 2024.</li>
+                                    <li>To be eligible for participation in the Promotion, participants must have attained the age of eighteen (18) years or older at the time of entry and must be a Resident of Nairobi County or be able to avail themselves in Nairobi at point of Redemption.</li>
+                                    <li>To Enter the Promotion, participants must:
+                                        <ul>
+                                            <li>Scan the QR Code available in POS in-store and access the Consumer Journey for a chance to win a ticket for two to the exclusive party.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+
+                                <h2>Prizes</h2>
+
+                                <ul>
+                                    <li>Participants in the draw stand a chance to win the following prizes:</li>
+                                    <li>One out of the 30 Tickets for the Exclusive Concert for Khaligraph and Femi One (one ticket admits two)</li>
+                                    <li>One out of the 8 Monster Boom boxes</li>
+                                </ul>
                             </div>
 
                         </div>
