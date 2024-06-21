@@ -66,7 +66,11 @@ class QuizController extends Controller
     public function saveScore(Request $request)
     {
         // dd($request->all());
-
+if($request->score && $request->score !=''){
+    $total_score=$request->score;
+}else{
+    $total_score=0;
+}
         $mobile = (string) $request->phone;
         $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
         $user = Score::where('phone', $mobile2)->first();
@@ -84,7 +88,7 @@ class QuizController extends Controller
             $user->save();
         }
         $single = new SingleScore();
-        $single->total_score = $request->score;
+        $single->total_score = $total_score;
         $single->user_phone = $mobile2;
         $single->save();
         session()->forget('random_questions');
