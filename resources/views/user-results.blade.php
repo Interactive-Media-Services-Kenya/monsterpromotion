@@ -198,50 +198,56 @@
 
     .form {
 
-        margin: 0 auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+margin: 0 auto;
+background: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    fieldset {
-        border: 2px solid #B2D236;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        padding: 10px 20px;
-    }
+fieldset {
+border: 2px solid #B2D236;
+border-radius: 5px;
+margin-bottom: 20px;
+padding: 10px 20px;
+}
 
-    legend {
-        background-color: #B2D236;
-        color: white;
-        WIDTH: 20%;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-weight: bold;
-    }
+legend {
+background-color: #B2D236;
+color: white;
+WIDTH: 20%;
+padding: 5px 10px;
+border-radius: 5px;
+font-weight: bold;
+}
 
-    @media (max-width: 998px) {
-        legend {
-            width: 80%;
-        }
-    }
+@media (max-width: 998px) {
+legend {
+    width: 80%;
+}
+}
 
-    .cardi {
-        background-color: white;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        border-radius: 10px;
-        /* Rounded corners */
-    }
+.cardi {
+background-color: white;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+transition: 0.3s;
+border-radius: 10px;
+/* Rounded corners */
+}
 
-    .cardi:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        /* Increase shadow on hover */
-    }
+.cardi:hover {
+box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+/* Increase shadow on hover */
+}
+
+.trophy-icon {
+color: gold;
+/* Change color as needed */
+}
 </style>
 
 <!-- Modal -->
+
 
 
 <section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
@@ -274,9 +280,9 @@
                         <table class="table table-striped">
                             <thead style="background:#B2D236;">
                                 <tr>
-                                    <th scope="col" class="scores">Rank</th>
-                                    <th scope="col" class="scores">Player</th>
-                                    <th scope="col" class="scores">Score</th>
+                                    <th scope="col" class="scores" style="text-align:center">RANK</th>
+                                    <th scope="col" class="scores">PLAYER</th>
+                                    <th scope="col" class="scores" style="text-align:center">POINTS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -284,14 +290,47 @@
                                     $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
                                 @endphp
                                 @foreach($leaders as $leader)
-                                    <tr style="background:rgb(38,37,35)" class="cardi">
-                                        <th scope="row" class="scores">{{ $loop->iteration }}</th>
-                                        <td class="scores name">{{ $leader->name }}</td>
-                                        <td class="scores score">{{ $leader->score }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                    </tr>
+                                                                @php
+                                                                    $img = DB::table('users')->where('phone', $leader->phone)->value('photo');
+                                                                @endphp
+                                                                <tr style="background:rgb(38,37,35)" class="cardi">
+
+
+
+                                                                    <th scope="row" class="scores">
+                                                                        <div style="position: relative; text-align: center;">
+                                                                            <img style="border-radius: 50%; width: 60px; height: 50px;"
+                                                                                src="{{ asset('images/trophy.png') }}" alt="image">
+                                                                            <div
+                                                                                style="position: absolute; top: 45%; left: 50%;font-size:16px; transform: translate(-50%, -50%); font-weight: bold;">
+                                                                                {{ $loop->iteration }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+
+                                                                    <td class="scores name"> <img style="border-radius:50%;width:50px;height:50px"
+                                                                            src="{{ asset(str_replace('public', 'storage', $img)) }}" alt="image">
+                                                                        &nbsp;&nbsp; {{ $leader->name }}</td>
+                                                                    <!-- <td class="scores" style="text-align:center">{{ $leader->score }}</td> -->
+                                                                    <td class="scores score" style="text-align:center">
+    @php
+        $stars = ceil($leader->score / 5); // Calculate number of stars needed
+    @endphp
+
+    @for ($i = 0; $i < 5; $i++)
+        @if ($i < $stars)
+            <span style="color: gold;">★</span> <!-- Gold star -->
+        @else
+            <span style="color: lightgray;">★</span> <!-- Grayed-out star -->
+        @endif
+    @endfor
+    ({{ $leader->score }} points )
+</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3"></td>
+                                                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
