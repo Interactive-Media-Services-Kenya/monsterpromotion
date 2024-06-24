@@ -169,7 +169,7 @@
     @php
         $stars = ceil($leader->score / 5); // Calculate number of stars needed
     @endphp
-    
+
     @for ($i = 0; $i < 5; $i++)
         @if ($i < $stars)
             <span style="color: gold;">★</span> <!-- Gold star -->
@@ -245,5 +245,94 @@
     </div>
 </section>
 
+<audio id="background-music" loop>
+    <source src="/wrong.mp3" type="audio/mp3">
+    <source src="/wrong.ogg" type="audio/ogg">
+    <!-- Include other formats if necessary -->
+    Your browser does not support the audio element.
+  </audio>
+
+
+
+<script>
+
+let audioContext = null;
+
+// Function to initialize the audio context
+function initAudioContext() {
+  // Create a new AudioContext if it doesn't exist
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+// Function to create a simple sine wave oscillator
+function createOscillator(frequency) {
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.value = frequency;
+  oscillator.start(0);
+  return oscillator;
+}
+
+// Function to create a gain node (volume control)
+function createGainNode() {
+  const gainNode = audioContext.createGain();
+  gainNode.gain.value = 0.5; // Set initial volume
+  return gainNode;
+}
+
+// Function to play soothing background music
+function playSoothingBackground() {
+  initAudioContext(); // Initialize the audio context
+
+  const oscillator1 = createOscillator(220); // Adjust frequency as needed
+  const oscillator2 = createOscillator(330); // Adjust frequency as needed
+  const gainNode1 = createGainNode();
+  const gainNode2 = createGainNode();
+
+  // Connect nodes
+  oscillator1.connect(gainNode1);
+  oscillator2.connect(gainNode2);
+  gainNode1.connect(audioContext.destination);
+  gainNode2.connect(audioContext.destination);
+
+  // Adjust volumes
+  gainNode1.gain.exponentialRampToValueAtTime(0.1, audioContext.currentTime + 5); // Fade out over 5 seconds
+  gainNode2.gain.exponentialRampToValueAtTime(0.1, audioContext.currentTime + 5); // Fade out over 5 seconds
+
+  // Play the audio element
+  const audioElement = document.getElementById('background-music');
+  audioElement.play().catch(function(error) {
+    console.error('Failed to play audio:', error);
+  });
+}
+
+// Automatically start playing soothing background music when the page loads
+window.onload = function() {
+  // Check if AudioContext can be created/resumed due to user gesture
+  const playPromise = audioContext ? Promise.resolve() : new Promise((resolve, reject) => {
+    const resume = () => {
+      if (audioContext.state === 'suspended') {
+        audioContext.resume().then(resolve).catch(reject);
+      } else {
+        resolve();
+      }
+    };
+
+    // Handle user gesture to start audio
+    document.addEventListener('click', resume);
+    document.addEventListener('touchstart', resume);
+  });
+
+  // After user gesture, start playing
+  playPromise.then(() => {
+    playSoothingBackground();
+  }).catch((error) => {
+    console.error('Failed to start audio:', error);
+  });
+};
+
+</script>
 @include('footer')
 @endsection

@@ -272,10 +272,8 @@ color: gold;
                 </div>
             </div>
             <div class="single-item form" style="background:black; color: white;">
-
                 <fieldset>
                     <legend>LEADERSBOARD</legend>
-
                     <div class="row">
                         <table class="table table-striped">
                             <thead style="background:#B2D236;">
@@ -294,9 +292,6 @@ color: gold;
                                                                     $img = DB::table('users')->where('phone', $leader->phone)->value('photo');
                                                                 @endphp
                                                                 <tr style="background:rgb(38,37,35)" class="cardi">
-
-
-
                                                                     <th scope="row" class="scores">
                                                                         <div style="position: relative; text-align: center;">
                                                                             <img style="border-radius: 50%; width: 60px; height: 50px;"

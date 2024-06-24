@@ -144,7 +144,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="single-item">
                     <div class="row">
 

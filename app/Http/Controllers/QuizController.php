@@ -250,7 +250,7 @@ if($request->score && $request->score !=''){
         try {
             $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
 
-            $senderName = rawurlencode("IMS");
+            $senderName = rawurlencode("MONSTER");
             $bulkBalanceUser = "voucher";
             $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
             $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile2&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
@@ -269,6 +269,7 @@ if($request->score && $request->score !=''){
             $response = curl_exec($ch);
             $res = json_decode($response);
             curl_close($ch);
+            Log::debug('SMS SEND');
             return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
         } catch (\Exception $e) {
             Log::debug($e);
