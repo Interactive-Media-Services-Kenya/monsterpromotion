@@ -58,13 +58,10 @@
         Your browser does not support the audio element.
       </audio>
     <script>
-
     document.addEventListener('DOMContentLoaded', function() {
       var audio = document.getElementById('background-music');
-      console.log('papa');
       audio.play();
     });
-
     </script>
     @include('footer')
     @endsection
