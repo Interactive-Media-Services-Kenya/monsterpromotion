@@ -305,32 +305,6 @@ function playSoothingBackground() {
     console.error('Failed to play audio:', error);
   });
 }
-
-// Automatically start playing soothing background music when the page loads
-window.onload = function() {
-  // Check if AudioContext can be created/resumed due to user gesture
-  const playPromise = audioContext ? Promise.resolve() : new Promise((resolve, reject) => {
-    const resume = () => {
-      if (audioContext.state === 'suspended') {
-        audioContext.resume().then(resolve).catch(reject);
-      } else {
-        resolve();
-      }
-    };
-
-    // Handle user gesture to start audio
-    document.addEventListener('click', resume);
-    document.addEventListener('touchstart', resume);
-  });
-
-  // After user gesture, start playing
-  playPromise.then(() => {
-    playSoothingBackground();
-  }).catch((error) => {
-    console.error('Failed to start audio:', error);
-  });
-};
-
 </script>
 @include('footer')
 @endsection

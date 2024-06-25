@@ -62,13 +62,50 @@ document.addEventListener('DOMContentLoaded', function () {
     var user_phone_no = localStorage.getItem('user_mobile_no');
     var phone = user_phone_no;
     localStorage.setItem('user_phone', phone);
-    if (username.trim() === '') {
-      alert('Please enter your full name.');
-    } else {
+    saveQuest();
       this.submit();
-    }
   });
 });
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+console.log(csrfToken);
+function saveQuest(){
+    console.log('sasas');
+    var questionAnswers = localStorage.getItem('question_answers');
+    var dataToSend = {
+      questionAnswers: questionAnswers,
+      user_phone: localStorage.getItem('user_mobile_no')
+    };
+    if (questionAnswers) {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        // Prepare data to send
+        var dataToSend = {
+          // Assuming dataToSend is properly defined in your original code
+          dataToSend: dataToSend
+        };
+
+        // Send AJAX request
+        $.ajax({
+          url: '/api/user/save-quiz-attempt', // Endpoint URL
+          type: 'POST', // HTTP method
+          headers: {
+            'X-CSRF-TOKEN': csrfToken // CSRF token
+          },
+          contentType: 'application/json', // Content type
+          data: JSON.stringify(dataToSend), // Data to send (needs to be stringified JSON)
+          success: function(response) {
+            // Handle success response
+            localStorage.removeItem('question_answers');
+          },
+          error: function(xhr, status, error) {
+            // Handle error response
+            console.error('Failed to send data to the backend:', error);
+            localStorage.removeItem('question_answers');
+          }
+        });
+      }
+
+}
 document.addEventListener('DOMContentLoaded', function () {
   fetchQuestion();
   document.addEventListener('change', function (event) {
