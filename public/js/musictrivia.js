@@ -64,10 +64,46 @@ document.addEventListener('DOMContentLoaded', function () {
     if (username.trim() === '') {
       alert('Please enter your full name.');
     } else {
+        saveQuest();
       this.submit();
+
     }
   });
 });
+function saveQuest(){
+    console.log('sasas');
+    var questionAnswers = localStorage.getItem('question_answers');
+    var dataToSend = {
+      questionAnswers: questionAnswers,
+      user_phone: localStorage.getItem('user_mobile_no')
+    };
+    // Check if the item exists
+    if (questionAnswers) {
+      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      // Send the data to the backend
+      fetch('save-quiz-answers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({ dataToSend })
+      })
+        .then(response => {
+          if (response.ok) {
+            localStorage.removeItem('question_answers');
+          } else {
+            localStorage.removeItem('question_answers');
+            console.error('Failed to send data to the backend');
+          }
+        })
+        .catch(error => {
+          console.error('Error sending data to the backend:', error);
+        });
+    } else {
+      console.error('No data found in localStorage');
+    }
+}
 document.addEventListener('DOMContentLoaded', function () {
   // Fetch the first question when the page loads
   fetchQuestion();
