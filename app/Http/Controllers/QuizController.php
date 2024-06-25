@@ -265,84 +265,102 @@ if($request->score && $request->score !=''){
     }
     public function sendOTP(Request $request)
     {
+        try {
+            // Generate OTP
+            $otp = rand(100000, 999999);
 
-        $mobile = $request["mobile"];
-        $otp = rand(100000, 999999);
-        $numberStr = $mobile;
-        if ($numberStr[0] == '0') {
-            $mobile2 = "254" . ltrim($mobile, '0');
-        } else {
-            $mobile2 = $mobile;
-        }
-        $exist = 'new';
-        $user = User::where('phone', $mobile2)->first();
-        if ($user) {
-            if ($user->status == 1) {
-                $exist = 'approved';
-                $username = $user->name;
-            } else if ($user->status == 2) {
-                $exist = 'rejected';
+            // Format mobile number
+            $mobile = $request->input('mobile');
+            $mobile2 = $this->formatMobileNumber($mobile); // Extracted to a separate method
+
+            // Check if user exists and determine status
+            $user = User::where('phone', $mobile2)->first();
+            if ($user) {
+                $exist = $this->getUserExistenceStatus($user);
                 $username = $user->name;
             } else {
-                $exist = 'pending';
-                $username = $user->name;
+                $exist = 'none';
+                $username = 'none';
             }
-        } else {
-            $username = 'none';
-        }
-        try {
-            // $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
 
-            // $senderName = rawurlencode("IMS");
-            // $bulkBalanceUser = "voucher";
-            // $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
-            // $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile2&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
+            // Prepare and execute cURL request
+            $response = $this->sendSmsViaCurl($mobile2, $otp);
 
-            // $ch = curl_init();
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // curl_setopt($ch, CURLOPT_URL, $url);
-            // curl_setopt($ch, CURLOPT_ENCODING, "");
-            // curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-            // curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-            // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            // $response = curl_exec($ch);
-            // $res = json_decode($response);
-            // curl_close($ch);
-            // Log::debug('SMS SEND');
-            $curl = curl_init();
-            $encodMessage = rawurlencode("Your UrgentCargo account verification code is: $otp.");
-            curl_setopt_array(
-                $curl,
-                array(
-                    CURLOPT_URL => 'http://167.99.63.221:8080/API_All_IMS_BULK/BULK_SMS_OTP',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"IMS","msisdn":' . $mobile2 . ',"message":"Your UrgentCargo account verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
-                    CURLOPT_HTTPHEADER => array(
-                        'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
-                        'MESSAGE_ID: 123988',
-                        'ORIGINATOR: MONSTER',
-                        'Content-Type: application/json'
-                    ),
-                )
-            );
-            $response = curl_exec($curl);
-            curl_close($curl);
-            echo $response;
-            return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
+            // Log success and return response
+            Log::info('OTP sent successfully', ['mobile' => $mobile2, 'otp' => $otp]);
+            return response()->json([
+                "status" => "success",
+                "exist" => $exist,
+                "username" => $username,
+                "code" => $otp,
+                "message" => "OTP requested successfully"
+            ]);
         } catch (\Exception $e) {
-            Log::debug($e);
-            return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
+            // Log error and return error response
+            Log::error('Error sending OTP', ['error' => $e->getMessage()]);
+            return response()->json([
+                "status" => "error",
+                "message" => "Unable to request OTP."
+            ]);
         }
+    }
+
+    private function formatMobileNumber($mobile)
+    {
+        // Format mobile number to international format if necessary
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            return "254" . ltrim($mobile, '0');
+        }
+        return $mobile;
+    }
+
+    private function getUserExistenceStatus($user)
+    {
+        // Determine user status based on 'status' field
+        switch ($user->status) {
+            case 1:
+                return 'approved';
+            case 2:
+                return 'rejected';
+            default:
+                return 'pending';
+        }
+    }
+
+    private function sendSmsViaCurl($mobile, $otp)
+    {
+        // Prepare cURL request to send SMS
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'http://167.99.63.221:8080/API_All_IMS_BULK/BULK_SMS_OTP',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode([
+                'key' => 'KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG',
+                'originator' => 'IMS',
+                'msisdn' => $mobile,
+                'message' => "Your MONSTER PROMOTIONS account verification code is: $otp",
+                'client_id' => 'IMS',
+                'country' => 'KE',
+                'network' => '9'
+            ]),
+            CURLOPT_HTTPHEADER => [
+                'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
+                'MESSAGE_ID: 123988',
+                'ORIGINATOR: MONSTER',
+                'Content-Type: application/json'
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return $response;
     }
 
     public function saveSelfie(Request $request)
