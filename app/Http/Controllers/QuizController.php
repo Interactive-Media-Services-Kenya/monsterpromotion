@@ -261,7 +261,7 @@ if($request->score && $request->score !=''){
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"MONSTER","msisdn":' . $mobile . ',"message":"Your MONSTER PROMOTIONS verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
+                    CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"IMS","msisdn":' . $mobile . ',"message":"Your MONSTER PROMOTIONS verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
                     CURLOPT_HTTPHEADER => array(
                         'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
                         'MESSAGE_ID: 123988',
