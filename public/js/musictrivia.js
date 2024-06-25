@@ -52,6 +52,7 @@ function startCountdownAndProgressBar(duration) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    console.log(localStorage.getItem('question_answers'));
   var user_phone_no = localStorage.getItem('user_mobile_no');
   document.getElementById('userr_phone').value = user_phone_no;
   // Add event listener to the form submission
@@ -61,13 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var user_phone_no = localStorage.getItem('user_mobile_no');
     var phone = user_phone_no;
     localStorage.setItem('user_phone', phone);
-    if (username.trim() === '') {
-      alert('Please enter your full name.');
-    } else {
+        console.log(localStorage.getItem('question_answers'));
         saveQuest();
       this.submit();
-
-    }
   });
 });
 function saveQuest(){
@@ -176,6 +173,7 @@ function fetchQuestion(questionId = null, selectedAnswer = null) {
   } else {
     if (questionId) {
       url += `&questionId=${questionId}&selectedAnswer=0&user_code=${user_phone_no}`;
+      localStorage.setItem('question_answers', JSON.stringify(questions));
     }
   }
   xhr.open('GET', url, true);
@@ -208,7 +206,7 @@ function fetchQuestion(questionId = null, selectedAnswer = null) {
         modal.style.display = 'block';
         body.classList.add('modal-open');
         const data = JSON.parse(localStorage.getItem('question_answers'));
-        const totalQuestions = data.length;
+        const totalQuestions =10;
         document.getElementById('total_questions').value = totalQuestions;
       }
     } else {
