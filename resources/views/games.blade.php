@@ -247,14 +247,11 @@
 
 
 <audio id="background-music" loop>
-    <source src="/wrong.mp3" type="audio/mp3">
-    <source src="/wrong.ogg" type="audio/ogg">
+    <source src="/background.mp3" type="audio/mp3">
+    <source src="/background.ogg" type="audio/ogg">
     <!-- Include other formats if necessary -->
     Your browser does not support the audio element.
   </audio>
-
-
-
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -304,6 +301,12 @@ function playSoothingBackground() {
   audioElement.play().catch(function(error) {
     console.error('Failed to play audio:', error);
   });
+}
+if (!localStorage.getItem('user_mobile_no')) {
+  window.location.href = "/";
+} else {
+  const user_phone_no = localStorage.getItem('user_mobile_no');
+  localStorage.setItem('user_mobile_no', user_phone_no);
 }
 
 </script>

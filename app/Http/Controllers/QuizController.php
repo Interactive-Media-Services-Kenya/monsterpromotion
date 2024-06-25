@@ -304,7 +304,6 @@ if($request->score && $request->score !=''){
             ]);
         }
     }
-
     private function formatMobileNumber($mobile)
     {
         // Format mobile number to international format if necessary
@@ -356,10 +355,8 @@ if($request->score && $request->score !=''){
                 'Content-Type: application/json'
             ],
         ]);
-
         $response = curl_exec($curl);
         curl_close($curl);
-
         return $response;
     }
 

@@ -370,7 +370,18 @@ color: gold;
     });
 </script>
 
+<audio id="background-music" loop>
+    <source src="/background.mp3" type="audio/mp3">
+    <source src="/background.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('background-music');
+  audio.play();
+});
+</script>
 
 
 @include('footer')

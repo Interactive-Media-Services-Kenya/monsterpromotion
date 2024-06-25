@@ -51,6 +51,20 @@
             </div>
     </div>
     <script src="{{ asset('js/indexpage.js')}}"></script>
+    <audio id="background-music" loop>
+        <source src="/background.mp3" type="audio/mp3">
+        <source src="/background.ogg" type="audio/ogg">
+        <!-- Include other formats if necessary -->
+        Your browser does not support the audio element.
+      </audio>
+    <script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+      var audio = document.getElementById('background-music');
+      console.log('papa');
+      audio.play();
+    });
+
+    </script>
     @include('footer')
     @endsection

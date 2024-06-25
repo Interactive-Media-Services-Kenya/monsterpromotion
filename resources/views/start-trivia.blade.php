@@ -3,11 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/starttrivia.css')}}">
 
-<!-- Modal -->
-<audio id="background-music" loop>
-    <source src="path_to_your_audio_file.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
+
 
 <!-- Browse Tournaments start -->
 <section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
@@ -64,7 +60,19 @@
     </div>
 </section>
 <!-- Browse Tournaments end -->
+<audio id="background-music" loop>
+    <source src="/background.mp3" type="audio/mp3">
+    <source src="/background.ogg" type="audio/ogg">
+    <!-- Include other formats if necessary -->
+    Your browser does not support the audio element.
+  </audio>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('background-music');
+  audio.play();
+});
+</script>
 <script src="{{ asset('js/starttrivia.js')}}"></script>
 @include('footer')
 @endsection
