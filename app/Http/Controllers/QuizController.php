@@ -29,11 +29,11 @@ class QuizController extends Controller
     public function viewScore(Request $request)
     {
         $requestData = $request->all();
+        log::info(collect($requestData));
+        log::info('saaaaaaa');
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
-
         $questionIds = array();
-
         foreach ($questionAnswers as $answer) {
             $questionIds[] = $answer['questionId'];
         }
@@ -222,7 +222,6 @@ if($request->score && $request->score !=''){
     }
     public function sendOTP(Request $request)
     {
-
         $mobile = $request["mobile"];
         $otp = rand(100000, 999999);
         $numberStr = $mobile;
@@ -248,27 +247,36 @@ if($request->score && $request->score !=''){
             $username = 'none';
         }
         try {
-            $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
 
-            $senderName = rawurlencode("MONSTER");
-            $bulkBalanceUser = "voucher";
-            $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
-            $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile2&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
+            $curl = curl_init();
 
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_ENCODING, "");
-            curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            $response = curl_exec($ch);
-            $res = json_decode($response);
-            curl_close($ch);
+            curl_setopt_array(
+                $curl,
+                array(
+                    CURLOPT_URL => 'http://167.99.63.221:8080/API_All_IMS_BULK/BULK_SMS_OTP',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"MONSTER","msisdn":' . $mobile . ',"message":"Your MONSTER PROMOTIONS verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
+                    CURLOPT_HTTPHEADER => array(
+                        'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
+                        'MESSAGE_ID: 123988',
+                        'ORIGINATOR: MONSTER',
+                        'Content-Type: application/json'
+                    ),
+                )
+            );
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            echo $response;
+            log::info('ss' . $response);
+            log::info($mobile);
             Log::debug('SMS SEND');
             return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
         } catch (\Exception $e) {

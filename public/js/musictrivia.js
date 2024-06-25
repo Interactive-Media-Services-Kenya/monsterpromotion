@@ -212,7 +212,7 @@ function updateQuestion(questionData) {
       <source src="/music/${questionData.music_title}" type="audio/mp3">
       Your browser does not support the audio element.
   </audio>
-</p> 
+</p>
     <p>${questionData.question}</p>
     <br />
     <div style="color:white">
@@ -231,6 +231,7 @@ function updateQuestion(questionData) {
 }
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('saveit').addEventListener('click', function (event) {
+    console.log('sasas');
     var questionAnswers = localStorage.getItem('question_answers');
     var dataToSend = {
       questionAnswers: questionAnswers,
