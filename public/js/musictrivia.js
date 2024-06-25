@@ -87,7 +87,7 @@ function saveQuest(){
 
         // Send AJAX request
         $.ajax({
-          url: '/api/save-quiz-attempt', // Endpoint URL
+          url: '/api/user/save-quiz-attempt', // Endpoint URL
           type: 'POST', // HTTP method
           headers: {
             'X-CSRF-TOKEN': csrfToken // CSRF token
