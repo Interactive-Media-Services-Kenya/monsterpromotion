@@ -232,8 +232,6 @@ function updateQuestion(questionData) {
     document.getElementById('points-earned').innerText = currentCount + 1;
     document.getElementById('scored').innerText = currentCount + 1;
     document.getElementById('total_score').value = currentCount + 1;
-
-
     document.getElementById('total_questions').value = totalQuestions;
   }
   localStorage.setItem('last_question', questionData.id);
@@ -283,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Send AJAX request
         $.ajax({
-          url: 'save-quiz-answers', // Endpoint URL
+          url: 'save-quiz-attempt', // Endpoint URL
           type: 'POST', // HTTP method
           headers: {
             'X-CSRF-TOKEN': csrfToken // CSRF token
