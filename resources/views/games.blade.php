@@ -245,6 +245,7 @@
     </div>
 </section>
 
+
 <audio id="background-music" loop>
     <source src="/wrong.mp3" type="audio/mp3">
     <source src="/wrong.ogg" type="audio/ogg">
@@ -256,15 +257,12 @@
 
 <script>
 
-let audioContext = null;
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('background-music');
+  console.log('papa');
+  audio.play();
+});
 
-// Function to initialize the audio context
-function initAudioContext() {
-  // Create a new AudioContext if it doesn't exist
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  }
-}
 
 // Function to create a simple sine wave oscillator
 function createOscillator(frequency) {
