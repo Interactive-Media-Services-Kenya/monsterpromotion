@@ -270,9 +270,8 @@ if($request->score && $request->score !=''){
             $otp = rand(100000, 999999);
 
             // Format mobile number
-            $mobile = $request->input('mobile');
+            $mobile = $request->mobile;
             $mobile2 = $this->formatMobileNumber($mobile); // Extracted to a separate method
-
             // Check if user exists and determine status
             $user = User::where('phone', $mobile2)->first();
             if ($user) {
@@ -329,6 +328,7 @@ if($request->score && $request->score !=''){
 
     private function sendSmsViaCurl($mobile, $otp)
     {
+
         // Prepare cURL request to send SMS
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -351,7 +351,7 @@ if($request->score && $request->score !=''){
             CURLOPT_HTTPHEADER => [
                 'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
                 'MESSAGE_ID: 123988',
-                'ORIGINATOR: MONSTER',
+                'ORIGINATOR: IMS',
                 'Content-Type: application/json'
             ],
         ]);
@@ -359,7 +359,54 @@ if($request->score && $request->score !=''){
         curl_close($curl);
         return $response;
     }
+    // public function sendSmsViaCurl()
+    // {
 
+    //     // https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=254705030613&from=EABL&sms=Congratulations! You have WON a NAIVAS Shopping Voucher worth KES.5,000 from Tujengane na Spirits Promotion. Your voucher number is IMS-30587USHDGSSDGEC. This Voucher is limited to Food Items ONLY. Visit any Naivas Supermarket near you to redeem your voucher. T%26Cs apply! Strictly18+ ONLY. Normal SMS charges will apply. Helpline 0721985566. SMS STOP to 20405 to opt out of this promotion.&response=json&unicode=0&bulkbalanceuser=voucher
+    //     // log::info('reached here');
+    //     $mobile1='0705030613';
+    //     $numbers='1231';
+    //     try {
+    //         $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
+    //         if (substr($mobile1, 0, 3) === "254") {
+    //             $mobile = $mobile1;
+    //         } else {
+    //             $mobile = "254" . ltrim($mobile1, '0');
+    //         }
+    //         $senderName = rawurlencode("MONSTER");
+    //         $bulkBalanceUser = "voucher";
+    //         $currentDate = date('d/m hA');
+    //         $encodMessage = rawurlencode("LOTTO BOMBA\n\n" . $numbers . "\nTSN " . rand(9999, 10000) . " KES 1\nDraw 5697 " . $currentDate);
+    //         $url =
+    //             "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=" .
+    //             $mobile .
+    //             "&from=" .
+    //             $senderName .
+    //             "&sms=" .
+    //             $encodMessage .
+    //             "&response=json&unicode=0&bulkbalanceuser=" .
+    //             $bulkBalanceUser;
+    //         $ch = curl_init();
+    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //         curl_setopt($ch, CURLOPT_URL, $url);
+    //         curl_setopt($ch, CURLOPT_ENCODING, "");
+    //         curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+    //         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+    //         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    //         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    //         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    //         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    //         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    //         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    //         $response = curl_exec($ch);
+    //         $res = json_decode($response);
+    //         curl_close($ch);
+    //         log::info('send to:' . $mobile);
+    //     } catch (\Exception $e) {
+    //         print_r($e);
+    //         Log::debug($e);
+    //     }
+    // }
     public function saveSelfie(Request $request)
     {
         $mobile = $request->input('phone');
