@@ -273,30 +273,35 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     // Check if the item exists
     if (questionAnswers) {
-      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      // Send the data to the backend
-      fetch('save-quiz-answers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ dataToSend })
-      })
-        .then(response => {
-          if (response.ok) {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        // Prepare data to send
+        var dataToSend = {
+          // Assuming dataToSend is properly defined in your original code
+          dataToSend: dataToSend
+        };
+
+        // Send AJAX request
+        $.ajax({
+          url: 'save-quiz-answers', // Endpoint URL
+          type: 'POST', // HTTP method
+          headers: {
+            'X-CSRF-TOKEN': csrfToken // CSRF token
+          },
+          contentType: 'application/json', // Content type
+          data: JSON.stringify(dataToSend), // Data to send (needs to be stringified JSON)
+          success: function(response) {
+            // Handle success response
             localStorage.removeItem('question_answers');
-          } else {
+          },
+          error: function(xhr, status, error) {
+            // Handle error response
+            console.error('Failed to send data to the backend:', error);
             localStorage.removeItem('question_answers');
-            console.error('Failed to send data to the backend');
           }
-        })
-        .catch(error => {
-          console.error('Error sending data to the backend:', error);
         });
-    } else {
-      console.error('No data found in localStorage');
-    }
+      }
+
   });
   // document.getElementById('dontsave').addEventListener('click', function (event) {
   //   event.preventDefault();
