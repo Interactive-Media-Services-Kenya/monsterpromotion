@@ -305,6 +305,7 @@ function playSoothingBackground() {
     console.error('Failed to play audio:', error);
   });
 }
+
 </script>
 @include('footer')
 @endsection
