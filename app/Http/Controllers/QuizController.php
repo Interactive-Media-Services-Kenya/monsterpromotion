@@ -83,11 +83,17 @@ class QuizController extends Controller
         }
         $user = QuizAnswer::where('user_phone', $mobile2)->first();
         if ($user != "") {
-            $existingQuestionIds = json_decode($user->question_id, true);
+            // Initialize $existingQuestionIds as an empty array if it's null
+            $existingQuestionIds = $user->question_id ? json_decode($user->question_id, true) : [];
+
+            // Merge and update question IDs
             $updatedQuestionIds = array_values(array_unique(array_merge($existingQuestionIds, $questionIds)));
+
+            // Encode and save updated question IDs
             $user->question_id = json_encode($updatedQuestionIds);
             $user->save();
-        } else {
+        }
+         else {
             $questionIdsJson = json_encode($questionIds);
             // log::debug($questionIdsJson);
             $quizAnswer = new QuizAnswer();
