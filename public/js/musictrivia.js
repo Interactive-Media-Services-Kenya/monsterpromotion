@@ -87,7 +87,7 @@ function saveQuest(){
 
         // Send AJAX request
         $.ajax({
-          url: 'save-quiz-attempt', // Endpoint URL
+          url: '/api/save-quiz-attempt', // Endpoint URL
           type: 'POST', // HTTP method
           headers: {
             'X-CSRF-TOKEN': csrfToken // CSRF token
@@ -267,52 +267,6 @@ function updateQuestion(questionData) {
   questionCounter++; // Increment the counter for the next question
   overlay.remove();
 }
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('saveit').addEventListener('click', function (event) {
-    console.log('sasas');
-    var questionAnswers = localStorage.getItem('question_answers');
-    var dataToSend = {
-      questionAnswers: questionAnswers,
-      user_phone: localStorage.getItem('user_mobile_no')
-    };
-    // Check if the item exists
-    if (questionAnswers) {
-        var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-        // Prepare data to send
-        var dataToSend = {
-          // Assuming dataToSend is properly defined in your original code
-          dataToSend: dataToSend
-        };
-
-        // Send AJAX request
-        $.ajax({
-          url: 'save-quiz-attempt', // Endpoint URL
-          type: 'POST', // HTTP method
-          headers: {
-            'X-CSRF-TOKEN': csrfToken // CSRF token
-          },
-          contentType: 'application/json', // Content type
-          data: JSON.stringify(dataToSend), // Data to send (needs to be stringified JSON)
-          success: function(response) {
-            // Handle success response
-            localStorage.removeItem('question_answers');
-          },
-          error: function(xhr, status, error) {
-            // Handle error response
-            console.error('Failed to send data to the backend:', error);
-            localStorage.removeItem('question_answers');
-          }
-        });
-      }
-
-  });
-  // document.getElementById('dontsave').addEventListener('click', function (event) {
-  //   event.preventDefault();
-  //   localStorage.removeItem('question_answers');
-  //   window.location.href = '/leaders-board';
-  // });
-});
 
 
 

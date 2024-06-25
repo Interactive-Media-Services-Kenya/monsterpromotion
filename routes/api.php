@@ -13,4 +13,4 @@ Route::middleware(['api', 'throttle:70,1'])->group(function () {
     Route::post('user/check-trivia-result', [App\Http\Controllers\QuizController::class, 'getQuestionResult'])->name('check-trivia-result');
 });
 
-Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-attempt');
+Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'saveansweredQuestion'])->name('save-quiz-attempt');

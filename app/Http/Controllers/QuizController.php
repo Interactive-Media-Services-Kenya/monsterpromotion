@@ -63,6 +63,44 @@ class QuizController extends Controller
             return redirect('user/leaders-board')->with('success', 'Question created successfully.');
         }
     }
+    public function saveansweredQuestion(Request $request)
+    {
+        log('tulifika');
+        $requestData = $request->all();
+        $phone = $requestData['dataToSend']['user_phone'];
+        $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
+
+        $questionIds = array();
+
+        foreach ($questionAnswers as $answer) {
+            $questionIds[] = $answer['questionId'];
+        }
+        $mobile = $phone;
+        $numberStr = $mobile;
+        if ($numberStr[0] == '0') {
+            $mobile2 = "254" . ltrim($mobile, '0');
+        } else {
+            $mobile2 = $mobile;
+        }
+        $user = QuizAnswer::where('user_phone', $mobile2)->first();
+        if ($user != "") {
+            $existingQuestionIds = json_decode($user->question_id, true);
+            $updatedQuestionIds = array_values(array_unique(array_merge($existingQuestionIds, $questionIds)));
+            $user->question_id = json_encode($updatedQuestionIds);
+            $user->save();
+        } else {
+            $questionIdsJson = json_encode($questionIds);
+            // log::debug($questionIdsJson);
+            $quizAnswer = new QuizAnswer();
+            $quizAnswer->selected_answer = 1;
+            $quizAnswer->question_id = $questionIdsJson;
+            $quizAnswer->category = 1;
+            $quizAnswer->correct_answer = 1;
+            $quizAnswer->user_phone = $mobile2;
+            $quizAnswer->save();
+            return redirect('user/leaders-board')->with('success', 'Question created successfully.');
+        }
+    }
     public function saveScore(Request $request)
     {
         // dd($request->all());
