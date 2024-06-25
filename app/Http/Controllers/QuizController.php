@@ -30,7 +30,7 @@ class QuizController extends Controller
     {
         $requestData = $request->all();
         log::info(collect($requestData));
-        log::info('saaaaaaa');
+        log::info('saaaaaaa')
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
         $questionIds = array();
