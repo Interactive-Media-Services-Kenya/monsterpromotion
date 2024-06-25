@@ -24,7 +24,7 @@ Route::get('user/music-game/{id}', [App\Http\Controllers\QuizController::class, 
 Route::get('user/select-question', [App\Http\Controllers\QuizController::class, 'selectQuiz'])->name('user/select-question');
 Route::post('user/save-score', [App\Http\Controllers\QuizController::class, 'saveScore'])->name('save-score');
 Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'myScore'])->name('user/my-results');
-Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
+//Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
 Route::get('user/leaders-board', [App\Http\Controllers\QuizController::class, 'leadersBoard'])->name('leaders-board');
 
 Route::get('user/terms-conditions', [App\Http\Controllers\QuizController::class, 'terms'])->name('terms-conditions');

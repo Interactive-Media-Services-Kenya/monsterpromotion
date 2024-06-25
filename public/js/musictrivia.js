@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
       this.submit();
   });
 });
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+console.log(csrfToken);
 function saveQuest(){
     console.log('sasas');
     var questionAnswers = localStorage.getItem('question_answers');
@@ -97,8 +99,6 @@ function saveQuest(){
         .catch(error => {
           console.error('Error sending data to the backend:', error);
         });
-    } else {
-      console.error('No data found in localStorage');
     }
 }
 document.addEventListener('DOMContentLoaded', function () {
