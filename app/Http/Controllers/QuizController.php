@@ -65,7 +65,6 @@ class QuizController extends Controller
     }
     public function saveansweredQuestion(Request $request)
     {
-        log('tulifika');
         $requestData = $request->all();
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
