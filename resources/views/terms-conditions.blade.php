@@ -361,8 +361,5 @@
     </section>
     <!-- Browse Tournaments end -->
 
-
-
-
     @include('footer')
 @endsection

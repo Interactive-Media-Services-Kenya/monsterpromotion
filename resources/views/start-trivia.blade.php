@@ -38,6 +38,12 @@
                                 <p>4. Answer as many questions as possible within the allocated time.
                                 </p>
                                 <p>5. Each correct attempt earns you a point.</p>
+                                <br/>
+                                <h4>PRIZES</h4>
+                                <p>Participants in the draw stand a chance to win the following prizes:</p>
+                                <p>1. One out of the 30 Tickets for the Exclusive Concert for Khaligraph and Femi One (one ticket admits two).</p>
+                                    <p>2. One out of the 8 Monster Boom boxes.</p><br/>
+                                    <p>*****The more times you play, the higher the chances of winning*****</p>
                             </div>
 
                         </div>
