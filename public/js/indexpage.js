@@ -1,1 +1,296 @@
-function _0x4376(_0x242979,_0x516467){var _0x3530da=_0x3530();return _0x4376=function(_0x437669,_0x294871){_0x437669=_0x437669-0x9d;var _0x9301bf=_0x3530da[_0x437669];return _0x9301bf;},_0x4376(_0x242979,_0x516467);}var _0x222040=_0x4376;(function(_0x2af1aa,_0x2ee3bf){var _0xa62eab=_0x4376,_0x28268a=_0x2af1aa();while(!![]){try{var _0x300f5b=-parseInt(_0xa62eab(0xca))/0x1*(parseInt(_0xa62eab(0xf9))/0x2)+parseInt(_0xa62eab(0xf3))/0x3+-parseInt(_0xa62eab(0xcd))/0x4*(-parseInt(_0xa62eab(0xc2))/0x5)+parseInt(_0xa62eab(0xa8))/0x6+parseInt(_0xa62eab(0xd2))/0x7*(-parseInt(_0xa62eab(0xde))/0x8)+-parseInt(_0xa62eab(0xb5))/0x9*(-parseInt(_0xa62eab(0xe2))/0xa)+parseInt(_0xa62eab(0xb4))/0xb*(parseInt(_0xa62eab(0x100))/0xc);if(_0x300f5b===_0x2ee3bf)break;else _0x28268a['push'](_0x28268a['shift']());}catch(_0x3c4bf1){_0x28268a['push'](_0x28268a['shift']());}}}(_0x3530,0x398f1));localStorage[_0x222040(0xb1)](_0x222040(0xe5))&&(window['location'][_0x222040(0xfe)]=_0x222040(0xc9));const formput=document[_0x222040(0xd6)]('.upload-form'),form=document[_0x222040(0xd6)]('form'),fileInput=document[_0x222040(0xd6)](_0x222040(0xc1));phoneInput=document[_0x222040(0xc0)](_0x222040(0xe4))['value'],nameInput=document['getElementById'](_0x222040(0xf4))[_0x222040(0xd9)],(verifyButton=document[_0x222040(0xd6)](_0x222040(0xa6)),verificationCodeInput=document[_0x222040(0xc0)](_0x222040(0xe7)),progressArea=document[_0x222040(0xd6)]('.progress-area'),uploadedArea=document[_0x222040(0xd6)](_0x222040(0xb6))),fileInput[_0x222040(0xe1)]=!![],verificationCodeInput[_0x222040(0xe1)]=!![],document[_0x222040(0xc0)](_0x222040(0xa1))['disabled']=!![],formput[_0x222040(0xf5)](_0x222040(0xb0),()=>{var _0x39b475=_0x222040;fileInput[_0x39b475(0xb0)]();}),verifyButton['addEventListener'](_0x222040(0xb0),()=>{var _0x6b5cfb=_0x222040,_0x659cba=document[_0x6b5cfb(0xc0)](_0x6b5cfb(0xe4))[_0x6b5cfb(0xd9)];validateMobileNumber(_0x659cba)?$[_0x6b5cfb(0xb9)]({'url':'/api/user/send-otp','method':_0x6b5cfb(0xb3),'data':{'mobile':_0x659cba,'_token':_0x6b5cfb(0xbb)},'success':function(_0x19fd2b){var _0x55c932=_0x6b5cfb;if(_0x19fd2b[_0x55c932(0xa7)]===_0x55c932(0xc3)){if(_0x19fd2b[_0x55c932(0xab)]==_0x55c932(0xdc)){var _0x5cddd9=document[_0x55c932(0xc0)](_0x55c932(0xf4));_0x5cddd9[_0x55c932(0xd9)]=_0x19fd2b[_0x55c932(0xf4)],_0x5cddd9['readOnly']=!![],document['querySelector']('.upload-form')['style'][_0x55c932(0xc5)]=_0x55c932(0xae);}else{if(_0x19fd2b[_0x55c932(0xab)]==_0x55c932(0xf8)){var _0x5cddd9=document[_0x55c932(0xc0)](_0x55c932(0xf4));_0x5cddd9['value']=_0x19fd2b[_0x55c932(0xf4)],_0x5cddd9['readOnly']=!![],document[_0x55c932(0xd6)](_0x55c932(0xec))[_0x55c932(0xce)]=_0x55c932(0xf7);}else{if(_0x19fd2b[_0x55c932(0xab)]==_0x55c932(0xe6)){var _0x5cddd9=document[_0x55c932(0xc0)](_0x55c932(0xf4));_0x5cddd9['value']=_0x19fd2b[_0x55c932(0xf4)],_0x5cddd9[_0x55c932(0xbf)]=!![],document[_0x55c932(0xd6)](_0x55c932(0xbd))['style'][_0x55c932(0xc5)]='none',document[_0x55c932(0xd6)](_0x55c932(0xec))['innerText']=_0x55c932(0xfb);}}}var _0x5d9fc9=_0x19fd2b[_0x55c932(0xed)];localStorage['setItem'](_0x55c932(0xd0),_0x5d9fc9),toastr['success']('OTP\x20requested\x20successfully!'),verificationCodeInput['disabled']=![];}else Swal['fire']({'icon':_0x55c932(0xe0),'title':_0x55c932(0xd3),'text':_0x55c932(0xbe)})['then'](_0x45b791=>{var _0x27d8f2=_0x55c932;_0x45b791[_0x27d8f2(0xf1)]&&(window[_0x27d8f2(0xac)][_0x27d8f2(0xfe)]='/');});},'error':function(_0x477c51,_0x37b894,_0x15e185){var _0x30d803=_0x6b5cfb;toastr['error'](_0x30d803(0xdb));}}):Swal[_0x6b5cfb(0x9e)]({'icon':_0x6b5cfb(0xe0),'title':'Error','text':_0x6b5cfb(0xef)});}),fileInput[_0x222040(0xb7)]=({target:_0x41525a})=>{var _0x207958=_0x222040;let _0x37ca61=_0x41525a[_0x207958(0xa5)][0x0];if(_0x37ca61){let _0x5e0832=_0x37ca61[_0x207958(0xdf)];if(_0x5e0832[_0x207958(0xe9)]>=0xc){let _0x6e6b7e=_0x5e0832['split']('.');_0x5e0832=_0x6e6b7e[0x0][_0x207958(0xbc)](0x0,0xd)+_0x207958(0xaa)+_0x6e6b7e[0x1];}uploadFile(_0x5e0832);}};function uploadFile(_0x58b652){var _0x49dcd1=_0x222040;let _0x167bc3=new XMLHttpRequest();_0x167bc3[_0x49dcd1(0xf2)](_0x49dcd1(0xb3),'api/user/uspload-photo'),_0x167bc3[_0x49dcd1(0xff)][_0x49dcd1(0xf5)]('progress',({loaded:_0x11d143,total:_0x4e50b4})=>{var _0x34abd1=_0x49dcd1;let _0x3a890d=Math[_0x34abd1(0xee)](_0x11d143/_0x4e50b4*0x64),_0x122f75=Math['floor'](_0x4e50b4/0x3e8),_0x2bb36e;_0x122f75<0x400?_0x2bb36e=_0x122f75+'\x20KB':_0x2bb36e=(_0x11d143/(0x400*0x400))[_0x34abd1(0xda)](0x2)+'\x20MB';let _0x5ef7eb='<li\x20class=\x22row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-file-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22details\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22name\x22>'+_0x58b652+_0x34abd1(0xa3)+_0x3a890d+_0x34abd1(0xba)+_0x3a890d+'%\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</li>';uploadedArea[_0x34abd1(0xe3)][_0x34abd1(0xd4)]('onprogress'),progressArea[_0x34abd1(0xc7)]=_0x5ef7eb;if(_0x11d143==_0x4e50b4){progressArea[_0x34abd1(0xc7)]='';let _0xf70b4f=_0x34abd1(0xe8)+_0x58b652+_0x34abd1(0xa9)+_0x2bb36e+_0x34abd1(0xeb);uploadedArea[_0x34abd1(0xe3)][_0x34abd1(0xd7)]('onprogress'),uploadedArea[_0x34abd1(0xb2)](_0x34abd1(0xaf),_0xf70b4f);}});let _0xc998c7=new FormData(form);_0x167bc3['send'](_0xc998c7);}function validateMobileNumber(_0x109650){var _0x4cc23b=_0x222040;_0x109650=_0x109650[_0x4cc23b(0xfc)](/\D/g,'');const _0x1606c4=_0x109650[_0x4cc23b(0xe9)];if((_0x109650['startsWith']('07')||_0x109650[_0x4cc23b(0xc8)]('01'))&&_0x1606c4===0xa)return!![];else return(_0x109650[_0x4cc23b(0xc8)](_0x4cc23b(0x9d))||_0x109650[_0x4cc23b(0xc8)](_0x4cc23b(0x9d)))&&_0x1606c4===0xc?!![]:![];}var ellipsis=document[_0x222040(0xc0)](_0x222040(0xcc)),intervalId;function startAnimation(){var _0x59d98b=_0x222040,_0x47a320=document['getElementById'](_0x59d98b(0xcc)),_0x652e22=0x1,_0x438a25=0x1,_0x549cb6=!![];intervalId=setInterval(function(){var _0x4f9f10=_0x59d98b;_0x549cb6?(_0x47a320[_0x4f9f10(0xc7)]+='.',_0x652e22++,_0x652e22>_0x438a25&&(_0x549cb6=![])):(_0x47a320[_0x4f9f10(0xc7)]=_0x47a320['innerHTML'][_0x4f9f10(0xa4)](0x0,-0x1),_0x652e22--,_0x652e22===0x1&&(_0x549cb6=!![]));},0x320);}startAnimation();function stopAnimation(){var _0x1bc579=_0x222040;clearInterval(intervalId),ellipsis[_0x1bc579(0xc7)]='';}function verifyOTP(){var _0x9a385d=_0x222040,_0x3dd85b=document[_0x9a385d(0xc0)]('verificationid')[_0x9a385d(0xd9)];if(_0x3dd85b!=''){document[_0x9a385d(0xc0)](_0x9a385d(0xc6))['textContent']='Verifying\x20code',document[_0x9a385d(0xc0)]('verifying_code')[_0x9a385d(0xea)][_0x9a385d(0xc5)]='inline-block',document[_0x9a385d(0xc0)]('ellipsis')['style']['display']='inline-block';var _0xe75343=document[_0x9a385d(0xc0)](_0x9a385d(0xe7))['value'],_0x34193f=localStorage['getItem']('verification_otp');;startAnimation(),_0xe75343['length']==0x6&&(_0x34193f==_0xe75343?(fileInput[_0x9a385d(0xe1)]=![],document[_0x9a385d(0xc0)](_0x9a385d(0xc6))['textContent']=_0x9a385d(0xd1),document[_0x9a385d(0xc0)](_0x9a385d(0xc6))[_0x9a385d(0xea)][_0x9a385d(0xf6)]=_0x9a385d(0xf0),document[_0x9a385d(0xc0)](_0x9a385d(0xcc))[_0x9a385d(0xea)][_0x9a385d(0xc5)]='none',document[_0x9a385d(0xc0)](_0x9a385d(0xa1))['disabled']=![]):(document[_0x9a385d(0xc0)](_0x9a385d(0xc6))[_0x9a385d(0xfa)]=_0x9a385d(0xc4),document['getElementById'](_0x9a385d(0xcc))[_0x9a385d(0xea)]['display']=_0x9a385d(0xae)));}}function _0x3530(){var _0x2f9ca6=['toFixed','Error:\x20Unable\x20to\x20request\x20OTP.','approved','Pending\x20Approval','8ePKdST','name','error','disabled','4300VaydIL','classList','phone_no','user_mobile_no','pending','verificationid','<li\x20class=\x22row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22content\x20upload\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-file-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22details\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22name\x22>','length','style','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-check\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</li>','.response-message','code','floor','Please\x20Enter\x20a\x20valid\x20mobile\x20No','#56be78','isConfirmed','open','789039dWScuU','username','addEventListener','color','Your\x20previous\x20upload\x20was\x20rejected,Kindly\x20upload\x20again','rejected','248194OotJCB','textContent','Your\x20previous\x20upload\x20is\x20still\x20pending,Please\x20try\x20again\x20later.','replace','setItem','href','upload','24nRIkcj','254','fire','Your\x20uploaded\x20selfie\x20is\x20pending\x20approval.\x20We\x20shall\x20get\x20back\x20to\x20you\x20shortly.','Please\x20enter\x20a\x20phone\x20number.','submitbtn','Phone\x20Cannot\x20be\x20empty.','\x20•\x20Uploading</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22percent\x22>','slice','files','.verify-button','status','488166GGqquo','\x20•\x20Uploaded</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22size\x22>','...\x20.','exist','location','api/user/save-user-details','none','afterbegin','click','getItem','insertAdjacentHTML','POST','612139OCsunu','8172CJxLsS','.uploaded-area','onchange','info','ajax','%</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress-bar\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress\x22\x20style=\x22width:\x20','{{\x20csrf_token()\x20}}','substring','.upload-form','OTP\x20Not\x20Send.','readOnly','getElementById','.file-input','49795tDRQnk','success','Wrong\x20Verification\x20Code','display','verifying_code','innerHTML','startsWith','user/play-games','2rcAYjN','Success','ellipsis','32OPugck','innerText','trim','verification_otp','Verified\x20Succesfully','3092803Ryebtt','Error','add','then','querySelector','remove','failed_phone','value'];_0x3530=function(){return _0x2f9ca6;};return _0x3530();}function saveDetails(){var _0x44a871=_0x222040;let _0x120fe7=document['getElementById']('username')[_0x44a871(0xd9)];if(!_0x120fe7){Swal[_0x44a871(0x9e)]({'icon':_0x44a871(0xe0),'title':_0x44a871(0xd3),'text':'Please\x20enter\x20username.'});return;}let _0x51193f=fileInput[_0x44a871(0xa5)][0x0],_0xe93067=document['getElementById']('phone_no')[_0x44a871(0xd9)][_0x44a871(0xcf)]();document[_0x44a871(0xd6)](_0x44a871(0xbd))[_0x44a871(0xea)][_0x44a871(0xc5)]===_0x44a871(0xae)?document[_0x44a871(0xc0)](_0x44a871(0xa1))[_0x44a871(0xe1)]=![]:!_0x51193f&&Swal[_0x44a871(0x9e)]({'icon':_0x44a871(0xe0),'title':_0x44a871(0xd3),'text':'Please\x20select\x20a\x20file\x20to\x20upload.'});if(!_0xe93067){Swal[_0x44a871(0x9e)]({'icon':'error','title':'Error','text':_0x44a871(0xa0)});return;}let _0x746037=new FormData(form);$[_0x44a871(0xb9)]({'url':_0x44a871(0xad),'method':_0x44a871(0xb3),'data':_0x746037,'processData':![],'contentType':![],'headers':{'X-CSRF-TOKEN':_0x44a871(0xbb)},'success':function(_0x37e3a3){var _0x408294=_0x44a871;_0x37e3a3['status']==_0x408294(0xdc)?(Swal[_0x408294(0x9e)]({'icon':_0x408294(0xc3),'title':_0x408294(0xcb),'text':'Details\x20submitted,\x20you\x20will\x20be\x20redirected\x20shortly.'}),setTimeout(function(){var _0x25516c=_0x408294;window[_0x25516c(0xac)]['href']=_0x25516c(0xc9);},0x3e8),localStorage[_0x408294(0xfd)](_0x408294(0xe5),_0xe93067),localStorage[_0x408294(0xfd)]('username',_0x120fe7)):Swal[_0x408294(0x9e)]({'icon':_0x408294(0xb8),'title':_0x408294(0xdd),'text':_0x408294(0x9f),'showCancelButton':!![],'confirmButtonText':'OK'})[_0x408294(0xd5)](_0x7691f3=>{var _0x3a1122=_0x408294;_0x7691f3[_0x3a1122(0xf1)]&&location['reload']();});},'error':function(_0x3a671e,_0x20bf83,_0x5bd580){var _0x2e7ee3=_0x44a871;response[_0x2e7ee3(0xa7)]==_0x2e7ee3(0xd8)&&Swal[_0x2e7ee3(0x9e)]({'icon':_0x2e7ee3(0xe0),'title':_0x2e7ee3(0xe0),'text':_0x2e7ee3(0xa2)});}});}
+
+if (localStorage.getItem('user_mobile_no')) {
+  window.location.href = 'user/play-games';
+}
+
+const formput = document.querySelector(".upload-form");
+const form = document.querySelector("form"),
+  fileInput = document.querySelector(".file-input");
+phoneInput = document.getElementById("phone_no").value;
+nameInput = document.getElementById("username").value;
+verifyButton = document.querySelector(".verify-button"),
+  verificationCodeInput = document.getElementById("verificationid"),
+  progressArea = document.querySelector(".progress-area"),
+  uploadedArea = document.querySelector(".uploaded-area");
+fileInput.disabled = true;
+verificationCodeInput.disabled = true;
+document.getElementById("submitbtn").disabled = true;
+formput.addEventListener("click", () => {
+  fileInput.click();
+});
+verifyButton.addEventListener("click", () => {
+  var phone = document.getElementById("phone_no").value;
+  if (validateMobileNumber(phone)) {
+    $.ajax({
+      url: '/api/user/send-otp',
+      method: 'POST',
+      data: {
+        mobile: phone,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        if (response.status === 'success') {
+          if (response.exist == 'approved') {
+
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+            document.querySelector(".upload-form").style.display = 'none';
+          } else if (response.exist == 'rejected') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+            document.querySelector(".response-message").innerText = 'Your previous upload was rejected,Kindly upload again';
+          } else if (response.exist == 'pending') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+
+            document.querySelector(".upload-form").style.display = 'none';
+            document.querySelector(".response-message").innerText = 'Your previous upload is still pending,Please try again later.';
+          }
+          var verification_otp = response.code;
+          localStorage.setItem('verification_otp', verification_otp);
+          toastr.success('OTP requested successfully!');
+          verificationCodeInput.disabled = false;
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'OTP Not Send.'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/';
+            }
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error('Error: Unable to request OTP.');
+      }
+    });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please Enter a valid mobile No'
+    });
+  }
+});
+fileInput.onchange = ({ target }) => {
+    fileInput.onchange = ({ target }) => {
+        let file = target.files[0];
+        if (file) {
+          // Check if the selected file is an image
+          if (!file.type.startsWith('image/')) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Please select a valid image file.'
+            });
+            fileInput.value = ''; // Clear the selected file
+            return;
+          }
+
+          let fileName = file.name;
+          if (fileName.length >= 12) {
+            let splitName = fileName.split('.');
+            fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
+          }
+          uploadFile(fileName);
+        }
+      };
+
+
+function uploadFile(name) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "api/user/uspload-photo");
+  xhr.upload.addEventListener("progress", ({ loaded, total }) => {
+    let fileLoaded = Math.floor((loaded / total) * 100);
+    let fileTotal = Math.floor(total / 1000);
+    let fileSize;
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024 * 1024)).toFixed(2) + " MB";
+    let progressHTML = `<li class="row">
+          <i class="fas fa-file-alt"></i>
+          <div class="content">
+            <div class="details">
+              <span class="name">${name} • Uploading</span>
+              <span class="percent">${fileLoaded}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="width: ${fileLoaded}%"></div>
+            </div>
+          </div>
+        </li>`;
+    uploadedArea.classList.add("onprogress");
+    progressArea.innerHTML = progressHTML;
+    if (loaded == total) {
+      progressArea.innerHTML = "";
+      let uploadedHTML = `<li class="row">
+            <div class="content upload">
+              <i class="fas fa-file-alt"></i>
+              <div class="details">
+                <span class="name">${name} • Uploaded</span>
+                <span class="size">${fileSize}</span>
+              </div>
+            </div>
+            <i class="fas fa-check"></i>
+          </li>`;
+      uploadedArea.classList.remove("onprogress");
+      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+    }
+  });
+  let data = new FormData(form);
+  xhr.send(data);
+}
+function validateMobileNumber(number) {
+  number = number.replace(/\D/g, '');
+  const length = number.length;
+  if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
+    return true;
+  } else if ((number.startsWith('254') || number.startsWith('254')) && length === 12) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+var ellipsis = document.getElementById("ellipsis");
+var intervalId;
+function startAnimation() {
+  var ellipsis = document.getElementById("ellipsis");
+  var count = 1;
+  var maxCount = 1;
+  var increasing = true;
+
+  intervalId = setInterval(function () {
+    if (increasing) {
+      ellipsis.innerHTML += ".";
+      count++;
+      if (count > maxCount) {
+        increasing = false;
+      }
+    } else {
+      ellipsis.innerHTML = ellipsis.innerHTML.slice(0, -1);
+      count--;
+      if (count === 1) {
+        increasing = true;
+      }
+    }
+  }, 800);
+}
+
+startAnimation();
+
+function stopAnimation() {
+  clearInterval(intervalId);
+  ellipsis.innerHTML = "";
+}
+
+function verifyOTP() {
+  var verificationCodeInput = document.getElementById("verificationid").value;
+  if (verificationCodeInput != "") {
+    document.getElementById("verifying_code").textContent = "Verifying code";
+    document.getElementById("verifying_code").style.display = 'inline-block';
+    document.getElementById("ellipsis").style.display = 'inline-block';
+    var otp_code = document.getElementById("verificationid").value;
+    var otp_retrieved = localStorage.getItem('verification_otp');
+    ;
+    startAnimation();
+    if (otp_code.length == 6) {
+      if (otp_retrieved == otp_code) {
+        fileInput.disabled = false;
+        document.getElementById("verifying_code").textContent = "Verified Succesfully";
+        document.getElementById("verifying_code").style.color = '#56be78';
+        document.getElementById("ellipsis").style.display = 'none';
+        document.getElementById("submitbtn").disabled = false;
+      } else {
+        document.getElementById("verifying_code").textContent = "Wrong Verification Code";
+        document.getElementById("ellipsis").style.display = 'none';
+      }
+    }
+  }
+}
+
+function saveDetails() {
+    let username = document.getElementById("username").value;
+    if (!username) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Please enter username.'
+        });
+        return;
+      }
+  let file = fileInput.files[0];
+  let phone = document.getElementById("phone_no").value.trim();
+
+  if (document.querySelector(".upload-form").style.display === 'none') {
+    document.getElementById("submitbtn").disabled = false;
+  } else {
+    if (!file) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please select a file to upload.'
+      });
+
+    }
+  }
+  if (!phone) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please enter a phone number.'
+    });
+    return;
+  }
+  let data = new FormData(form);
+  $.ajax({
+    url: 'api/user/save-user-details',
+    method: 'POST',
+    data: data,
+    processData: false,
+    contentType: false,
+    headers: {
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      if (response.status == 'approved') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Details submitted, you will be redirected shortly.'
+        });
+        setTimeout(function () {
+          window.location.href = 'user/play-games';
+        }, 1000);
+        localStorage.setItem('user_mobile_no', phone);
+        localStorage.setItem('username', username);
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Pending Approval',
+          text: 'Your uploaded selfie is pending approval. We shall get back to you shortly.',
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Reload the page
+            location.reload();
+          }
+        });
+      }
+    },
+    error: function (xhr, status, error) {
+      if (response.status == 'failed_phone') {
+        Swal.fire({
+          icon: 'error',
+          title: 'error',
+          text: 'Phone Cannot be empty.'
+        });
+
+      }
+    }
+  });
+}

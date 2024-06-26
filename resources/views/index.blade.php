@@ -38,7 +38,9 @@
                             style="color:red;display:none"></span>
                         <span class="response-message" style="color:dodgerblue"></span>
                         <div class="upload-form" style="margin-top:-20px;">
-                            <input class="file-input" id="selfie" type="file" name="file" hidden>
+
+
+                            <input class="file-input" id="selfie" type="file" name="file" accept="image/*" hidden>
                             <i class="fas fa-cloud-upload-alt"></i>
                             <p>Browse File to Upload</p>
                         </div>
