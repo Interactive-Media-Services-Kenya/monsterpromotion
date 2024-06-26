@@ -12,8 +12,6 @@
     .scores {
         color: white;
     }
-
-    /* Add this CSS */
     body.overlay-shown {
         overflow: hidden;
     }
@@ -22,7 +20,6 @@
         display: none;
     }
 
-    /* Modal styles */
     .modal {
         display: none;
         position: fixed;
@@ -232,17 +229,15 @@ background-color: white;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 transition: 0.3s;
 border-radius: 10px;
-/* Rounded corners */
 }
 
 .cardi:hover {
 box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-/* Increase shadow on hover */
 }
 
 .trophy-icon {
 color: gold;
-/* Change color as needed */
+
 }
 </style>
 
@@ -346,18 +341,17 @@ color: gold;
             const searchText = searchInput.value.trim().toLowerCase();
             const matchedRows = [];
 
-            // Separate matched and unmatched rows
             rows.forEach(row => {
                 const nameElement = row.querySelector('.name');
                 const scoreElement = row.querySelector('.score');
-                if (nameElement && scoreElement) { // Check if elements exist
+                if (nameElement && scoreElement) {
                     const name = nameElement.textContent.trim().toLowerCase();
                     const score = scoreElement.textContent.trim().toLowerCase();
                     if (name.includes(searchText) || score.includes(searchText)) {
-                        row.classList.add('highlighted'); // Add highlighted class
+                        row.classList.add('highlighted');
                         matchedRows.push(row);
                     } else {
-                        row.classList.remove('highlighted'); // Remove highlighted class
+                        row.classList.remove('highlighted');
                     }
                 }
             });

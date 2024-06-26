@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
-  
     public function pendingRequests()
     {
         $users=User::where("status",0)->orWhere("status",2)->orderBy("id","desc")->get();
@@ -26,7 +25,7 @@ class UserController extends Controller
     }
     public function viewScore(Request $request)
     {
-        $requestData = $request->all(); 
+        $requestData = $request->all();
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
 
@@ -54,16 +53,16 @@ class UserController extends Controller
             $quizAnswer = new QuizAnswer();
             $quizAnswer->selected_answer = 1;
             $quizAnswer->question_id =$questionIdsJson;
-            $quizAnswer->category = 1; 
+            $quizAnswer->category = 1;
             $quizAnswer->correct_answer = 1;
-            $quizAnswer->user_phone = $mobile2; 
+            $quizAnswer->user_phone = $mobile2;
             $quizAnswer->save();
             return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
     }
     public function saveScore(Request $request)
     {
-      
+
         $mobile = (string) $request->phone;
         $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
         $user = Score::where('phone', $mobile2)->first();
@@ -116,14 +115,14 @@ class UserController extends Controller
             $question_answer->status=1;
             $question_answer->save();
         }
-   
+
         return redirect('admin/manage-questions')->with('success', 'Question created successfully.');
     }
     public function manageQuestions(){
         $questions=Question::where('status',1)->get();
         return view('backend.quiz/index',['questions'=>$questions]);
     }
-    
+
     public function playQuiz(){
         // $questions=Question::where('status',1)->get();
         return view('start-trivia');
@@ -135,7 +134,7 @@ class UserController extends Controller
         // $questions=Question::where('status',1)->get();
         return view('trivia-questions');
     }
-    
+
     public function selectQuiz() {
         $mobile =$_GET['user_code'];
         $numberStr = $mobile;
@@ -172,7 +171,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Quiz completed']);
         }
     }
-    
+
     public function updateUser(){
              $id = ($_GET['id']);
              $status=$_GET['s'];
@@ -189,7 +188,7 @@ class UserController extends Controller
     }
     public function sendOTP(Request $request)
     {
-       
+
         try {
             $headers = ["Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql"];
             $mobile =$request["mobile"];
@@ -210,7 +209,7 @@ class UserController extends Controller
                 $bulkBalanceUser = "voucher";
                 $encodMessage = rawurlencode("MONSTER PROMOTIONS\nYour verification code is: $otp.");
                 $url = "https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=$mobile2&from=$senderName&sms=$encodMessage&response=json&unicode=0&bulkbalanceuser=$bulkBalanceUser";
-    
+
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_URL, $url);
@@ -231,7 +230,7 @@ class UserController extends Controller
             return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
         }
     }
-    
+
     public function saveSelfie(Request $request)
     {
         $mobile =$request->input('phone');
@@ -249,9 +248,9 @@ class UserController extends Controller
                     if($user->status=1){
                         return response()->json(["status" => "approved"]);
                     }else{
-                        return response()->json(["status" => "pending"]);  
+                        return response()->json(["status" => "pending"]);
                     }
-                    
+
                 }else{
                     $file = $request->file('file');
                     $directory = 'public/user-uploads';
@@ -266,6 +265,6 @@ class UserController extends Controller
                     $user->save();
                 }
         return response()->json(["status" => "success"]);
-     } 
+     }
     }
 }

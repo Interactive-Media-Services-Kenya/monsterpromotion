@@ -31,9 +31,7 @@ class QuizController extends Controller
         $requestData = $request->all();
         $phone = $requestData['dataToSend']['user_phone'];
         $questionAnswers = json_decode($requestData['dataToSend']['questionAnswers'], true);
-
         $questionIds = array();
-
         foreach ($questionAnswers as $answer) {
             $questionIds[] = $answer['questionId'];
         }
@@ -52,7 +50,6 @@ class QuizController extends Controller
             $user->save();
         } else {
             $questionIdsJson = json_encode($questionIds);
-            // log::debug($questionIdsJson);
             $quizAnswer = new QuizAnswer();
             $quizAnswer->selected_answer = 1;
             $quizAnswer->question_id = $questionIdsJson;
@@ -117,6 +114,8 @@ if($request->score && $request->score !=''){
         $mobile = (string) $request->phone;
         $mobile2 = $mobile[0] == '0' ? "254" . ltrim($mobile, '0') : $mobile;
         $user = Score::where('phone', $mobile2)->first();
+        $userIp = $_SERVER['REMOTE_ADDR'];
+        $location = $this->getLocationFromIp($userIp);
         if (!$user) {
             $question = new Score();
             $question->name = $request->username;
@@ -125,6 +124,8 @@ if($request->score && $request->score !=''){
             $question->phone = $mobile2;
             $question->questions_attempted = $request->total_questions;
             $question->status = 1;
+            $question->location=$location;
+            $question->ip=$userIp;
             $question->save();
         } else {
             $user->score += $request->score;
@@ -137,6 +138,40 @@ if($request->score && $request->score !=''){
         session()->forget('random_questions');
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
+public function getLocationFromIp($ip) {
+    $url = "https://ipapi.co/{$ip}/json/";
+
+    // Initialize cURL session
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Only for testing purposes, you should set this to true in production
+
+    // Execute cURL session
+    $response = curl_exec($ch);
+
+    // Check for cURL errors
+    if(curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+        curl_close($ch);
+        return 'Unknown';
+    }
+
+    // Close cURL session
+    curl_close($ch);
+
+    // Decode JSON response
+    $data = json_decode($response, true);
+
+    // Extract relevant location data
+    $city = $data['city'] ?? '';
+    $country = $data['country_name'] ?? '';
+    $region = $data['region'] ?? '';
+
+    // Format location string
+    $location = trim("{$city}, {$region}, {$country}", ', ');
+
+    return $location;
+}
     public function storeQuestion(Request $request)
     {
         $rules = [
@@ -180,7 +215,6 @@ if($request->score && $request->score !=''){
 
     public function playQuiz()
     {
-        // $questions=Question::where('status',1)->get();
         return view('start-trivia');
     }
     public function leadersBoard()
@@ -189,14 +223,11 @@ if($request->score && $request->score !=''){
     }
     public function startQuiz()
     {
-        // $questions=Question::where('status',1)->get();
         return view('trivia-questions');
     }
 
-
     public function musicQuiz()
     {
-        // $questions=Question::where('status',1)->get();
         return view('music-game');
     }
     public function selectQuiz()
