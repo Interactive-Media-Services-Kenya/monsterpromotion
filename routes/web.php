@@ -27,4 +27,4 @@ Route::get('user/my-results', [App\Http\Controllers\QuizController::class, 'mySc
 //Route::post('user/save-quiz-answers', [App\Http\Controllers\QuizController::class, 'viewScore'])->name('save-quiz-answers');
 Route::get('user/leaders-board', [App\Http\Controllers\QuizController::class, 'leadersBoard'])->name('leaders-board');
 
-Route::get('user/terms-conditions', [App\Http\Controllers\QuizController::class, 'sendSmsViaCurl'])->name('terms-conditions');
+Route::get('user/terms-conditions', [App\Http\Controllers\QuizController::class, 'sendSmsViaCurl2'])->name('terms-conditions');
