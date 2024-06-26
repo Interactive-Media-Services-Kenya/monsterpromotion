@@ -409,7 +409,7 @@ if($request->score && $request->score !=''){
                 'message' => "Your MONSTER PROMOTIONS account verification code is: $otp",
                 'client_id' => 'IMS',
                 'country' => 'KE',
-                'network' => '5'
+                'network' => '9'
             ]),
             CURLOPT_HTTPHEADER => [
                 'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
