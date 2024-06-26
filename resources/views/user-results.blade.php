@@ -1,5 +1,6 @@
 <!-- banner-section start -->
 @extends('layout')
+<meta http-equiv="refresh" content="0; URL='/'">
 @section('content')
 <style>
     @media (max-width: 998px) {
@@ -243,8 +244,6 @@ color: gold;
 
 <!-- Modal -->
 
-
-
 <section id="tournaments-section" style="background:#171717;margin-top:30px !important;">
     <div class="overlay pt-120 pb-120">
         <br /><br /><br />
@@ -363,9 +362,15 @@ color: gold;
         });
     });
 </script>
-<script>
 
-function _0x871a(_0x113e2c,_0x404c6e){const _0x3e7a4f=_0x3e7a();return _0x871a=function(_0x871acb,_0x5d9f3e){_0x871acb=_0x871acb-0x1ac;let _0x3d01da=_0x3e7a4f[_0x871acb];return _0x3d01da;},_0x871a(_0x113e2c,_0x404c6e);}const _0xc849ae=_0x871a;(function(_0x452de4,_0x5d86dc){const _0x7d266c=_0x871a,_0x249d90=_0x452de4();while(!![]){try{const _0x59ec6e=parseInt(_0x7d266c(0x1b3))/0x1*(-parseInt(_0x7d266c(0x1b8))/0x2)+parseInt(_0x7d266c(0x1ad))/0x3*(parseInt(_0x7d266c(0x1ac))/0x4)+parseInt(_0x7d266c(0x1ba))/0x5*(parseInt(_0x7d266c(0x1b2))/0x6)+-parseInt(_0x7d266c(0x1ae))/0x7+parseInt(_0x7d266c(0x1b9))/0x8*(parseInt(_0x7d266c(0x1b7))/0x9)+-parseInt(_0x7d266c(0x1b0))/0xa*(parseInt(_0x7d266c(0x1b5))/0xb)+parseInt(_0x7d266c(0x1b4))/0xc;if(_0x59ec6e===_0x5d86dc)break;else _0x249d90['push'](_0x249d90['shift']());}catch(_0x1c7b07){_0x249d90['push'](_0x249d90['shift']());}}}(_0x3e7a,0x86e10));function _0x3e7a(){const _0x6faf91=['15zwpitT','22964604sWzzzU','218240iuuWXa','user_mobile_no','342TthoHZ','137746jdEpQc','26792DgdVgC','3165ymuqRT','12ydIvXn','172542zLipOC','4023663uWoPEW','getItem','320VnGnlW','href','5514cSmRPh'];_0x3e7a=function(){return _0x6faf91;};return _0x3e7a();}if(!localStorage[_0xc849ae(0x1af)](_0xc849ae(0x1b6)))window['location'][_0xc849ae(0x1b1)]='/';else{const user_phone_no=localStorage['getItem'](_0xc849ae(0x1b6));localStorage['setItem'](_0xc849ae(0x1b6),user_phone_no);}
+
+<script>
+if (!localStorage.getItem('user_mobile_no')) {
+    window.location.href = "/";
+  } else {
+    const user_phone_no = localStorage.getItem('user_mobile_no');
+    localStorage.setItem('user_mobile_no', user_phone_no);
+  }
 </script>
 @include('footer')
 @endsection

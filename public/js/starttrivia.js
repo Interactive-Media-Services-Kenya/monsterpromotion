@@ -1,1 +1,54 @@
-function _0x4669(){var _0x2d1fe3=['clear','querySelector','href','DOMContentLoaded','/user/start-trivia/','ajax','78FpxxWE','.btn-play','getItem','/api/user/get-category','block','1007448ZTkpjC','25310wgJYZU','506960qgUVda','textContent','display','14NFHudE','1440016CKKGBX','16347JyoUAl','getElementById','927OjpVRD','style','click','question_answers','header-text','addEventListener','95605RQFlre','countdown','location','2531732isihzE'];_0x4669=function(){return _0x2d1fe3;};return _0x4669();}var _0x1e8d53=_0x4748;function _0x4748(_0x3d3ae4,_0x7bfcac){var _0x4669b1=_0x4669();return _0x4748=function(_0x474808,_0x19d756){_0x474808=_0x474808-0xfb;var _0x3e38ec=_0x4669b1[_0x474808];return _0x3e38ec;},_0x4748(_0x3d3ae4,_0x7bfcac);}(function(_0x3cb953,_0x343953){var _0x517107=_0x4748,_0x592e52=_0x3cb953();while(!![]){try{var _0x44a4bc=parseInt(_0x517107(0x112))/0x1*(-parseInt(_0x517107(0x110))/0x2)+-parseInt(_0x517107(0x10b))/0x3+parseInt(_0x517107(0x111))/0x4+parseInt(_0x517107(0xfc))/0x5*(parseInt(_0x517107(0x106))/0x6)+parseInt(_0x517107(0xff))/0x7+-parseInt(_0x517107(0x10d))/0x8+parseInt(_0x517107(0x114))/0x9*(-parseInt(_0x517107(0x10c))/0xa);if(_0x44a4bc===_0x343953)break;else _0x592e52['push'](_0x592e52['shift']());}catch(_0x10d14c){_0x592e52['push'](_0x592e52['shift']());}}}(_0x4669,0x2fd69));var currentUrl=window[_0x1e8d53(0xfe)][_0x1e8d53(0x102)],urlParts=currentUrl['split']('/'),categoryId=urlParts[urlParts['length']-0x1];$[_0x1e8d53(0x105)]({'url':_0x1e8d53(0x109),'method':'POST','data':{'categoryID':categoryId,'_token':'{{\x20csrf_token()\x20}}'},'success':function(_0x213d7a){var _0x95ffdd=_0x1e8d53;document[_0x95ffdd(0x113)](_0x95ffdd(0x118))['innerText']=_0x213d7a['category_name'];}}),document[_0x1e8d53(0xfb)](_0x1e8d53(0x103),function(){var _0x2ca90c=_0x1e8d53,_0x25ed4e=localStorage[_0x2ca90c(0x108)](_0x2ca90c(0x117));_0x25ed4e&&localStorage[_0x2ca90c(0x100)](_0x2ca90c(0x117));}),document[_0x1e8d53(0xfb)]('DOMContentLoaded',function(){var _0x18987c=_0x1e8d53;const _0x6b5989=document[_0x18987c(0x101)](_0x18987c(0x107)),_0x25395d=document[_0x18987c(0x113)](_0x18987c(0xfd));let _0x1a05db=0xa;_0x6b5989[_0x18987c(0xfb)](_0x18987c(0x116),function(){var _0x12b476=_0x18987c;overlay[_0x12b476(0x115)][_0x12b476(0x10f)]=_0x12b476(0x10a),_0xe62e3();});function _0xe62e3(){var _0x3ebd9f=_0x18987c;_0x25395d[_0x3ebd9f(0x10e)]=_0x1a05db;const _0x398c30=setInterval(function(){var _0x278737=_0x3ebd9f;_0x1a05db--,_0x25395d[_0x278737(0x10e)]=_0x1a05db,_0x1a05db<=0x0&&(clearInterval(_0x398c30),_0x43944a());},0x3e8);}function _0x43944a(){var _0x4ea1ae=_0x18987c;window[_0x4ea1ae(0xfe)][_0x4ea1ae(0x102)]=_0x4ea1ae(0x104)+categoryId;}});
+
+var currentUrl = window.location.href;
+var urlParts = currentUrl.split("/");
+var categoryId = urlParts[urlParts.length - 1]
+$.ajax({
+  url: '/api/user/get-category',
+  method: 'POST',
+  data: {
+    categoryID: categoryId,
+    _token: '{{ csrf_token() }}'
+  },
+  success: function (response) {
+    document.getElementById('header-text').innerText = response.category_name;
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  var userResults = localStorage.getItem('question_answers')
+  if (userResults) {
+    localStorage.clear('question_answers');
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const readyButton = document.querySelector('.btn-play');
+  const countdownElement = document.getElementById('countdown');
+  let countdownValue = 10;
+  readyButton.addEventListener('click', function () {
+    if (!localStorage.getItem('user_mobile_no')) {
+        window.location.href = "/";
+      } else {
+        overlay.style.display = 'block';
+        startCountdown();
+      }
+  });
+  function startCountdown() {
+    countdownElement.textContent = countdownValue;
+    const countdownInterval = setInterval(function () {
+      countdownValue--;
+      countdownElement.textContent = countdownValue;
+      if (countdownValue <= 0) {
+        clearInterval(countdownInterval);
+        redirectToGame();
+      }
+    }, 1000);
+  }
+
+  function redirectToGame() {
+    window.location.href = '/user/start-trivia/' + categoryId;
+  }
+
+});
+
+
+
