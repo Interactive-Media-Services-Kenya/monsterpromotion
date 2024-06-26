@@ -140,39 +140,19 @@ if($request->score && $request->score !=''){
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
     }
 public function getLocationFromIp($ip) {
-    $url = "https://ipapi.co/{$ip}/json/";
-
-    // Initialize cURL session
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Only for testing purposes, you should set this to true in production
-
-    // Execute cURL session
-    $response = curl_exec($ch);
-
-    // Check for cURL errors
-    if(curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-        curl_close($ch);
-        return 'Unknown';
+    $apiUrl = "http://ip-api.com/php/$ip";
+    $response = file_get_contents($apiUrl);
+    if ($response !== false) {
+        $data = unserialize($response);
+        if ($data && $data['status'] === 'success') {
+            $region = $data['regionName'];
+            $city = $data['city'];
+            $location = "$region, $city";
+  return $location;
+    }else{
+        return 'unknown';
     }
-
-    // Close cURL session
-    curl_close($ch);
-
-    // Decode JSON response
-    $data = json_decode($response, true);
-
-    // Extract relevant location data
-    $city = $data['city'] ?? '';
-    $country = $data['country_name'] ?? '';
-    $region = $data['region'] ?? '';
-
-    // Format location string
-    $location = trim("{$city}, {$region}, {$country}", ', ');
-
-    return $location;
-}
+    }}
     public function storeQuestion(Request $request)
     {
         $rules = [
