@@ -18,9 +18,9 @@
                 <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
                     <div class="right-area">
                         <ul class="d-flex">
-                            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.facebook.com/MonsterEnergy/"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://x.com/monsterenergy"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/monsterenergy/"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
