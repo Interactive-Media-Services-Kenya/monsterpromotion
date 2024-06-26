@@ -124,8 +124,7 @@ if($request->score && $request->score !=''){
             $question->phone = $mobile2;
             $question->questions_attempted = $request->total_questions;
             $question->status = 1;
-            $question->location=$location;
-            $question->ip=$userIp;
+
             $question->save();
         } else {
             $user->score += $request->score;
@@ -134,6 +133,8 @@ if($request->score && $request->score !=''){
         $single = new SingleScore();
         $single->total_score = $total_score;
         $single->user_phone = $mobile2;
+        $question->location=$location;
+        $question->ip=$userIp;
         $single->save();
         session()->forget('random_questions');
         return redirect('user/leaders-board')->with('success', 'Question created successfully.');
