@@ -100,7 +100,7 @@ fileInput.onchange = ({ target }) => {
           uploadFile(fileName);
         }
       };
-
+    }
 
 function uploadFile(name) {
   let xhr = new XMLHttpRequest();
