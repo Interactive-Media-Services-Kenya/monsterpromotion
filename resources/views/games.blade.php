@@ -252,8 +252,6 @@
     <!-- Include other formats if necessary -->
     Your browser does not support the audio element.
   </audio>
-<script>
  <script src="{{ asset('js/gamespage.js')}}"></script>
-</script>
 @include('footer')
 @endsection
