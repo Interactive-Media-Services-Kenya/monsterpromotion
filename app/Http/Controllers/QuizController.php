@@ -282,7 +282,7 @@ if($request->score && $request->score !=''){
                 $username = 'none';
             }
             // Prepare and execute cURL request
-            $response = $this->sendSmsViaCurl('', $otp);
+            $response = $this->sendSmsViaCurl($mobile2, $otp);
             // Log success and return response
             Log::info('OTP sent successfully', ['mobile' => $mobile2, 'otp' => $otp]);
             return response()->json([
@@ -387,7 +387,7 @@ if($request->score && $request->score !=''){
         }
     }
 
-    private function sendSmsViaCurl($mobile,$otp)
+    public function sendSmsViaCurl($mobile,$otp)
     {
         // 25410475859
         // $otp='131';
