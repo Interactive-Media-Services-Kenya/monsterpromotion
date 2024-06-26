@@ -1,1 +1,275 @@
-eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('5 w=p.4("6 7");5 x=p.4("3"),y=p.4("2"),z=p.1(".0"),A=p.1(".9"),B=p.1(".8");x.0=!0;y.0=!0;document.1("q").0=!0;w.addEventListener("r",()=>{x.s()});A.addEventListener("r",()=>{var c=p.4("7").v;if(t(c)){u({t:"/a/b/c/d",m:"e",d:{f:c,_token:\'{ csrf_token() }\'}},(G)=>{if(G.t==="e"){if(G.u==="h"){p.l("9",c);p.l("i",D);var E=p.4("D");E.v=G.j;E.r=!0;p.1(".6").7="n"}else if(G.u==="o"){var E=p.4("D");E.v=G.j;E.r=!0;p.1(".5").2="p q r s, t u v w x"}else if(G.u==="y"){var E=p.4("D");E.v=G.j;E.r=!0;p.1(".6").7="z A"}}else{B(6)}},B=>{v("C: D e f.")})}else{v("C: D e")}});x.onchange=({H})=>{let c=H.0[0];if(c){let I=c.0;if(I>=12){let J=I.split(\'K\');I=J[0].m(0,13)+"... ."+J[1]}k(I)}};function k(c){let I=new XMLHttpRequest();I.n("s","/a/b/l/o");I.u("p",({Q,R})=>{let S=Math.O((Q/R)*100);let T=Math.O(R/1000);let U;T<1024?U=T+" KB":U=(Q/(1024*1024)).f(2)+" MB";let V=`<W class="x"><1 class="2"><3 class="9">${c} • Uploading</3><3 class="8">${S}%</3></1><1 class="4"><1 class="t" style="U: ${S}%"></1></1></W>`;A.1("7");z.innerHTML=V;if(Q===R){z.innerHTML="";let W=`<W class="x"><1 class="2 v"><3 class="9">${c} • Uploaded</3><3 class="G">${U}</3></1><1 class="t"></1></W>`;A.1("7");A.1("6",W)}},1=>{v("H: L m p.")});let X=new FormData(x);I.r(X)}function t(c){c=c.u(/\\D/g,\'\');let I=c.0;if((I.s(\'07\')||I.s(\'01\'))&&I.0===10){return 0}c.I((I.s(\'254\')||I.s(\'254\'))&&I.0===12)}var Y=p.4("M");var N;function o(){var c=p.4("M");var I=1;var Z=1;var $=!0;N=setInterval(()=>{if($){c.innerHTML+=".";$++;if($>Z){$=!1}}else{c.innerHTML=c.innerHTML.u(0,-1);$--;if($===1){$=!0}}},800)}o();function C(){$.4("M").innerHTML="";clearInterval(N)}function P(){var c=p.4("3").v;if(c!=""){p.4("L").textContent="R S";p.4("L").2="T";var I=p.4("2").v;var c=p.4("3").v;var _=p.1(".0").6==="N";o();if(c.0===6){if(I===c){x.0=!1;p.4("L").textContent="U V";p.4("L").2="W X Y";A.0=!1}else{p.4("L").textContent="Z A B C";}}}}function Q(){let c=x.0[0];let I=p.4("3").v.aa();let Z=p.4("2").v;if(p.1(".6").2==="D"){if(!c){v("E F G H.");}}if(!I){v("E F G H.");return}let $=new FormData(x);u({t:"/a/b/D-E-F",m:"G",d:$,H:!0,I:{"X-CSRF-TOKEN":\'{ csrf_token() }\'}},(G)=>{if(G.t==="J"){v("K L M, N O P Q.")}else{u("K L M, N O P Q.")}})}',62,189,'|||||||||||||||||||||function|document|querySelector|var|localStorage|getElementById|input|fileInput|phoneInput|nameInput|const|upload|form|verificationCodeInput|progressArea|uploadedArea|disabled|click|verifyButton|validateMobileNumber|phone|ajax|url|data|mobile|method|POST|token|csrf_token|response|status|success|approved|exist|setItem|username|value|innerText|previous|rejected|upload|try|pending|toastr|error|send|OTP|Unable|request|Swal|fire|isConfirmed|reload|location|onchange|target|files|length|split|name|if|uploadFile|fileName|upload|HTML|floor|Math|total|KB|loaded|progress|percent|style|width|details|fas|file|alt|row|content|bar|check|insertAdjacentHTML|else|innerHTML|play|details|select|success|uploaded|redirected|setTimeout|info|Approval|shall|get|back|onclick|stopAnimation|empty|failed_phone|Cannot'.split('|'),0,{}))
+
+if (localStorage.getItem('user_mobile_no')) {
+  window.location.href = 'user/play-games';
+}
+
+const formput = document.querySelector(".upload-form");
+const form = document.querySelector("form"),
+  fileInput = document.querySelector(".file-input");
+phoneInput = document.getElementById("phone_no").value;
+nameInput = document.getElementById("username").value;
+verifyButton = document.querySelector(".verify-button"),
+  verificationCodeInput = document.getElementById("verificationid"),
+  progressArea = document.querySelector(".progress-area"),
+  uploadedArea = document.querySelector(".uploaded-area");
+fileInput.disabled = true;
+verificationCodeInput.disabled = true;
+document.getElementById("submitbtn").disabled = true;
+formput.addEventListener("click", () => {
+  fileInput.click();
+});
+verifyButton.addEventListener("click", () => {
+  var phone = document.getElementById("phone_no").value;
+  if (validateMobileNumber(phone)) {
+    $.ajax({
+      url: '/api/user/send-otp',
+      method: 'POST',
+      data: {
+        mobile: phone,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        if (response.status === 'success') {
+          if (response.exist == 'approved') {
+            localStorage.setItem('user_mobile_no', phone);
+            localStorage.setItem('username', nameInput);
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+            document.querySelector(".upload-form").style.display = 'none';
+          } else if (response.exist == 'rejected') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+            document.querySelector(".response-message").innerText = 'Your previous upload was rejected,Kindly upload again';
+          } else if (response.exist == 'pending') {
+            var usernameInput = document.getElementById("username");
+            usernameInput.value = response.username;
+            usernameInput.readOnly = true;
+
+            document.querySelector(".upload-form").style.display = 'none';
+            document.querySelector(".response-message").innerText = 'Your previous upload is still pending,Please try again later.';
+          }
+          var verification_otp = response.code;
+          localStorage.setItem('verification_otp', verification_otp);
+          toastr.success('OTP requested successfully!');
+          verificationCodeInput.disabled = false;
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'OTP Not Send.'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/';
+            }
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error('Error: Unable to request OTP.');
+      }
+    });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please Enter a valid mobile No'
+    });
+  }
+});
+fileInput.onchange = ({ target }) => {
+  let file = target.files[0];
+  if (file) {
+    let fileName = file.name;
+    if (fileName.length >= 12) {
+      let splitName = fileName.split('.');
+      fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
+    }
+    uploadFile(fileName);
+  }
+}
+
+function uploadFile(name) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "api/user/uspload-photo");
+  xhr.upload.addEventListener("progress", ({ loaded, total }) => {
+    let fileLoaded = Math.floor((loaded / total) * 100);
+    let fileTotal = Math.floor(total / 1000);
+    let fileSize;
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024 * 1024)).toFixed(2) + " MB";
+    let progressHTML = `<li class="row">
+          <i class="fas fa-file-alt"></i>
+          <div class="content">
+            <div class="details">
+              <span class="name">${name} • Uploading</span>
+              <span class="percent">${fileLoaded}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="width: ${fileLoaded}%"></div>
+            </div>
+          </div>
+        </li>`;
+    uploadedArea.classList.add("onprogress");
+    progressArea.innerHTML = progressHTML;
+    if (loaded == total) {
+      progressArea.innerHTML = "";
+      let uploadedHTML = `<li class="row">
+            <div class="content upload">
+              <i class="fas fa-file-alt"></i>
+              <div class="details">
+                <span class="name">${name} • Uploaded</span>
+                <span class="size">${fileSize}</span>
+              </div>
+            </div>
+            <i class="fas fa-check"></i>
+          </li>`;
+      uploadedArea.classList.remove("onprogress");
+      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+    }
+  });
+  let data = new FormData(form);
+  xhr.send(data);
+}
+function validateMobileNumber(number) {
+  number = number.replace(/\D/g, '');
+  const length = number.length;
+  if ((number.startsWith('07') || number.startsWith('01')) && length === 10) {
+    return true;
+  } else if ((number.startsWith('254') || number.startsWith('254')) && length === 12) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+var ellipsis = document.getElementById("ellipsis");
+var intervalId;
+function startAnimation() {
+  var ellipsis = document.getElementById("ellipsis");
+  var count = 1;
+  var maxCount = 1;
+  var increasing = true;
+
+  intervalId = setInterval(function () {
+    if (increasing) {
+      ellipsis.innerHTML += ".";
+      count++;
+      if (count > maxCount) {
+        increasing = false;
+      }
+    } else {
+      ellipsis.innerHTML = ellipsis.innerHTML.slice(0, -1);
+      count--;
+      if (count === 1) {
+        increasing = true;
+      }
+    }
+  }, 800);
+}
+
+startAnimation();
+
+function stopAnimation() {
+  clearInterval(intervalId);
+  ellipsis.innerHTML = "";
+}
+
+function verifyOTP() {
+  var verificationCodeInput = document.getElementById("verificationid").value;
+  if (verificationCodeInput != "") {
+    document.getElementById("verifying_code").textContent = "Verifying code";
+    document.getElementById("verifying_code").style.display = 'inline-block';
+    document.getElementById("ellipsis").style.display = 'inline-block';
+    var otp_code = document.getElementById("verificationid").value;
+    var otp_retrieved = localStorage.getItem('verification_otp');
+    ;
+    startAnimation();
+    if (otp_code.length == 6) {
+      if (otp_retrieved == otp_code) {
+        fileInput.disabled = false;
+        document.getElementById("verifying_code").textContent = "Verified Succesfully";
+        document.getElementById("verifying_code").style.color = '#56be78';
+        document.getElementById("ellipsis").style.display = 'none';
+        document.getElementById("submitbtn").disabled = false;
+      } else {
+        document.getElementById("verifying_code").textContent = "Wrong Verification Code";
+        document.getElementById("ellipsis").style.display = 'none';
+      }
+    }
+  }
+}
+
+function saveDetails() {
+  let file = fileInput.files[0];
+  let phone = document.getElementById("phone_no").value.trim();
+  let username = document.getElementById("username").value;
+  if (document.querySelector(".upload-form").style.display === 'none') {
+    document.getElementById("submitbtn").disabled = false;
+  } else {
+    if (!file) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please select a file to upload.'
+      });
+
+    }
+  }
+  if (!phone) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please enter a phone number.'
+    });
+    return;
+  }
+  let data = new FormData(form);
+  $.ajax({
+    url: 'api/user/save-user-details',
+    method: 'POST',
+    data: data,
+    processData: false,
+    contentType: false,
+    headers: {
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      if (response.status == 'approved') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Details submitted, you will be redirected shortly.'
+        });
+        setTimeout(function () {
+          window.location.href = 'user/play-games';
+        }, 1000);
+        localStorage.setItem('user_mobile_no', phone);
+        localStorage.setItem('username', username);
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Pending Approval',
+          text: 'Your uploaded selfie is pending approval. We shall get back to you shortly.',
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Reload the page
+            location.reload();
+          }
+        });
+      }
+    },
+    error: function (xhr, status, error) {
+      if (response.status == 'failed_phone') {
+        Swal.fire({
+          icon: 'error',
+          title: 'error',
+          text: 'Phone Cannot be empty.'
+        });
+
+      }
+    }
+  });
+}

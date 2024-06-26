@@ -326,9 +326,11 @@ if($request->score && $request->score !=''){
         }
     }
 
-    private function sendSmsViaCurl($mobile, $otp)
+    private function sendSmsViaCurl($mobile,$otp)
     {
-
+        // 25410475859
+        // $otp='131';
+        // $mobile='25410475859';
         // Prepare cURL request to send SMS
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -359,7 +361,7 @@ if($request->score && $request->score !=''){
         curl_close($curl);
         return $response;
     }
-    // public function sendSmsViaCurl()
+    // public function sendSmsViaCurl2()
     // {
 
     //     // https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to=254705030613&from=EABL&sms=Congratulations! You have WON a NAIVAS Shopping Voucher worth KES.5,000 from Tujengane na Spirits Promotion. Your voucher number is IMS-30587USHDGSSDGEC. This Voucher is limited to Food Items ONLY. Visit any Naivas Supermarket near you to redeem your voucher. T%26Cs apply! Strictly18+ ONLY. Normal SMS charges will apply. Helpline 0721985566. SMS STOP to 20405 to opt out of this promotion.&response=json&unicode=0&bulkbalanceuser=voucher
