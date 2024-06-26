@@ -11,14 +11,14 @@
     <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
     <p id="loadd" style="color:white">Loading Next Question....</p>
 </div>
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" style="background:#18181A">
     <div class="modal-content">
         <img src="https://www.monsterenergy.com/img/home/monster-logo.png" alt="site-logo">
         {{-- <span class="close">&times;</span> --}}
-        <p style="color:#56be78"><b>CONGRATULATIONS <span id="playerName" style="color:black"></span> </b></p>
+        <p style="color:#56be78"><b>CONGRATULATIONS <span id="playerName" style="color:white"></span> </b></p>
         <br />
-        <p style="color:#56be78"><b>YOU GOT </b><span style="color:black" id="scored">0 <span
-                    style="color:black">POINTS</span>
+        <p style="color:#56be78"><b>YOU GOT </b><span style="color:white" id="scored">0 <span
+                    style="color:white">POINTS</span>
         </p>
 
         <form action="{{ route('save-score') }}" method="post">
@@ -29,7 +29,7 @@
             <input type="hidden" id="userr_phone" name="phone" value="">
             <div class="subscribe" style="margin-top:10px">
                 <button type="submit" id="saveit" class="btn btn-primary btn-play"
-                    style="margin-top:20px;width:100%;background:#171717;border:none">VIEW RANKING</button>
+                    style="margin-top:20px;width:100%;background:white;color:black;border:none">VIEW RANKING</button>
             </div>
         </form>
     </div>
