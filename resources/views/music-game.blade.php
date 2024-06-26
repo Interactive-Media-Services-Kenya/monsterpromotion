@@ -16,13 +16,13 @@
         {{-- <span class="close">&times;</span> --}}
         <p style="color:#56be78"><b>CONGRATULATIONS <span id="playerName" style="color:black"></span> </b></p>
         <br />
-        <p style="color:#56be78"><b>YOU GOT </b><span style="color:black" id="scored"> <span
+        <p style="color:#56be78"><b>YOU GOT </b><span style="color:black" id="scored">0 <span
                     style="color:black">POINTS</span>
         </p>
         <form action="{{ route('save-score') }}" method="post">
             @csrf
             <input type="hidden" name="username" id="username" placeholder="Enter Fullname">
-            <input type="hidden" id="total_score" name="score" value=""><br />
+            <input type="hidden" id="total_score" name="score" value="0"><br />
             <input type="hidden" id="total_questions" name="total_questions" value="">
             <input type="hidden" id="userr_phone" name="phone" value="">
             <div class="subscribe" style="margin-top:10px">
