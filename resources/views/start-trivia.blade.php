@@ -43,7 +43,7 @@
                                 <p>Participants in the draw stand a chance to win the following prizes:</p>
                                 <p>1. One out of the 30 Tickets for the Exclusive Concert for Khaligraph and Femi One (one ticket admits two).</p>
                                     <p>2. One out of the 8 Monster Boom boxes.</p><br/>
-                                    <p>*****The more times you play, the higher the chances of winning*****</p>
+                                    <p>*****The more times you play, the higher the chances of winning.</p>
                             </div>
 
                         </div>

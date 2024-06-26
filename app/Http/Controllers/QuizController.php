@@ -229,14 +229,13 @@ public function getLocationFromIp($ip) {
         }
         if (!isset($_SESSION['random_questions'])) {
             $randomQuestions = Question::select('id', 'question', 'music_title', 'choice_A', 'choice_B', 'choice_C', 'choice_D')
-                ->whereNotIn('id', $question_done)
+                ->whereNotIn('id',$question_done)
                 ->where('category_id', $category)
                 ->get()
                 ->shuffle()
                 ->take(10);
-
             $_SESSION['random_questions'] = $randomQuestions->toArray();
-            if (count($randomQuestions) > 0) {
+            if (count($randomQuestions) > 8) {
                 return response()->json($randomQuestions->first());
             } else {
                 return response()->json('caught-up');
@@ -250,7 +249,7 @@ public function getLocationFromIp($ip) {
                 if ($nextQuestionIndex < count($randomQuestions)) {
                     $nextQuestion = $randomQuestions[$nextQuestionIndex];
                     return response()->json($nextQuestion);
-                    if (count($randomQuestions) > 0) {
+                    if (count($randomQuestions) >8) {
                         return response()->json($randomQuestions->first());
                     } else {
                         return response()->json('caught-up');
