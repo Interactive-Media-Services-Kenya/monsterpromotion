@@ -257,7 +257,7 @@ public function getLocationFromIp($ip) {
                     }
                 }
             }
-            // return response()->json(['message' => 'Quiz completed']);
+            return response()->json(['message' => 'Quiz completed']);
         }
     }
 
