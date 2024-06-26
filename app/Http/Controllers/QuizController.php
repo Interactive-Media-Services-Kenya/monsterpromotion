@@ -263,108 +263,108 @@ if($request->score && $request->score !=''){
             return redirect()->back()->with('error', 'An Error occured');
         }
     }
-    // public function sendOTP(Request $request)
-    // {
-    //     try {
-    //         // Generate OTP
-    //         $otp = rand(100000, 999999);
-
-    //         // Format mobile number
-    //         $mobile ='0705030613';
-    //         $mobile2 = $this->formatMobileNumber($mobile); // Extracted to a separate method
-    //         // Check if user exists and determine status
-    //         $user = User::where('phone', $mobile2)->first();
-    //         if ($user) {
-    //             $exist = $this->getUserExistenceStatus($user);
-    //             $username = $user->name;
-    //         } else {
-    //             $exist = 'none';
-    //             $username = 'none';
-    //         }
-    //         // Prepare and execute cURL request
-    //         $response = $this->sendSmsViaCurl('', $otp);
-    //         // Log success and return response
-    //         Log::info('OTP sent successfully', ['mobile' => $mobile2, 'otp' => $otp]);
-    //         return response()->json([
-    //             "status" => "success",
-    //             "exist" => $exist,
-    //             "username" => $username,
-    //             "code" => $otp,
-    //             "message" => "OTP requested successfully"
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         // Log error and return error response
-    //         Log::error('Error sending OTP', ['error' => $e->getMessage()]);
-    //         return response()->json([
-    //             "status" => "error",
-    //             "message" => "Unable to request OTP."
-    //         ]);
-    //     }
-    // }
     public function sendOTP(Request $request)
     {
-        $mobile = $request->mobile;
-        $otp = rand(100000, 999999);
-        $numberStr = $mobile;
-        if ($numberStr[0] == '0') {
-            $mobile2 = "254" . ltrim($mobile, '0');
-        } else {
-            $mobile2 = $mobile;
-        }
-        $exist = 'new';
-        $user = User::where('phone', $mobile2)->first();
-        if ($user) {
-            if ($user->status == 1) {
-                $exist = 'approved';
-                $username = $user->name;
-            } else if ($user->status == 2) {
-                $exist = 'rejected';
+        try {
+            // Generate OTP
+            $otp = rand(100000, 999999);
+
+            // Format mobile number
+            $mobile =$request->mobile;
+            $mobile2 = $this->formatMobileNumber($mobile); // Extracted to a separate method
+            // Check if user exists and determine status
+            $user = User::where('phone', $mobile2)->first();
+            if ($user) {
+                $exist = $this->getUserExistenceStatus($user);
                 $username = $user->name;
             } else {
-                $exist = 'pending';
-                $username = $user->name;
+                $exist = 'none';
+                $username = 'none';
             }
-        } else {
-            $username = 'none';
-        }
-        try {
-
-            $curl = curl_init();
-
-            curl_setopt_array(
-                $curl,
-                array(
-                    CURLOPT_URL => 'http://167.99.63.221:8080/API_All_IMS_BULK/BULK_SMS_OTP',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"MONSTER","msisdn":' . $mobile . ',"message":"Your MONSTER PROMOTIONS verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
-                    CURLOPT_HTTPHEADER => array(
-                        'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
-                        'MESSAGE_ID: 123988',
-                        'ORIGINATOR: MONSTER',
-                        'Content-Type: application/json'
-                    ),
-                )
-            );
-
-            $response = curl_exec($curl);
-
-            curl_close($curl);
-            echo $response;
-            log::info('ss' . $response);
-            log::info($mobile);
-            Log::debug('SMS SEND');
-            return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
+            // Prepare and execute cURL request
+            $response = $this->sendSmsViaCurl('', $otp);
+            // Log success and return response
+            Log::info('OTP sent successfully', ['mobile' => $mobile2, 'otp' => $otp]);
+            return response()->json([
+                "status" => "success",
+                "exist" => $exist,
+                "username" => $username,
+                "code" => $otp,
+                "message" => "OTP requested successfully"
+            ]);
         } catch (\Exception $e) {
-            Log::debug($e);
-            return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
+            // Log error and return error response
+            Log::error('Error sending OTP', ['error' => $e->getMessage()]);
+            return response()->json([
+                "status" => "error",
+                "message" => "Unable to request OTP."
+            ]);
         }
     }
+    // public function sendOTP(Request $request)
+    // {
+    //     $mobile = $request->mobile;
+    //     $otp = rand(100000, 999999);
+    //     $numberStr = $mobile;
+    //     if ($numberStr[0] == '0') {
+    //         $mobile2 = "254" . ltrim($mobile, '0');
+    //     } else {
+    //         $mobile2 = $mobile;
+    //     }
+    //     $exist = 'new';
+    //     $user = User::where('phone', $mobile2)->first();
+    //     if ($user) {
+    //         if ($user->status == 1) {
+    //             $exist = 'approved';
+    //             $username = $user->name;
+    //         } else if ($user->status == 2) {
+    //             $exist = 'rejected';
+    //             $username = $user->name;
+    //         } else {
+    //             $exist = 'pending';
+    //             $username = $user->name;
+    //         }
+    //     } else {
+    //         $username = 'none';
+    //     }
+    //     try {
+
+    //         $curl = curl_init();
+
+    //         curl_setopt_array(
+    //             $curl,
+    //             array(
+    //                 CURLOPT_URL => 'http://167.99.63.221:8080/API_All_IMS_BULK/BULK_SMS_OTP',
+    //                 CURLOPT_RETURNTRANSFER => true,
+    //                 CURLOPT_ENCODING => '',
+    //                 CURLOPT_MAXREDIRS => 10,
+    //                 CURLOPT_TIMEOUT => 0,
+    //                 CURLOPT_FOLLOWLOCATION => true,
+    //                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //                 CURLOPT_CUSTOMREQUEST => 'POST',
+    //                 CURLOPT_POSTFIELDS => '{"key":"KXVT-8IOT6-UTTT-BFT34-FDJJG-74BG","originator":"MONSTER","msisdn":' . $mobile . ',"message":"Your MONSTER PROMOTIONS verification code is: ' . $otp . '","client_id":"IMS","country":"KE","network":"9"}',
+    //                 CURLOPT_HTTPHEADER => array(
+    //                     'API-KEY: TVX-MTR-7632-E74U-856M-GG833',
+    //                     'MESSAGE_ID: 123988',
+    //                     'ORIGINATOR: MONSTER',
+    //                     'Content-Type: application/json'
+    //                 ),
+    //             )
+    //         );
+
+    //         $response = curl_exec($curl);
+
+    //         curl_close($curl);
+    //         echo $response;
+    //         log::info('ss' . $response);
+    //         log::info($mobile);
+    //         Log::debug('SMS SEND');
+    //         return response()->json(["status" => "success", "exist" => $exist, "username" => $username, "code" => $otp, "message" => "OTP requested successfully"]);
+    //     } catch (\Exception $e) {
+    //         Log::debug($e);
+    //         return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
+    //     }
+    // }
     private function formatMobileNumber($mobile)
     {
         // Format mobile number to international format
