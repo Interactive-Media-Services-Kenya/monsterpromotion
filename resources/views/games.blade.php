@@ -252,6 +252,13 @@
     <!-- Include other formats if necessary -->
     Your browser does not support the audio element.
   </audio>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var audio = document.getElementById('background-music');
+    audio.play();
+  });
+
+  </script>
  <script src="{{ asset('js/gamespage.js')}}"></script>
 @include('footer')
 @endsection
