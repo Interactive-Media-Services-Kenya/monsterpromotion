@@ -230,7 +230,6 @@ class UserController extends Controller
             return response()->json(["status" => "error", "message" => "Unable to request OTP."]);
         }
     }
-
     public function saveSelfie(Request $request)
     {
         $mobile =$request->input('phone');
@@ -240,31 +239,37 @@ class UserController extends Controller
         } else {
             $mobile2 = $mobile;
         }
-        $user=User::where('phone',$mobile2)->first();
-        if(!$mobile){
+        if (!$mobile) {
             return response()->json(["status" => "failed_phone"]);
-        }else{
-                if($user){
-                    if($user->status=1){
-                        return response()->json(["status" => "approved"]);
-                    }else{
-                        return response()->json(["status" => "pending"]);
-                    }
-
-                }else{
-                    $file = $request->file('file');
-                    $directory = 'public/user-uploads';
-                    if (!Storage::exists($directory)) {
-                        Storage::makeDirectory($directory);
-                    }
-                    $filePath = $file->store($directory);
-                    $user = new User;
-                    $user->phone =$mobile2;
-                    $user->status =0;
-                    $user->photo = $filePath;
-                    $user->save();
+        }
+        $user = User::where('phone', $mobile2)->first();
+        if ($user) {
+            if ($user->status == 1) {
+                return response()->json(["status" => "approved"]);
+            } else {
+                return response()->json(["status" => "pending"]);
+            }
+        } else {
+            if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                $file = $request->file('file');
+                $fileName = time() . '_' . $mobile2 . '.' . $file->getClientOriginalExtension();
+                // Directory to store uploaded files
+                $directory = 'public/user-uploads';
+                // Ensure directory exists
+                if (!Storage::exists($directory)) {
+                    Storage::makeDirectory($directory);
                 }
-        return response()->json(["status" => "success"]);
-     }
+                $filePath = $file->storeAs($directory, $fileName);
+                $user = new User;
+                $user->phone = $mobile2;
+                $user->status = 1;
+                 $user->photo = $filePath;
+                $user->save();
+
+                return response()->json(["status" => "success"]);
+            } else {
+                return response()->json(["status" => "failed_upload"]);
+            }
+        }
     }
 }

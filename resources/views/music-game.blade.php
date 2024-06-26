@@ -43,11 +43,7 @@
                 <div class="col-lg-8 text-center">
                     <div class="section-header">
                         <h2 class="title">QUESTION <span id="question-number"></span></h2>
-                        <audio id="beepAudio" controls style="display: none;">
-                            <source src="{{ asset('monster.wav') }}" type="audio/wav">
-                            <source src="{{ asset('monster.wav') }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+
                     </div>
                 </div>
             </div>

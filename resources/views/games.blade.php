@@ -246,7 +246,7 @@
 </section>
 
 
-<audio id="background-music" loop>
+{{-- <audio id="background-music" loop>
     <source src="/background.mp3" type="audio/mp3">
     <source src="/background.ogg" type="audio/ogg">
     <!-- Include other formats if necessary -->
@@ -258,7 +258,7 @@
     audio.play();
   });
 
-  </script>
+  </script> --}}
  <script src="{{ asset('js/gamespage.js')}}"></script>
 @include('footer')
 @endsection
