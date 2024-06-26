@@ -29,7 +29,7 @@
                             </li>
                             <li><a href="{{ route('user/music-game', ['id' => encrypt(3)]) }}">Music Game</a></li>
                             <li><a href="{{ route('leaders-board')}}">Leaders Board</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="{{ route('user/play-trivia', ['id' => encrypt(1)]) }}">How To Play</a></li>
                         </ul>
                     </div>
                 </nav>
