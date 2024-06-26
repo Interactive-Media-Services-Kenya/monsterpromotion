@@ -1,9 +1,3 @@
-if (!localStorage.getItem('user_mobile_no')) {
-    window.location.href = "/";
-  } else {
-    const user_phone_no = localStorage.getItem('user_mobile_no');
-    localStorage.setItem('user_mobile_no', user_phone_no);
-  }
 
 var currentUrl = window.location.href;
 var urlParts = currentUrl.split("/");
