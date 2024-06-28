@@ -6,7 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Monster Promotions</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Promotions - Play to win exclusive party tickets</title>
+    <meta name="description" content="Play monster promotions games and stand a chance to win exclusive party tickets..">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Monster Promotions,games,play deals, offers, discounts, exclusive deals">
     <link rel="stylesheet" href="{{ asset('css/1oLxepliGc2T.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Wk1556kCcZhf.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Wk1556kCcZhf.css') }}">
