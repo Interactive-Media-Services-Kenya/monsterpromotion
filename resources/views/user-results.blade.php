@@ -285,7 +285,7 @@ if (!localStorage.getItem('user_mobile_no')) {
                             </thead>
                             <tbody>
                                 @php
-                                    $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(10)->get();
+                                    $leaders = DB::table('scores')->where('status', "1")->orderBy('score', 'desc')->limit(30)->get();
                                 @endphp
                                 @foreach($leaders as $leader)
                                                                 @php
