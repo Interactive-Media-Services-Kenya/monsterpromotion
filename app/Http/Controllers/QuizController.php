@@ -11,6 +11,7 @@ use App\Models\Score;
 use App\Models\QuestionAnswer;
 use App\Models\QuizAnswer;
 use App\Models\User;
+use App\Models\Registration;
 use DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -400,6 +401,13 @@ public function getLocationFromIp($ip) {
     }
     public function sendSmsViaCurl($mobile,$otp)
     {
+        $exist=DB::table('registrations')->where('phone',$mobile)->exists();
+        if(!$exist){
+            $user = new Registration;
+            $user->phone = $mobile;
+            $user->status = 0;
+            $user->save();
+        }
         $pref = substr($mobile, 0, 6);
         $pref_airtel = substr($mobile, 0, 5);
         // Check if the number belongs to Airtel
@@ -408,7 +416,6 @@ public function getLocationFromIp($ip) {
         } else {
             // Query the database to determine the network based on the prefix
             $prefix = DB::table('phone_extensions')->where('phone_extension', $pref)->value('network_name');
-
             // Determine the network based on the prefix obtained from the database
             if ($prefix == 'Safaricom') {
                 $network = 9;
