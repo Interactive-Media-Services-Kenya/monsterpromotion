@@ -11,7 +11,6 @@ use App\Models\Score;
 use App\Models\QuestionAnswer;
 use App\Models\QuizAnswer;
 use App\Models\User;
-use DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -398,26 +397,9 @@ public function getLocationFromIp($ip) {
                 return 'pending';
         }
     }
+
     public function sendSmsViaCurl($mobile,$otp)
     {
-        $pref = substr($mobile, 0, 6);
-        $pref_airtel = substr($mobile, 0, 5);
-        // Check if the number belongs to Airtel
-        if ($pref_airtel == '25410' || $pref_airtel == '25411') {
-            $network = 5;
-        } else {
-            // Query the database to determine the network based on the prefix
-            $prefix = DB::table('phone_extensions')->where('phone_extension', $pref)->value('network_name');
-
-            // Determine the network based on the prefix obtained from the database
-            if ($prefix == 'Safaricom') {
-                $network = 9;
-            } elseif ($prefix == 'Airtel') {
-                $network = 5;
-            } else {
-                $network = 9; // Default to 9 if the network is not found in the database
-            }
-        }
         // 25410475859
         // $otp='131';
         // $mobile='25410475859';
@@ -438,7 +420,7 @@ public function getLocationFromIp($ip) {
                 'message' => "Your MONSTER PROMOTIONS account verification code is: $otp",
                 'client_id' => 'IMS',
                 'country' => 'KE',
-                'network' => $network,
+                'network' => '9'
             ]),
             CURLOPT_HTTPHEADER => [
                 'API-KEY: TVX-MTR-7632-E74U-856M-GG833',

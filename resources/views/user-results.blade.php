@@ -311,7 +311,6 @@ if (!localStorage.getItem('user_mobile_no')) {
     @php
         $stars = ceil($leader->score / 5); // Calculate number of stars needed
     @endphp
-
     @for ($i = 0; $i < 5; $i++)
         @if ($i < $stars)
             <span style="color: gold;">★</span> <!-- Gold star -->
@@ -330,9 +329,7 @@ if (!localStorage.getItem('user_mobile_no')) {
                             </tbody>
                         </table>
                     </div>
-
             </div>
-
         </div>
     </div>
 </section>

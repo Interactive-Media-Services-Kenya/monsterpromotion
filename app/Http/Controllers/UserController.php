@@ -19,6 +19,11 @@ class UserController extends Controller
         $users=User::where("status",0)->orWhere("status",2)->orderBy("id","desc")->get();
         return view('backend.users.pending',['users'=>$users]);
     }
+    public function allUsers()
+    {
+        $users=User::orderBy("id","desc")->get();
+        return view('backend.users.pending',['users'=>$users]);
+    }
     public function add()
     {
         return view('backend.quiz/add');
