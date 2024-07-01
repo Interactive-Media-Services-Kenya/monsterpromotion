@@ -51,6 +51,9 @@
         color: gold;
         /* Change color as needed */
     }
+    body{
+background:#171717;
+    }
 </style>
 <section id="banner-section">
     <div id="balloon-container">
