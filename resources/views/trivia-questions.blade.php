@@ -23,7 +23,7 @@
                     style="color:black">POINTS</span>
         </p>
 
-        <form action="{{ route('save-score') }}" method="post">
+        <form action="{{ route('save-score') }}" method="post" onsubmit="return onSubmit()">
             @csrf
             <input type="hidden" name="username" id="username" placeholder="Enter Fullname">
             <input type="hidden" id="total_score" name="score" value="0"><br />
@@ -80,6 +80,10 @@
 <script src="{{ asset('js/playtrivia.js')}}"></script>
 <script>
 var _0x1e5cd7=_0x3eca;function _0x1acc(){var _0x4cf838=['textContent','username','getItem','getElementById','playerName','5942720PryVmx','5XOOdjP','1250086POGNRg','value','1482216GLxQVf','6685434QYCjkL','32384016tPhRPk','8942934WtsdOx','669561uAxRPW'];_0x1acc=function(){return _0x4cf838;};return _0x1acc();}(function(_0x42f0fa,_0x298283){var _0x2434e0=_0x3eca,_0x37bb4a=_0x42f0fa();while(!![]){try{var _0x40fb05=-parseInt(_0x2434e0(0xbe))/0x1+-parseInt(_0x2434e0(0xca))/0x2+-parseInt(_0x2434e0(0xc2))/0x3+parseInt(_0x2434e0(0xc8))/0x4+parseInt(_0x2434e0(0xc9))/0x5*(-parseInt(_0x2434e0(0xbf))/0x6)+-parseInt(_0x2434e0(0xc1))/0x7+parseInt(_0x2434e0(0xc0))/0x8;if(_0x40fb05===_0x298283)break;else _0x37bb4a['push'](_0x37bb4a['shift']());}catch(_0x4d7e03){_0x37bb4a['push'](_0x37bb4a['shift']());}}}(_0x1acc,0xc61ab));function _0x3eca(_0x2478ed,_0x2bad01){var _0x1acca2=_0x1acc();return _0x3eca=function(_0x3ecaf6,_0x2ada70){_0x3ecaf6=_0x3ecaf6-0xbd;var _0x1ea94c=_0x1acca2[_0x3ecaf6];return _0x1ea94c;},_0x3eca(_0x2478ed,_0x2bad01);}var usernameInput=document[_0x1e5cd7(0xc6)]('username');usernameInput[_0x1e5cd7(0xbd)]=localStorage[_0x1e5cd7(0xc5)](_0x1e5cd7(0xc4)),document[_0x1e5cd7(0xc6)](_0x1e5cd7(0xc7))[_0x1e5cd7(0xc3)]=localStorage['getItem'](_0x1e5cd7(0xc4));
-</script>
+function onSubmit() {
+        document.getElementById("saveit").disabled = true;
+        return true;
+    }
+    </script>
 @include('footer')
 @endsection
