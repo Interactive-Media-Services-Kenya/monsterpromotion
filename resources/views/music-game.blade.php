@@ -22,7 +22,7 @@
         <p style="color:#56be78"><b>YOU GOT </b><span style="color:black" id="scored">0 <span
                     style="color:black">POINTS</span>
         </p>
-        <form action="{{ route('save-score') }}" method="post">
+        <form action="{{ route('save-score') }}" method="post" onsubmit="return onSubmit()">
             @csrf
             <input type="hidden" name="username" id="username" placeholder="Enter Fullname">
             <input type="hidden" id="total_score" name="score" value="0"><br />
@@ -31,7 +31,6 @@
             <div class="subscribe" style="margin-top:10px">
                 <button type="submit" id="saveit" class="btn btn-primary btn-play"
                     style="margin-top:20px;width:100%;background:#171717;border:none">VIEW RANKING</button>
-
             </div>
         </form>
     </div>
@@ -84,9 +83,12 @@ $categoryId = encrypt(3);  ?>
 </script>
 <script>
   var _0xc197bf=_0x5ba0;(function(_0x330884,_0x1b9443){var _0x8015b0=_0x5ba0,_0x1ee8d6=_0x330884();while(!![]){try{var _0x53f1ba=parseInt(_0x8015b0(0x197))/0x1*(-parseInt(_0x8015b0(0x18c))/0x2)+parseInt(_0x8015b0(0x193))/0x3*(parseInt(_0x8015b0(0x18a))/0x4)+parseInt(_0x8015b0(0x191))/0x5+-parseInt(_0x8015b0(0x190))/0x6*(-parseInt(_0x8015b0(0x18e))/0x7)+parseInt(_0x8015b0(0x18f))/0x8*(-parseInt(_0x8015b0(0x188))/0x9)+-parseInt(_0x8015b0(0x195))/0xa+-parseInt(_0x8015b0(0x189))/0xb*(-parseInt(_0x8015b0(0x194))/0xc);if(_0x53f1ba===_0x1b9443)break;else _0x1ee8d6['push'](_0x1ee8d6['shift']());}catch(_0x20bec1){_0x1ee8d6['push'](_0x1ee8d6['shift']());}}}(_0xccaf,0x6deeb));function _0xccaf(){var _0x5dafe9=['1129330OPEPlC','playerName','141QoOGtm','5160BIUtUE','3585220LOePfj','username','415xDVdKE','1964988zOzKHl','21329MxGlcW','7484vFYzLF','getItem','1496anDwVu','getElementById','49847kDbsjE','24RxUkzw','528rNyqMV'];_0xccaf=function(){return _0x5dafe9;};return _0xccaf();}function _0x5ba0(_0x80d972,_0x5c0e2f){var _0xccaf34=_0xccaf();return _0x5ba0=function(_0x5ba0b7,_0x1784bc){_0x5ba0b7=_0x5ba0b7-0x188;var _0x26eb70=_0xccaf34[_0x5ba0b7];return _0x26eb70;},_0x5ba0(_0x80d972,_0x5c0e2f);}var usernameInput=document[_0xc197bf(0x18d)]('username');usernameInput['value']=localStorage[_0xc197bf(0x18b)](_0xc197bf(0x196)),document['getElementById'](_0xc197bf(0x192))['textContent']=localStorage[_0xc197bf(0x18b)](_0xc197bf(0x196));
+  function onSubmit() {
+        document.getElementById("saveit").disabled = true;
+        return true;
+    }
 </script>
-<script>
-</script>
+
 <script src="{{ asset('js/musictrivia.js')}}"></script>
 @include('footer')
 @endsection
